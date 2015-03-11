@@ -1,0 +1,60 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maxime@deraspe.net
+# review:  	
+# date:    	15-02-24
+# version: 	0.01
+# licence:  	
+
+require 'net/http'
+
+ROOT_path = File.dirname(__FILE__)
+# blat URL = "http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/blat/blat"
+
+# Install blat on the user system
+def installBlat
+
+  begin
+    Net::HTTP.start("hgdownload.cse.ucsc.edu") do |http|
+      resp = http.get("/admin/exe/linux.x86_64/blat/blat")
+      open("#{ROOT_path}/blat.linux", "wb") do |file|
+        file.write(resp.body)
+      end
+    end
+    
+    File.chmod(0755, "#{ROOT_path}/blat.linux")
+  rescue
+    abort "Problem installing Blat, aborting"
+  end
+
+end
+
+
+# Install blat if not already install
+if ! File.exists? "#{ROOT_path}/blat.linux"
+
+  puts "Installing Blat the aligner.."
+  puts ""
+  puts "Please note that the Blat source and executables are freely available for"
+  puts "academic, nonprofit and personal use. Commercial licensing information is"
+  puts "available on the Kent Informatics website (http://www.kentinformatics.com/)."
+  puts "See http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/blat/"
+  puts ""
+  puts "Do you accept the license ? Y/n"
+
+  answer = $stdin.gets.chomp
+
+  if answer.downcase == "y" or answer.downcase == ""
+    puts "OK you accepted the licence let's install the blat binary"
+    installBlat
+    puts "Blat successfully installed : OK"
+    puts ""
+  else
+    puts "Sorry bacterial-annotator rely on blat for the alignment !"
+  end
+
+end
+
+
+# system("#{ROOT_path}/blat.linux")

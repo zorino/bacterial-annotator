@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maxime@deraspe.net
+# review:  	
+# date:    	15-02-24
+# version: 	0.01
+# licence:  	
+
+require 'open-uri'
+
+ROOT_path = File.dirname(__FILE__)
+# prodigal URL = "https://github.com/hyattpd/Prodigal/releases/download/v2.6.2/prodigal.linux"
+
+# Install prodigal on the user system
+def installProdigal
+
+  begin
+    resp = open("https://github.com/hyattpd/Prodigal/releases/download/v2.6.2/prodigal.linux")
+    open("#{ROOT_path}/prodigal.linux", "wb") do |file|
+      file.write(resp.read)
+    end
+    File.chmod(0755, "#{ROOT_path}/prodigal.linux")
+  rescue
+    abort "Problem installing Prodigal, aborting"
+  end
+
+end
+
+
+# Install prodigal if not already install
+if ! File.exists? "#{ROOT_path}/prodigal.linux"
+
+  puts "Installing Prodigal the ORF finder.."
+  puts "See https://github.com/hyattpd/Prodigal"
+  puts "The Licence is GPLv3"
+  installProdigal
+  puts "Prodigal successfully installed"
+  puts ""
+
+end
+
+# Main
+# Dir.mkdir("Prodigal-Output") if ! File.exists? "Prodigal-Output"
+# system("#{ROOT_path}/prodigal.linux -a Prodigal-Output/Proteins.fa -d Prodigal-Output/Genes.fa -o Prodigal-Output/Genbanks.gbk -i #{ARGV[0]}")

@@ -1,0 +1,178 @@
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maxime@deraspe.net
+# review:  	
+# date:    	15-02-24
+# version: 	0.0.1
+# licence:  	
+
+
+
+class SyntenyManip
+
+  attr_reader :query_file, :subject_file, :aln_hits
+
+  def initialize query_file, subject_file
+    @query_file = query_file
+    @subject_file = subject_file
+    @aln_file = nil
+  end
+
+  # run blat on proteins
+  def run_blat root, outdir
+    system("#{root}/blat.linux -out=blast8 -minIdentity=70 -prot #{@subject_file} #{@query_file} #{outdir}/Proteins-References.aln")
+    @aln_file = "#{outdir}/Proteins-References.aln"
+    extract_hits
+  end
+
+  # Extract Hit from blast8 file and save it in hash
+  # contig-0_1      ABJ71957.1      96.92   65      2       0       1       65      1       65      9.2e-31 131.0
+  def extract_hits
+    @aln_hits = {}
+    File.open(@aln_file,"r") do |fread|
+      while l = fread.gets
+        lA = l.chomp!.split("\t")
+        key = lA[0]
+        hit = lA[1]
+        if ! @aln_hits.has_key? key
+          @aln_hits[key] = {
+            pId: lA[2],
+            length: lA[3],
+            evalue: lA[10],
+            score: lA[11].to_f,
+            hits: [hit]
+          }
+        elsif lA[11].to_f > @aln_hits[key][:score]
+          @aln_hits[key] = {
+            pId: lA[2],
+            length: lA[3],
+            evalue: lA[10],
+            score: lA[11],
+            hits: [hit]
+          }
+        elsif lA[11].to_f == @aln_hits[key][:score]
+          @aln_hits[key][:hits] << hit
+        end
+      end
+    end
+  end
+
+
+
+  # Get the annotations for a contig
+  def get_annotation_for_contig prots_to_annotate, ref_cds
+
+    return {} if prots_to_annotate == nil
+
+    contig_to_annotate = prots_to_annotate[0].split("_")[0..-2].join("_")
+    annotations = {}
+    prots = []
+
+    @aln_hits.each_key do |k|
+      contig = k.split("_")[0..-2].join("_")
+      if contig == contig_to_annotate
+        prots << k
+      end
+    end
+
+    # sorting the prot by their appearance in the contig
+    prots.sort! { |a,b| a.split("_")[-1].to_i <=> b.split("_")[-1].to_i }
+
+    i = 0
+    prots_to_annotate.each_with_index do |p|
+
+      if @aln_hits.has_key? p
+
+        hit_index = 0
+
+        if @aln_hits[p][:hits].length > 1
+          hit_index = choose_best_hit i, prots, ref_cds
+        end
+
+        h = @aln_hits[p][:hits][hit_index]
+        hit = ref_cds[h]
+        annotations[p] = hit
+        i+=1
+
+      else
+        annotations[p] = nil
+      end
+      
+    end
+
+    annotations                 # return
+
+  end
+
+
+  # Choose Best Hit base on neighbor hits
+  def choose_best_hit i, prots, ref_cds
+
+    hit_index = 0
+    p = prots[i]
+    hit_locus_tags = []
+
+    @aln_hits[p][:hits].each do |h|
+      hit_locus_tags << ref_cds[h][:locustag].downcase.split("_")[-1].gsub(/[a-z]/,"").to_i
+    end
+
+    continue=true
+    offset=1
+
+    while continue
+      fwd_end = false
+      bcw_end = false
+      found = false
+
+      if (i+offset) < (prots.length-1)
+        fwd_p = prots[i+offset]
+        next_prot_hits = @aln_hits[fwd_p][:hits]
+        if next_prot_hits.length < 2
+          n = ref_cds[next_prot_hits[0]][:locustag].downcase.split("_")[-1].gsub(/[a-z]/,"").to_i
+          closest = 10000
+          current_ltag_i = 0
+          hit_locus_tags.each_with_index do |ltag,ltag_i|
+            if (ltag-n).abs < closest
+              current_ltag_i = ltag_i
+              closest = (ltag-n).abs
+            end
+          end
+          hit_index = current_ltag_i
+          found = true
+        end
+      else
+        fwd_end = true
+      end
+
+      if (i-offset) >= 0 and !found
+        bcw_p = prots[i-offset]
+        next_prot_hits = @aln_hits[bcw_p][:hits]
+        if next_prot_hits.length < 2
+          n = ref_cds[next_prot_hits[0]][:locustag].downcase.split("_")[-1].gsub(/[a-z]/,"").to_i
+          closest = 10000
+          current_ltag_i = 0
+          hit_locus_tags.each_with_index do |ltag,ltag_i|
+            if (ltag-n).abs < closest
+              current_ltag_i = ltag_i
+              closest = (ltag-n).abs
+            end
+          end
+          hit_index = current_ltag_i
+          found = true
+        end
+      else
+        bcw_end = true
+      end
+
+      offset += 1
+      continue = (!fwd_end and !bcw_end and !found)
+    end
+
+    hit_index
+  end
+
+
+
+
+
+end                             # END of Class

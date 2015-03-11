@@ -1,0 +1,86 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maxime@deraspe.net
+# review:  	
+# date:    	15-02-24
+# version: 	0.01
+# licence:  	
+
+
+require 'bacterial-annotator'
+
+
+# Usage message to print to CLI
+def usage
+
+  print <<OEM
+
+bacterial-annotator [OPTIONS] FASTA_FILE
+
+[OPTIONS]
+
+  --input/-i		Provide the fasta file to annotate
+  --refgenome/-g	Provide a Genbank file or a Gbk Accession ID
+  --outdir/-o		Output directory [default=BAnnotation]
+
+  --help/-h		Print Help
+OEM
+
+end
+
+# Parse the Options given on the CLI
+def parseOptions
+
+  options = {}
+
+  # default options
+  options[:outdir] = "BAnnotation"
+
+  while x = ARGV.shift
+
+    case x.downcase
+    when "--input", "-i"
+      options[:input] = ARGV.shift
+    when "--refgenome", "-g"
+      options[:refgenome] = ARGV.shift
+    when "--outdir", "-o"
+      options[:outdir] = ARGV.shift
+    when "--help", "-h"
+      usage
+    end
+
+  end
+  
+  options
+
+end
+  
+
+# Main
+if ARGV.size > 1
+
+  ROOT = File.dirname(__FILE__)
+  options = parseOptions
+
+  # Check for 3rd party dependencies : Prodigal and Blat
+  system("ba_prodigal")
+  system("ba_blat")
+
+  if ! File.exist? ("#{ROOT}/blat.linux")
+    abort "exiting blat is missing"
+  end
+
+  if ! options.has_key? :refgenome
+    puts "You didn't provide a reference genome for the annotation !"
+  elsif ! options.has_key? :input
+    puts "You didn't provide a fasta file to annotate !"
+  end
+
+  bannot = BacterialAnnotator.new(options[:input], options[:refgenome], ROOT, options[:outdir])
+  bannot.prepare_files_for_annotation
+  bannot.run_annotation
+  
+else
+  usage
+end
