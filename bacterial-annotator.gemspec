@@ -9,7 +9,8 @@ Gem::Specification.new do |s|
   s.files       = ["lib/bacterial-annotator.rb",
                    "lib/bacterial-annotator/genbank-manip.rb",
                    "lib/bacterial-annotator/fasta-manip.rb",
-                   "lib/bacterial-annotator/synteny-manip.rb"]
+                   "lib/bacterial-annotator/synteny-manip.rb",
+                   "lib/bacterial-annotator/remote-ncbi.rb"]
   s.homepage    = 'http://rubygems.org/gems/bacterial-annotator'
   s.license       = 'GPLv3'
   s.require_path = 'lib'
@@ -18,11 +19,8 @@ Gem::Specification.new do |s|
     "bacterial-annotator",
     "ba_prodigal",
     "ba_blat"
-    # "prodigal.linux",
-    # "blat.linux",
-    # "multifasta-manip",
-    # "genbank-manip"
   ]
   s.default_executable = "bacterial-annotator"
   s.add_runtime_dependency 'bio', '~> 1.4', '>= 1.4.3'
+  s.add_runtime_dependency 'mechanize', '~>2.7', '>=2.7.3'
 end
