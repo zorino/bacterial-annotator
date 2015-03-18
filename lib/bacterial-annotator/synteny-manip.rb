@@ -36,18 +36,18 @@ class SyntenyManip
         hit = lA[1]
         if ! @aln_hits.has_key? key
           @aln_hits[key] = {
-            pId: lA[2],
-            length: lA[3],
+            pId: lA[2].to_f,
+            length: lA[3].to_i,
             evalue: lA[10],
             score: lA[11].to_f,
             hits: [hit]
           }
         elsif lA[11].to_f > @aln_hits[key][:score]
           @aln_hits[key] = {
-            pId: lA[2],
-            length: lA[3],
+            pId: lA[2].to_f,
+            length: lA[3].to_i,
             evalue: lA[10],
-            score: lA[11],
+            score: lA[11].to_f,
             hits: [hit]
           }
         elsif lA[11].to_f == @aln_hits[key][:score]
@@ -79,7 +79,7 @@ class SyntenyManip
     prots.sort! { |a,b| a.split("_")[-1].to_i <=> b.split("_")[-1].to_i }
 
     i = 0
-    prots_to_annotate.each_with_index do |p|
+    prots_to_annotate.each do |p|
 
       if @aln_hits.has_key? p
 
@@ -95,9 +95,11 @@ class SyntenyManip
         i+=1
 
       else
+
         annotations[p] = nil
+
       end
-      
+
     end
 
     annotations                 # return
@@ -170,8 +172,6 @@ class SyntenyManip
 
     hit_index
   end
-
-
 
 
 

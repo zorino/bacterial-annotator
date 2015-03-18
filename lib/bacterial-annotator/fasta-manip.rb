@@ -33,6 +33,7 @@ class FastaManip
     system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk")
     @prodigal_files = {multiGBK: "#{outdir}/Genbanks.gbk",
                        contigs: [],
+                       contigs_length: [],
                        genes: "#{outdir}/Genes.fa",
                        proteins: "#{outdir}/Proteins.fa",
                        prot_ids_by_contig: {},
@@ -53,6 +54,7 @@ class FastaManip
     @fasta_flat.each_entry do |seq|
       file_name = seq.definition.chomp.split(" ")[0]
       @prodigal_files[:contigs] << "#{file_name}"
+      @prodigal_files[:contigs_length] << seq.seq.length
       File.open("#{outdir}/single-fasta/#{file_name}.fasta", "w") do |fwrite| 
         fwrite.write(seq)
       end

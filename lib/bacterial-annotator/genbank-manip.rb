@@ -104,14 +104,18 @@ class GenbankManip
   # add annotation to a genbank file produced by prodigal
   def add_annotation annotations, outdir, mode
 
-    # p annotations
-
-    # @gbk = Bio::GenBank.new(File.open(gbkFile,"r").read)
-
+    nb_of_added_ft = 0
     i = 0
-    contig = @gbk.definition.split(";")[2].gsub("seqhdr","").delete("\"").delete("=").split(" ")[0]
+    contig = @gbk.definition.split(";")[2].
+             gsub("seqhdr","").
+             delete("\"").
+             delete("=").
+             split(" ")[0]
 
-    @gbk.each_cds do |cds|
+    # iterate through 
+    @gbk.features.each_with_index do |cds, ft_index|
+
+      next if cds.feature != "CDS"
 
       if mode == 0
         ftArray = []
@@ -135,18 +139,29 @@ class GenbankManip
           ftArray.push(qGene)
         end
 
-        qProd = Bio::Feature::Qualifier.new('product', product)
-        qNote = Bio::Feature::Qualifier.new('note', "correspond to #{locus} locus")
-        ftArray.push(qProd,qNote)
+        if product != nil
+          qProd = Bio::Feature::Qualifier.new('product', product)
+          ftArray.push(qProd)
+        end
+
+        if locus != nil
+          qNote = Bio::Feature::Qualifier.new('note', "correspond to #{locus} locus")
+          ftArray.push(qNote)
+        end
 
       end
       cds.qualifiers = ftArray
 
     end
 
-    File.open("#{outdir}/#{contig}-new.gbk", "w") do |f| 
+    File.open("#{outdir}/#{contig}.gbk", "w") do |f| 
       f.write(@gbk.to_biosequence.output(:genbank))
     end
+
+    # Bioruby doesn't support gff at this point
+    # File.open("#{outdir}/#{contig}.gff", "w") do |f| 
+    #   f.write(@gbk.to_biosequence.output(:gff))
+    # end
 
   end
 

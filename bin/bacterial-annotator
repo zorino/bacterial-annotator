@@ -20,11 +20,26 @@ bacterial-annotator [OPTIONS] FASTA_FILE
 
 [OPTIONS]
 
-  --input/-i		Provide the fasta file to annotate
-  --refgenome/-g	Provide a Genbank file or a Gbk Accession ID
-  --outdir/-o		Output directory [default=BAnnotation]
+  --input/-i		<fasta_file>	Provide the fasta file to annotate
+  --refgenome/-g	<GBK_ID>	Provide a Genbank file or a Gbk Accession ID
+  --outdir/-o		<outdir>	Output directory [default=BAnnotation]
 
-  --help/-h		Print Help
+//optionals
+  --minlength		Minimum contig length for annotation [default=500]
+  --force/-f		Force to overwrite the output directory
+  --gff			Will also generate gff annotation files
+
+  --finish-remotedb	<remote_database> [nr|refseq|swissprot]
+			Complete the annotation of remaining CDS with a remote NCBI BLAST
+			Can be very slow, better to use an external database !
+
+  --finish-externaldb	<proteins fasta_file>
+			Complete the annotation of remaining CDS with this 
+			database (protein fasta file) faster than remotedb.
+			Fasta Header need to look something like this (NCBI or EBI) :
+
+
+  --help/-h		Print this !
 OEM
 
 end
@@ -46,16 +61,24 @@ def parseOptions
       options[:refgenome] = ARGV.shift
     when "--outdir", "-o"
       options[:outdir] = ARGV.shift
+    when "--force", "-f"
+      options[:force] = 1
+    when "--gff"
+      options[:gff] = 1
+    when "--finish-remotedb"
+      options[:remote_db] = ARGV.shift
+    when "--finish-externaldb"
+      options[:external_db] = ARGV.shift
     when "--help", "-h"
       usage
     end
 
   end
-  
+
   options
 
 end
-  
+
 
 # Main
 if ARGV.size > 1
@@ -77,10 +100,10 @@ if ARGV.size > 1
     puts "You didn't provide a fasta file to annotate !"
   end
 
-  bannot = BacterialAnnotator.new(options[:input], options[:refgenome], ROOT, options[:outdir])
+  bannot = BacterialAnnotator.new(options[:input], options[:refgenome], ROOT, options[:outdir], options)
   bannot.prepare_files_for_annotation
   bannot.run_annotation
-  
+
 else
   usage
 end
