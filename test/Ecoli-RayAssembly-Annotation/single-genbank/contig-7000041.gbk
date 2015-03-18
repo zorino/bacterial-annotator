@@ -1,0 +1,11 @@
+LOCUS       contig-7000041                 198 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1134;seqlen=198;seqhdr="contig-7000041 198 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(35..>196)
+                     /note=";gc_cont=0.537;tscore=3.22;"
+ORIGIN
+        1 gagacattag gaaatccttg aggtgcatcc ttttttacaa catagccgct gctcgtataa
+       61 gtaacaactt gtccggcttt atagttggga gcggctgcaa gactaaaggc ggtagtactt
+      121 tgtaagccag ctcctgtacc cccagtagcg ccggtagctc cagtgggtcc agtgatgcca
+      181 gtggatccgg tgatgcca
+//

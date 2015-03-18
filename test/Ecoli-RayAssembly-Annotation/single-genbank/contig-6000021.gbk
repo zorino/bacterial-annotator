@@ -1,0 +1,11 @@
+LOCUS       contig-6000021                 188 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=570;seqlen=188;seqhdr="contig-6000021 188 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<1..>186)
+                     /note=";gc_cont=0.425;tscore=0.00;"
+ORIGIN
+        1 cataaataat ccggctgtta actctccaaa tggtgtatag gcaatgggaa gtggaccacc
+       61 cgcataaagg taagcaacgg ccatacaaac aagaccgatt gcagcaagcc accagctaga
+      121 attcatacaa atataaacac ctaatagtat tgcgatgccg aaaaatccaa atgctaagtt
+      181 aagcactg
+//

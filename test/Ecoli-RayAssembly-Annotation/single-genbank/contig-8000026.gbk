@@ -1,0 +1,9 @@
+LOCUS       contig-8000026                 224 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=709;seqlen=224;seqhdr="contig-8000026 224 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tcttcctttt tccctttttc ctctttcctt tctcctcttc ttttctccct ctctttttct
+       61 tccctccctt tcctcttttc cctcctcttc ccccccctcc ctttccttcc tcttctccct
+      121 ctttctcttc tcttcctttt cctttcccct ttttcctcct tccccttttc tttttttttt
+      181 ccctttcttc cttccccccc tcctcctctc ttcccccctc tccc
+//

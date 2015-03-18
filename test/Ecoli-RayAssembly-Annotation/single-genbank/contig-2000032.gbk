@@ -1,0 +1,10 @@
+LOCUS       contig-2000032                 266 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=874;seqlen=266;seqhdr="contig-2000032 266 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aatcttaata tctcactttt ctattcttcc ttctcttaat atttaacttt tctaaaccat
+       61 tcacctaatc ttcttcatct actcttattc tttttttttt attttatctt tctttaatcc
+      121 ttctaatttt ttcttttatt cattctttat ttatcataat ttctaattct tacataatta
+      181 actataaatc tttttaaaat ccctctctcc ttaataccaa tttttccttt ccaactttaa
+      241 tcttttcatt tttattctac ccctaa
+//

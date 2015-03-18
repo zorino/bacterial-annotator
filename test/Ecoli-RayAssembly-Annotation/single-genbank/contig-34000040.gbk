@@ -1,0 +1,8 @@
+LOCUS       contig-34000040                 124 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1125;seqlen=124;seqhdr="contig-34000040 124 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ccttcccttc ttttccttct ttctccctct tccctttttt ccccctcccc cccttcccct
+       61 ccttcccttt cttttccttc ccccccttcc cttcccttct tcctttttcc tcctcttcct
+      121 ttct
+//

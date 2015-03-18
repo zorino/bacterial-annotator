@@ -1,0 +1,10 @@
+LOCUS       contig-19000040                 152 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1110;seqlen=152;seqhdr="contig-19000040 152 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             72..>152
+                     /note=";gc_cont=0.370;tscore=3.89;"
+ORIGIN
+        1 atggaacaat tttaccactg tttatggggg caatgttaat cggaacttca atagctggag
+       61 gattaaagga gatgacctca ttagttactg tattttgtat agcgatggca cttattttat
+      121 ttgcgatagg gccagttcta cgcatgcaaa ta
+//

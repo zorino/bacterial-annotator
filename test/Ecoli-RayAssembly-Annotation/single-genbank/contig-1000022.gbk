@@ -1,0 +1,12 @@
+LOCUS       contig-1000022                 298 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=585;seqlen=298;seqhdr="contig-1000022 298 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(1..>297)
+                     /note=";gc_cont=0.343;tscore=3.22;"
+ORIGIN
+        1 tcatgctttt acccctccag aaactgtctg ttgaaataat gttcggaaca gttgaatatc
+       61 agcgttttta gattcatatt ttattagttc tttacctaag tataaagctt gtttcttggc
+      121 ttgaattctc ttttctttat ttgctatttc atctaaatca gctacatgtg ctaagccaat
+      181 tgttcttcgg ataagctcac atccagcaaa tccgaccaca tccgtaaaaa tattttgcaa
+      241 aataatcggc aaccattgtt tttctttcgt atatgcttct acaccttctc caatccat
+//

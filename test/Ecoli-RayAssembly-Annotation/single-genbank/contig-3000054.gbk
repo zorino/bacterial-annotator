@@ -1,0 +1,12 @@
+LOCUS       contig-3000054                 285 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1507;seqlen=285;seqhdr="contig-3000054 285 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..234
+                     /note=";gc_cont=0.325;tscore=3.22;"
+ORIGIN
+        1 ataacggtgc aaatgtgtat aaataaacat gaagcagtac aacaaatatt agaaacacta
+       61 caagtgaaag gcattccaat actttcatat gaagtggaag cttcacagca aggtatagaa
+      121 actgtttata aggtagggat gcaactgaaa aatatatcgc cagaagaaaa gaatgagttt
+      181 attcagcata tgcaaacatt accggaagtt acattcataa agttaaaatc atagcgctga
+      241 aaacgaggat agatgtagcg ggaattacgc tatcatctat ctttt
+//

@@ -1,0 +1,12 @@
+LOCUS       contig-5000003                 244 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=86;seqlen=244;seqhdr="contig-5000003 244 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             43..>243
+                     /note=";gc_cont=0.328;tscore=3.89;"
+ORIGIN
+        1 aatactactt agtattaagt ttgttattaa ggggctgtaa acatgaatat aaagcaatcg
+       61 ttcaaaattt tagctatgtt tttaagtgtt ttatttgtgt tattcccact tcaaaaagca
+      121 ttcgcagaag ttatggacca tacaaagtat caaatggatt ggagctatag taagtccaag
+      181 aagaaaccaa tccgcacaga gcttattaaa acggcagatg gcaaaattgc tttttgctta
+      241 aatg
+//

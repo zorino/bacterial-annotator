@@ -1,0 +1,8 @@
+LOCUS       contig-13000011                 161 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=305;seqlen=161;seqhdr="contig-13000011 161 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tccccccttc ctccccctcc cctccttttc tttccccctt ccttcctttc cccttttccc
+       61 tttctcttcc ccctttcctt ctttcctttt tttttcctct cttcttcccc ctctctccct
+      121 ctttcctttt ctccttttcc ctctcctttt tctcttcttc t
+//

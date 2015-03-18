@@ -1,0 +1,8 @@
+LOCUS       contig-21000005                 139 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=149;seqlen=139;seqhdr="contig-21000005 139 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cctcctctcc tccccctcct ctccccccct tttccctttt ccttccccct ctccttctcc
+       61 ctttcccttc tttttctctc tttttctttc cttttttcct tctccttttt tttttttcct
+      121 cctccttctt cccccttct
+//

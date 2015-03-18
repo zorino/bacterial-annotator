@@ -1,0 +1,10 @@
+LOCUS       contig-4000053                 263 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1482;seqlen=263;seqhdr="contig-4000053 263 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tctggtggta cagcatggaa tagtccatat tactatgcct cttatataaa tcctgaaatt
+       61 gcaaactata taaaacaaaa gaaccctaca agagtaggct ggattattca agactatata
+      121 aatgaaaagt ggtcaccact gctgtatcaa gaagttataa gagcgaataa gtcacttata
+      181 aaagaataaa gatgatgagg ataagaagcg ataaaatacg tcgcttctta ttgaaaatac
+      241 aatgtatctt gtaaatggaa caa
+//

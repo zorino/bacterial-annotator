@@ -1,0 +1,1816 @@
+<?xml version="1.0"?>
+<!DOCTYPE BlastOutput PUBLIC "-//NCBI//NCBI BlastOutput/EN" "http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd">
+<BlastOutput>
+  <BlastOutput_program>blastp</BlastOutput_program>
+  <BlastOutput_version>BLASTP 2.2.31+</BlastOutput_version>
+  <BlastOutput_reference>Stephen F. Altschul, Thomas L. Madden, Alejandro A. Sch&amp;auml;ffer, Jinghui Zhang, Zheng Zhang, Webb Miller, and David J. Lipman (1997), &quot;Gapped BLAST and PSI-BLAST: a new generation of protein database search programs&quot;, Nucleic Acids Res. 25:3389-3402.</BlastOutput_reference>
+  <BlastOutput_db>refseq_protein</BlastOutput_db>
+  <BlastOutput_query-ID>Query_78036</BlastOutput_query-ID>
+  <BlastOutput_query-def>contig-0_20 # 16195 # 16854 # -1 # ;gc_cont=0.517</BlastOutput_query-def>
+  <BlastOutput_query-len>220</BlastOutput_query-len>
+  <BlastOutput_param>
+    <Parameters>
+      <Parameters_matrix>BLOSUM62</Parameters_matrix>
+      <Parameters_expect>10</Parameters_expect>
+      <Parameters_gap-open>11</Parameters_gap-open>
+      <Parameters_gap-extend>1</Parameters_gap-extend>
+      <Parameters_filter>F</Parameters_filter>
+    </Parameters>
+  </BlastOutput_param>
+<BlastOutput_iterations>
+<Iteration>
+  <Iteration_iter-num>1</Iteration_iter-num>
+  <Iteration_query-ID>Query_78036</Iteration_query-ID>
+  <Iteration_query-def>contig-0_20 # 16195 # 16854 # -1 # ;gc_cont=0.517</Iteration_query-def>
+  <Iteration_query-len>220</Iteration_query-len>
+<Iteration_hits>
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>gi|447144239|ref|WP_001221495.1|</Hit_id>
+  <Hit_def>quorum sensing DNA-binding response regulator in two-component regulatory system with QseC [Escherichia coli] &gt;gi|16130921|ref|NP_417497.1| quorum sensing DNA-binding response regulator in two-component regulatory system with QseC [Escherichia coli str. K-12 substr. MG1655] &gt;gi|170082568|ref|YP_001731888.1| DNA-binding transcriptional regulator QseB [Escherichia coli str. K-12 substr. DH10B] &gt;gi|388479025|ref|YP_491217.1| DNA-binding response regulator in two-component regulatory system with QseC [Escherichia coli str. K-12 substr. W3110]</Hit_def>
+  <Hit_accession>WP_001221495</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>442.195</Hsp_bit-score>
+      <Hsp_score>1136</Hsp_score>
+      <Hsp_evalue>1.49464e-155</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>219</Hsp_identity>
+      <Hsp_positive>219</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>gi|447144237|ref|WP_001221493.1|</Hit_id>
+  <Hit_def>MULTISPECIES: transcriptional regulator [Enterobacteriaceae] &gt;gi|218560102|ref|YP_002393015.1| DNA-binding transcriptional regulator QseB [Escherichia coli S88] &gt;gi|218691322|ref|YP_002399534.1| DNA-binding transcriptional regulator QseB [Escherichia coli ED1a] &gt;gi|218701797|ref|YP_002409426.1| DNA-binding transcriptional regulator QseB [Escherichia coli IAI39] &gt;gi|218706652|ref|YP_002414171.1| DNA-binding transcriptional regulator QseB [Escherichia coli UMN026] &gt;gi|222157744|ref|YP_002557883.1| Transcriptional regulatory protein qseB [Escherichia coli LF82] &gt;gi|387618326|ref|YP_006121348.1| DNA-binding transcriptional regulator QseB [Escherichia coli O83:H1 str. NRG 857C] &gt;gi|544577580|ref|YP_008573104.1| Transcriptional regulatory protein BasR [Escherichia coli PMV-1]</Hit_def>
+  <Hit_accession>WP_001221493</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>439.499</Hsp_bit-score>
+      <Hsp_score>1129</Hsp_score>
+      <Hsp_evalue>1.75148e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>218</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>3</Hit_num>
+  <Hit_id>gi|723116343|ref|WP_033560344.1|</Hit_id>
+  <Hit_def>transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_033560344</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>439.499</Hsp_bit-score>
+      <Hsp_score>1129</Hsp_score>
+      <Hsp_evalue>1.77074e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>217</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVVLDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAV+LDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>4</Hit_num>
+  <Hit_id>gi|692982140|ref|WP_032172036.1|</Hit_id>
+  <Hit_def>transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_032172036</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>439.499</Hsp_bit-score>
+      <Hsp_score>1129</Hsp_score>
+      <Hsp_evalue>1.77074e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>217</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGVGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHG+GYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>5</Hit_num>
+  <Hit_id>gi|486162077|ref|WP_001525668.1|</Hit_id>
+  <Hit_def>transcriptional regulatory protein qseB [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001525668</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>439.499</Hsp_bit-score>
+      <Hsp_score>1129</Hsp_score>
+      <Hsp_evalue>1.77074e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>217</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRVLLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MR+LLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>6</Hit_num>
+  <Hit_id>gi|447144222|ref|WP_001221478.1|</Hit_id>
+  <Hit_def>MULTISPECIES: transcriptional regulator [Enterobacteriaceae] &gt;gi|215488353|ref|YP_002330784.1| DNA-binding transcriptional regulator QseB [Escherichia coli O127:H6 str. E2348/69]</Hit_def>
+  <Hit_accession>WP_001221478</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>439.113</Hsp_bit-score>
+      <Hsp_score>1128</Hsp_score>
+      <Hsp_evalue>2.77282e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>217</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSIDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFS+DWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>7</Hit_num>
+  <Hit_id>gi|585334922|ref|WP_024216571.1|</Hit_id>
+  <Hit_def>transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_024216571</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>439.113</Hsp_bit-score>
+      <Hsp_score>1128</Hsp_score>
+      <Hsp_evalue>2.77282e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>217</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPILILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREP+LILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>8</Hit_num>
+  <Hit_id>gi|490117710|ref|WP_004018268.1|</Hit_id>
+  <Hit_def>response regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_004018268</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>438.343</Hsp_bit-score>
+      <Hsp_score>1126</Hsp_score>
+      <Hsp_evalue>4.58604e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>217</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAMILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDA+ILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>9</Hit_num>
+  <Hit_id>gi|763328013|ref|WP_044186457.1|</Hit_id>
+  <Hit_def>transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_044186457</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>438.343</Hsp_bit-score>
+      <Hsp_score>1126</Hsp_score>
+      <Hsp_evalue>5.40372e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>217</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEDVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDE+VTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>10</Hit_num>
+  <Hit_id>gi|447144236|ref|WP_001221492.1|</Hit_id>
+  <Hit_def>transcriptional regulator [Escherichia coli] &gt;gi|157162501|ref|YP_001459819.1| DNA-binding transcriptional regulator QseB [Escherichia coli HS]</Hit_def>
+  <Hit_accession>WP_001221492</Hit_accession>
+  <Hit_len>219</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>438.343</Hsp_bit-score>
+      <Hsp_score>1126</Hsp_score>
+      <Hsp_evalue>5.40372e-154</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>219</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>219</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>217</Hsp_identity>
+      <Hsp_positive>218</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>219</Hsp_align-len>
+      <Hsp_qseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGEPLTLKPKEFALLELLMRNAGRVLSRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_qseq>
+      <Hsp_hseq>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAGDPLTLKPKEFALLELLMRNAGRVLPRKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_hseq>
+      <Hsp_midline>MRILLIEDDMLIGDGIKTGLSKMGFSVDWFTQGRQGKEALYSAPYDAVILDLTLPGMDGRDILREWREKGQREPVLILTARDALAERVEGLRLGADDYLCKPFALIEVAARLEALMRRTNGQASNELRHGNVMLDPGKRIATLAG+PLTLKPKEFALLELLMRNAGRVL RKLIEEKLYTWDEEVTSNAVEVHVHHLRRKLGSDFIRTVHGIGYTLGEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+</Iteration_hits>
+  <Iteration_stat>
+    <Statistics>
+      <Statistics_db-num>46414575</Statistics_db-num>
+      <Statistics_db-len>16909551090</Statistics_db-len>
+      <Statistics_hsp-len>0</Statistics_hsp-len>
+      <Statistics_eff-space>0</Statistics_eff-space>
+      <Statistics_kappa>0.041</Statistics_kappa>
+      <Statistics_lambda>0.267</Statistics_lambda>
+      <Statistics_entropy>0.14</Statistics_entropy>
+    </Statistics>
+  </Iteration_stat>
+</Iteration>
+<Iteration>
+  <Iteration_iter-num>2</Iteration_iter-num>
+  <Iteration_query-ID>Query_78037</Iteration_query-ID>
+  <Iteration_query-def>contig-0_21 # 17006 # 17398 # 1 # ;gc_cont=0.519</Iteration_query-def>
+  <Iteration_query-len>131</Iteration_query-len>
+<Iteration_hits>
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>gi|446635312|ref|WP_000712658.1|</Hit_id>
+  <Hit_def>MULTISPECIES: hypothetical protein [Enterobacteriaceae] &gt;gi|15803566|ref|NP_289599.1| hypothetical protein Z4376 [Escherichia coli O157:H7 str. EDL933] &gt;gi|15833160|ref|NP_311933.1| hypothetical protein ECs3906 [Escherichia coli O157:H7 str. Sakai] &gt;gi|16130920|ref|NP_417496.1| hydrogen peroxide and cadmium resistance periplasmic protein; stress-induced OB-fold protein [Escherichia coli str. K-12 substr. MG1655] &gt;gi|82778366|ref|YP_404715.1| hypothetical protein SDY_3215 [Shigella dysenteriae Sd197] &gt;gi|157162500|ref|YP_001459818.1| hypothetical protein EcHS_A3202 [Escherichia coli HS] &gt;gi|170082567|ref|YP_001731887.1| hypothetical protein ECDH10B_3198 [Escherichia coli str. K-12 substr. DH10B] &gt;gi|187732013|ref|YP_001881792.1| hypothetical protein SbBS512_E3458 [Shigella boydii CDC 3083-94] &gt;gi|218555594|ref|YP_002388507.1| hypothetical protein ECIAI1_3172 [Escherichia coli IAI1] &gt;gi|218560101|ref|YP_002393014.1| hypothetical protein ECS88_3410 [Escherichia coli S88] &gt;gi|218691321|ref|YP_002399533.1| hypothetical protein ECED1_3681 [Escherichia coli ED1a] &gt;gi|218696730|ref|YP_002404397.1| hypothetical protein EC55989_3440 [Escherichia coli 55989] &gt;gi|218701796|ref|YP_002409425.1| hypothetical protein ECIAI39_3519 [Escherichia coli IAI39] &gt;gi|218706651|ref|YP_002414170.1| hypothetical protein ECUMN_3509 [Escherichia coli UMN026] &gt;gi|222157743|ref|YP_002557882.1| Protein ygiW [Escherichia coli LF82] &gt;gi|387618325|ref|YP_006121347.1| hypothetical protein NRG857_15015 [Escherichia coli O83:H1 str. NRG 857C] &gt;gi|388479024|ref|YP_491216.1| hypothetical protein Y75_p2950 [Escherichia coli str. K-12 substr. W3110] &gt;gi|407480346|ref|YP_006777495.1| hypothetical protein O3K_03825 [Escherichia coli O104:H4 str. 2011C-3493] &gt;gi|544577579|ref|YP_008573103.1| hypothetical protein ECOPMV1_03330 [Escherichia coli PMV-1]</Hit_def>
+  <Hit_accession>WP_000712658</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>266.159</Hsp_bit-score>
+      <Hsp_score>679</Hsp_score>
+      <Hsp_evalue>4.80601e-89</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>130</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>gi|545297765|ref|WP_021577970.1|</Hit_id>
+  <Hit_def>protein ygiW [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_021577970</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>266.159</Hsp_bit-score>
+      <Hsp_score>679</Hsp_score>
+      <Hsp_evalue>6.38414e-89</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSITTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGS+TTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>3</Hit_num>
+  <Hit_id>gi|485696396|ref|WP_001330010.1|</Hit_id>
+  <Hit_def>hypothetical protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001330010</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>266.159</Hsp_bit-score>
+      <Hsp_score>679</Hsp_score>
+      <Hsp_evalue>6.38414e-89</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEIDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGE+DKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>4</Hit_num>
+  <Hit_id>gi|585343307|ref|WP_024224930.1|</Hit_id>
+  <Hit_def>hypothetical protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_024224930</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>265.388</Hsp_bit-score>
+      <Hsp_score>677</Hsp_score>
+      <Hsp_evalue>1.10217e-88</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGMTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNG+TVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>5</Hit_num>
+  <Hit_id>gi|485777855|ref|WP_001401138.1|</Hit_id>
+  <Hit_def>MULTISPECIES: hypothetical protein [Escherichia]</Hit_def>
+  <Hit_accession>WP_001401138</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>265.003</Hsp_bit-score>
+      <Hsp_score>676</Hsp_score>
+      <Hsp_evalue>1.4964e-88</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDSWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDD+WVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>6</Hit_num>
+  <Hit_id>gi|485681921|ref|WP_001316657.1|</Hit_id>
+  <Hit_def>hypothetical protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001316657</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>265.003</Hsp_bit-score>
+      <Hsp_score>676</Hsp_score>
+      <Hsp_evalue>1.63301e-88</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVMALCSAPVMSAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAVMALCSAPVM+AEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>7</Hit_num>
+  <Hit_id>gi|745761475|ref|WP_039060162.1|</Hit_id>
+  <Hit_def>hypothetical protein [Shigella flexneri]</Hit_def>
+  <Hit_accession>WP_039060162</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>265.003</Hsp_bit-score>
+      <Hsp_score>676</Hsp_score>
+      <Hsp_evalue>1.80167e-88</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVENAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVE+AKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>8</Hit_num>
+  <Hit_id>gi|693156053|ref|WP_032292461.1|</Hit_id>
+  <Hit_def>hypothetical protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_032292461</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>264.618</Hsp_bit-score>
+      <Hsp_score>675</Hsp_score>
+      <Hsp_evalue>2.3161e-88</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>129</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFTAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKF AVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>9</Hit_num>
+  <Hit_id>gi|693077236|ref|WP_032239971.1|</Hit_id>
+  <Hit_def>hypothetical protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_032239971</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>264.618</Hsp_bit-score>
+      <Hsp_score>675</Hsp_score>
+      <Hsp_evalue>2.3161e-88</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>129</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESTKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVES KSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>10</Hit_num>
+  <Hit_id>gi|657322593|ref|WP_029395853.1|</Hit_id>
+  <Hit_def>hypothetical protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_029395853</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>264.618</Hsp_bit-score>
+      <Hsp_score>675</Hsp_score>
+      <Hsp_evalue>2.3161e-88</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>130</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>129</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>MKKFAAVIAVMALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_qseq>
+      <Hsp_hseq>MKKFAAVIAVIALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_hseq>
+      <Hsp_midline>MKKFAAVIAV+ALCSAPVMAAEQGGFSGPSATQSQAGGFQGPNGSVTTVESAKSLRDDTWVTLRGNIVERISDDLYVFKDASGTINVDIDHKRWNGVTVTPKDTVEIQGEVDKDWNSVEIDVKQIRKVNP</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+</Iteration_hits>
+  <Iteration_stat>
+    <Statistics>
+      <Statistics_db-num>46414575</Statistics_db-num>
+      <Statistics_db-len>16909551090</Statistics_db-len>
+      <Statistics_hsp-len>0</Statistics_hsp-len>
+      <Statistics_eff-space>0</Statistics_eff-space>
+      <Statistics_kappa>0.041</Statistics_kappa>
+      <Statistics_lambda>0.267</Statistics_lambda>
+      <Statistics_entropy>0.14</Statistics_entropy>
+    </Statistics>
+  </Iteration_stat>
+</Iteration>
+<Iteration>
+  <Iteration_iter-num>3</Iteration_iter-num>
+  <Iteration_query-ID>Query_78038</Iteration_query-ID>
+  <Iteration_query-def>contig-0_22 # 17451 # 17933 # 1 # ;gc_cont=0.532</Iteration_query-def>
+  <Iteration_query-len>161</Iteration_query-len>
+<Iteration_hits>
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>gi|446105650|ref|WP_000183505.1|</Hit_id>
+  <Hit_def>MULTISPECIES: transcriptional repressor for mcbR biofilm gene [Escherichia] &gt;gi|49176303|ref|YP_026197.1| transcriptional repressor for mcbR biofilm gene [Escherichia coli str. K-12 substr. MG1655] &gt;gi|157162499|ref|YP_001459817.1| transcription activator effector binding domain/DNA gyrase inhibitor domain-containing protein [Escherichia coli HS] &gt;gi|170082566|ref|YP_001731886.1| transcriptional regulator [Escherichia coli str. K-12 substr. DH10B] &gt;gi|218706650|ref|YP_002414169.1| putative transcriptional regulator [Escherichia coli UMN026] &gt;gi|388479023|ref|YP_491215.1| transcriptional regulator [Escherichia coli str. K-12 substr. W3110]</Hit_def>
+  <Hit_accession>WP_000183505</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>335.109</Hsp_bit-score>
+      <Hsp_score>858</Hsp_score>
+      <Hsp_evalue>2.87616e-115</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>160</Hsp_identity>
+      <Hsp_positive>160</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>gi|487505801|ref|WP_001705444.1|</Hit_id>
+  <Hit_def>gyrI-like small molecule binding domain protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001705444</Hit_accession>
+  <Hit_len>162</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>335.109</Hsp_bit-score>
+      <Hsp_score>858</Hsp_score>
+      <Hsp_evalue>3.66883e-115</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>160</Hsp_identity>
+      <Hsp_positive>160</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>3</Hit_num>
+  <Hit_id>gi|446105639|ref|WP_000183494.1|</Hit_id>
+  <Hit_def>MULTISPECIES: AraC family transcriptional regulator [Enterobacteriaceae] &gt;gi|218555593|ref|YP_002388506.1| putative transcriptional regulator [Escherichia coli IAI1] &gt;gi|218696729|ref|YP_002404396.1| transcriptional regulator [Escherichia coli 55989] &gt;gi|407480347|ref|YP_006777496.1| transcriptional regulator [Escherichia coli O104:H4 str. 2011C-3493]</Hit_def>
+  <Hit_accession>WP_000183494</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>334.724</Hsp_bit-score>
+      <Hsp_score>857</Hsp_score>
+      <Hsp_evalue>5.30492e-115</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>159</Hsp_identity>
+      <Hsp_positive>160</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTIWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHT+WGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>4</Hit_num>
+  <Hit_id>gi|446105648|ref|WP_000183503.1|</Hit_id>
+  <Hit_def>AraC family transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_000183503</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>333.954</Hsp_bit-score>
+      <Hsp_score>855</Hsp_score>
+      <Hsp_evalue>9.36594e-115</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>158</Hsp_identity>
+      <Hsp_positive>160</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTIWGIIRHWMPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHT+WGIIRHW+PASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>5</Hit_num>
+  <Hit_id>gi|446105645|ref|WP_000183500.1|</Hit_id>
+  <Hit_def>AraC family transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_000183500</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>333.954</Hsp_bit-score>
+      <Hsp_score>855</Hsp_score>
+      <Hsp_evalue>9.36594e-115</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>158</Hsp_identity>
+      <Hsp_positive>160</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTIWGIIRHWLPASGEKMRKAPIMFHYTNLAEGVTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHT+WGIIRHWLPASGEKMRKAPI+FHYTNLAEGVTEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>6</Hit_num>
+  <Hit_id>gi|446105649|ref|WP_000183504.1|</Hit_id>
+  <Hit_def>AraC family transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_000183504</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>333.954</Hsp_bit-score>
+      <Hsp_score>855</Hsp_score>
+      <Hsp_evalue>9.67818e-115</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>159</Hsp_identity>
+      <Hsp_positive>160</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGMTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEG+TEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>7</Hit_num>
+  <Hit_id>gi|545297764|ref|WP_021577969.1|</Hit_id>
+  <Hit_def>transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_021577969</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>333.954</Hsp_bit-score>
+      <Hsp_score>855</Hsp_score>
+      <Hsp_evalue>9.78456e-115</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>159</Hsp_identity>
+      <Hsp_positive>160</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTKQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVT+QRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>8</Hit_num>
+  <Hit_id>gi|764144516|ref|WP_044326222.1|</Hit_id>
+  <Hit_def>AraC family transcriptional regulator [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_044326222</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>333.569</Hsp_bit-score>
+      <Hsp_score>854</Hsp_score>
+      <Hsp_evalue>1.37314e-114</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>159</Hsp_identity>
+      <Hsp_positive>159</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPVTTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDP TTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>9</Hit_num>
+  <Hit_id>gi|485792184|ref|WP_001413984.1|</Hit_id>
+  <Hit_def>gyrI-like small molecule binding domain protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001413984</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>333.569</Hsp_bit-score>
+      <Hsp_score>854</Hsp_score>
+      <Hsp_evalue>1.37314e-114</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>159</Hsp_identity>
+      <Hsp_positive>159</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVVWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGV WDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>10</Hit_num>
+  <Hit_id>gi|485736659|ref|WP_001363890.1|</Hit_id>
+  <Hit_def>gyrI-like small molecule binding domain protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001363890</Hit_accession>
+  <Hit_len>160</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>333.569</Hsp_bit-score>
+      <Hsp_score>854</Hsp_score>
+      <Hsp_evalue>1.40349e-114</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>160</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>160</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>159</Hsp_identity>
+      <Hsp_positive>159</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>160</Hsp_align-len>
+      <Hsp_qseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGIIRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_qseq>
+      <Hsp_hseq>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGITRHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_hseq>
+      <Hsp_midline>MTNLTLDVNIIDFPSIPVAMLPHRCSPELLNYSVAKFIMWRKETGLSPVNQSQTFGVAWDDPATTAPEAFRFDICGSVSEPIPDNRYGVSNGELTGGRYAVARHVGELDDISHTVWGI RHWLPASGEKMRKAPILFHYTNLAEGVTEQRLETDVYVPLA</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+</Iteration_hits>
+  <Iteration_stat>
+    <Statistics>
+      <Statistics_db-num>46414575</Statistics_db-num>
+      <Statistics_db-len>16909551090</Statistics_db-len>
+      <Statistics_hsp-len>0</Statistics_hsp-len>
+      <Statistics_eff-space>0</Statistics_eff-space>
+      <Statistics_kappa>0.041</Statistics_kappa>
+      <Statistics_lambda>0.267</Statistics_lambda>
+      <Statistics_entropy>0.14</Statistics_entropy>
+    </Statistics>
+  </Iteration_stat>
+</Iteration>
+<Iteration>
+  <Iteration_iter-num>4</Iteration_iter-num>
+  <Iteration_query-ID>Query_78039</Iteration_query-ID>
+  <Iteration_query-def>contig-0_23 # 18138 # 18434 # 1 # ;gc_cont=0.401</Iteration_query-def>
+  <Iteration_query-len>99</Iteration_query-len>
+<Iteration_hits>
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>gi|446337729|ref|WP_000415584.1|</Hit_id>
+  <Hit_def>MULTISPECIES: GCU-specific mRNA interferase toxin of the MqsR-MqsA toxin-antitoxin system; biofilm/motility regulator; anti-repressor [Enterobacteriaceae] &gt;gi|16130918|ref|NP_417494.1| GCU-specific mRNA interferase toxin of the MqsR-MqsA toxin-antitoxin system; biofilm/motility regulator; anti-repressor [Escherichia coli str. K-12 substr. MG1655] &gt;gi|157162498|ref|YP_001459816.1| hypothetical protein EcHS_A3200 [Escherichia coli HS] &gt;gi|170082565|ref|YP_001731885.1| quorum-sensing regulator [Escherichia coli str. K-12 substr. DH10B] &gt;gi|218706649|ref|YP_002414168.1| motility quorum-sensing regulator [Escherichia coli UMN026] &gt;gi|388479022|ref|YP_491214.1| cyanide hydratase [Escherichia coli str. K-12 substr. W3110]</Hit_def>
+  <Hit_accession>WP_000415584</Hit_accession>
+  <Hit_len>98</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>204.912</Hsp_bit-score>
+      <Hsp_score>520</Hsp_score>
+      <Hsp_evalue>8.33334e-66</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>98</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>98</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>98</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>gi|693101567|ref|WP_032256700.1|</Hit_id>
+  <Hit_def>mRNA interferase MqsR [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_032256700</Hit_accession>
+  <Hit_len>98</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>203.371</Hsp_bit-score>
+      <Hsp_score>516</Hsp_score>
+      <Hsp_evalue>3.22263e-65</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>98</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>97</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>98</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSDSDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLS+SDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>3</Hit_num>
+  <Hit_id>gi|585327421|ref|WP_024209087.1|</Hit_id>
+  <Hit_def>mRNA interferase MqsR [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_024209087</Hit_accession>
+  <Hit_len>98</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>202.986</Hsp_bit-score>
+      <Hsp_score>515</Hsp_score>
+      <Hsp_evalue>3.75428e-65</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>98</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>97</Hsp_identity>
+      <Hsp_positive>98</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>98</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSITTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKS+TTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>4</Hit_num>
+  <Hit_id>gi|446337730|ref|WP_000415585.1|</Hit_id>
+  <Hit_def>hypothetical protein [Escherichia coli] &gt;gi|218701794|ref|YP_002409423.1| motility quorum-sensing regulator [Escherichia coli IAI39]</Hit_def>
+  <Hit_accession>WP_000415585</Hit_accession>
+  <Hit_len>98</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>202.986</Hsp_bit-score>
+      <Hsp_score>515</Hsp_score>
+      <Hsp_evalue>4.93112e-65</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>98</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>97</Hsp_identity>
+      <Hsp_positive>97</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>98</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNTGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVN GQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>5</Hit_num>
+  <Hit_id>gi|693024371|ref|WP_032201387.1|</Hit_id>
+  <Hit_def>mRNA interferase MqsR [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_032201387</Hit_accession>
+  <Hit_len>98</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>202.601</Hsp_bit-score>
+      <Hsp_score>514</Hsp_score>
+      <Hsp_evalue>6.76565e-65</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>98</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>97</Hsp_identity>
+      <Hsp_positive>97</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>98</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLSVSFKEK</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVL VSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>6</Hit_num>
+  <Hit_id>gi|446337728|ref|WP_000415583.1|</Hit_id>
+  <Hit_def>hypothetical protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_000415583</Hit_accession>
+  <Hit_len>98</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>201.83</Hsp_bit-score>
+      <Hsp_score>512</Hsp_score>
+      <Hsp_evalue>1.05806e-64</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>98</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>97</Hsp_identity>
+      <Hsp_positive>97</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>98</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGLVYLKITVIHDVLIVSFKEK</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTG VYLKITVIHDVLIVSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>7</Hit_num>
+  <Hit_id>gi|585280422|ref|WP_024173241.1|</Hit_id>
+  <Hit_def>mRNA interferase MqsR [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_024173241</Hit_accession>
+  <Hit_len>98</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>201.83</Hsp_bit-score>
+      <Hsp_score>512</Hsp_score>
+      <Hsp_evalue>1.08139e-64</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>98</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>97</Hsp_identity>
+      <Hsp_positive>97</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>98</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQGYLKITVIHDVLIVSFKEK</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQ YLKITVIHDVLIVSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>8</Hit_num>
+  <Hit_id>gi|545276577|ref|WP_021563839.1|</Hit_id>
+  <Hit_def>mRNA interferase MqsR [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_021563839</Hit_accession>
+  <Hit_len>98</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>201.445</Hsp_bit-score>
+      <Hsp_score>511</Hsp_score>
+      <Hsp_evalue>1.56683e-64</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>98</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>97</Hsp_identity>
+      <Hsp_positive>97</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>98</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPWLVTGQVYLKITVIHDVLIVSFKEK</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRP LVTGQVYLKITVIHDVLIVSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>9</Hit_num>
+  <Hit_id>gi|765473333|ref|WP_044722598.1|</Hit_id>
+  <Hit_def>mRNA interferase MqsR, partial [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_044722598</Hit_accession>
+  <Hit_len>89</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>188.348</Hsp_bit-score>
+      <Hsp_score>477</Hsp_score>
+      <Hsp_evalue>2.11169e-59</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>89</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>89</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>89</Hsp_identity>
+      <Hsp_positive>89</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>89</Hsp_align-len>
+      <Hsp_qseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHD</Hsp_qseq>
+      <Hsp_hseq>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHD</Hsp_hseq>
+      <Hsp_midline>MEKRTPHTRLSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHD</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>10</Hit_num>
+  <Hit_id>gi|742839924|ref|WP_038988657.1|</Hit_id>
+  <Hit_def>mRNA interferase MqsR [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_038988657</Hit_accession>
+  <Hit_len>89</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>182.956</Hsp_bit-score>
+      <Hsp_score>463</Hsp_score>
+      <Hsp_evalue>2.09908e-57</Hsp_evalue>
+      <Hsp_query-from>10</Hsp_query-from>
+      <Hsp_query-to>98</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>89</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>87</Hsp_identity>
+      <Hsp_positive>89</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>89</Hsp_align-len>
+      <Hsp_qseq>LSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYLKITVIHDVLIVSFKEK</Hsp_qseq>
+      <Hsp_hseq>MSQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVYIKITVIHDVLIVSFKEK</Hsp_hseq>
+      <Hsp_midline>+SQVKKLVNAGQVRTTRSALLNADELGLDFDGMCNVIIGLSESDFYKSMTTYSDHTIWQDVYRPRLVTGQVY+KITVIHDVLIVSFKEK</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+</Iteration_hits>
+  <Iteration_stat>
+    <Statistics>
+      <Statistics_db-num>46414575</Statistics_db-num>
+      <Statistics_db-len>16909551090</Statistics_db-len>
+      <Statistics_hsp-len>0</Statistics_hsp-len>
+      <Statistics_eff-space>0</Statistics_eff-space>
+      <Statistics_kappa>0.041</Statistics_kappa>
+      <Statistics_lambda>0.267</Statistics_lambda>
+      <Statistics_entropy>0.14</Statistics_entropy>
+    </Statistics>
+  </Iteration_stat>
+</Iteration>
+<Iteration>
+  <Iteration_iter-num>5</Iteration_iter-num>
+  <Iteration_query-ID>Query_78040</Iteration_query-ID>
+  <Iteration_query-def>contig-0_24 # 18436 # 18831 # 1 # ;gc_cont=0.422</Iteration_query-def>
+  <Iteration_query-len>132</Iteration_query-len>
+<Iteration_hits>
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>gi|446572761|ref|WP_000650107.1|</Hit_id>
+  <Hit_def>MULTISPECIES: antitoxin for MqsR toxin; transcriptional repressor [Enterobacteriaceae] &gt;gi|16130917|ref|NP_417493.1| antitoxin for MqsR toxin; transcriptional repressor [Escherichia coli str. K-12 substr. MG1655] &gt;gi|157162497|ref|YP_001459815.1| Cro/CI family transcriptional regulator [Escherichia coli HS] &gt;gi|170082564|ref|YP_001731884.1| DNA-binding transcriptional regulator [Escherichia coli str. K-12 substr. DH10B] &gt;gi|218701793|ref|YP_002409422.1| putative DNA-binding transcriptional regulator [Escherichia coli IAI39] &gt;gi|218706648|ref|YP_002414167.1| putative DNA-binding transcriptional regulator [Escherichia coli UMN026] &gt;gi|388479021|ref|YP_491213.1| DNA-binding transcriptional regulator [Escherichia coli str. K-12 substr. W3110]</Hit_def>
+  <Hit_accession>WP_000650107</Hit_accession>
+  <Hit_len>131</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>273.478</Hsp_bit-score>
+      <Hsp_score>698</Hsp_score>
+      <Hsp_evalue>7.37084e-92</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>131</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>131</Hsp_identity>
+      <Hsp_positive>131</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>131</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_hseq>
+      <Hsp_midline>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>gi|545290311|ref|WP_021572968.1|</Hit_id>
+  <Hit_def>antitoxin MqsA [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_021572968</Hit_accession>
+  <Hit_len>131</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>270.396</Hsp_bit-score>
+      <Hsp_score>690</Hsp_score>
+      <Hsp_evalue>1.30351e-90</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>131</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>130</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>131</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>MKCPVCHQEEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_hseq>
+      <Hsp_midline>MKCPVCHQ EMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>3</Hit_num>
+  <Hit_id>gi|485897030|ref|WP_001487520.1|</Hit_id>
+  <Hit_def>antitoxin MqsA [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001487520</Hit_accession>
+  <Hit_len>131</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>270.396</Hsp_bit-score>
+      <Hsp_score>690</Hsp_score>
+      <Hsp_evalue>1.43816e-90</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>131</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>130</Hsp_identity>
+      <Hsp_positive>130</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>131</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>MKCPVCHQGEMVSGIKDIPSTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_hseq>
+      <Hsp_midline>MKCPVCHQGEMVSGIKDIP TFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>4</Hit_num>
+  <Hit_id>gi|692953212|ref|WP_032146961.1|</Hit_id>
+  <Hit_def>antitoxin, partial [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_032146961</Hit_accession>
+  <Hit_len>105</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>219.164</Hsp_bit-score>
+      <Hsp_score>557</Hsp_score>
+      <Hsp_evalue>8.36281e-71</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>105</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>105</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>105</Hsp_identity>
+      <Hsp_positive>105</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>105</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKG</Hsp_qseq>
+      <Hsp_hseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKG</Hsp_hseq>
+      <Hsp_midline>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKG</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>5</Hit_num>
+  <Hit_id>gi|503343652|ref|WP_013578313.1|</Hit_id>
+  <Hit_def>MULTISPECIES: antitoxin [Rahnella]</Hit_def>
+  <Hit_accession>WP_013578313</Hit_accession>
+  <Hit_len>133</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>184.882</Hsp_bit-score>
+      <Hsp_score>468</Hsp_score>
+      <Hsp_evalue>6.54792e-57</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>88</Hsp_identity>
+      <Hsp_positive>108</Hsp_positive>
+      <Hsp_gaps>1</Hsp_gaps>
+      <Hsp_align-len>131</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>MKCSVCGGAELEFGIKKVPYSFRGRKTVIEA-EGDHCPACGEVVMDREQSMAYMAKVKSFKAKVIAETIEPEYIIQVRKKLELTQKEASEIFGGGVNAFSRYEKGKAQPHPSIIKLLRVLDHHPELLDEVR</Hsp_hseq>
+      <Hsp_midline>MKC VC   E+  GIK +PY+FRGRKTV++   G +C  C E +M++E+S A+MA+VK+F+A V AET+ PE+I++VRKKL LTQKEASEIFGGGVNAFSRYEKG AQPHPS IKLLRVLD HPELL+E+R</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>6</Hit_num>
+  <Hit_id>gi|497324094|ref|WP_009638307.1|</Hit_id>
+  <Hit_def>antitoxin [Serratia sp. M24T3]</Hit_def>
+  <Hit_accession>WP_009638307</Hit_accession>
+  <Hit_len>131</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>179.874</Hsp_bit-score>
+      <Hsp_score>455</Hsp_score>
+      <Hsp_evalue>4.75721e-55</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>87</Hsp_identity>
+      <Hsp_positive>105</Hsp_positive>
+      <Hsp_gaps>1</Hsp_gaps>
+      <Hsp_align-len>131</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>MKCSVCGGAELVSGTQKIPYVFRGHKTHIEA-EGDHCAACGEVIMDREQSNAYQARIKAFKAKIIAVTIEPAFIMSVRKKLALTQKEASEIFGGGVNAFSRYEKGIAQPHPSTIKLLQVLDHHPELLNEIR</Hsp_hseq>
+      <Hsp_midline>MKC VC   E+VSG + IPY FRG KT ++   G +C  C E IM++E+S+A+ A++KAF+A + A T+ P FI+ VRKKL+LTQKEASEIFGGGVNAFSRYEKG AQPHPSTIKLL+VLD HPELLNEIR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>7</Hit_num>
+  <Hit_id>gi|516410130|ref|WP_017799528.1|</Hit_id>
+  <Hit_def>hypothetical protein [Erwinia toletana]</Hit_def>
+  <Hit_accession>WP_017799528</Hit_accession>
+  <Hit_len>131</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>177.563</Hsp_bit-score>
+      <Hsp_score>449</Hsp_score>
+      <Hsp_evalue>4.86483e-54</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>82</Hsp_identity>
+      <Hsp_positive>102</Hsp_positive>
+      <Hsp_gaps>1</Hsp_gaps>
+      <Hsp_align-len>131</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>MKCPVCGGAELESGIRDVPYVFRGHKIQIEA-KGDYCPACGEVLMDPEESAVFMAKVKKFKAEIISQTIEPGFIAQVRKKLALTQQEAGEVFGGGVNAFSRYENGKSQPHPSTVKLLRILDKHPELLTEIR</Hsp_hseq>
+      <Hsp_midline>MKCPVC   E+ SGI+D+PY FRG K  ++   G YC  C E +M+ EES  FMA+VK F+A + ++T+ P FI +VRKKL+LTQ+EA E+FGGGVNAFSRYE G +QPHPST+KLLR+LDKHPELL EIR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>8</Hit_num>
+  <Hit_id>gi|488138716|ref|WP_002209924.1|</Hit_id>
+  <Hit_def>MULTISPECIES: antitoxin [Yersinia] &gt;gi|108806388|ref|YP_650304.1| hypothetical protein YPA_0391 [Yersinia pestis Antiqua] &gt;gi|108813240|ref|YP_649007.1| hypothetical protein YPN_3080 [Yersinia pestis Nepal516] &gt;gi|218928056|ref|YP_002345931.1| hypothetical protein YPO0881 [Yersinia pestis CO92]</Hit_def>
+  <Hit_accession>WP_002209924</Hit_accession>
+  <Hit_len>132</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>176.792</Hsp_bit-score>
+      <Hsp_score>447</Hsp_score>
+      <Hsp_evalue>9.72921e-54</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>2</Hsp_hit-from>
+      <Hsp_hit-to>132</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>79</Hsp_identity>
+      <Hsp_positive>103</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>131</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>MKCPVCGGVELIHEARDVPFTYKGRKFIVEGVIGQHCPACGETVMTEAESDVYAAKTMLLRKMVNTESIAPAYIVQIRKKLGLNQREASEIFGGGVNAFSRYEKGKALPHPSTIKLLQVLDKHPELLNEIR</Hsp_hseq>
+      <Hsp_midline>MKCPVC   E++   +D+P+T++GRK +++G+ G +C  C E++M + ESD + A+    R  VN E++AP +IV++RKKL L Q+EASEIFGGGVNAFSRYEKG A PHPSTIKLL+VLDKHPELLNEIR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>9</Hit_num>
+  <Hit_id>gi|488282599|ref|WP_002353807.1|</Hit_id>
+  <Hit_def>antitoxin [Yersinia pestis]</Hit_def>
+  <Hit_accession>WP_002353807</Hit_accession>
+  <Hit_len>131</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>176.407</Hsp_bit-score>
+      <Hsp_score>446</Hsp_score>
+      <Hsp_evalue>1.19843e-53</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>131</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>79</Hsp_identity>
+      <Hsp_positive>103</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>131</Hsp_align-len>
+      <Hsp_qseq>MKCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>MKCPVCGGVELIHEARDVPFTYKGRKFIVEGVIGQHCPACGETVMTEAESDVYAAKTMLLRKMVNTESIAPAYIVQIRKKLGLNQREASEIFGGGVNAFSRYEKGKALPHPSTIKLLQVLDKHPELLNEIR</Hsp_hseq>
+      <Hsp_midline>MKCPVC   E++   +D+P+T++GRK +++G+ G +C  C E++M + ESD + A+    R  VN E++AP +IV++RKKL L Q+EASEIFGGGVNAFSRYEKG A PHPSTIKLL+VLDKHPELLNEIR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>10</Hit_num>
+  <Hit_id>gi|510939462|ref|WP_016257202.1|</Hit_id>
+  <Hit_def>antitoxin, partial [Yersinia pestis]</Hit_def>
+  <Hit_accession>WP_016257202</Hit_accession>
+  <Hit_len>130</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>174.096</Hsp_bit-score>
+      <Hsp_score>440</Hsp_score>
+      <Hsp_evalue>9.66396e-53</Hsp_evalue>
+      <Hsp_query-from>2</Hsp_query-from>
+      <Hsp_query-to>131</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>130</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>78</Hsp_identity>
+      <Hsp_positive>102</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>130</Hsp_align-len>
+      <Hsp_qseq>KCPVCHQGEMVSGIKDIPYTFRGRKTVLKGIHGLYCVHCEESIMNKEESDAFMAQVKAFRASVNAETVAPEFIVKVRKKLSLTQKEASEIFGGGVNAFSRYEKGNAQPHPSTIKLLRVLDKHPELLNEIR</Hsp_qseq>
+      <Hsp_hseq>KCPVCGGVELIHEARDVPFTYKGRKFIVEGVIGQHCPACGETVMTEAESDVYAAKTMLLRKMVNTESIAPAYIVQIRKKLGLNQREASEIFGGGVNAFSRYEKGKALPHPSTIKLLQVLDKHPELLNEIR</Hsp_hseq>
+      <Hsp_midline>KCPVC   E++   +D+P+T++GRK +++G+ G +C  C E++M + ESD + A+    R  VN E++AP +IV++RKKL L Q+EASEIFGGGVNAFSRYEKG A PHPSTIKLL+VLDKHPELLNEIR</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+</Iteration_hits>
+  <Iteration_stat>
+    <Statistics>
+      <Statistics_db-num>46414575</Statistics_db-num>
+      <Statistics_db-len>16909551090</Statistics_db-len>
+      <Statistics_hsp-len>0</Statistics_hsp-len>
+      <Statistics_eff-space>0</Statistics_eff-space>
+      <Statistics_kappa>0.041</Statistics_kappa>
+      <Statistics_lambda>0.267</Statistics_lambda>
+      <Statistics_entropy>0.14</Statistics_entropy>
+    </Statistics>
+  </Iteration_stat>
+</Iteration>
+<Iteration>
+  <Iteration_iter-num>6</Iteration_iter-num>
+  <Iteration_query-ID>Query_78041</Iteration_query-ID>
+  <Iteration_query-def>contig-0_25 # 18964 # 20571 # 1 # ;gc_cont=0.523</Iteration_query-def>
+  <Iteration_query-len>536</Iteration_query-len>
+<Iteration_hits>
+<Hit>
+  <Hit_num>1</Hit_num>
+  <Hit_id>gi|481024503|ref|WP_001295629.1|</Hit_id>
+  <Hit_def>MULTISPECIES: putative ABC transporter permease [Escherichia] &gt;gi|16130916|ref|NP_417492.1| putative ABC transporter permease [Escherichia coli str. K-12 substr. MG1655] &gt;gi|157162496|ref|YP_001459814.1| binding protein [Escherichia coli HS] &gt;gi|170082563|ref|YP_001731883.1| putative binding protein [Escherichia coli str. K-12 substr. DH10B] &gt;gi|218701792|ref|YP_002409421.1| putative binding protein [Escherichia coli IAI39] &gt;gi|218706647|ref|YP_002414166.1| putative binding protein [Escherichia coli UMN026] &gt;gi|388479020|ref|YP_491212.1| transporter subunit [Escherichia coli str. K-12 substr. W3110]</Hit_def>
+  <Hit_accession>WP_001295629</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1102.04</Hsp_bit-score>
+      <Hsp_score>2849</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>535</Hsp_identity>
+      <Hsp_positive>535</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>2</Hit_num>
+  <Hit_id>gi|485748920|ref|WP_001375094.1|</Hit_id>
+  <Hit_def>ABC transporter substrate-binding protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001375094</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1101.66</Hsp_bit-score>
+      <Hsp_score>2848</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>535</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVVGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFV+GWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>3</Hit_num>
+  <Hit_id>gi|657322955|ref|WP_029396014.1|</Hit_id>
+  <Hit_def>ABC transporter substrate-binding protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_029396014</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1101.27</Hsp_bit-score>
+      <Hsp_score>2847</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>535</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKSDVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGK+DVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>4</Hit_num>
+  <Hit_id>gi|692128096|ref|WP_032083699.1|</Hit_id>
+  <Hit_def>ABC transporter substrate-binding protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_032083699</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1100.89</Hsp_bit-score>
+      <Hsp_score>2846</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>535</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPRYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNP+YRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>5</Hit_num>
+  <Hit_id>gi|485758750|ref|WP_001384150.1|</Hit_id>
+  <Hit_def>putative binding protein ygiS [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001384150</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1100.89</Hsp_bit-score>
+      <Hsp_score>2846</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>535</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPLSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKP+SERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>6</Hit_num>
+  <Hit_id>gi|487572765|ref|WP_001720604.1|</Hit_id>
+  <Hit_def>putative binding protein ygiS [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001720604</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1100.89</Hsp_bit-score>
+      <Hsp_score>2846</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>535</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNNEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLN+EYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>7</Hit_num>
+  <Hit_id>gi|754837578|ref|WP_042199437.1|</Hit_id>
+  <Hit_def>ABC transporter substrate-binding protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_042199437</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1100.5</Hsp_bit-score>
+      <Hsp_score>2845</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>534</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNVAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINN AAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>8</Hit_num>
+  <Hit_id>gi|693105357|ref|WP_032259028.1|</Hit_id>
+  <Hit_def>ABC transporter substrate-binding protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_032259028</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1100.5</Hsp_bit-score>
+      <Hsp_score>2845</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>534</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPVQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVP QQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>9</Hit_num>
+  <Hit_id>gi|643943488|ref|WP_025269889.1|</Hit_id>
+  <Hit_def>ABC transporter substrate-binding protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_025269889</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1100.5</Hsp_bit-score>
+      <Hsp_score>2845</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>535</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGKVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAG+VDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+<Hit>
+  <Hit_num>10</Hit_num>
+  <Hit_id>gi|485656959|ref|WP_001301053.1|</Hit_id>
+  <Hit_def>ABC transporter substrate-binding protein [Escherichia coli]</Hit_def>
+  <Hit_accession>WP_001301053</Hit_accession>
+  <Hit_len>535</Hit_len>
+  <Hit_hsps>
+    <Hsp>
+      <Hsp_num>1</Hsp_num>
+      <Hsp_bit-score>1100.5</Hsp_bit-score>
+      <Hsp_score>2845</Hsp_score>
+      <Hsp_evalue>0</Hsp_evalue>
+      <Hsp_query-from>1</Hsp_query-from>
+      <Hsp_query-to>535</Hsp_query-to>
+      <Hsp_hit-from>1</Hsp_hit-from>
+      <Hsp_hit-to>535</Hsp_hit-to>
+      <Hsp_query-frame>0</Hsp_query-frame>
+      <Hsp_hit-frame>0</Hsp_hit-frame>
+      <Hsp_identity>534</Hsp_identity>
+      <Hsp_positive>535</Hsp_positive>
+      <Hsp_gaps>0</Hsp_gaps>
+      <Hsp_align-len>535</Hsp_align-len>
+      <Hsp_qseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVDRQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_qseq>
+      <Hsp_hseq>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTVERQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_hseq>
+      <Hsp_midline>MYTRNLLWLVSLVSAAPLYAADVPANTPLAPQQVFRYNNHSDPGTLDPQKVEENTAAQIVLDLFEGLVWMDGEGQVQPAQAERWEILDGGKRYIFHLRSGLQWSDGQPLTAEDFVLGWQRAVDPKTASPFAGYLAQAHINNAAAIVAGKADVTSLGVKATDDRTLEVTLEQPVPWFTTMLAWPTLFPVPHHVIAKHGDSWSKPENMVYNGAFVLDQWVVNEKITARKNPKYRDAQHTVLQQVEYLALDNSVTGYNRYRAGEVDLTWVPAQQIPAIEKSLPGELRIIPRLNSEYYNFNLEKPPFNDVRVRRALYLTV+RQLIAQKVLGLRTPATTLTPPEVKGFSATTFDELQKPMSERVAMAKALLKQAGYDASHPLRFELFYNKYDLHEKTAIALSSEWKKWLGAQVTLRTMEWKTYLDARRAGDFMLSRQSWDATYNDASSFLNTLKSDSEENVGHWKNAQYDALLNQATQITDATKRNALYQQAEVIINQQAPLIPIYYQPLIKLLKPYVGGFPLHNPQDYVYSKELYIKAH</Hsp_midline>
+    </Hsp>
+  </Hit_hsps>
+</Hit>
+</Iteration_hits>
+  <Iteration_stat>
+    <Statistics>
+      <Statistics_db-num>46414575</Statistics_db-num>
+      <Statistics_db-len>16909551090</Statistics_db-len>
+      <Statistics_hsp-len>0</Statistics_hsp-len>
+      <Statistics_eff-space>0</Statistics_eff-space>
+      <Statistics_kappa>0.041</Statistics_kappa>
+      <Statistics_lambda>0.267</Statistics_lambda>
+      <Statistics_entropy>0.14</Statistics_entropy>
+    </Statistics>
+  </Iteration_stat>
+</Iteration>
+</BlastOutput_iterations>
+</BlastOutput>

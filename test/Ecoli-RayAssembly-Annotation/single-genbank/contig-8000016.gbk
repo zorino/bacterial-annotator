@@ -1,0 +1,9 @@
+LOCUS       contig-8000016                 217 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=432;seqlen=217;seqhdr="contig-8000016 217 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ggggggaagg gagaagaaga ggaaagggag ggaggaaaaa agagagaaga ggaaagagaa
+       61 aaggggggag aggaagaggg agaaaaaaga gggagggaag gagaggggga agggggaagg
+      121 aaggaagggg agggagaaag agaagaggga agaggggaaa aggagggggg aaggaaaaga
+      181 aaggaaggag aggaaaaagg ggaagaagga gaaaaga
+//

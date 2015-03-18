@@ -1,0 +1,9 @@
+LOCUS       contig-8000035                 227 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=958;seqlen=227;seqhdr="contig-8000035 227 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ctcccccctt ctttccctcc ctctcccctt tcccctccct tcctcttttc ctttccctcc
+       61 ctccctcctc tctttttctc ttcctttttc tctttcttct tttctccctt ctctctcctt
+      121 cttttccctt tctctctttc cttcttttct ctttcttccc ttcccttttc tttccctccc
+      181 ttcttcttcc ccctttcccc cttcccttcc ttccttcttt tctcttt
+//

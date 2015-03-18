@@ -1,0 +1,11 @@
+LOCUS       contig-6000044                 216 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1208;seqlen=216;seqhdr="contig-6000044 216 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>216
+                     /note=";gc_cont=0.375;tscore=1.61;"
+ORIGIN
+        1 gaagatactg tatttcaaac gttaaaacaa ggtttgtacg gatgggaagt tacggatatt
+       61 atcgttacgt taacccatac tggctatgct agtcctgtta caacagctag tgactttaga
+      121 aacttaacgc cactcgtttt aatggatgct ttaaagaaag ctgaaacata tgtatatgaa
+      181 ccagttaatg cgtttgaatt aactgtaccg gagcag
+//

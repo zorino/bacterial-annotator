@@ -1,0 +1,13 @@
+LOCUS       contig-10000054                 214 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1514;seqlen=214;seqhdr="contig-10000054 214 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             87..179
+                     /note=";gc_cont=0.247;tscore=1.40;"
+     CDS             137..>214
+                     /note=";gc_cont=0.308;tscore=3.89;"
+ORIGIN
+        1 gattatggat ggaaatgaag gaaaagaagt ggaaaggaaa aagagaagga tttttaatga
+       61 tgggaataaa atgaggaatg ggggtgatga aaaaaggttt tatagaaatt gaagtgaagg
+      121 tattaagagt gatgaaatgg gtagagaaga aaaaaagatg gaaagatata tttatttaag
+      181 gatggatgga ggttataagt tgagtaatga aggt
+//

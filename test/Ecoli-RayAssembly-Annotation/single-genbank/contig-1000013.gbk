@@ -1,0 +1,12 @@
+LOCUS       contig-1000013                 361 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=346;seqlen=361;seqhdr="contig-1000013 361 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ggaagggagg agagggggag ggaagggggg ggagggaggg gaggaggggg aaaggggagg
+       61 aaagggaagg ggagagagga gagaagaaag gaaaaagaaa aagaggaaag agaagagaga
+      121 gggggagaaa agggggagaa ggaagaggag gagaaaaagg gagaagagaa aggaagaaga
+      181 ggaaaaagag gagggaggga aggagagggg gaagaggggg ggaaaaggag ggggggaagg
+      241 aaaagagggg aagagaaaaa aaggggggaa ggaaggaaaa agggaaaagg agggaaggga
+      301 gggggaggag gaagagaagg agagagggga ggagaggggg gagggggaga gaggggggaa
+      361 g
+//

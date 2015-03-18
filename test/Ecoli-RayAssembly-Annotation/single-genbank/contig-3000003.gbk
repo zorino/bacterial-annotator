@@ -1,0 +1,12 @@
+LOCUS       contig-3000003                 277 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=84;seqlen=277;seqhdr="contig-3000003 277 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..70)
+                     /note=";gc_cont=0.348;tscore=3.89;"
+ORIGIN
+        1 atactgtttt accgctgttc ggtctagcaa tcatttcatc atacgctgat tcattatata
+       61 aagacatcat tgtccactct ttatttacgg cacgcctctc atcaattgta gaagctacgt
+      121 ccctgagcac tgcaaatatt tctcttaaac gagcattttg attattatct ctacaataaa
+      181 tactattttt gtgattcata tactcagctg atgcacataa tccgccagct ataattttta
+      241 caagcctctc tggacacatt atcgcatatt gtaaagc
+//

@@ -1,0 +1,11 @@
+LOCUS       contig-5000030                 211 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=828;seqlen=211;seqhdr="contig-5000030 211 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>209)
+                     /note=";gc_cont=0.377;tscore=1.61;"
+ORIGIN
+        1 aatgagaacc aaatttgcgg gacagatata ggtgatacgg attctgcggt acgcattagt
+       61 ttatatactg tccatggttg acgacctact tcggcaacaa tccaaccagc attaattgcg
+      121 atatatggta gtaaaacaga ccatattgta atttttaagt aacgttttga gttttctagt
+      181 tttccttttc ggtttaagta gaaaccgtac c
+//

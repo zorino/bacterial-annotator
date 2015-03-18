@@ -1,0 +1,11 @@
+LOCUS       contig-7000018                 225 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=490;seqlen=225;seqhdr="contig-7000018 225 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>225
+                     /note=";gc_cont=0.311;tscore=1.61;"
+ORIGIN
+        1 gttagtgctt attcattttt cttttcttgt atatgtaatg atgaaagaaa agcacttagc
+       61 tactcagcaa gtttaactat tttatttttt gtactaaata tggtaggtaa attaagtgat
+      121 aagttagagt ggatgaaaag tctatcgtta tttacactgt ttcgtccaaa agaaattgcg
+      181 gaaggaacgt ataatatatg gccagtaagt ataggtttag ctgcg
+//

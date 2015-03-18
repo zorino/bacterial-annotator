@@ -1,0 +1,10 @@
+LOCUS       contig-17000025                 180 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=685;seqlen=180;seqhdr="contig-17000025 180 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..91)
+                     /note=";gc_cont=0.367;tscore=3.89;"
+ORIGIN
+        1 tatgtatata ttctaatgac gacctcgtat ttcttacggt tttagcagct tgttctaatt
+       61 gttccggtgt taccttaatt tgtgtgctca ttccatccct tctttgcata tatattatga
+      121 aaattataac atatcattat ttcattaatg gttatcattt gaaaatatcc gttcctaaaa
+//

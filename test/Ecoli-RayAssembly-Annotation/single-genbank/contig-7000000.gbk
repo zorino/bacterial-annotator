@@ -1,0 +1,13 @@
+LOCUS       contig-7000000                 222 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=8;seqlen=222;seqhdr="contig-7000000 222 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..112)
+                     /note=";gc_cont=0.369;tscore=3.89;"
+     CDS             complement(131..>220)
+                     /note=";gc_cont=0.311;tscore=3.22;"
+ORIGIN
+        1 ctgcccctaa tccaattaca tcatgacctt ctgcttttaa tgcttgtgcc tttgctgtaa
+       61 tttctaaagt tgcagatggt gttaaagcag ctactcgctt tgctaatttc atttgtagtt
+      121 ccccctacat ctatttttca atgctgtaat gaccagcata agccccattt tgaaactcta
+      181 aataataata cgtataacga tcttcctgat caatatatgt aa
+//

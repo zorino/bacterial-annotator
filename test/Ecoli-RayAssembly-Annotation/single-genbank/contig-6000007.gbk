@@ -1,0 +1,10 @@
+LOCUS       contig-6000007                 250 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=191;seqlen=250;seqhdr="contig-6000007 250 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tattaacatg actaatagag agaagaaaaa taacggttat tttctttcat atataaaaca
+       61 gacttatatt ggcataaagg gaagtgacga gaacagctta actattctcg tccaaagtta
+      121 ctccttggat gaaggggttt tcatgtatta tattaacaga gctttattaa tatttaatta
+      181 agccattgtt aatatattgt aaacatcctt catcctattt ttcagttgct gattttggta
+      241 aaacaactgt
+//

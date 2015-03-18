@@ -1,0 +1,8 @@
+LOCUS       contig-27000034                 131 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=948;seqlen=131;seqhdr="contig-27000034 131 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ctttccctcc ctttccttcc cctccttccc ctcctctctc tcccttttcc tcccccccct
+       61 ccccttctct tcctttcttt cctttcctct tctcttcctc tccttctttt cttcttcttc
+      121 ctctctccct c
+//

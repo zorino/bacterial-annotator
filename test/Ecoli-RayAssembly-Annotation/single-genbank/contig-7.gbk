@@ -1,0 +1,25 @@
+LOCUS       contig-7                 634 bp    DNA     linear   BCT 17-MAR-2015
+DEFINITION  seqnum=185;seqlen=634;seqhdr="contig-7 634 nucleotides";
+            gc_cont=50.23;transl_table=11;uses_sd=1.
+ACCESSION   
+VERSION     .0
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>632)
+                     /product="Minor spike protein H"
+ORIGIN
+        1 gcatcagtga cgacattaga aatatccttt gcagtagcgc caatatgaga agagccatac
+       61 cgctgattct gcgtttgctg atgaactaag tcaacctcag cactaacctt gcgagtcatt
+      121 tctttgattt ggtcattggt aaaatactga ccagccgttt gagcttgagt aagcatttgg
+      181 cgcataatct cggaaacctg ctgttgcttg gaaagattgg tgttttccat aatagacgca
+      241 acgcgagcag tagactcctt ctgttgataa gcaagcatct cattttgtgc atatacctgg
+      301 tctttcgtat tctggcgtga agtcgccgac tgaatgccag caatctcttt ttgagtctca
+      361 ttttgcatct cggcaatctc tttctgattg tccagttgca ttttagtaag ctctttttga
+      421 ttctcaaatc cggcgtcaac cataccagca gaggaagcat cagcaccagc acgctcccaa
+      481 gcattaagct caggaaatgc agcagcaaga taatcacgag tatcctttcc tttatcagcg
+      541 gcagacttgc caccaagtcc aaccaaatca agcaacttat cagaaacggc agaagtgcca
+      601 gcctgcaacg taccttcaag aagtccttta ccag
+//

@@ -1,0 +1,8 @@
+LOCUS       contig-14000026                 180 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=715;seqlen=180;seqhdr="contig-14000026 180 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 gagagagaaa aggggggagg ggagagaaaa ggaaaaggaa agaaaaggga agaagagggg
+       61 gaaaggagga gaaaagagga ggggaaaagg gagaaagaag agaaggagag gaaaaaggag
+      121 aaaaaaggga agaaggaaaa agaagaagag ggagaaaaag gaggggaagg aaaaggggga
+//

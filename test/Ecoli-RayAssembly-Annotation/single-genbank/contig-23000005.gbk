@@ -1,0 +1,8 @@
+LOCUS       contig-23000005                 133 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=151;seqlen=133;seqhdr="contig-23000005 133 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ccctccctct cccttcccct ccctccttct tcttcttccc ccccctcttc cccccctttt
+       61 ttcccctctt ttttttttcc tcttttttcc ctctttctct tccctccttt tcctccttcc
+      121 ctcccccttc ttt
+//

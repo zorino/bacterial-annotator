@@ -1,0 +1,9 @@
+LOCUS       contig-6000005                 239 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=134;seqlen=239;seqhdr="contig-6000005 239 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aaaaaaaggg gagaagggag agaaagggag gaaaagaaaa agggagggag gggaagaaag
+       61 aagggggaga gagaaaagaa aagagaaggg gaaaggagag agaggggaag aaaaggaaag
+      121 ggaggaaaag aaggaggaaa gaaggaagaa agagaagaaa aagaagaagg aaagagagga
+      181 aaaggaaaga gaggaggaga ggagaaaagg agaaaggaaa ggaaaggaaa gagagggga
+//

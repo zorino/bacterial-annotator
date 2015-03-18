@@ -1,0 +1,13 @@
+LOCUS       contig-3000041                 310 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1130;seqlen=310;seqhdr="contig-3000041 310 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             92..>310
+                     /note=";gc_cont=0.274;tscore=3.89;"
+ORIGIN
+        1 aaagagatgt atgaacagtt tggttttgtt gaaaggcagg taattatgac tttgaagtga
+       61 gaataatagt ttaaacggga gaagtgaaag aatgagaaaa gaaaatgagt atgttgcgta
+      121 tttacaaagg ttgtatcctg aattacaaat aaattctgtt tatataaatg aaataggtca
+      181 aaataatgat gtgttaattg taaatgataa tatagtattc cggtttccga aatatgaaaa
+      241 aggtattcag aaacttcgaa tagaaacaca gttactagag aaaataagac ccttcattac
+      301 gcttcaaatt
+//

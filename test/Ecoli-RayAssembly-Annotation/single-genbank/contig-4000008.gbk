@@ -1,0 +1,11 @@
+LOCUS       contig-4000008                 186 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=213;seqlen=186;seqhdr="contig-4000008 186 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>186
+                     /note=";gc_cont=0.333;tscore=1.61;"
+ORIGIN
+        1 acacacgtgc ttcgtggtga tgaccatatt tcaaacactc caaaacaaat gatgatttat
+       61 gaagctttcg gttgggatat tccacaattc ggtcatatga ctttaattgt aaatgaaagc
+      121 cgtaaaaaat taagtaagcg tgatgaatct attattcaat ttattgagca atataaagag
+      181 cttgga
+//

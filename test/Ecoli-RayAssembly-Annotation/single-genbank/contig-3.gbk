@@ -1,0 +1,26 @@
+LOCUS       contig-3                 539 bp    DNA     linear   BCT 17-MAR-2015
+DEFINITION  seqnum=81;seqlen=539;seqhdr="contig-3 539 nucleotides";
+            gc_cont=50.23;transl_table=11;uses_sd=1.
+ACCESSION   
+VERSION     .0
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+     CDS             <2..157
+                     /product="Deoxyribodipyrimidine photo-lyase,
+                     mitochondrial"
+     CDS             361..>537
+                     /product="UPF0421 protein YgaE"
+ORIGIN
+        1 gaccgagtta ttactagatt atatccgtgt attaaatgaa catgagcaat acgaggaagt
+       61 tgctttattg acaccgttac tcgatgatat gccgcaacag ttttttgaaa tcatcccgaa
+      121 aaaagagcag gctgatccat ctatctcaac agagtgatat gcctattttt catcttcaag
+      181 aaaaaaattg acgaagtaca cttctcatag taatctatag taacaatttg aaacctgctg
+      241 aaattcagca ggttttttta ctaaaaattg atgtttaaaa agaattagga aaaagtataa
+      301 aatgaatctt aatttcttat taacgtcact aaaatatcac ttgctaacat attgtaatga
+      361 atgtatagta tcatgttgta cattcattat gacaagagaa aggatcttat taagggtatg
+      421 aaacttggtg ctcgcatttt aaaaacgggt attgccatca cattagcttt atttgcttgt
+      481 attttactta acttaccgag tccagtattt gcgggaatct cagctatctt cgctgttca
+//

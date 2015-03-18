@@ -1,0 +1,9 @@
+LOCUS       contig-7000007                 190 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=192;seqlen=190;seqhdr="contig-7000007 190 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aggagaggaa agggaagggg ggagagagaa gagaggggaa aggaagggag ggaggaagga
+       61 ggaaggaggg gagggaagag aagggaagaa ggaaaagagg agaaaaagga ggggaaggag
+      121 ggagaagaaa agagagaagg aaggagggag gggaaagaag gggaagaaag aaaaagaaag
+      181 gagaaggagg
+//

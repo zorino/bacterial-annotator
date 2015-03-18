@@ -1,0 +1,8 @@
+LOCUS       contig-16000004                 144 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=122;seqlen=144;seqhdr="contig-16000004 144 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ttctcctcct tcctcccttt cctctcttcc ctctctcttt cttctctttc cctcctcttt
+       61 ctctcctttt tttcttttct tcccttcctc cctccttctc ccccttttct tctttctttc
+      121 ttctttcctc ctttttctct tttt
+//

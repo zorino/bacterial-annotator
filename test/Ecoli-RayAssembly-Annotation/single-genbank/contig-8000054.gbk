@@ -1,0 +1,11 @@
+LOCUS       contig-8000054                 236 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1512;seqlen=236;seqhdr="contig-8000054 236 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <2..148
+                     /note=";gc_cont=0.483;tscore=3.22;"
+ORIGIN
+        1 agtcctgcat agcaccaact taatccacct gctgggtgta cacaaaatag tggcaattgg
+       61 tttccgcttg ctcgtaacgg aagcaacaca tcgagtgcac tttgtccatt tcccacttca
+      121 agtctttcag caaggcctgc aacagtaggt gctgcaaata aagttccgat atttaattcg
+      181 atcccaagcg cttctttaat acggctcata agctgcactg caaggagtga atgacc
+//

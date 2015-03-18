@@ -1,0 +1,8 @@
+LOCUS       contig-10000020                 180 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=544;seqlen=180;seqhdr="contig-10000020 180 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tttttttctc cttctttttc cttcttcttt tccctctttt cttctctctt tccctttcct
+       61 cccccctctc ccctcttttt cttttttttc ctcttctttc tttttttctt ttctccccct
+      121 ttttttttcc tcctcccccc ttccctcctt ttctctccct ttcctctttc tcttctttct
+//

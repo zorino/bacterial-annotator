@@ -1,0 +1,12 @@
+LOCUS       contig-5000035                 255 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=955;seqlen=255;seqhdr="contig-5000035 255 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>254)
+                     /note=";gc_cont=0.317;tscore=1.61;"
+ORIGIN
+        1 tcgaatagag gggtattttc taacgtatta agagttaatg aacggaatgt attagtgtaa
+       61 tccgctttat atttctccat catttttaaa agttgctcaa taagtgaatg atcttgttct
+      121 tcgttgctaa atagtcctaa tttctttttc attccaagga accacaggtt ttcatactgt
+      181 acgctaaatt ttgaaatttc gtcttgagca atttttaatg cttcttcttc atcttcgtgc
+      241 agaattggta ttaaa
+//

@@ -1,0 +1,13 @@
+LOCUS       contig-2000017                 321 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=454;seqlen=321;seqhdr="contig-2000017 321 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>319)
+                     /note=";gc_cont=0.368;tscore=1.61;"
+ORIGIN
+        1 cgtacgtaaa ttcccattta ttattcaaag tcaagaatcc atccgtaata ctttcaatca
+       61 cacttgtaac tttttcatta gcaacagcta gttctctcgt tctttcttcc accatacttt
+      121 caagttgatc catatataac aagtttgaaa acgtaggagc tgtagcatca acgatagact
+      181 ttgccagttg aattcgggaa gcatcgtaat tatgagcttt tgccccttta ccaacgacga
+      241 ttacccctaa tacttctccc atcgaaacta atggcagcat cagtaggccc ttactatcta
+      301 tattttttgt ttgaataacc t
+//

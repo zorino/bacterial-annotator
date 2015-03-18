@@ -1,0 +1,22 @@
+LOCUS       contig-1000021           568 bp    NA      A     linear 17-MAR-2015
+DEFINITION  seqnum=565;seqlen=568;seqhdr="contig-1000021 568 nucleotides";
+            gc_cont=50.23;transl_table=11;uses_sd=1.
+ACCESSION   
+VERSION     .0
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 agtatggccc gggggatccg ttagctatcg ttcgcgagaa agttagtaga cacacaggac
+       61 ccaggcgtgc aagtcaattt cagctgacta caccgattct ggttaaaaga gcctatggcc
+      121 acccttattt tagagaaaaa aaaccacacc tctaatgtgt tgggcactag aaaaagctaa
+      181 ctacctagtc cgtttctgga cgacttcatt gggaataaca taccccccac tgtgattaag
+      241 actggcactg tcctaatgct ttcttcaata ggtttggctc atgtgtgatt ccctctggca
+      301 aacttataga ggacaagcag aataaaccaa ttcaaggtcg ttgtagctga aggcctggcc
+      361 tgcctgacag ttaattatga gcatgtcttg cccttcatgg tggatattca cagctgaaag
+      421 tggtattggc atttttttct gaggacacaa cgaggaaatc tgataaatac ggccacctga
+      481 agtctagctc ggagttaaca atttaccacg tttagagcgg ccgcgatatc ctgcagatgc
+      541 atccagtact agtatggccc gggggatc
+//

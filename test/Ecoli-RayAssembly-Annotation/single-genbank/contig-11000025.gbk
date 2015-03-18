@@ -1,0 +1,11 @@
+LOCUS       contig-11000025                 218 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=679;seqlen=218;seqhdr="contig-11000025 218 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(71..>217)
+                     /note=";gc_cont=0.224;tscore=3.22;"
+ORIGIN
+        1 ctcgcattcg cgaattttga ggtagagtct tactgcccat taaagtggga taaattataa
+       61 tctgccctca ttataacttg tttttaataa aacgcttact tttaatgaat tttaaaagtt
+      121 ctgaataaaa atccattttt gctatttgta tcattcgtat gtcgtctgac ttatataaca
+      181 gtttttctaa ataatcgata ctatgtattt ttatccta
+//

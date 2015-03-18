@@ -1,0 +1,12 @@
+LOCUS       contig-9                 247 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=240;seqlen=247;seqhdr="contig-9 247 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<1..>246)
+                     /note=";gc_cont=0.329;tscore=1.61;"
+ORIGIN
+        1 gaacttacat gctgcgacat tattattttg cgtttcaagc atgatacctg gcatgttgcc
+       61 ttcttttgcc cactgttttg cttgaacaac taatctttta ccaaccccga gtgtacgata
+      121 ttttttatcc accgttatat cttctatgta agcatagtga ttccaattct ttttcaatac
+      181 tatgaatcca atgatttggt tatgtaacag tgctatgtaa attatttgat ttggcttatt
+      241 tatatat
+//

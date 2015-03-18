@@ -1,0 +1,10 @@
+LOCUS       contig-23000000                 143 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=24;seqlen=143;seqhdr="contig-23000000 143 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             72..>143
+                     /note=";gc_cont=0.306;tscore=3.89;"
+ORIGIN
+        1 cacataacaa acactagaca catatcctaa ttttgtaacc ttacttacta atagaaaggc
+       61 gggtaataca aatgacctct aatatcgatt acacttcccc ctcaactaac ttcactcatg
+      121 atttaaatag aagtaatttt ttt
+//

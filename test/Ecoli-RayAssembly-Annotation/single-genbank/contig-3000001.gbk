@@ -1,0 +1,10 @@
+LOCUS       contig-3000001                 291 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=33;seqlen=291;seqhdr="contig-3000001 291 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tttaatttac attaatttaa tgtagaatat atgttcgttt tggtaggttt tatgctatac
+       61 taccattaaa taaggatgtt tttataatgg ataaaagatg cgggggaaca aagtttgact
+      121 acaaatacag ctcagctgtt tcaatatatt catatgacag aagaacagga acaattatca
+      181 ctgctatatt tacaaacaaa agaagaagag attttgaaag atattcaatt aacgacaatt
+      241 cgagatcaaa gaagaggcga ttttgctgag cggtttataa atgattttag g
+//

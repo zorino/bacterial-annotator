@@ -1,0 +1,12 @@
+LOCUS       contig-4000027                 243 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=741;seqlen=243;seqhdr="contig-4000027 243 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             72..239
+                     /note=";gc_cont=0.333;tscore=2.57;"
+ORIGIN
+        1 tagtttaaat tttatattgt atatttttaa ctttaacgct ataattatag tgttaaagat
+       61 ggaatcgtga tatgacctgt tatgaatcta tcgttttatt tatgaataaa tggattggta
+      121 ttttagcaag atgtgctaat aaactactcc accatgataa taacgtgccg aaatgtggtg
+      181 cgtatatttt cgtggtggag ttttttttat tctcaaaaag ggggaaagac catgaataac
+      241 aac
+//

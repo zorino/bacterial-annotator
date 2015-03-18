@@ -1,0 +1,9 @@
+LOCUS       contig-5000052                 206 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1453;seqlen=206;seqhdr="contig-5000052 206 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 agagaaggga agagaagaaa gaaagaggag gaaaaaggga gaggagaggg aagggaagag
+       61 aagaaaggga gggaagggga ggaggaagga gaaagggaga ggaaggaagg aagaggagag
+      121 gaagggaaga ggggaaggaa aaagaaaaaa agaaagaaaa ggagggggga gggaggaaaa
+      181 gggaggaaga aagaagaaag gaaaaa
+//

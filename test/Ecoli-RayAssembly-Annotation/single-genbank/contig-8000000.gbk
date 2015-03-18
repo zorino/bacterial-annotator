@@ -1,0 +1,9 @@
+LOCUS       contig-8000000                 210 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=9;seqlen=210;seqhdr="contig-8000000 210 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tccttctttt ttttttttct ccttcccccc tccctcttct ctcctcctcc cttctttccc
+       61 cttttttctc ctcccctttc tccctccttc ctcctccctc cctttctccc tcttccctcc
+      121 tccccttttt tttttttttc ttttcttccc tcttccttcc ccttcccctt tcttttcttt
+      181 tttcttcttc cccctcctcc tctttctccc
+//

@@ -1,0 +1,8 @@
+LOCUS       contig-19000042                 170 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1171;seqlen=170;seqhdr="contig-19000042 170 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cttttccctt cttctcctcc tttcctctct cttcctcttc ttccctttct ttctcttcct
+       61 cctttttctt cccttcctct tctttcccct cctccccttc tttcctctct tcccttcctt
+      121 ctcttttcct cctccccctt tcctcttttc ctctctcttt cccttccctt
+//

@@ -1,0 +1,8 @@
+LOCUS       contig-30000025                 127 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=698;seqlen=127;seqhdr="contig-30000025 127 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 gagagagggg aggaagggaa agggggaggg ggaggagaga aggagggaag aggggggaga
+       61 gaaagaagaa gaggggaaag aaagagaaag ggaagggaaa gagaagaaag gaggagggag
+      121 ggggaaa
+//

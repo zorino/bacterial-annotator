@@ -1,0 +1,11 @@
+LOCUS       contig-10000021                 183 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=574;seqlen=183;seqhdr="contig-10000021 183 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>183
+                     /note=";gc_cont=0.388;tscore=1.61;"
+ORIGIN
+        1 tacgtgaaaa gtcatccaga ggtgcagcaa gatcctgctt ttcaaaagat tatcgctact
+       61 tctaatggat tagctcaagc aacaaacact ttaaataata gtcagaaaca attgacacaa
+      121 ggtgcacaga agcttgcaga tggtcagcat aaggttgaag aaggtatgaa tacattcgga
+      181 gtt
+//

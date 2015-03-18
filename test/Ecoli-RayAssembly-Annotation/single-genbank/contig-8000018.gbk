@@ -1,0 +1,10 @@
+LOCUS       contig-8000018                 179 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=491;seqlen=179;seqhdr="contig-8000018 179 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<1..>177)
+                     /note=";gc_cont=0.333;tscore=1.61;"
+ORIGIN
+        1 aatggattta ccttttgccg ttttaaagat ttcttcttca tataactctt caaattgagc
+       61 aattttccct tgttgtgcga gctgaattgc atacgcaaca tctctttctg taattgacac
+      121 accttttcga ataacaacaa gtagttgttg taagattttt tctacgagtg tcacagttt
+//

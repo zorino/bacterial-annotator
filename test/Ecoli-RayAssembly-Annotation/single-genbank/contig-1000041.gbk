@@ -1,0 +1,14 @@
+LOCUS       contig-1000041                 398 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1128;seqlen=398;seqhdr="contig-1000041 398 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             191..>397
+                     /note=";gc_cont=0.329;tscore=3.89;"
+ORIGIN
+        1 cattctcatt tacccccatt actttaataa tacataaaat cttgagaaat ataaattgat
+       61 aaatgttaat tttctaaaaa atatgcaata tttcattttt ttccctcttg actatacttt
+      121 catatccatt ctttgctacg agccttgaaa aattggtata ctataaccaa attatggagg
+      181 tgttttcgcg atgacttatt ataaagacga tagctatgcc ttacatacag atttatatca
+      241 aattaatatg gcttatacat attggaaaga tggtattcat aaccgccgct cggtgtttga
+      301 tttatacttt cgaaaacttc cattcgagaa tggttatgct gtttttgctg gtcttgaaaa
+      361 aattgtagag tacatagaaa acttcagctt taccgaaa
+//

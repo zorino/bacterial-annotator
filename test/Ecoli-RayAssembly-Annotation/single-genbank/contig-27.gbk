@@ -1,0 +1,25 @@
+LOCUS       contig-27                607 bp    DNA     linear    BC 17-MAR-0201
+DEFINITION  seqnum=737;seqlen=607;seqhdr="contig-27 607 nucleotides";
+            gc_cont=50.23;transl_table=11;uses_sd=1.
+ACCESSION   
+VERSION     .0
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>605)
+                     /product="Capsid protein F"
+ORIGIN
+        1 ccatacaaaa cagggtcgcc agcaatatcg gtataagtca aagcaccttt agcgttaagg
+       61 tactgaatct ctttagtcgc agtaggcgga aaacgaacaa gcgcaagagt aaacatagtg
+      121 ccatgctcag gaacaaagaa acgcggcaca gaatgtttat aggtctgttg aacacgacca
+      181 gaaaactggc ctaacgacgt ttggtcagtt ccatcaacat catagccaga tgcccagaga
+      241 ttagagcgca tgacaagtaa aggacggttg tcagcgtcat aagaggtttt acctccaaat
+      301 gaagaaataa catcatggta acgctgcatg aagtaatcac gttcttggtc agtatgcaaa
+      361 ttagcataag cagcttgcag acccataatg tcaatagatg tggtagaagt cgtcatttgg
+      421 cgagaaagct cagtctcagg aggaagcgga gcagtccaaa tgtttttgag atggcagcaa
+      481 cggaaaccat aacgagcatc atcttgatta agctcattag ggttagcctc ggtacggtca
+      541 ggcatccacg gcgctttaaa atagttgtta tagatattca aataaccctg aaacaaatgc
+      601 ttaggga
+//

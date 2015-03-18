@@ -1,0 +1,12 @@
+LOCUS       contig-6000047                 268 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1292;seqlen=268;seqhdr="contig-6000047 268 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             110..>268
+                     /note=";gc_cont=0.239;tscore=3.89;"
+ORIGIN
+        1 ttgtatttct ttcttgcaaa atttccacct tacaatcgga tgcaccctac tataatttca
+       61 acatcttatg taacatttgt tacacacgat aagaaacgga gttgttacga tgaaaaatac
+      121 tgacaaacgc aatcgcttaa atgataggat atttcattac agggtaacaa aaaataacat
+      181 agttttaatt gaatattaca taaaacagat tataatgtta aaaggaaatg acgctaacaa
+      241 atttttatac aaaataaatc atgcacat
+//

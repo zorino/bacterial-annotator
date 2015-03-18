@@ -1,0 +1,9 @@
+LOCUS       contig-5000014                 210 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=380;seqlen=210;seqhdr="contig-5000014 210 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ggaaggaggg agggaagagg gggggagaaa gaagagaagg aaagaggagg gaaaaggagg
+       61 agagaggaaa gggaggggaa gaaaaagaaa agagggggag ggaagaaaag aaggagaaaa
+      121 gagagaaagg aagaagaggg ggggaaagag aagagagaag aggggggggg agaggggagg
+      181 ggaaaggggg agggggggag aaaaggaaag
+//

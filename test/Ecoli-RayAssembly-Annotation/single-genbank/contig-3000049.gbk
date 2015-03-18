@@ -1,0 +1,14 @@
+LOCUS       contig-3000049                 413 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1353;seqlen=413;seqhdr="contig-3000049 413 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             237..>413
+                     /note=";gc_cont=0.588;tscore=3.89;"
+ORIGIN
+        1 tttgatttat aagggatttt gccgatttcg gcctattggt taaaaaatga gctgatttaa
+       61 caaaaattta acgcgaattt taacaaaata ttaacgctta caatttaggt ggcacttttc
+      121 ggggaaatgt gcgcggaacc cctatttgtt tatttttcta aatacattca aatatgtatc
+      181 cgctcatgag acaataaccc tgataaatgc ttcaataata ttgaaaaagg aagagtatgc
+      241 gtagccgtaa ttggagccgt accctgaccg aacgtagcgg cggtaatggt gcggtggcgg
+      301 tgtttatggc gtgctatgat tgcttttttg gcgtgcagag catgccgcgt gcgagcaaac
+      361 agcaggcgcg ttatgcggtg ggccgttgcc tgatgctgtg gagcagcaac gat
+//

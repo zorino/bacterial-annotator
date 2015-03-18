@@ -1,0 +1,12 @@
+LOCUS       contig-4000001                 247 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=34;seqlen=247;seqhdr="contig-4000001 247 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <3..>245
+                     /note=";gc_cont=0.337;tscore=1.61;"
+ORIGIN
+        1 aatataaaga gcttggatat cttccagaag caatctttaa ctttattgca ttactaggtt
+       61 ggtcgccagt aggagaagaa gaaatcttct ctcaagaaga gtttatcaaa atgttcgatg
+      121 cagctcgttt atcaaaatca cctgcattat ttgattctca aaaactaaaa tggatgaaca
+      181 accaatatat gaaaaagcaa gatttagata cggtagtaga attaagctta ccgcatttag
+      241 tgaaggc
+//

@@ -1,0 +1,8 @@
+LOCUS       contig-9000012                 174 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=324;seqlen=174;seqhdr="contig-9000012 174 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cttttctttt ctcctttttc tcttcttttt ctcccctttc ctctctctct tcttcttttc
+       61 ttctcctcct cctctcttct tccctcctcc cttccctttt cctcttcctc cctttcttcc
+      121 tttcttttct ttcctctctc ctcttccttt tctctcctcc ccctccttcc tccc
+//

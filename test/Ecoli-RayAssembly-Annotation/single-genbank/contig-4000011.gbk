@@ -1,0 +1,12 @@
+LOCUS       contig-4000011                 283 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=296;seqlen=283;seqhdr="contig-4000011 283 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>282
+                     /note=";gc_cont=0.365;tscore=1.61;"
+ORIGIN
+        1 cttatggacg ttatcccttt atttcgtatt ttaataaatc cgttgcttgt tatttcgcaa
+       61 acgattccaa tcgttgtact tgcaccgtta tttattattt ggtttggata tggaatgcta
+      121 ccgaaagtaa tggtagtcat actcgtttgt ttcttcccga ttgcgcttag cattttagaa
+      181 ggttttcaaa cggtagataa aaatatgttg aagttgttgc aaacgatgaa ggcaacgaaa
+      241 tggcaagttt accagaaagt aaagtttcca gcagtgcttc cat
+//

@@ -1,0 +1,8 @@
+LOCUS       contig-13000023                 167 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=619;seqlen=167;seqhdr="contig-13000023 167 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tctctttccc cttcctctcc ttcttccctt cctttcctcc tcctttttcc ttttttcctt
+       61 ttcctttccc ttcccccccc ttctcctccc ttccctcttc tccctttttc tttccttttt
+      121 tccccttttt tccttctctc cctttccttc cccccccttc tctccct
+//

@@ -1,0 +1,14 @@
+LOCUS       contig-1000017                 373 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=453;seqlen=373;seqhdr="contig-1000017 373 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>371)
+                     /note=";gc_cont=0.293;tscore=1.61;"
+ORIGIN
+        1 atttgagttg ctgtaattat tgaattaagt gtggtttttt gtgttttatt atgttttagc
+       61 atcttcataa cttgatatct atctgtttcg atttgttgtg tttgttgttt atttccctta
+      121 acaagcacct ttaaattaga gagtaaaatt cgatttacac atatatcttc ttctgttctt
+      181 acacgatgct ggaacccatt ttctgcacac caatattttt gtgtgaaaat ctgatttatt
+      241 actctttgtt tgattaaatc tgtggaatat ttaatttcta taaattcttc atttccatct
+      301 tcatatttta cccacatatc gacaatagag gtcactgatt ttccatttat acatgcagtc
+      361 ataactagag gtt
+//

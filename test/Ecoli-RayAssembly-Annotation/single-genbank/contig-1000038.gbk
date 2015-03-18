@@ -1,0 +1,13 @@
+LOCUS       contig-1000038                 329 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1041;seqlen=329;seqhdr="contig-1000038 329 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>328)
+                     /note=";gc_cont=0.382;tscore=1.61;"
+ORIGIN
+        1 cgagaatccc ggctgagaat gcaatcattg tttttctttg ataatcgatt ccttgtaaaa
+       61 tagctgctga aactgtgaaa atcgcactta atatagcaga cggtgcgaat gaaattaaat
+      121 attgtgatcc accaagtgcg atttcaggat ttacataaac catgcggaat gcatcgtaag
+      181 cgatgctagc aagaccaaat gcagccggga tcgtgaagaa taacaagact tgaaatatct
+      241 ttgaaatttg ttcttgtaat tcttctaatt tcccgcttgt ataagatttc gttatagccg
+      301 gaatgatcgt taaggagaat ccagttgca
+//

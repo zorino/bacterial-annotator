@@ -1,0 +1,11 @@
+LOCUS       contig-43                 302 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1185;seqlen=302;seqhdr="contig-43 302 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tcctccctcc cctttcctcc cctttctccc ccccctctcc ttccttcttc cctcctcctt
+       61 tctttctctt ccctctcccc ctcccccccc tcttctttcc tcctttcctc ttcttcctcc
+      121 ctttcccccc tcttcccccc ttccttcttt cctctctcct ccttctcttc ttttcctccc
+      181 tcttctctct ctcctttttt tttccccttc tcttcccttt tccctttttc tctctttctt
+      241 ccccttcccc ttccttccct tccttcccct ctctctcttt cttccttcct cccctttccc
+      301 tc
+//

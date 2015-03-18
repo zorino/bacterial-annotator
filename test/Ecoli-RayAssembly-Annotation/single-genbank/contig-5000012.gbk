@@ -1,0 +1,9 @@
+LOCUS       contig-5000012                 184 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=320;seqlen=184;seqhdr="contig-5000012 184 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 gaaggggaaa aggaggaaag agagaaaaaa ggagaggagg aaagagaaga aaaaaagagg
+       61 aagaagagaa agaaggaaag aagaagggga aggggggaga ggaagagaaa gggaaaaaga
+      121 gagaagaaaa aaagagaaaa ggaaggaagg aaaggaggaa gagggagaaa aggagaaagg
+      181 gaaa
+//

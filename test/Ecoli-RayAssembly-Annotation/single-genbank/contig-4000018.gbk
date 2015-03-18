@@ -1,0 +1,12 @@
+LOCUS       contig-4000018                 265 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=487;seqlen=265;seqhdr="contig-4000018 265 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>265)
+                     /note=";gc_cont=0.273;tscore=1.61;"
+ORIGIN
+        1 ctaagtcttt attatctaaa tgtgaaacaa tttctttaat tcctaattgt tctttttcat
+       61 tttgcaaaac gttgattgtt tttgttattt cctctttttg ttcagtcgtt aaagctgttt
+      121 tactaccact attaaaaact gctataatct catacttttc tgtcccgtct ttattcattt
+      181 cttttatcat tttgtcagca atactacttt gttctgtatt aggaatcgta atgtgccctt
+      241 tttctttcac taatttatcc atatt
+//

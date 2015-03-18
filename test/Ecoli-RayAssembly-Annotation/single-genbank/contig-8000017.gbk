@@ -1,0 +1,9 @@
+LOCUS       contig-8000017                 210 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=460;seqlen=210;seqhdr="contig-8000017 210 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ttttccttca tcttcttcat accatttacc tcttcctcca tttaatcatt cataccttcc
+       61 ttatatcacc atcttttttc tttatttttt atctcatctt taaaatttat ctcaactcca
+      121 tttcacaata cctctttttc tttcatcaca ttcttcattc tttaaacata aaatctcttt
+      181 ctttcaaata atttttcatc cttccataat
+//

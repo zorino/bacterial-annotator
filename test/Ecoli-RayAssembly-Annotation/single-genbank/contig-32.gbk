@@ -1,0 +1,10 @@
+LOCUS       contig-32                 293 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=872;seqlen=293;seqhdr="contig-32 293 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aaggacacag aacagataga tggcagagtt ttgtgaaagc agcacgaagg aagggtatgt
+       61 ctgaatctgt atgctgtgtg actttgggca aggcacttca cctctctgag cctccatgtc
+      121 tccacactta gtctgggtaa aggacagtgg tgaagataag ttgaaattac aggcatgaga
+      181 gcactttgta aactctggcc gggtgcagtg gctcacgcct gtaatcctag cactttggga
+      241 ggctgagaca ggcggatcac ttgaggtcag gagttcaaga ccatcctggc caa
+//

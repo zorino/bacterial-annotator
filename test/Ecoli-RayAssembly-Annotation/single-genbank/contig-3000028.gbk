@@ -1,0 +1,10 @@
+LOCUS       contig-3000028                 300 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=762;seqlen=300;seqhdr="contig-3000028 300 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aggggggaag aagaggagaa aaagaaaggg gaaaaaaaaa aggaagggag aagaaagggg
+       61 ggagaaagag ggggggaggg agaaaggggg aggagaggga ggaaggaaaa agaaaaagaa
+      121 gagaagaagg gaagagggaa aagagaaaaa gagagggaaa aaagggggag ggggagagag
+      181 aaagggagga gaggaaaagg ggagaggggg ggaaaggaaa aagaaaaaaa gggggaaggg
+      241 ggaagggaag gaggaaaaaa agggaagggg agagaaagaa gagggaagga gaagggaaaa
+//

@@ -1,0 +1,10 @@
+LOCUS       contig-2000027                 270 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=739;seqlen=270;seqhdr="contig-2000027 270 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tatacaagat ttaactgaat ttttttgaaa tctgtaatat attttttttc ttggtgttac
+       61 aattttttca cttgaaatat atgtcgtacg atgtttaaat taaaatcgtg agtataaaat
+      121 ttgctaatga tgaaacgttt tcatatttag taaatttgat cagataaaat cgagcggttt
+      181 gtggaaacat ccacacaact accaagagaa aaaggggcga aagactagat gtcaaaaatc
+      241 atcgcgatta acgcaggaag ctcttccttg
+//

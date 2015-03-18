@@ -1,0 +1,13 @@
+LOCUS       contig-3000010                 358 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=265;seqlen=358;seqhdr="contig-3000010 358 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>357
+                     /note=";gc_cont=0.305;tscore=1.61;"
+ORIGIN
+        1 ttacagaaag atagtttcaa aattacagac ggatcaagaa cgcttgatcc aaagtttgat
+       61 tacacacttg atgtaacaga tacaggattt gaagtgaaac taaccggtga ttataagtct
+      121 aatatggata aaactttaac tatcacatac acaacagact ttaattacga aaatctatcc
+      181 aaagagaaga ataacaaatc attcaaaaat acagcaaatt tatcatggat agacataaat
+      241 gataaaaaga ataatagctc atctgatgat acatttgatc ctgattacta cacaaaagga
+      301 aatggattta aatacggctc ttacaatgcc cagacgaaag aaattaaatg ggacatag
+//

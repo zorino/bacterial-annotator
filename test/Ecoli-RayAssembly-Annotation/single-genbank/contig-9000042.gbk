@@ -1,0 +1,9 @@
+LOCUS       contig-9000042                 222 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1161;seqlen=222;seqhdr="contig-9000042 222 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tagcattagc ttttcgttta gcggaagtat taggaacaac tgttgataaa ctatttttgt
+       61 acaagcagta gggggagtag ttgttgggga aagagaaaat aagccttttc gttactgtat
+      121 tagtggctat aggtacgtta gtgtttgcac tttactattg gttaactgaa cttcaagtaa
+      181 actggtatgc actatttatt tgtagcatcg cgttacatta tc
+//

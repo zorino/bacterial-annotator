@@ -1,0 +1,13 @@
+LOCUS       contig-2000044                 301 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1204;seqlen=301;seqhdr="contig-2000044 301 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(168..>299)
+                     /note=";gc_cont=0.371;tscore=3.22;"
+ORIGIN
+        1 taccaaagga tttttgtttt tgagtatttt aaacaaaacc gcttatgctt caaaaatgaa
+       61 gtataagcgg ttctttcttt tgaatgaacc aataataaac gcaattctac ccttattcaa
+      121 tgaaaggtct acagcattat ttcgatgaag ctaaacattc ataaaatcta tccctcttcc
+      181 atttctactt gcttcatata atattccatc gcttcattaa gccatttttg ttcatcttct
+      241 gcgaaaggcg aaggtatcat attttcaagt tcttgcatat ccagttctcc cacactagta
+      301 t
+//

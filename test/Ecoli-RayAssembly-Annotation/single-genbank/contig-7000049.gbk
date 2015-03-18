@@ -1,0 +1,12 @@
+LOCUS       contig-7000049                 290 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1357;seqlen=290;seqhdr="contig-7000049 290 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <2..>289
+                     /note=";gc_cont=0.385;tscore=1.61;"
+ORIGIN
+        1 ggcggcggtc gccattcaaa acgcaaaaaa tttaacccaa aaagaaaatc ttattgccga
+       61 gaagcagctg ttactaaatg ttacccgtga tttatcagtg tgttcctcgg tacaggagat
+      121 ttttgataaa tgtttttttt acttaggaca gattttagag agtaaaaaca tggctgccca
+      181 ccttttagac cggctagata aaacaacgat taaaacaacg attaaaacaa cgaaattaag
+      241 cgcggactgt gattgggcag aaactgactg gatggagaaa acctatgaag
+//

@@ -1,0 +1,10 @@
+LOCUS       contig-7000010                 269 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=269;seqlen=269;seqhdr="contig-7000010 269 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 gaaaaggggg aagaaaaaag ggggaaggga gagaggggag aaaaggagag ggaagagaga
+       61 aaaaagagaa aagggggagg gaagggaaaa gaagaaagga gagagggaag ggagagggaa
+      121 aaagaggaag aagaagggag aaaaggagag agaaagaaga aggggaaaga aggaaaggag
+      181 aaaagagaga aggaggaaaa ggagagggaa aaaagagaga agaaaaaaag gggagagagg
+      241 gggaaggaag agaggaggga gagagggga
+//

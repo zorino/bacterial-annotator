@@ -1,0 +1,10 @@
+LOCUS       contig-5000017                 288 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=457;seqlen=288;seqhdr="contig-5000017 288 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ttttccctcc ctttcccttt tctcctccct cttttcccct tccccccctc tcctttcttc
+       61 cccccctttt ttctcctcct tctccttttc ttctctctct tccttttttt tctccttctt
+      121 ttctcccctc ttctttccct tctctccctt ttcttttccc tttcttttcc ttcttctttc
+      181 ctccttctcc tttccctctc cctcttttct ctctcttccc ccttctcctc tttcctcctc
+      241 ctctccttcc tcctcctttc cctcctcttc ttctccccct cccctcct
+//

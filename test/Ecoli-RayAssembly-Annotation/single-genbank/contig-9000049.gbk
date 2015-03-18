@@ -1,0 +1,12 @@
+LOCUS       contig-9000049                 253 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1359;seqlen=253;seqhdr="contig-9000049 253 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..127)
+                     /note=";gc_cont=0.270;tscore=3.89;"
+ORIGIN
+        1 tatttatcac tttaatttta atctccttaa ttctttcttc ataaccaaat ttctttactc
+       61 taatttctat atcctccttt ccatccattt ttcctccttc tttacctttc atttttatca
+      121 ctttcattcc cttctcactc tcctcttcta tctcttttat cactttttca tatttacctt
+      181 atttttatat ccccatcatt acatctcctt ctctacctac ctcttcaact tatctttata
+      241 aaatatcatt taa
+//

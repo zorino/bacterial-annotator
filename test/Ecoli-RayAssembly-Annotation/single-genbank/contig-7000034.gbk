@@ -1,0 +1,10 @@
+LOCUS       contig-7000034                 247 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=928;seqlen=247;seqhdr="contig-7000034 247 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 taaggcaaaa tccttttcta tttagatagg gtccagtaaa tctgaaatgt gttttttctg
+       61 cattctgcac agaattacaa actgacactg agatattact taaaagccct attcagccag
+      121 tcttttcacc tgcaggggat atagtgacat ccatagtgat agccctgatg tactacttgt
+      181 atctggaagc cctgaatcta tttttgttac caaagctttg attaaggcac tggtacagag
+      241 gggctga
+//

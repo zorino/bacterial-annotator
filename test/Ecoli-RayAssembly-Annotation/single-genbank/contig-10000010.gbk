@@ -1,0 +1,9 @@
+LOCUS       contig-10000010                 208 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=272;seqlen=208;seqhdr="contig-10000010 208 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tttctcttcc tcctcttctc ctccctttct cttttccttt ttctccttcc cctcttcctc
+       61 cttcttttcc tcctctctcc cttttcttcc tttctttccc tccctcctct tccctccccc
+      121 ttcttctttt tttttctctt tccctttctt tcttcctctt tcttttccct cttttctttt
+      181 ttccttttct cctcctcctc cctccttt
+//

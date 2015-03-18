@@ -1,0 +1,12 @@
+LOCUS       contig-5000015                 265 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=404;seqlen=265;seqhdr="contig-5000015 265 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>263)
+                     /note=";gc_cont=0.406;tscore=1.61;"
+ORIGIN
+        1 catgttttcg ttgaagccat cgcttcacat ttcgtgcagt aaaaactatg ctcaaaaaat
+       61 aacggtgtaa tccctaactc ttctactgta aagtttgtaa aaatttcttg tgcttcataa
+      121 gtaccgtaat aatctcctac tcctgcatga tcgcgcccta caataaagtg ggtgcatcca
+      181 aaattctttc tgactaatgc atggaatatc gcttccctcg gccctgcgta acgcattgct
+      241 gcaggaaata cacttaaaaa gacac
+//

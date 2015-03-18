@@ -1,0 +1,10 @@
+LOCUS       contig-3000018                 296 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=486;seqlen=296;seqhdr="contig-3000018 296 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tggattcctc ttccttctct ctcttcctcc tcctccctcc tctctctttt ctctttccct
+       61 tttttcctcc tccctcctct cctccctttt tttccttccc ccttcctccc tcctcttctt
+      121 tctcctttct tccctttctt ttcctccttc ttctccttct cccccctttt tttcctttct
+      181 tccttccttc ccttcccctc cctcttcctt ccttttctct ctttttcttt ccttcctccc
+      241 cttcctcctt tcttttcttt cccccttctt cccccccccc ctctctcttt ttcttc
+//

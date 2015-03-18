@@ -1,0 +1,8 @@
+LOCUS       contig-14000005                 166 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=142;seqlen=166;seqhdr="contig-14000005 166 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 gagaggggaa gagaaaaaga gagggggaaa gggggaaaga agaaagaaaa aaagaaggaa
+       61 ggaagaggag gagaggaggg ggggagaaaa gaggaggagg gaaaggagga aagggaaggg
+      121 agaggggaaa gagaagaaga aggggaaagg gaggggggga agagga
+//

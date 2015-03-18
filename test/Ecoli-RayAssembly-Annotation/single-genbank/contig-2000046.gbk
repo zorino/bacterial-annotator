@@ -1,0 +1,12 @@
+LOCUS       contig-2000046                 299 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1256;seqlen=299;seqhdr="contig-2000046 299 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <3..>299
+                     /note=";gc_cont=0.350;tscore=1.61;"
+ORIGIN
+        1 gaaaaaaagt ggaaatgatg ggattagttg aaaaagttat tttcacgggg gttagatctg
+       61 atgttcctga tattatgatg gcaatggatg tatttatttt tccgtcgctg tatgaaggaa
+      121 tgcctaatac agtaattgaa gcacagggta caggtttacc ttgtattatt tcagatacaa
+      181 ttactaggga ggcagatata acggggaata tagagtatct taccattaat aaggaaccag
+      241 aaaaatgggc agaaaaagct ttaacgtatt caaatggtta tgaacgaggt aatgtacaa
+//

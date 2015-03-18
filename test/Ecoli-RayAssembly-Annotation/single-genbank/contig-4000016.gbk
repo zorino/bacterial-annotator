@@ -1,0 +1,11 @@
+LOCUS       contig-4000016                 231 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=428;seqlen=231;seqhdr="contig-4000016 231 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <3..>230
+                     /note=";gc_cont=0.395;tscore=1.61;"
+ORIGIN
+        1 acggtgaggg tgatgggctt ggaggcttaa tcatcgatta ttatgacggc tattatgtag
+       61 taagttggta tagcgaaggg atttatactt tcagagatga gattatagca gctcttcaaa
+      121 aagtagcaaa ttttaaaggt atttatgaga agaagcgttt tgatacgaaa ggaaaataca
+      181 ttgaaggcga tgattttgta gcaggagagc gcggtgagtt cccgcttatc g
+//

@@ -1,0 +1,11 @@
+LOCUS       contig-8000028                 237 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=767;seqlen=237;seqhdr="contig-8000028 237 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..191)
+                     /note=";gc_cont=0.365;tscore=3.89;"
+ORIGIN
+        1 acgcaatgct catttaatac acctttctgg cattgatcaa tcgcctccat aatatgcaca
+       61 agagcttctt caaaatctat taatatattt ccaaaaccac ttgtagctct tacaagttca
+      121 tttccatctt tatcaaatgc aattgcttct gtcttcgttc ccccgccgtc tattccaatc
+      181 atatacttca tatgttcgcc tcattttcat catcttattg gagggaatgt tatattc
+//

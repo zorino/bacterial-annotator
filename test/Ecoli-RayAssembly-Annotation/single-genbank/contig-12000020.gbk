@@ -1,0 +1,10 @@
+LOCUS       contig-12000020                 174 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=546;seqlen=174;seqhdr="contig-12000020 174 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <3..>173
+                     /note=";gc_cont=0.404;tscore=1.61;"
+ORIGIN
+        1 ttaaagaagc gattccaata acagaaacgt tattctcacc atacgctctc gtgccagtta
+       61 ttatttttct cgttacgatg cctctcatta ataaagcgat gcatccagat gaaaaacata
+      121 cgataacggt agatcctagc gtattccatg aagaagctgc cgctcaagaa gtag
+//

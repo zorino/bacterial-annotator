@@ -1,0 +1,25 @@
+LOCUS       contig-21000008          773 bp    NA      NA     linea 17-MAR-2015
+DEFINITION  seqnum=230;seqlen=773;seqhdr="contig-21000008 773 nucleotides";
+            gc_cont=50.23;transl_table=11;uses_sd=1.
+ACCESSION   
+VERSION     .0
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ctggatgcat ctgcaggata tcgcggccgc gtcttcagag ggggatagca tgacctcacg
+       61 ccttctataa aagccctccc ttagtctttt gattatccca tgacattaca cttattgtga
+      121 gggggttatt tgaccggaca gctctagggt tcgcaatgct cctcacaata tatcaaagcc
+      181 accaaacatc cggccatcta ttccgctctt ctcatgttgg ttgtgaatat gtaatgcagt
+      241 ccaggcttcg tagaacacaa tgatctaata gaggtgcata agttgtgcag aacccttgga
+      301 gtctcatgga atcgcgaatg gtctctagga tcccccgggc catactagta ctggatgcat
+      361 ctgcaggata tcgcggccgc catctgccct acgtttgagg gttataagct gggtagtatt
+      421 actcctacta acgggctgca tacctccatc ttctagcagg tgtggtcagc ttctcagtgt
+      481 aatcggaagg gacctgtgaa aaaaaggttc aaaagcactg atgggcaagt gttctccaga
+      541 cggtcttaga acggacatta gcggttttga cagataagga tcccccgggc catactagta
+      601 ctggatgcat ctgcaggata tcgcggccgc tcgacgtaga actcaatcta aaacttcgat
+      661 ttgcaactta ccaaacaaaa agagcaactc ttaaagggtt atacgagctc gctgcatttg
+      721 gaacgtagga tcccccgggc catactagat cggaagagca cacgtctgaa ctc
+//

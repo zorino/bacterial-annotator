@@ -1,0 +1,8 @@
+LOCUS       contig-8000004                 169 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=114;seqlen=169;seqhdr="contig-8000004 169 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 agggaggaag aaaagggaag aaggaaaggg ggaggaaaaa gggaagggag gggaagagaa
+       61 aggaaaaaag gaggaaaagg agggaaagaa agggggggag ggaaagaagg aaaaggggaa
+      121 aaggggaaaa aagggaaaga gagaaagggg aaaaggggga aagaggaaa
+//

@@ -1,0 +1,8 @@
+LOCUS       contig-26000006                 127 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=182;seqlen=127;seqhdr="contig-26000006 127 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ggggggagag gaaagaggag aaagaagggg gaaaagggga aggggaagga ggaaaaaaaa
+       61 aaaagaagga gggaaggaag aaggggggga gggagagagg aaagggaaaa aggaagaaaa
+      121 agaagga
+//

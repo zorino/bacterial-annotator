@@ -1,0 +1,10 @@
+LOCUS       contig-2000030                 289 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=825;seqlen=289;seqhdr="contig-2000030 289 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aaggagaagg aagaaggggg ggggggggga ggagaaggag gagaaggaga gaggaagggg
+       61 gagagagaga gaaaaggaag gaaaggaggg aagaagggga aagaaggaag aaagagaggg
+      121 agggaaagag ggaaggaaaa gaagaagaaa aaggaagaag gagagggggg ggagaaaaga
+      181 aggaagaaag gaagagagga gggaagggga aaagaaagaa gaaaagaagg aggggagaaa
+      241 aaaagaaaga aaaagagaga agggagagaa aggagaaaga aaaagagaa
+//

@@ -1,0 +1,9 @@
+LOCUS       contig-6000003                 232 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=87;seqlen=232;seqhdr="contig-6000003 232 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 gtcgggaaac ctgtcgtgcc agctgcatta acatggtcat agctgtttcc ttgcgtattg
+       61 ggcgctctcc gcttcctcgc tcactgactc gctgcgctcg gtcgttcggg taaagcctgg
+      121 ggtgcctaat gagcaaaagg ccagcaaaag gccaggaacc gtaaaaaggc cgcgttgctg
+      181 gcgtttttcc ataggctccg cccccctgac gagcatcaca aaaatcgacg ct
+//

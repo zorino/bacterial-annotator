@@ -1,0 +1,8 @@
+LOCUS       contig-19000001                 133 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=49;seqlen=133;seqhdr="contig-19000001 133 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ttctttctcc ccttcccctt tcccccttct ttcctttctc tcctctcttc cccttccttc
+       61 ccctccttcc ctttcccttc cctttcccct cccctcctcc ctcttccccc tctccttctt
+      121 ccccctcctc ttc
+//

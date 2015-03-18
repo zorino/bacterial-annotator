@@ -1,0 +1,9 @@
+LOCUS       contig-9000025                 221 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=677;seqlen=221;seqhdr="contig-9000025 221 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 gggaaggaaa aaagggagag gggaaaggag gggaagaggg aggaggggag ggaggagaga
+       61 gggggggaga aggaaggaaa aggaaagaag gagagagaaa aaggaagagg aaagagaggg
+      121 agagagaaga aagggagagg gaggaaagga agggagaggg aaaagggagg ggggggggga
+      181 ggagggaagg gagggagaga aggagaggaa gggagaaagg a
+//

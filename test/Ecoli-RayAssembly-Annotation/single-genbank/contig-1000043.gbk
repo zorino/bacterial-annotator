@@ -1,0 +1,10 @@
+LOCUS       contig-1000043                 247 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1186;seqlen=247;seqhdr="contig-1000043 247 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 agagagggaa aaagaaaggg aaagggaaaa gaaaagaaag ggggagggaa agaagaaaag
+       61 gggagaagga gaggaaaaaa ggaggaggag gaagagaaaa aaaggggagg gggaggaagg
+      121 ggaggaaggg aaggagagaa gaggggaaaa agaaaaaggg aggagaggag ggagaaagga
+      181 agggaggaga agaaagggga gggggaggaa ggagaagggg ggggggggga gggagaggga
+      241 aaaggga
+//

@@ -1,0 +1,10 @@
+LOCUS       contig-28000020                 125 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=562;seqlen=125;seqhdr="contig-28000020 125 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <3..>125
+                     /note=";gc_cont=0.285;tscore=1.61;"
+ORIGIN
+        1 tctttttaat agacggggtc ttcccattaa ttcttcatat gttagttgtt ttggtaaatc
+       61 tttcgtataa attaaaaaca attgatcttc tatttctttc actgtttgat ctgattgata
+      121 gtcca
+//

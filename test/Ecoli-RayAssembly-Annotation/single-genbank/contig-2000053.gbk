@@ -1,0 +1,12 @@
+LOCUS       contig-2000053                 286 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1480;seqlen=286;seqhdr="contig-2000053 286 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>286)
+                     /note=";gc_cont=0.393;tscore=1.61;"
+ORIGIN
+        1 gaattggtaa ttgtttctgc atctcttcta atacaactgc agttgctgta ttacatgcaa
+       61 taactaacat tttgatattt aaatctagta aatgctccgt catttcccac gtaaattgac
+      121 gcacttcttc tcgagaacgt ggaccataag ggcaacgtgc tgtatcccct aaatatataa
+      181 tgcgctcttt cggcaactga cgaattaatt ccttcgccac tgttaaaccg ccaactcctg
+      241 aatcgataac accgattgct ctattcaact tcatcacccg ttttct
+//

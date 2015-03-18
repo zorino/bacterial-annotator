@@ -1,0 +1,27 @@
+LOCUS       contig-2000034           849 bp    NA      A     linear 17-MAR-2015
+DEFINITION  seqnum=923;seqlen=849;seqhdr="contig-2000034 849 nucleotides";
+            gc_cont=50.23;transl_table=11;uses_sd=1.
+ACCESSION   
+VERSION     .0
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ctggatgcat ctgcaggata tcgcggccgc acggtcatca attctttaag tgcggaggcg
+       61 ccagggggca cagagaatct tttttttcat agcgggccct cgtcagctcg tgttattgaa
+      121 gcattctgtt cccagtgccc acacatgtga agcatcctca ctgatctact tccccaccta
+      181 cctgatgtgg ctcaattctg acaagaaagc aactttggag aaccatgaac ctacctttag
+      241 agctggacgt ggacccatca gcattcaaaa tcatgtgtaa aaaacaggag aaaatgtcac
+      301 ttttttttaa cccttgaatt tttttggtag acactcccgg cttctgggtt cctttttgtg
+      361 atggttctta ttactcttca aaagctccca atcttcaaga ccattgaccg taattggaag
+      421 cctaatgtgc gtaaaaaggg gcggagcttc aagttttaga gaatggactc tgggagaggg
+      481 tatgtggcaa aggttactca atttaatgtc cctcacatgg aaataacatt gggatcaaga
+      541 gctttattat cttaaattct aaagtccaca tccaccattt ccctagtaaa aagaggggct
+      601 ctgttattta gccatttgtg tactttttgt gaggaggtta tgtcaataat atcctttttg
+      661 ctgctgaagt tgcggagagt tttggccaca tattctattg tagtctggat cttcctcggt
+      721 aggctaagcg tcgttccaca cacaacaaca tctctccact gtttgtttaa agtttagaaa
+      781 gaaaatatcc atcgttcaca agatcgtagg agaaggacac gacttaagga tcccccgggc
+      841 catactagt
+//

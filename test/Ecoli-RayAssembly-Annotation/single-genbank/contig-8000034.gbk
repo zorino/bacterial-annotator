@@ -1,0 +1,11 @@
+LOCUS       contig-8000034                 233 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=929;seqlen=233;seqhdr="contig-8000034 233 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>232)
+                     /note=";gc_cont=0.264;tscore=1.61;"
+ORIGIN
+        1 aattggatgt tttcaaaagt tgtgtaaatc cttttacgac agttaaaggg tttcttactt
+       61 catgtgatat actagcagcg agttggctaa caatctccat tttctccatt ttaattaatt
+      121 ttgatcgcat acatactgca tcttttataa cttcatttat ataaacaata aatagcatta
+      181 gagtagtcgg taatattatg aagtaaataa tatacaaatt atttacttca aaa
+//

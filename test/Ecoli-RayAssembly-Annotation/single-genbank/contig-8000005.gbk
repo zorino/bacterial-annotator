@@ -1,0 +1,11 @@
+LOCUS       contig-8000005                 196 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=136;seqlen=196;seqhdr="contig-8000005 196 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<1..>195)
+                     /note=";gc_cont=0.426;tscore=1.61;"
+ORIGIN
+        1 accgcctagt aaaagagtaa cagcctcttc aggcgtaagc tgaatggggg gcaagaaata
+       61 accatccatt aatgaataac cgtggccggg catagcgaaa agtgggacgc cacattcact
+      121 aagtgcatcc atgtctcgat aaatcgttct tatacttgtt tcgaattttt cagctaagct
+      181 ttttgctgta acagtt
+//

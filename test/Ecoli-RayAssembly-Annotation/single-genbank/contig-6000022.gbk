@@ -1,0 +1,9 @@
+LOCUS       contig-6000022                 204 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=590;seqlen=204;seqhdr="contig-6000022 204 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tccccttttc ttttcccttt ctttttttcc tctcccttcc cttcttcctc cttcctcttc
+       61 ccccttttct tccctcctct ttttttcttc cctttcctct ccctcccccc cttccccttc
+      121 ttccctccct cccccttttc tttcctcccc ttcctttctc ccttttctct ttcccttccc
+      181 cccctccccc tccctttttt cctt
+//

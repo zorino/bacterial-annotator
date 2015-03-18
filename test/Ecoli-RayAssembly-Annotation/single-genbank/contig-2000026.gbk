@@ -1,0 +1,12 @@
+LOCUS       contig-2000026                 296 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=703;seqlen=296;seqhdr="contig-2000026 296 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <3..>296
+                     /note=";gc_cont=0.398;tscore=1.61;"
+ORIGIN
+        1 tgaaatatat gggggaaatt tggtatggcg gcaccattta cacaatgaga gaagaaaatg
+       61 aaaaagtgga cgctatttac gttgaaaacg gtatgattgt tgatgttgga agtaaaaaag
+      121 agttagaaaa ccgatatgct gcggttacat tgtacgattt agaagacaaa acgatgattc
+      181 caggcctcgt tgatagccat atgcatctta ttggtcacgg ggagagatta cttcgtctag
+      241 atttatcaaa ttgtacatcg tatagcgaag tgctgactct cgttcggaag cgcgta
+//

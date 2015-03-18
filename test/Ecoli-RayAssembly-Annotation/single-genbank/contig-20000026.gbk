@@ -1,0 +1,8 @@
+LOCUS       contig-20000026                 147 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=721;seqlen=147;seqhdr="contig-20000026 147 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cgaagcctaa tacttttagc atgaaccttg tccgtttttg cttcgtatca actgaatttt
+       61 ttccttttaa cggatgaaag tttttcgtga agaatatttc ttcaatatca tatgaagaaa
+      121 caggcaattt tttcggaagt tttttct
+//

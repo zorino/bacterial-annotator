@@ -1,0 +1,8 @@
+LOCUS       contig-22000034                 145 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=943;seqlen=145;seqhdr="contig-22000034 145 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tcctcccctt ctcttttttc tttttttttt tccctccccc ccttcccctt cccccttttt
+       61 tccttcttcc cctttttttc cttccctttc cccttctttc ccctcttctt ctccctcttt
+      121 ttctcttttc cctcctcctc ctctc
+//

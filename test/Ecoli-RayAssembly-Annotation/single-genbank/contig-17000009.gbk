@@ -1,0 +1,8 @@
+LOCUS       contig-17000009                 136 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=257;seqlen=136;seqhdr="contig-17000009 136 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cctcccctcc ttctcttctt cctttctctt ctttttcttt tctccccttc ctctcttttc
+       61 tctccttctt ccctcctccc cttcttcttc ccccttttct ctttttctcc tttttcttct
+      121 ttctcttcct tttccc
+//

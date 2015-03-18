@@ -1,0 +1,10 @@
+LOCUS       contig-19000052                 133 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1467;seqlen=133;seqhdr="contig-19000052 133 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>131)
+                     /note=";gc_cont=0.364;tscore=1.61;"
+ORIGIN
+        1 gatagcgttg tatgattcgt ataagaaatc gtttgcgtcg ttatgtgcca agcttcttcc
+       61 catgctagtt tttcttcatc taataaaata cgcatcagtt ctggaatcgc caaaactgga
+      121 tgtgtatcat taa
+//

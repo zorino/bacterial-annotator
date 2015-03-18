@@ -1,0 +1,9 @@
+LOCUS       contig-6000015                 227 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=405;seqlen=227;seqhdr="contig-6000015 227 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 gagggggagg aagaagggag agggagaagg gaagagaaaa gggaggggga ggagggagag
+       61 gaaaaaaaaa aagaggagga agagagggga gaagaaggaa agaaagagaa gagggagggg
+      121 gagaaaggga aagagaaaag agaaagagga ggggagagaa aggagaagaa aaaagagaga
+      181 agagaagagg ggaaaggagg gaagggaagg aaaggaagga aagggag
+//

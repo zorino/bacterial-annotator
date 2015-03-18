@@ -1,0 +1,12 @@
+LOCUS       contig-5000024                 245 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=635;seqlen=245;seqhdr="contig-5000024 245 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <2..>244
+                     /note=";gc_cont=0.403;tscore=1.61;"
+ORIGIN
+        1 ctcattatac aacttcatct gggatgattt ctgtgactgg tacattgaaa tggcgaaact
+       61 tcctctatac ggtgaagatg aagcagctaa gaaaacaact cgttctattt tagcttacgt
+      121 attagatcaa acaatgcgtc tattacaccc attcatgcca ttcgtaacag agaagatttg
+      181 gcaacattta ccgcatgaag gcgaatctat tacagtagca gcgtggccaa cagtacgcga
+      241 agatt
+//

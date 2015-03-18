@@ -1,0 +1,14 @@
+LOCUS       contig-36                 400 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=988;seqlen=400;seqhdr="contig-36 400 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>399
+                     /note=";gc_cont=0.308;tscore=1.61;"
+ORIGIN
+        1 gcgttagatg aagagattgt tgcttctgct ttagctgaat tacatgggaa agatgagaat
+       61 ggtgatgcta aaaaaatcgg tagagattat ttagagaagt ttattcaaat tccattgtat
+      121 ataccagaaa cggatgtcta cagtctgaat gaaatgttat gggctggtgt cagagagatt
+      181 ttagaagaaa atgatctgat gggaaaatct gaatttttaa gaattgaaaa atcgagtatg
+      241 catcgattaa ttgatttgca aaagtttgaa tttagtcctc gaaatattaa ccgatatttg
+      301 aatatattaa agtttatggt tccgcttcta aaagatgaaa cttatattga tgatttgctc
+      361 tatttattat ttattaaagt tagtgcgcca ggtttatatg
+//

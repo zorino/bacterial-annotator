@@ -1,0 +1,11 @@
+LOCUS       contig-1000055                 352 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1542;seqlen=352;seqhdr="contig-1000055 352 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ttctctcctt ctttctcttc cttttttctt ctctccctct cttcctccct ttcttccctc
+       61 tttctttttc tcctttccct ctctttctcc ctctcccttt ccctttcctc ctccttcttc
+      121 ttctttttct ttttccttct ccctttttct cttttttctt cctcccttct tctttccctt
+      181 tcttcttcct tcccccctct tctttcctcc ctcttccttt cttcccttct cccttccttc
+      241 tccttctttt tccttttttt tttccttttt tctccttttt ttttcctttt cttcccctct
+      301 tccttctctt ttcctccctt ctcctctttt cccctctttc tttttcctct cc
+//

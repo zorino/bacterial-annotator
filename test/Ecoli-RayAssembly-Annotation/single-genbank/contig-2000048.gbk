@@ -1,0 +1,12 @@
+LOCUS       contig-2000048                 280 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1322;seqlen=280;seqhdr="contig-2000048 280 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             94..>279
+                     /note=";gc_cont=0.306;tscore=3.89;"
+ORIGIN
+        1 taagaagggc cctgctttgc agggtttttt ttctttgtct acttttcatt taaaaagtga
+       61 gatggtacag taaaagaaag aggaggaaaa gatatgattc aacgctttat agaactcgga
+      121 gagggctact ctgatttata tgaattactt gaaattgcca aagcaaatca agaacgtata
+      181 acacatatgt tacaatttga aacaattaaa aatgaaaaaa aagtgtgctc acttgttgta
+      241 atattaaaac caactactac tggtgatttc caaccattat
+//

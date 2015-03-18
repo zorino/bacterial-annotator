@@ -1,0 +1,11 @@
+LOCUS       contig-9000028                 221 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=768;seqlen=221;seqhdr="contig-9000028 221 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>219
+                     /note=";gc_cont=0.416;tscore=1.61;"
+ORIGIN
+        1 ggtattgcag cagacaatcc atttggatat gcgggataca tgtatgataa agagattggc
+       61 atgtattact tgattgctcg ttactacaac ccagatcatg gtgtgttctt atcggtagat
+      121 cctgatccgg gtgacgaaga tgatccgatt acaatgaatg gttatacgta tgcagataat
+      181 aatccagtga tgatgacaga tcctgatggg catgtagctt g
+//

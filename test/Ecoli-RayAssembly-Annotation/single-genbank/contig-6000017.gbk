@@ -1,0 +1,12 @@
+LOCUS       contig-6000017                 281 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=458;seqlen=281;seqhdr="contig-6000017 281 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>279
+                     /note=";gc_cont=0.409;tscore=1.61;"
+ORIGIN
+        1 gaactgaaac gattaaaagc taagtatcct cacttaaaaa caattatttc tgttggtggc
+       61 tggacttggt ctaaccgctt ttctgacatg gccgctgatg aaaaaacaag aaaagtattc
+      121 gctgaatcta cagtcgattt cctacgcgaa tatggatttg acggcgttga tttagattgg
+      181 gaatatccgg gcgtagaaac gattcctggt ggtagttatc gtcctgaaga taagcaaaac
+      241 ttcaccctac tccttcaaga agttcgaaat gcattaacga a
+//

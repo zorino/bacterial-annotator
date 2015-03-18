@@ -1,0 +1,14 @@
+LOCUS       contig-8                 394 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=209;seqlen=394;seqhdr="contig-8 394 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<1..>393)
+                     /note=";gc_cont=0.331;tscore=1.61;"
+ORIGIN
+        1 ctctaatact ctctctcctg aaactttttg tatccactct ttcaattcct tcacgatata
+       61 tggggataga ctacttatat gttgctcgta aaacttataa acctcactat gtggagtgtc
+      121 ctcttccact tccacatctt ttatttcttc aacaacttct tgtaaactac tagtatcctc
+      181 ttcttctggc ataccaaaat actgcaataa caatggaatc ttccattctt tttccagaca
+      241 tgtacgtaaa aacatatgta tgaattcttt attttttaca gtctttaact cacgtaacac
+      301 acatttttct acattcgtat ttaaaattgg attatagtgt agccaattta tgatgtataa
+      361 ctctttcgtt tccgcatcgt ataaaatctt tccg
+//

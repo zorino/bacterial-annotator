@@ -1,0 +1,9 @@
+LOCUS       contig-5000004                 181 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=111;seqlen=181;seqhdr="contig-5000004 181 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tcttccctcc cccccctcct cccctccccc tccccttctt cctcttcccc tcctttcttt
+       61 ccctcttctc ttctccctcc ccttcccttc ctcttttcct tcctcttttt ccttcttccc
+      121 tccttttctc cctttctcct cctcctctcc cctttccttt cccttccccc tctctcctct
+      181 t
+//

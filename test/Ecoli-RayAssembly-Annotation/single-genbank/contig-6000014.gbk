@@ -1,0 +1,11 @@
+LOCUS       contig-6000014                 202 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=381;seqlen=202;seqhdr="contig-6000014 202 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>202)
+                     /note=";gc_cont=0.313;tscore=1.61;"
+ORIGIN
+        1 cctcaagatg aaccttccca ataatctcat tcaaaatata ctcaatttca acttgttcca
+       61 ttgtacgtgg agctccaaaa tcagaattta gctttactcg tatttctaat cgatcttgta
+      121 tctcatgtaa aggtgtacca agataaagaa tgctgtagta taaaacacca tcttcaatat
+      181 ttttttgaat catatctttt gt
+//

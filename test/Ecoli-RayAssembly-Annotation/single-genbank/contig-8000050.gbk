@@ -1,0 +1,10 @@
+LOCUS       contig-8000050                 241 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1387;seqlen=241;seqhdr="contig-8000050 241 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ccttttcttc ccttcccctc ttcctctctc tcccccctcc cttccttttc ctccttctct
+       61 tccccccttc ccttttcttc tcctttctcc cctttttctt ttcttccttc cccttcctcc
+      121 tctcttctct ttcttcctct ttcctcttct tcttttctct cttctttttc tctcccctcc
+      181 tcccttccct ctcccctctc cctctccctt ccccttctct tctcccttcc ctcttccctc
+      241 t
+//

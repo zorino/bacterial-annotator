@@ -1,0 +1,11 @@
+LOCUS       contig-9000035                 221 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=959;seqlen=221;seqhdr="contig-9000035 221 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(14..157)
+                     /note=";gc_cont=0.271;tscore=2.20;"
+ORIGIN
+        1 tcatcaccat cttttatccc tcttttttca tcttcatcat ttcctttatc actccctttt
+       61 caaattctat tttatcaaaa ctttccacct taaaatcact cttcttttct ctaatcattt
+      121 ttccatctct atctataaaa atatacttct tactcatcaa actttctcct cacttaattc
+      181 ttcaattact ctctttcttt cttcactttt tcctacttta a
+//

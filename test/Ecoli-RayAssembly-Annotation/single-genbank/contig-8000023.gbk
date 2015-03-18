@@ -1,0 +1,11 @@
+LOCUS       contig-8000023                 207 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=614;seqlen=207;seqhdr="contig-8000023 207 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>207
+                     /note=";gc_cont=0.430;tscore=1.61;"
+ORIGIN
+        1 gagcacggtt tatttatgtg taattggggc gcgctagcaa caagtgatgg taaaacattc
+       61 gttgccggcg gggcacgtat tacgttacca gatgattttt tagcacctct tgaaggtggt
+      121 aaggagttaa gtgaagtgat ggaagagttt gtacagagaa aagatattcg tagtcatgaa
+      181 ggggctatcg gtatttttac ggatgat
+//

@@ -1,0 +1,11 @@
+LOCUS       contig-5000020                 214 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=539;seqlen=214;seqhdr="contig-5000020 214 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <3..>212
+                     /note=";gc_cont=0.248;tscore=1.61;"
+ORIGIN
+        1 agttattaaa agaagagaac aactatgaga aacataataa ctactttaat ttaatggttg
+       61 aagaacttga tcgtgccaat tctattatta ctgaatttct ctcaataggt aatacaaaga
+      121 aatcagattt gcagatgtta gatttaaact caattatccg tgatattatt cctttaataa
+      181 agattgatac gcataatcaa aataaatata ttca
+//

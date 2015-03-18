@@ -1,0 +1,14 @@
+LOCUS       contig-1000007                 381 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=186;seqlen=381;seqhdr="contig-1000007 381 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>379)
+                     /note=";gc_cont=0.362;tscore=1.61;"
+ORIGIN
+        1 ctacagtacg tgttatatcg gaacagtatc cgtcgtaaag tgcaccgaaa tctaatgtaa
+       61 cgatgtcgct ccgctcgatt attttatttg atgcaacgcc atgaggaaga gaagaacgaa
+      121 caccagaagc tacaataatt tgaaatgatg aagatgtagc tccttttttt cgcatgaaaa
+      181 attctaactc atctcgtaca tcattttcac ttattcccgg ttttagaaac gtaagaatgt
+      241 ggtgaaatgc ttcgtccgca atatgagctg caattttcat tgtttctatt tcaggcgtgt
+      301 ctttaatgat acgaatactt tcgataattt cgcacacttg aatcatttcc gtatgtacgt
+      361 atttttgcaa gtttttatat t
+//

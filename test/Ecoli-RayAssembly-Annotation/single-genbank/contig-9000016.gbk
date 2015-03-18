@@ -1,0 +1,11 @@
+LOCUS       contig-9000016                 203 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=433;seqlen=203;seqhdr="contig-9000016 203 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>202)
+                     /note=";gc_cont=0.338;tscore=1.61;"
+ORIGIN
+        1 cttttccctc gcggaagata gagtcttttg cagggcttaa ttttgcacct aatgcaaagt
+       61 ttgtattaat tgcagctgct tttacttcac ttagttgtgt tggtaattga gatgcctcta
+      121 attcaacaat ctttaaattt tttggatttt caattacatc ttttgcagtc gctttttctg
+      181 tagcctttgg atcaactttt aaa
+//

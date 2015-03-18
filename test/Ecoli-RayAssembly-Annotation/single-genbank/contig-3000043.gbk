@@ -1,0 +1,9 @@
+LOCUS       contig-3000043                 201 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1188;seqlen=201;seqhdr="contig-3000043 201 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ttcccttttt cctcctcctt tctttccctc ccctttcctt tcctccctct cccctccttc
+       61 cctctctccc tttcccctcc ttctctctcc tttctcccct cctccctctc ccccttcctc
+      121 tccccctctc ttctttcttt ctttcccttc ccctcttcct ttcttttccc ttttctcttt
+      181 ctttccctcc ttttttctct c
+//

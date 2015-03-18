@@ -1,0 +1,8 @@
+LOCUS       contig-24000047                 137 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1310;seqlen=137;seqhdr="contig-24000047 137 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cctctccctt cttctttcct ccctccctcc tccttccttt cccttcctct cttctcccct
+       61 ccccttcctc ctccttcttt tctctccttt tttttccttt ttctcccttt ttctttcctt
+      121 ctcctttccc ctctttc
+//

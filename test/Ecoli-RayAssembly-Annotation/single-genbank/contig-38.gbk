@@ -1,0 +1,11 @@
+LOCUS       contig-38                 351 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1040;seqlen=351;seqhdr="contig-38 351 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ccccttccct ccccctctcc tcccttccct ccctcctcct ttcccttttt tctcccccct
+       61 ttctcctcct ccctctccct ttcttcttct ttccctccct ctcccctttt tttcttcccc
+      121 cctctccccc cctttctctt ttcttccctc tttcccccct ttttctttct tccccccttc
+      181 tccttccttt ttctctctct ccctcccccc tttttctccc tccttccctt tctcctcccc
+      241 tttctccctc ttcttcttcc cttcctttcc tttctccccc ctcttctccc cccttcctcc
+      301 cttcccttcc ttcttcctcc tctcctcctt tcccctcttc ttctcccctt c
+//

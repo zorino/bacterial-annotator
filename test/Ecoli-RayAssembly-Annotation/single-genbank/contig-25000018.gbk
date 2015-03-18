@@ -1,0 +1,10 @@
+LOCUS       contig-25000018                 132 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=508;seqlen=132;seqhdr="contig-25000018 132 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(25..>132)
+                     /note=";gc_cont=0.278;tscore=3.22;"
+ORIGIN
+        1 taatccattt cctaaacttt ttcattaatt ttcaattttg ttataaaaca gttgttgact
+       61 tttgtttttt gtactaatac aatgatagta agaaatggaa atggagggat tgacatgatc
+      121 gatcaaccaa tg
+//

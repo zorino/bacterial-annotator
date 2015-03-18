@@ -1,0 +1,16 @@
+LOCUS       contig-2000010                 481 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=264;seqlen=481;seqhdr="contig-2000010 481 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <1..>480
+                     /note=";gc_cont=0.575;tscore=1.61;"
+ORIGIN
+        1 aacgatctgc tggaaaccag cgcgagcccg ggtgaaagcg aaattctgcg tgcggtggaa
+       61 gtgaccatcg tggtgcatga tgacattatt ccgtggcgtt atccggcgaa acgtgagctg
+      121 cagtttggcg aatggcagcg taacgatatt ctggccggca tttttgaacc ggcgaccatt
+      181 gatatcgatc tggccattct gctgaccaaa gcgcgtgaac atagcgtggc gctggttggt
+      241 ccggcagcgg aagaactgtt tgatccggtg ccggaacagg acctgtttga agcgctgaac
+      301 gaaaccctga ccctgtggaa cagcccgccg gattgggcgg gtgatgaacg caacgtggtg
+      361 ctgaccctga gccgtatttg gtatagcgcg gtgaccggca aaattgcgcc gaaagatgtg
+      421 gcggcggatt gggccatgga acgtctgccg gcgcagtatc agccggtgat tctggaagcg
+      481 c
+//

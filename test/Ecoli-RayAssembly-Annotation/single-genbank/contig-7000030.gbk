@@ -1,0 +1,9 @@
+LOCUS       contig-7000030                 200 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=830;seqlen=200;seqhdr="contig-7000030 200 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tcttcctttc ctttccctcc tctctccttt ttctcccccc ccctcccctc ttctctcctt
+       61 cttttccctt cttctttctt ccttttttcc ttttttcccc cctctctcct tcctcccttc
+      121 cccttctttt ttctcctccc tcttcttctt tcttctttcc tctttctcct tcttcccctc
+      181 ttctctccct cctccccccc
+//

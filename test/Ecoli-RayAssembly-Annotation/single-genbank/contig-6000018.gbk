@@ -1,0 +1,11 @@
+LOCUS       contig-6000018                 237 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=489;seqlen=237;seqhdr="contig-6000018 237 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             150..>236
+                     /note=";gc_cont=0.414;tscore=3.89;"
+ORIGIN
+        1 atgctgcttt aaataaggta ggtttttctt tattagaacg tcatacaaaa cattgcgtag
+       61 caaaagcaat taacaaaggg gatggagatg aatctattca agaattaatg agtgtaataa
+      121 gacaattttc aaaataggag gggtataaaa tggataaaca aaagcatgtg acgctcggcg
+      181 ttacaggaat gacatgtgca gcatgtgcaa cccgaattga aaaagtgcta aataaaa
+//

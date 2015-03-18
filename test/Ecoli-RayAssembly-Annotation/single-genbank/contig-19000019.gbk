@@ -1,0 +1,10 @@
+LOCUS       contig-19000019                 146 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=531;seqlen=146;seqhdr="contig-19000019 146 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..67)
+                     /note=";gc_cont=0.303;tscore=3.89;"
+ORIGIN
+        1 ttttcatatc actactttct tcttctatct tactttcatt catactacca cttccaacat
+       61 ctttcatacc taatcttcct aatctaacat ccttaccctt ctccatacct cttttacttc
+      121 cttttttcat tttacttaat ttttta
+//

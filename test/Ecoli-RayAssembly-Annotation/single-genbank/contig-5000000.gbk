@@ -1,0 +1,11 @@
+LOCUS       contig-5000000                 226 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=6;seqlen=226;seqhdr="contig-5000000 226 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>224)
+                     /note=";gc_cont=0.342;tscore=0.00;"
+ORIGIN
+        1 acatcctgtt ctccatgaag aagtaacaac gggactttga catctattaa ttcgtttctc
+       61 atatctgttt ctattaaata atctaagcct aattgtaatg actgaatcga gtctccttta
+      121 aaattcagcg caatctcttc aaaactcgta ttctctttca gctcatcttt tgtaaacata
+      181 ttttcataaa accgcttgag cgtatcttct ttctttctcg ccacat
+//

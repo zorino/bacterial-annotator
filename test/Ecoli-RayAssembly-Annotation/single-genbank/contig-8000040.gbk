@@ -1,0 +1,9 @@
+LOCUS       contig-8000040                 188 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1099;seqlen=188;seqhdr="contig-8000040 188 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 ggggaaggag gagggggagg aaagggggaa gaaaggggag agagagagaa agaagaggag
+       61 gaggaaggga agggggaagg aaaagaaagg ggaaggaaag ggagaaagag gaaagggaag
+      121 aaagaggaaa agaaaggaaa ggaagaaggg aggaggagag agagggggaa aagaaggaga
+      181 aaagggaa
+//

@@ -1,0 +1,10 @@
+LOCUS       contig-21000022                 126 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=605;seqlen=126;seqhdr="contig-21000022 126 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..85)
+                     /note=";gc_cont=0.238;tscore=3.89;"
+ORIGIN
+        1 ttaattctga atatttgtaa cttaaattta tcgacggttt tttctctatc atgtatgaga
+       61 aatttcttat atatttctca tacattcatc attttccttt catcgcctcc tcacgtctaa
+      121 gtttta
+//

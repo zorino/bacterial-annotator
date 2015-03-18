@@ -1,0 +1,8 @@
+LOCUS       contig-8000008                 177 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=217;seqlen=177;seqhdr="contig-8000008 177 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 tttcctccct tcctctttcc cccctcttct ttctcctctc cttcttctct ccttttcctc
+       61 ttccttctcc ccctttcttc ccccttttcc cttctttttc ccttttttct ctcccctttt
+      121 ttctccttct cttcttcctt ccttcttttc ccttcttccc cccttcccct cctttcc
+//

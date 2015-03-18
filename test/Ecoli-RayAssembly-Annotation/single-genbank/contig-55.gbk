@@ -1,0 +1,15 @@
+LOCUS       contig-55                 463 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1541;seqlen=463;seqhdr="contig-55 463 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..>463)
+                     /note=";gc_cont=0.511;tscore=1.61;"
+ORIGIN
+        1 cctttttctt ccctttcctt cctcttctct tccttccttt ctcctcttct ctcctcttct
+       61 ttccttttct cttccccttt ctccccttct ctttcctcct ttttcccccc cttttttttc
+      121 tcccccctct ccttcccttc ctccctcttt tccttcttct cccctttttc ccttccccct
+      181 ctccttcccc ctcttcccct ccctccccct ctcttccccc cttctcttct ctctcccttt
+      241 tctcctcccc tctccttcct cctttttttt tttcttttcc tcttctttcc cttctctctc
+      301 tccctttttc cctccccttc cccccccctt ccccttcttt tctctctctt cttctttctt
+      361 tccccttttt ctcctttctt cctctttttt tcccctcctc cccttctccc tcctccttcc
+      421 ttccctctct ttcccccttc cctttctttc ccttctcccc tcc
+//

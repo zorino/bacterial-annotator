@@ -1,0 +1,9 @@
+LOCUS       contig-5000037                 231 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1017;seqlen=231;seqhdr="contig-5000037 231 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aggggggagg agggggggga gaaagagaga gggggaaaaa gggagggaaa ggaggggggg
+       61 agaggagggg ggagggagaa aaagaagaag aaaaggagga aaggagagaa aagaaagagg
+      121 aaaggggaga aagaggagaa ggggaaggaa aaaggaaggg gggagaggag gagggagaga
+      181 ggggaagggg aaagggggaa ggggaggaaa aagaaaagaa agggaaagga g
+//

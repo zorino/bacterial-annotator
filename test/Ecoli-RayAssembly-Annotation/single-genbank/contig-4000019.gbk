@@ -1,0 +1,12 @@
+LOCUS       contig-4000019                 281 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=516;seqlen=281;seqhdr="contig-4000019 281 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<3..>281)
+                     /note=";gc_cont=0.616;tscore=1.61;"
+ORIGIN
+        1 agtggtgtgc cataggcctt gaacggggcg aaggactctc gctgctgtgt cacgccaaaa
+       61 gcgctgacac gggaccggtc ggcaggactg agaccagaga tgacttcgcc gatggtgtcg
+      121 cgcgaggtct cccaccagcg gatgggattg tgctcgtact gatccatcgc cggggtgtgt
+      181 aactggatgg gacgcttggc ggtgcccagt acgttgccgt tgacatcgac gacgatggcc
+      241 ttcgtggagg tcgtcgacga atcgatggcg acaacgaggg g
+//

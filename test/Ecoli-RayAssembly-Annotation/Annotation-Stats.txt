@@ -1,0 +1,12 @@
+#Contigs annotation based on reference genomes
+Short Contigs (< 500) :	1502
+Foreign Contigs :		6
+Annotated Contigs :		60
+Total Contigs :			1568
+% Contigs annotated :		3.826530612244898
+
+#CDS annotations based on reference genomes
+Annotated CDS :			4306
+Total CDS :			4529
+% CDS annotated :		95.07617575623757
+

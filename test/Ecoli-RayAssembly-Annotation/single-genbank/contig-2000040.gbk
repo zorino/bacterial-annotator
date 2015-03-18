@@ -1,0 +1,12 @@
+LOCUS       contig-2000040                 271 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1093;seqlen=271;seqhdr="contig-2000040 271 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             complement(<2..199)
+                     /note=";gc_cont=0.359;tscore=-12.06;"
+ORIGIN
+        1 aaagtgtttc cgaaattagc tctgaataat gagattctag ccaatcgcgg gcgaattcat
+       61 ttggagccgt aattgttaat acatctttct ttaaattatg tgcggtcgtt gattttaacc
+      121 atgtttcata gcttggttta ctgacctttt tttctagttc ttttaaggcg ctgttccata
+      181 aatcagagat gttttccaaa ggtgtccctc ctttactaag atggtaaaag aataaggttg
+      241 cgcaacaaat gtacaaccta aataaatata a
+//

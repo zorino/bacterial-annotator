@@ -1,0 +1,14 @@
+LOCUS       contig-3000042                 370 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1155;seqlen=370;seqhdr="contig-3000042 370 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+     CDS             <3..>368
+                     /note=";gc_cont=0.473;tscore=1.61;"
+ORIGIN
+        1 aaactggcgc cgagcgtatg ccgcatgacc tttcccatct tggcttcctt gctggtcaga
+       61 ttggtcgtct tattaccatt tcaactactc cggttatcgc tggcgactcc ttcgagatgg
+      121 acgccgttgg cgctctccgt ctttctccat tgcgtcgtgg ccttgctatt gactctactg
+      181 tagacatttt tactttttat gtccctcatc gtcacgttta tggtgaacag tggattaagt
+      241 tcatgaagga tggtgttaat gccactcctc tcccgactgt taacactact ggttatattg
+      301 accatgccgc ttttcttggc acgattaacc ctgataccaa taaaatccct aagcatttgt
+      361 ttcagggtta
+//

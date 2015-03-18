@@ -1,0 +1,8 @@
+LOCUS       contig-18000000                 152 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=19;seqlen=152;seqhdr="contig-18000000 152 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cttttttttc ttttttcttt tttttctttc cctccccttc ttcttcctct ttctcttctt
+       61 cttctctctc ccctctctcc ttcccttcct tttcctttcc tccctctcct ctcccctttc
+      121 cttcttcctt tccctctccc ctttttttct tt
+//

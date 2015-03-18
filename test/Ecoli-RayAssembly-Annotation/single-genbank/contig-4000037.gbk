@@ -1,0 +1,10 @@
+LOCUS       contig-4000037                 252 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=1016;seqlen=252;seqhdr="contig-4000037 252 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cataatttat catgagttaa tgccaaaaat ggaacgaaga tttcatttat tagaagcttt
+       61 attataatgg aataaaagaa ggggaaataa aggtgaaact ttcaaatgta aagggacatt
+      121 ggagatggag caaatggaag gagtttgttg atgtaattta tagaagtaac gaaatcggtt
+      181 ggataattaa tatctaatgt tttatgagag gattgctgtt acggttagat aaagaaaggt
+      241 atgaggtttt ga
+//

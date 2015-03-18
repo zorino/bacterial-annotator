@@ -1,0 +1,9 @@
+LOCUS       contig-8000024                 216 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=638;seqlen=216;seqhdr="contig-8000024 216 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 attatttcac ttcaaaatag atgattcctt ctatataaca tgctacttgc gatgaaatgg
+       61 taactaaata agaaaaacag tttactctac ttttcttctt attgtacaac agagtattca
+      121 ttcatgcatt gttatttgtt cacaaattcg atataatttg attgagtaaa gtcaaaatat
+      181 tttattaata taaaatttta tgattagggg atattt
+//

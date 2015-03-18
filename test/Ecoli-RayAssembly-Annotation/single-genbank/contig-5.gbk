@@ -1,0 +1,54 @@
+LOCUS       contig-5                2114 bp    DNA     linear   BCT 17-MAR-2015
+DEFINITION  seqnum=128;seqlen=2114;seqhdr="contig-5 2114 nucleotides";
+            gc_cont=50.23;transl_table=11;uses_sd=1.
+ACCESSION   
+VERSION     .0
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+     CDS             <3..539
+                     /gene="insD1"
+                     /product="IS2 transposase TnpB"
+                     /note="correspond to b0361 locus"
+     CDS             complement(510..>2114)
+                     /product="Putative uncharacterized protein YdbA"
+ORIGIN
+        1 aagaaagcaa tcagcgatgg tgctctgacg ggttcgagtt ctgctgtgat aacggagaga
+       61 gactgcgtgt cacgttcgcg ctggactgct gtgatcgtga ggcactgcac tgggcggtca
+      121 ctaccggcgg cttcaacagt gaaacagtac aggacgtcat gctgggagcg gtggaacgcc
+      181 gcttcggcaa cgatcttccg tcgtctccag tggagtggct gacggataat ggttcatgct
+      241 accgggctaa tgaaacacgc cagttcgccc ggatgttggg acttgaaccg aagaacacgg
+      301 cggtgcggag tccggagagt aacggaatag cagagagctt cgtgaaaacg ataaagcgtg
+      361 actacatcag tatcatgccc aaaccagacg ggttaacggc agcaaagaac cttgcagagg
+      421 cgttcgagca ttataacgaa tggcatccgc atagtgcgct gggttatcgc tcgccacggg
+      481 aatatctgcg gcagcgggct tgtaatgggt taagtgataa cagatgtctg gaaatatagg
+      541 ggcaaatcca gggttcttgt cccatgatgt tcaaaactgt caatatcctg cattgttagc
+      601 gtagcgccac tgccaatttc cagcaaagct ttatcctgta cccgaataac cccggcaaac
+      661 cccagaggga attctccgct gattgtcgta tctccattca gatataccga cgactcacca
+      721 ctaacgacaa taacgctggt ataactatat cctgtgcgca aggaagtaac ctgcgaccca
+      781 tctgcaagcg cgtttttctc tccaatcagt tcaagtccac cattcatatt aacggtattg
+      841 ccatcgccaa tcacaaccag acctgacgtt ttctctgcgc tgccatcaaa taaattactc
+      901 tgacgagaag taacctcact gtctgataca acagttaact ttccatccag cgtcacgtta
+      961 ttatcactgc cgtaaacgtt gatacccacg gatggatcga agaaatattc cgccgcattg
+     1021 tctgcggttt tatccttatc aaccagaacg ttaccagtga tattcactgt attcgcatcg
+     1081 ccagaaacgt ttatgcccgt cgctttctgc ccgaccactt ttagatcttt tgccgccagc
+     1141 gtcacgctgt tattgttgcc attaagatct accccggtcg agaaatcgcc aacctgcata
+     1201 ctgcctgcca gcgaaacctt cccactgttg gttgtgatgc tgaaccctgt cgcttcattg
+     1261 ctaacgttaa catcacccgt attggatact gttgccccct caccgttgat gagcacgcca
+     1321 atcgatccag tatcggaaac aacaatatct cctttgttgt taaccgtgcc gttgtcacca
+     1381 atgttctcaa caccatgcgc accgcctgta acagtcaggc taccatccag atttacaatg
+     1441 ccgatattgc ccgcgatttt ggtacccgtg gaatcttttc catcaacagt ggtttttcca
+     1501 ctgttattcg cggtggcgtc gttaccgttg atctgagtgc cggtgccgcc attggtgata
+     1561 gtgctctcgc cttcgttatt gacgatggcc tggtcgccgt caatctggat accgatggac
+     1621 tccggatcgg tgacggtcat ggtgcccttg ttatccaccg ttgcgctgtc gccggtgata
+     1681 tcaataccgt gaccgccgcc gctgacatcc agatcgccgt cctgaatcac cttcccgtta
+     1741 ttgccagcaa tttccgtacc ggtggaatcc ttgccgtcaa cggtggtttt gccgttgttg
+     1801 tttgccgtgg cgtcatcacc gttaatctgc gtgccggtgc caccgttggt gatggcgctc
+     1861 tcgccttcgt tgttaacaac cgcctggtcg ccgtcaacct ggataccgat ggactccgga
+     1921 tcggtgacgg tcatggtgcc cttgttatcc accgttgcgc tgtcgccggt gatatcaata
+     1981 ccgtgaccgc cgccgctgac atccagatcg ccgtcctgaa tcaccttccc gttattgcca
+     2041 gcaatttccg taccggtgga atccttgccg tcaacggtgg ttttgccgtt gttgtttgcc
+     2101 gtggcgtcat cacc
+//

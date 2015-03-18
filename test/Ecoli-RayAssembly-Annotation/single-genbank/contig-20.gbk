@@ -1,0 +1,42 @@
+LOCUS       contig-20               1744 bp    DNA     linear    BC 17-MAR-0201
+DEFINITION  seqnum=534;seqlen=1744;seqhdr="contig-20 1744 nucleotides";
+            gc_cont=50.23;transl_table=11;uses_sd=1.
+ACCESSION   
+VERSION     .0
+KEYWORDS    .
+SOURCE      
+  ORGANISM  
+            .
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 aagaaacatc ttcgggttgt gaggttaagc gactaagcgt acacggtgga tgccctggca
+       61 gtcagaggcg atgaaggacg tgctaatctg cgataagcgt cggtaaggtg atatgaaccg
+      121 ttataaccgg cgatttccga atggggaaac ccagtgtgtt tcgacacact atcattaact
+      181 gaatccatag gttaatgagg cgaaccgggg gaactgaaac atctaagtac cccgaggaaa
+      241 agaaatcaac cgagattccc ccagtagcgg cgagcgaacg gggagcagcc cagagcctga
+      301 atcagtgtgt gtgttagtgg aagcgtctgg aaaggcgcgc gatacagggt gacagccccg
+      361 tacacaaaaa tgcacatgct gtgagctcga tgagtagggc gggacacgtg gtatcctgtc
+      421 tgaatatggg gggaccatcc tccaaggcta aatactcctg actgaccgat agtgaaccag
+      481 taccgtgagg gaaaggcgaa aagaaccccg gcgaggggag tgaaaaagaa cctgaaaccg
+      541 tgtacgtaca agcagtggga gcacgcttag gcgtgtgact gcgtaccttt tgtataatgg
+      601 gtcagcgact tatattctgt agcaaggtta accgaatagg ggagccgaag ggaaaccgag
+      661 tcttaactgg gcgttaagtt gcagggtata gacccgaaac ccggtgatct agccatgggc
+      721 aggttgaagg ttgggtaaca ctaactggag gaccgaaccg actaatgttg aaaaattagc
+      781 ggatgacttg tggctggggg tgaaaggcca atcaaaccgg gagatagctg gttctccccg
+      841 aaagctattt aggtagcgcc tcgtgaattc atctccgggg gtagagcact gtttcggcaa
+      901 gggggtcatc ccgacttacc aacccgatgc aaactgcgaa taccggagaa tgttatcacg
+      961 ggagacacac ggcgggtgct aacgtccgtc gtgaagaggg aaacaaccca gaccgccagc
+     1021 taaggtccca aagtcatggt taagtgggaa acgatgtggg aaggcccaga cagccaggat
+     1081 gttggcttag aagcagccat catttaaaga aagcgtaata gctcactggt cgagtcggcc
+     1141 tgcgcggaag atgtaacggg gctaaaccat gcaccgaagc tgcggcagcg acgcttatgc
+     1201 gttgttgggt aggggagcgt tctgtaagcc tgcgaaggtg tgctgtgagg catgctggag
+     1261 gtatcagaag tgcgaatgct gacataagta acgataaagc gggtgaaaag cccgctcgcc
+     1321 ggaagaccaa gggttcctgt ccaacgttaa tcggggcagg gtgagtcgac ccctaaggcg
+     1381 aggccgaaag gcgtagtcga tgggaaacag gttaatattc ctgtacttgg tgttactgcg
+     1441 aaggggggac ggagaaggct atgttggccg ggcgacggtt gtcccggttt aagcgtgtag
+     1501 gctggttttc caggcaaatc cggaaaatca aggctgaggc gtgatgacga ggcactacgg
+     1561 tgctgaagca acaaatgccc tgcttccagg aaaagcctct aagcatcagg taacatcaaa
+     1621 tcgtacccca aaccgacaca ggtggtcagg tagagaatac caaggcgctt gagagaactc
+     1681 gggtgaagga actaggcaaa atggtgccgt aacttcggga gaaggcacgc tgatatgtag
+     1741 gtga
+//

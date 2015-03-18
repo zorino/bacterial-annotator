@@ -1,0 +1,8 @@
+LOCUS       contig-11000011                 165 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=303;seqlen=165;seqhdr="contig-11000011 165 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 cttctctctc ttcctcttct tcctcttttt ctctccttcc ctccctcctt ctctcccctc
+       61 cctcccttct tctttttctt ctccccttcc cttccccttc tttttctttt tttcttttcc
+      121 cttccctctc tctttttctc ccttctcctc cccctctctc ccctc
+//

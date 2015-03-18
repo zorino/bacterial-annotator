@@ -1,0 +1,12 @@
+LOCUS       contig-1000019                 406 bp    DNA     linear   BCT 17-Mar-2015
+DEFINITION  seqnum=513;seqlen=406;seqhdr="contig-1000019 406 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
+FEATURES             Location/Qualifiers
+ORIGIN
+        1 agtatggccc gggggatcct tggaccgtta attcatatat cgaagtagca ggttgttgcc
+       61 ccgcctgatg ttgccactac ttgctcatga cagttttttt aggcaatgca aactactatt
+      121 tgatattttt ttccaagtac agttgtaggg tactccttat actgattctt ctgagcctgt
+      181 acggggagca ttaggtactg atgtagtagg agttgagctt cacaaattca ccaggtaagc
+      241 ccaaatttat tttctgcttg gacaggtcca cctcacatgg gtctgtctaa tatattaaaa
+      301 gagggatttt ctttgctgta ttgcagccca gtatatctgt tacttacagt agtagtccat
+      361 tattgctggc ctaggggctt ttgctcctac acgaacacca ctctgt
+//
