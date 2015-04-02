@@ -1,9 +1,0 @@
-LOCUS       contig-7000005                 217 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=135;seqlen=217;seqhdr="contig-7000005 217 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 agagaggaac ataaacgacc tgatggagct gaaaaacatg gcacaagaac ttcgtgaagc
-       61 atacgcaagt atcaacagcc gaatcaaccg agcagaagaa aggatatcag agtttgaaca
-      121 ccatcttgct gaaataaggc atgcagacaa gaccagagaa aagagaatga aaaggaatga
-      181 aaaaagcctc caagaaatat gggactttat aaaaaaa
-//

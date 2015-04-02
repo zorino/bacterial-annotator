@@ -1,9 +1,0 @@
-LOCUS       contig-12000054                 200 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1516;seqlen=200;seqhdr="contig-12000054 200 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 tttttccctc tttccctttt tctttttctt ttcctttccc tcttttccct tcttccttct
-       61 tcctttctct tctctccctt tcttcctttc cctcctttct tcttcccctt ctttcttcct
-      121 ttccttcctt ctccttcttc tcccttcctc ctcttttccc cctcctccct ccccttcttc
-      181 tttccttctc ctttccttct
-//

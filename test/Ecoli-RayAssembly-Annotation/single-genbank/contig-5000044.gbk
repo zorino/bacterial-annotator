@@ -1,9 +1,0 @@
-LOCUS       contig-5000044                 230 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1207;seqlen=230;seqhdr="contig-5000044 230 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 tcttccctcc ctccttcttc tctttctctc ttctctttct ttccccttct tttcttccct
-       61 ctttttcccc ccttctcctc tccctttttc ttttcccctt tcctctttcc ctctttccct
-      121 cccctccctc tccttttctc cccctttctt tttcccttcc tttttttcct ctttttcctc
-      181 ttccctcttt cccttttcct ttccttcccc ttcttctccc ttccttccct
-//

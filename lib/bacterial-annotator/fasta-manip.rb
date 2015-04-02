@@ -30,7 +30,7 @@ class FastaManip
   def run_prodigal root, outdir
     @prodigal_files = {}
     Dir.mkdir "#{outdir}" if ! Dir.exists? "#{outdir}"
-    system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk")
+    system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
     @prodigal_files = {multiGBK: "#{outdir}/Genbanks.gbk",
                        contigs: [],
                        contigs_length: [],

@@ -1,8 +1,0 @@
-LOCUS       contig-8000045                 172 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1243;seqlen=172;seqhdr="contig-8000045 172 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ctcctctccc ctctctttct ccccttcccc ctttccctct tcctctcccc tctcttctcc
-       61 ctcccttctt tcctttcccc ccctctctcc ccctcttttc tttccccctc cttctctctc
-      121 cttccttctc tccttcttct tttctctttt cctcccctct tcccttccct cc
-//

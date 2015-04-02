@@ -1,9 +1,0 @@
-LOCUS       contig-5000001                 198 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=35;seqlen=198;seqhdr="contig-5000001 198 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 cctctttcct ctctcccccc tctccttccc cctcctctcc ctcttctccc ctttcctttt
-       61 ttcccccttt ctcctttttc cctttttccc tccctcttct ctccctttct cccctctttc
-      121 cccttttcct ttttttcttc ttccctcccc cttccccctt tctccccttc tctttcctct
-      181 ctctccccct ctcctctt
-//

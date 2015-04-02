@@ -12,28 +12,34 @@ class SyntenyManip
 
   attr_reader :query_file, :subject_file, :aln_hits
 
-  def initialize query_file, subject_file
+  def initialize query_file, subject_file, name
     @query_file = query_file
     @subject_file = subject_file
+    @name = name
     @aln_file = nil
-  end
+  end                           # end of initialize
 
   # run blat on proteins
   def run_blat root, outdir
-    system("#{root}/blat.linux -out=blast8 -minIdentity=70 -prot #{@subject_file} #{@query_file} #{outdir}/Proteins-References.aln")
-    @aln_file = "#{outdir}/Proteins-References.aln"
-    extract_hits
-  end
+    system("#{root}/blat.linux -out=blast8 -minIdentity=70 -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
+    @aln_file = "#{outdir}/#{@name}.blat8.tsv"
+    # extract_hits 
+  end                           # end of method
 
   # Extract Hit from blast8 file and save it in hash
   # contig-0_1      ABJ71957.1      96.92   65      2       0       1       65      1       65      9.2e-31 131.0
-  def extract_hits
+  def extract_hits mode
+
     @aln_hits = {}
     File.open(@aln_file,"r") do |fread|
       while l = fread.gets
         lA = l.chomp!.split("\t")
         key = lA[0]
-        hit = lA[1]
+        if mode == :refgenome
+          hit = lA[1]
+        elsif mode == :externaldb
+          hit = lA[1].chomp.split("|")[1]
+        end
         if ! @aln_hits.has_key? key
           @aln_hits[key] = {
             pId: lA[2].to_f,
@@ -55,11 +61,12 @@ class SyntenyManip
         end
       end
     end
-  end
+
+  end                           # end of method
 
 
 
-  # Get the annotations for a contig
+  # Get the annotations for a contig for RerenceGenome
   def get_annotation_for_contig prots_to_annotate, ref_cds
 
     return {} if prots_to_annotate == nil
@@ -104,7 +111,7 @@ class SyntenyManip
 
     annotations                 # return
 
-  end
+  end                           # end of method
 
 
   # Choose Best Hit base on neighbor hits
@@ -171,8 +178,9 @@ class SyntenyManip
     end
 
     hit_index
-  end
+
+  end                           # end of method
 
 
 
-end                             # END of Class
+end                             # end of class

@@ -1,8 +1,0 @@
-LOCUS       contig-10000004                 164 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=116;seqlen=164;seqhdr="contig-10000004 164 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ttcccttctc ttctccctct ttcttttctc tctccccctc tttcctttct tttttttccc
-       61 ccctctccct cctcccttcc tccttcttct ccctttcttc cccttccccc tccttccttc
-      121 tcccttcctt cctccctctc ttccctctcc tcctcttcct ccct
-//

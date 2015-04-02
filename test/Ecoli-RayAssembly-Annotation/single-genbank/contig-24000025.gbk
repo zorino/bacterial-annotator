@@ -1,8 +1,0 @@
-LOCUS       contig-24000025                 160 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=692;seqlen=160;seqhdr="contig-24000025 160 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ccctcctttc cctctcccct cttttctctt ttcctttttt ctctttcttt tctttctcct
-       61 cttttctccc tcctctctct ctcccctctt ctcttttctc tccttttccc ttcctcccct
-      121 tctcttcctc ctctcccctt tctccttttt cctctccccc
-//

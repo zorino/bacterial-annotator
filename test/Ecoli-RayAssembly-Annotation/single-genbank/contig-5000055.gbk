@@ -1,9 +1,0 @@
-LOCUS       contig-5000055                 218 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1546;seqlen=218;seqhdr="contig-5000055 218 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 aaggaaagaa ggggaggaaa gaagaaaaag gaagaggaga ggaagagggg aagaaggaag
-       61 ggaagggaaa aaggaggagg aaaagaagaa agaggaggaa agaagaaggg aaaggaggga
-      121 aaaggaagga ggaaagagga aggggagaga ggaggaagaa gagaaggaga ggagggaaaa
-      181 gaaaaaagag aaggggggga aagaggggga gaaagaag
-//

@@ -1,9 +1,0 @@
-LOCUS       contig-4000055                 225 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1545;seqlen=225;seqhdr="contig-4000055 225 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 cttttttttt tctttccctc tttccttccc cttcccctcc cccttccttc tttccttccc
-       61 cccccctccc ccccccccct cctttccttc ctcttttttc ttctttttcc cttttttttt
-      121 tctttctctc ctttcttcct tccccctccc cttcccttcc tccctcccct tcccctcccc
-      181 cctcttttct cttttccttt ttttttcccc ctctcccccc tcccc
-//

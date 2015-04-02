@@ -1,8 +1,0 @@
-LOCUS       contig-20000018                 144 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=503;seqlen=144;seqhdr="contig-20000018 144 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ccccctctct cccctttcct tttttcctct ccccctttcc ctcttctttc tccctctttt
-       61 cttctccctt tccctccctt tttcctcttc ctttcccttc tctttttctc ctttcctctc
-      121 ccccctctct ccctccctcc cttc
-//

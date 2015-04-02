@@ -1,9 +1,0 @@
-LOCUS       contig-7000025                 237 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=675;seqlen=237;seqhdr="contig-7000025 237 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 gaggaaggaa aaaaagggag aaaaagaaag gagggagaag aggggaggag gaaggaaaag
-       61 agaggagggg aaagaaaggg aggggaggga gagagaggag aagaaggaga ggaaggaaga
-      121 agagaagaaa gaggggaggg aagaagaaag ggagggggga gggaagaaag aagagaggaa
-      181 aaggaggaag gaagaggaga aggagagagg ggagaaagag agggaggaga gggagag
-//

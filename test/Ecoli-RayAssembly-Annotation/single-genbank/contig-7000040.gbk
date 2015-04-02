@@ -1,9 +1,0 @@
-LOCUS       contig-7000040                 212 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1098;seqlen=212;seqhdr="contig-7000040 212 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ctcttctttc ctttccttct tttctccccc ctccttttcc cctccttttc cctttttcct
-       61 ccttcccccc cttccttcct cccccctttt tcctctccct ccctcctttt cctctccctc
-      121 cttctttttc ccccccctcc cctttttttc ctttcttttt ttccccttcc ctttcccttc
-      181 ttcccctttt ccttcttctc ccctcttcct ct
-//

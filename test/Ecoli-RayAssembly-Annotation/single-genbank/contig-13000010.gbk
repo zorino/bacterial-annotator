@@ -1,9 +1,0 @@
-LOCUS       contig-13000010                 187 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=275;seqlen=187;seqhdr="contig-13000010 187 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 tctccccccc tccttccttt ttccctcctt cttccttttc ctcttccctc tccccccctt
-       61 tttcccctcc cttcccctcc cccccccctt ctcctttttt tttccctttc tttttcttct
-      121 ctctcccccc ctttcctctt ttcctccccc ttctcttctc tctttcttcc tccccttcct
-      181 ctttctt
-//

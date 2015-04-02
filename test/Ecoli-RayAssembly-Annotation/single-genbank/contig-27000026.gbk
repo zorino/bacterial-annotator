@@ -1,8 +1,0 @@
-LOCUS       contig-27000026                 133 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=728;seqlen=133;seqhdr="contig-27000026 133 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 tcccttccct tctctttctc cttctctttt ctttcttctt tttccttctt ttcttccttc
-       61 ttttcccctt ccttcttttt cctttccttc cccccctcct tttcttcctt tccccctcct
-      121 ccctctcccc tct
-//

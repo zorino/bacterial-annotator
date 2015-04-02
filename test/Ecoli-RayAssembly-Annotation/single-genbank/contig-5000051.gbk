@@ -1,9 +1,0 @@
-LOCUS       contig-5000051                 240 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1431;seqlen=240;seqhdr="contig-5000051 240 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 tctttccctc ccctcttctc ttttcttctt tctccctccc ctccttcttt tcccctcccc
-       61 ccttcctttc ctctttctcc tccctttccc cttcccctcc ttccttcttc cccccccttc
-      121 tcctttcctc tttttttctt cccttttctt tttctccctt ccttccctct ttctttttct
-      181 tctccttccc ttttcttcct ctctcctcct tccttctctc ctccttcctt cttctttccc
-//

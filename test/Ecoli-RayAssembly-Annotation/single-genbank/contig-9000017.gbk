@@ -1,9 +1,0 @@
-LOCUS       contig-9000017                 204 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=461;seqlen=204;seqhdr="contig-9000017 204 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ttttcccctc cccctttctt ttcccccctt ttttttcttc tttttttttc cttctcctcc
-       61 cctttccctc ctcttccccc tcctcttttt tttccctctt tcctcccttc cccttcttcc
-      121 tttccctctc tcctctcctt ttttcccccc ccttccctct cttccctctt ttcctttctc
-      181 ctttcttcct ccccccccct tctc
-//

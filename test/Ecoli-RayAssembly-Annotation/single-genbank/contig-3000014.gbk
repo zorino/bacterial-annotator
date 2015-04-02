@@ -1,9 +1,0 @@
-LOCUS       contig-3000014                 235 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=378;seqlen=235;seqhdr="contig-3000014 235 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 cctttccttt ttcccccttc tccccccttt tccttcctct ttctctcctc ctctcctcct
-       61 tccctccttc ttttctcttt tcttcttctt cctttttccc ccctcttcct tcttctcccc
-      121 ctcctcccct tccccctcct tcccttcttc cctttcctcc tccttcttct tcttcttttc
-      181 tttcctctcc ccttcccctt ccctcctctc cttttccttt tctttctctc ccccc
-//

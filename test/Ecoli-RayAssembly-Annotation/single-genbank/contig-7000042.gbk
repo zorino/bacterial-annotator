@@ -1,9 +1,0 @@
-LOCUS       contig-7000042                 236 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1159;seqlen=236;seqhdr="contig-7000042 236 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 agaagggaaa agaagaagaa aaggggaagg ggggaaagaa gaaaaggaag gaagaaagga
-       61 gaagaaaaaa aaaggaaaag agaaggagag ggaaaagaag agaagggaag aaaggaaaag
-      121 aaaaaggaag aaaaaagaaa aaggagaaga aaagggaaag agggaagggg ggaaaaaaaa
-      181 aggagagagg ggagggagga gaagggagga gggaagaaag aaaaagggag gagagg
-//

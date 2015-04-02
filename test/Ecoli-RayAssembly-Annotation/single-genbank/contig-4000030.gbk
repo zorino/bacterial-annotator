@@ -1,9 +1,0 @@
-LOCUS       contig-4000030                 239 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=827;seqlen=239;seqhdr="contig-4000030 239 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 agaggaaagg gaaggggaag aaagagaaga ggaaaagaaa gggaagggag agggaggaga
-       61 agaggaaagg gggggaggaa agggaaggga ggaaggaaag gaaaaagaga ggagaggaaa
-      121 gggaaagaga gaagagggag aggaggaggg agaaaagagg gaaggaaagg aggaaaagag
-      181 ggagggggag aagaaaggag gaagggggga gagaggggaa agagaggaaa agaagaggg
-//

@@ -1,9 +1,0 @@
-LOCUS       contig-2000009                 226 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=242;seqlen=226;seqhdr="contig-2000009 226 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 atcagtgaaa aatgaagaag acttcctgct ttcaaggagc ttttagttct ttgttcattc
-       61 actaattgat tccgcagtcc tcactaagct ctatacccta tgctaggtgt catggagatc
-      121 aatgaccaat attaacaagg tgtctgcctt caaagagctc aaaaggaaac tggggggtga
-      181 cctatgccgt ctatttagtt ttattatgcc agttcttagt cttctc
-//

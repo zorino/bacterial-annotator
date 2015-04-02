@@ -1,8 +1,0 @@
-LOCUS       contig-11000007                 171 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=196;seqlen=171;seqhdr="contig-11000007 171 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 agaaactgtt ccctcccttc cttccttctc ctcttctctc ttctctctcc tttcctcccc
-       61 ctttccccct ttccctctct ctcttcccct tcttctccct ctctctcttc cttcctccct
-      121 tttctccttt ctctctcctc ttcctctccc ttcctctttc cttcctccct c
-//

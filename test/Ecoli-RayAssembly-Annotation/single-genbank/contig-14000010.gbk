@@ -1,9 +1,0 @@
-LOCUS       contig-14000010                 186 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=276;seqlen=186;seqhdr="contig-14000010 186 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 aagagggaga agagggggaa aggaaggaaa gaaaaagagg gaaaaaagga aaagaagggg
-       61 aaaaggagag agaaagggag aggaaggaaa aagggagggg gaggaaagaa aaaaaaaaaa
-      121 aagaaggggg aaggaaggag gaggaggagg gggaagaaga gaaagaaaag gggaggggaa
-      181 agaagg
-//

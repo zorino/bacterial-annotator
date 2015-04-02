@@ -1,8 +1,0 @@
-LOCUS       contig-19000046                 153 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1273;seqlen=153;seqhdr="contig-19000046 153 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ttcttccctc cttctttctc ttccttcctc tttccctccc ctcttcctct cttcttcttc
-       61 ttcctcttct ttcctcttct ccttcctttc ttcttcctct tctcttcctt tccccctctc
-      121 cctcctcctt tccttctcct tctcttcttt ctc
-//

@@ -1,8 +1,0 @@
-LOCUS       contig-23000036                 123 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1011;seqlen=123;seqhdr="contig-23000036 123 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 aggggagaag aggaaggaga aggaagggaa ggaagaaagg agggggagga agaggggaga
-       61 agagggaaag agaagagaga ggaaaaggaa aagaagaagg aggggagaga aggaaaaagg
-      121 gaa
-//

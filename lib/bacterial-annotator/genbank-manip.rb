@@ -129,10 +129,11 @@ class GenbankManip
       hit = annotations[prot_id] if annotations.has_key? prot_id
 
       if hit != nil
-        locus, gene, product = nil
+        locus, gene, product, note = nil
         locus = hit[:locustag]
         gene = hit[:gene]
         product = hit[:product]
+        note = hit[:note]
 
         if gene != nil
           qGene = Bio::Feature::Qualifier.new('gene', gene)
@@ -148,6 +149,12 @@ class GenbankManip
           qNote = Bio::Feature::Qualifier.new('note', "correspond to #{locus} locus")
           ftArray.push(qNote)
         end
+
+        if note != nil
+          qNote = Bio::Feature::Qualifier.new('note', note)
+          ftArray.push(qNote)
+        end
+
 
       end
       cds.qualifiers = ftArray

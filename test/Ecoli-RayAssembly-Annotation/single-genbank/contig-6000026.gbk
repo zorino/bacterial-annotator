@@ -1,9 +1,0 @@
-LOCUS       contig-6000026                 235 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=707;seqlen=235;seqhdr="contig-6000026 235 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 aagagggggg gaaaggggag agaaagggag ggagggaaga aggagagaag aaagaagaga
-       61 aaaagagaaa gaaagggaag gaaggagaaa aaggaagggg agaaaagggg aaagggaaag
-      121 gggggggaag gagaggaaaa ggggaggaag aaggggaaga aggaaggggg aagaaagggg
-      181 aagaaaggag gaaagaaaag gagggaggga aaaagggaaa agaaaagaaa aggag
-//

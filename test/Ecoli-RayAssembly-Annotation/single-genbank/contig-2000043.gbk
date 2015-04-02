@@ -1,9 +1,0 @@
-LOCUS       contig-2000043                 203 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1187;seqlen=203;seqhdr="contig-2000043 203 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 tcttttctct ttcccccccc ctctttttcc tctctttccc ccccctccct tctcttcctt
-       61 ctttcttttt tttcttcccc tccccctccc tttctctctc cccttccccc tcttcctctc
-      121 cctttttccc ctccccctct cctcctttct tttttcccct ttcctcctcc ctttccttcc
-      181 ctctcctctt ccctcccttc tcc
-//

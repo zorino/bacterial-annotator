@@ -35,7 +35,7 @@ class RemoteNCBI
     @xmloutput = ""
     @valid = validate_output
 
-  end
+  end                           # end of method
 
 
   # submit blast to ncbi
@@ -70,13 +70,15 @@ class RemoteNCBI
       end
 
       resultURI = URI.parse("http://blast.ncbi.nlm.nih.gov/Blast.cgi?RESULTS_FILE=on&RID=#{requestID}&FORMAT_TYPE=XML&FORMAT_OBJECT=Alignment&CMD=Get")
-      puts resultURI
-      
+
+      puts URI.parse("http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&RID=#{requestID}")
+
     end
 
     resultURI
 
-  end
+  end                           # end of method
+
 
   # validate the xml blast results
   def validate_output
@@ -115,7 +117,7 @@ class RemoteNCBI
     end
     valid
 
-  end
+  end                           # end of method
 
   # extract blast results from 
   def extract_blast_results
@@ -134,27 +136,34 @@ class RemoteNCBI
         prot_id = query_it.query_def.split(" ")[0]
         query_it.hits.each do |hit|
           if ! @aln_hits.has_key? prot_id
-            # cleaning product definition
-            product = hit.definition.gsub("MULTISPECIES: ","").
-                      gsub(/ \[.*\]/,"").
-                      gsub("RecName: Full=","").
-                      split("; AltName")[0].
-                      split("; Flags:")[0]
-            @aln_hits[prot_id] = {
-              pId: hit.identity.to_f/hit.target_len.to_f*100,
-              length: hit.target_len.to_i,
-              evalue: hit.evalue,
-              score: hit.bit_score.to_f,
-              hits: [{product: product}]
-            }
+            p_identity = hit.identity.to_f/hit.target_len.to_f*100
+            if p_identity > 70
+              # cleaning product definition
+              product = hit.definition.gsub("MULTISPECIES: ","").
+                        gsub(/ \[.*\]/,"").
+                        gsub("RecName: Full=","").
+                        split("; AltName")[0].
+                        split("; Flags:")[0].
+                        split(" ; Short=")[0]
+              gi = hit.hit_id.to_s.split("|")[1]
+              organism = ""
+              if ! hit.definition[/\[.*\]/].nil?
+                organism = hit.definition[/\[.*\]/].gsub("[","").gsub("]","")
+              end
+              @aln_hits[prot_id] = {
+                pId: hit.identity.to_f/hit.target_len.to_f*100,
+                length: hit.target_len.to_i,
+                evalue: hit.evalue,
+                score: hit.bit_score.to_f,
+                hits: [{gi: gi, product: product, org: organism}]
+              }
+            end
           end
-
         end
-
       end
-
     end
 
-  end
+  end                           # end of method
 
-end                             # end of Class
+
+end                             # end of class

@@ -1,9 +1,0 @@
-LOCUS       contig-3000004                 204 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=109;seqlen=204;seqhdr="contig-3000004 204 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 aattatggcg agaaataaaa gtctgaaaca tgattaaact cctaagcaga aaacctaccg
-       61 cgcttcgctt ggtcaacccc tcagcggcaa aaattaaaat ttttaccgct tcggcgttat
-      121 aacctcacac tcaatctttt atcacgaagt catgattgaa tcgcgagtgg tcggcagatt
-      181 gcgataaacg gtcacattaa attt
-//

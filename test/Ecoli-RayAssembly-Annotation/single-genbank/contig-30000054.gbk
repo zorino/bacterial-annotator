@@ -1,8 +1,0 @@
-LOCUS       contig-30000054                 132 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1534;seqlen=132;seqhdr="contig-30000054 132 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ttgatggttt aggttagagt agaaaggtgg taaaagtagt aatgatggga attttgagaa
-       61 ggaattaaat gaaaaaaaat aaagaatgaa gaaggtttga agtataagta gaaggtgaga
-      121 ataaaaagga ga
-//

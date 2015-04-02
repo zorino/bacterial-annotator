@@ -1,8 +1,0 @@
-LOCUS       contig-7000032                 176 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=879;seqlen=176;seqhdr="contig-7000032 176 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 gaggaaaggg gggagaaggg ggaagagaag gagaggaggg agaaagggga aaagaagagg
-       61 ggagaagaag ggaaaaagag gaggaaaggg gagggaaggg gaaggggaga gaaaagaaaa
-      121 aaggggagag agaaagggga agggggaagg ggggggaaaa agaaagggag gaaaga
-//

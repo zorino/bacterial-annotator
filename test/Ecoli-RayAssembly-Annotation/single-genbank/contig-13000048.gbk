@@ -1,8 +1,0 @@
-LOCUS       contig-13000048                 175 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=1333;seqlen=175;seqhdr="contig-13000048 175 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ttttccctct ttttcctcct cctctttccc ccctctttcc tccttcctct cctccccctt
-       61 tttttctttt tcctttcttc cctttttttt ctcctttctc tttttttcct ctttcccccc
-      121 ttcttttctt cctctttttt ttttttccct cctcttcccc ttccttttct cttcc
-//

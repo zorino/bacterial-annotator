@@ -1,9 +1,0 @@
-LOCUS       contig-6000000                 224 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=7;seqlen=224;seqhdr="contig-6000000 224 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 aagaaaaaga agaggaaaaa ggagagagag gaagaagggg gagaggaaga aaaggggaaa
-       61 gaaagaaaaa ggaaagaagg aagaagggag gggaaagggg gagagaaaag ggaggaggag
-      121 aagagggaag aggggagaaa ggggggggaa gagaagggag aaagaagggg agggaaggaa
-      181 gaaggggagg agagaaagga aaagaaaggg aaagaggaag aaag
-//

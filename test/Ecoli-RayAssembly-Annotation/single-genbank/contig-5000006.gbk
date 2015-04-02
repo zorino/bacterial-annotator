@@ -1,9 +1,0 @@
-LOCUS       contig-5000006                 228 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=161;seqlen=228;seqhdr="contig-5000006 228 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ttccttcttc ttctttctct ttttcccttt tcttcccttt ttttttctcc ccctcttctc
-       61 tcttcttccc tccccctccc cctccttttc tttctttttt ccccttccct ccttttttcc
-      121 ctcctctttt tttctttttt tttcttcttc cccttcttcc ttttcttttc tcctccctcc
-      181 ttcccctttt tcttcttctt cccctttctc ccctttcttt ttcctctt
-//

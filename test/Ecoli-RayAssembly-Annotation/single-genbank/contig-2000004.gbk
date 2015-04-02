@@ -1,9 +1,0 @@
-LOCUS       contig-2000004                 221 bp    DNA     linear   BCT 17-Mar-2015
-DEFINITION  seqnum=108;seqlen=221;seqhdr="contig-2000004 221 nucleotides";gc_cont=50.23;transl_table=11;uses_sd=1
-FEATURES             Location/Qualifiers
-ORIGIN
-        1 ccccatatct tcttcccctt tcaaattcat tttaattcct tcattattaa ttctttaatt
-       61 ttctttttct ccccatctct cttcttcatt ttttttatat attttaatct tcatctcttc
-      121 tttcatttta tttatccttc tttttaaaat ttcctccatt tttcatcccc attatttttc
-      181 ctctaaatta ttctcttttc attaattctt caatttattt a
-//
