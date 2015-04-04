@@ -192,6 +192,10 @@ class BacterialAnnotator
           puts "Problem NCBI blast for foreign proteins"
         else
           ncbiblast.extract_blast_results
+          if ! ncbiblast.aln_hits
+            puts "Didn't produce the annotation for #{cds_file}"
+            next
+          end
           ncbiblast.aln_hits.each do |k,v|
             contig_of_protein = k.split("_")[0..-2].join("_")
             # @contig_annotations[contig_of_protein][k][:product] = v[:hits][0][:product]
@@ -380,7 +384,7 @@ class BacterialAnnotator
     File.open(file, "r") do |fopen|
       while l=fopen.gets
         if l[0] == ">"
-          if iter > 50
+          if iter > 29
             fout.close
             iter = 0
             file_nb += 1

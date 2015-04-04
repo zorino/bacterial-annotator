@@ -67,7 +67,7 @@ class RemoteNCBI
           search = page.form_with(:name => 'searchForm') { |form|
             form.textareas[0].value = File.read(@seq_file)
             form.field_with(:name => 'DATABASE').value = @db
-            form.field_with(:name => 'MAX_NUM_SEQ').value = 10     
+            form.field_with(:name => 'MAX_NUM_SEQ').value = 40
           }.submit
 
           search.parser.css('td').each do |td|
