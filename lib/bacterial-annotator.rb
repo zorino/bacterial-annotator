@@ -67,11 +67,11 @@ class BacterialAnnotator
   def prepare_files_for_annotation
     puts "\nRunning Prodigal on your genome.."
     @fasta.run_prodigal @root, @outdir
+    puts "Prodigal done."
     if @with_refence_genome
       @refgenome.write_cds_to_file @outdir
-      puts "Successfully loaded #{@refgenome.gbk.definition} genomes"
+      puts "Successfully loaded #{@refgenome.gbk.definition}"
     end
-    puts "Prodigal done."
   end                           # end of method
 
   # run_alignment of reference genome proteins and the query
@@ -168,36 +168,46 @@ class BacterialAnnotator
 
     elsif @options.has_key? :remote_db	# from a remote DB
 
-      remotedb = @options[:remote_db]
-      valid = true
-      begin
-        puts "\nNCBI blast on #{remotedb} for foreign proteins"
-        ncbiblast = RemoteNCBI.new(remotedb,
-                                   remaining_cds_file,
-                                   "#{remaining_cds_file}.ncbiblast.#{remotedb}.xml")
-      rescue
-        valid = false
-      end
+      # do it by chunk to avoid NCBI CPU exceeding limit
+      cds_files = split_remaining_cds_file remaining_cds_file
+      @remotedb = @options[:remote_db]
 
-      # ncbi blast didn't worked out
-      if !valid
-        puts "Problem NCBI blast for foreign proteins"
-      else
-        ncbiblast.extract_blast_results
-        ncbiblast.aln_hits.each do |k,v|
-          contig_of_protein = k.split("_")[0..-2].join("_")
-          # @contig_annotations[contig_of_protein][k][:product] = v[:hits][0][:product]
-          if ! @contig_annotations.has_key? contig_of_protein
-            @contig_annotations[contig_of_protein] = {}
+      puts "\n# NCBI Blast on #{@remotedb}"
+
+      cds_files.each do |cds_file|
+
+        # remotedb = @options[:remote_db]
+        valid = true
+        begin
+          # puts "\nNCBI blast on #{@remotedb} for #{cds_file}"
+          ncbiblast = RemoteNCBI.new(@remotedb,
+                                     cds_file,
+                                     "#{cds_file}.#{@remotedb}.xml")
+        rescue
+          valid = false
+        end
+
+        # ncbi blast didn't worked out
+        if !valid
+          puts "Problem NCBI blast for foreign proteins"
+        else
+          ncbiblast.extract_blast_results
+          ncbiblast.aln_hits.each do |k,v|
+            contig_of_protein = k.split("_")[0..-2].join("_")
+            # @contig_annotations[contig_of_protein][k][:product] = v[:hits][0][:product]
+            if ! @contig_annotations.has_key? contig_of_protein
+              @contig_annotations[contig_of_protein] = {}
+            end
+            note = "correspond to gi:#{v[:hits][0][:gi]}"
+            if v[:hits][0][:org] != ""
+              note +=  " from #{v[:hits][0][:org]}"
+            end
+            @contig_annotations[contig_of_protein][k] = {product: v[:hits][0][:product],
+                                                         gene: nil,
+                                                         locustag: nil,
+                                                         note: note}
           end
-          note = "correspond to gi:#{v[:hits][0][:gi]}"
-          if v[:hits][0][:org] != ""
-            note +=  " from #{v[:hits][0][:org]}"
-          end
-          @contig_annotations[contig_of_protein][k] = {product: v[:hits][0][:product],
-                                                       gene: nil,
-                                                       locustag: nil,
-                                                       note: note}
+
         end
 
       end
@@ -353,6 +363,42 @@ class BacterialAnnotator
 
   end                           # end of method
 
-  private :dump_cds
+
+  # split fasta file to multiple fasta
+  def split_remaining_cds_file file
+
+    cds_files = []
+    outdir = "#{@outdir}/Protein-foreign.split"
+
+    Dir.mkdir(outdir) if ! Dir.exists? outdir
+
+    iter = 0
+    file_nb = 0
+    fout = File.open("#{outdir}/ProtForeign.#{file_nb}.fa", "w")
+    cds_files << "#{outdir}/ProtForeign.#{file_nb}.fa"
+
+    File.open(file, "r") do |fopen|
+      while l=fopen.gets
+        if l[0] == ">"
+          if iter > 50
+            fout.close
+            iter = 0
+            file_nb += 1
+            fout = File.open("#{outdir}/ProtForeign.#{file_nb}.fa", "w")
+            cds_files << "#{outdir}/ProtForeign.#{file_nb}.fa"
+          end
+          iter += 1
+        end
+        fout.write(l)
+      end
+    end
+
+    fout.close
+
+    cds_files
+
+  end                           # end of method
+
+  private :dump_cds, :split_remaining_cds_file
 
 end                             # end of class

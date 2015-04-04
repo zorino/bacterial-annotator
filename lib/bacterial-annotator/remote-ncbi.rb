@@ -32,8 +32,12 @@ class RemoteNCBI
     @outfile = outfile
     @resultURI = submit_blast url
 
-    @xmloutput = ""
-    @valid = validate_output
+    if @resultURI != ""
+      @xmloutput = ""
+      @valid = validate_output
+    else
+      @valid = false
+    end
 
   end                           # end of method
 
@@ -41,41 +45,56 @@ class RemoteNCBI
   # submit blast to ncbi
   def submit_blast ncbiURL
 
+    f = @seq_file.split("/")[-1]
+
     seq_fasta = File.read(@seq_file)
+
     a = Mechanize.new { |agent|
       agent.user_agent_alias = 'Linux Firefox'
       agent.ignore_bad_chunking = true
     }
 
-    resultURI = ""
+    toBreak = 0
+    requestID = ""
+    try = 1
 
-    a.get(ncbiURL) do |page|
+    while requestID == "" and try < 12
 
-      search = page.form_with(:name => 'searchForm') { |form|
-        form.textareas[0].value = File.read(@seq_file)
-        form.field_with(:name => 'DATABASE').value = @db
-        form.field_with(:name => 'MAX_NUM_SEQ').value = 10     
-      }.submit
+      begin
 
-      toBreak = 0
-      requestID = ""
-      search.parser.css('td').each do |td|
-        if toBreak == 1
-          requestID = td.text.gsub(" ","")
-          break
+        a.get(ncbiURL) do |page|
+
+          search = page.form_with(:name => 'searchForm') { |form|
+            form.textareas[0].value = File.read(@seq_file)
+            form.field_with(:name => 'DATABASE').value = @db
+            form.field_with(:name => 'MAX_NUM_SEQ').value = 10     
+          }.submit
+
+          search.parser.css('td').each do |td|
+            if toBreak == 1
+              requestID = td.text.gsub(" ","")
+              # puts "breaking because #{requestID}"
+              break
+            end
+            if td.text == "Request ID"
+              toBreak = 1
+            end
+          end
+
         end
-        if td.text == "Request ID"
-          toBreak = 1
-        end
+       
+      rescue
+        try += 1
+        puts "#{try} POST try for #{f}"
+        sleep 3
       end
-
-      resultURI = URI.parse("http://blast.ncbi.nlm.nih.gov/Blast.cgi?RESULTS_FILE=on&RID=#{requestID}&FORMAT_TYPE=XML&FORMAT_OBJECT=Alignment&CMD=Get")
-
-      puts URI.parse("http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&RID=#{requestID}")
 
     end
 
-    resultURI
+    uri_parsed = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&RID=#{requestID}"
+    puts "NCBI Blast for #{f}: #{uri_parsed}"
+
+    return URI.parse("http://blast.ncbi.nlm.nih.gov/Blast.cgi?RESULTS_FILE=on&RID=#{requestID}&FORMAT_TYPE=XML&FORMAT_OBJECT=Alignment&CMD=Get")
 
   end                           # end of method
 
@@ -86,10 +105,11 @@ class RemoteNCBI
     xmloutput = ""
     valid = true
     finish = false
+
     while valid and ! finish
+
       response = Net::HTTP.get_response(@resultURI)
       body = response.body.split("\n")
-
       if body[0] =~ /<?xml version=/
         xmloutput = body.join("\n")
         valid = true
@@ -106,7 +126,14 @@ class RemoteNCBI
           break if valid
         end
       end
-      sleep 3
+
+      case @db
+      when 'nr', 'refseq_protein'
+        sleep 30
+      when 'swissprot'
+        sleep 10
+      end
+
     end
 
     if finish
@@ -131,7 +158,7 @@ class RemoteNCBI
     @aln_hits = {}
 
     flat.each_entry do |report|
-      
+
       report.iterations.each do |query_it|
         prot_id = query_it.query_def.split(" ")[0]
         query_it.hits.each do |hit|
@@ -139,7 +166,9 @@ class RemoteNCBI
             p_identity = hit.identity.to_f/hit.target_len.to_f*100
             if p_identity > 70
               # cleaning product definition
-              product = hit.definition.gsub("MULTISPECIES: ","").
+              definition_clean = hit.definition.split(">")[0]
+              product = definition_clean.
+                        gsub("MULTISPECIES: ","").
                         gsub(/ \[.*\]/,"").
                         gsub("RecName: Full=","").
                         split("; AltName")[0].
@@ -147,8 +176,9 @@ class RemoteNCBI
                         split(" ; Short=")[0]
               gi = hit.hit_id.to_s.split("|")[1]
               organism = ""
-              if ! hit.definition[/\[.*\]/].nil?
-                organism = hit.definition[/\[.*\]/].gsub("[","").gsub("]","")
+              definition_clean = hit.definition.split(">")[0]
+              if ! definition_clean[/\[.*\]/].nil?                
+                organism = definition_clean[/\[.*\]/].gsub("[","").gsub("]","")
               end
               @aln_hits[prot_id] = {
                 pId: hit.identity.to_f/hit.target_len.to_f*100,
