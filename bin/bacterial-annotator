@@ -29,7 +29,7 @@ bacterial-annotator [OPTIONS]
   --refgenome/-g        <GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
   --guessRef		Will guess the best reference genome to use for the annotation.
 
-  --ncbi-remotedb	<remote_database> [nr|refseq|swissprot]
+  --remotedb		<remote_database> [nr|refseq|swissprot]
 			Complete the annotation of remaining CDS with a remote NCBI BLAST
 			Can be very slow, better to use an external database !
 
