@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'bacterial-annotator'
-  s.version     = '0.0.1'
-  s.date        = '2015-02-24'
+  s.version     = '0.1.0'
+  s.date        = '2015-04-17'
   s.summary     = "Bacterial Annotator"
-  s.description = "Annotate bacterial genomes from a draft or complete genome based on a reference genome."
+  s.description = "GEM to annotate bacterial genome sequence based on a reference genome and complete the annotation with an external database or a remote database."
   s.authors     = ["Maxime Deraspe"]
   s.email       = 'maxime@deraspe.net'
   s.files       = ["lib/bacterial-annotator.rb",

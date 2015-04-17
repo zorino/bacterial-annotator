@@ -4,4 +4,4 @@ Ecoli-RayAssembly-Annotation-REF+NCBIremote
 Ecoli-RayAssembly-Annotation-REF+NRremote
 remote-blast
 prot2003-2014.fa
-bacterial-annotator-0.0.1.gem
+bacterial-annotator-*.gem
