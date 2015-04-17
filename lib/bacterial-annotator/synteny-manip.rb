@@ -12,16 +12,17 @@ class SyntenyManip
 
   attr_reader :query_file, :subject_file, :aln_hits
 
-  def initialize query_file, subject_file, name
+  def initialize query_file, subject_file, name, pidentity
     @query_file = query_file
     @subject_file = subject_file
     @name = name
+    @pidentity = pidentity
     @aln_file = nil
   end                           # end of initialize
 
   # run blat on proteins
   def run_blat root, outdir
-    system("#{root}/blat.linux -out=blast8 -minIdentity=70 -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
+    system("#{root}/blat.linux -out=blast8 -minIdentity=#{@pidentity} -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
     @aln_file = "#{outdir}/#{@name}.blat8.tsv"
     # extract_hits 
   end                           # end of method
@@ -41,6 +42,7 @@ class SyntenyManip
           hit = lA[1].chomp.split("|")[1]
         end
         if ! @aln_hits.has_key? key
+          next if lA[2].to_f < @pidentity
           @aln_hits[key] = {
             pId: lA[2].to_f,
             length: lA[3].to_i,

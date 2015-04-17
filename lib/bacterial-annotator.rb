@@ -24,12 +24,9 @@ class BacterialAnnotator
     @options = options
     @outdir = @options[:outdir]
 
-
-    if @options.has_key? :minlength
-      @minlength = @options[:minlength].to_i
-    else
-      @minlength = 500
-    end
+    @minlength = @options[:minlength].to_i
+    @pidentity = @options[:pidentity].to_f
+    @pidentity = @pidentity * 100 if @pidentity < 1.00
 
     if File.exists? (@outdir)
       if ! options.has_key? :force
@@ -41,7 +38,7 @@ class BacterialAnnotator
     end
     Dir.mkdir(@outdir)
 
-    @fasta = FastaManip.new(@options[:input])
+    @fasta = FastaManip.new(@options[:input], @options[:meta])
 
     @with_refence_genome = false
     if @options.has_key? :refgenome
@@ -80,7 +77,7 @@ class BacterialAnnotator
     # process reference genome synteny
     if @with_refence_genome        # Annotation with the Reference Genome
 
-      @prot_synteny = SyntenyManip.new(@fasta.prodigal_files[:proteins], @refgenome.cds_file, "Prot-Ref")
+      @prot_synteny = SyntenyManip.new(@fasta.prodigal_files[:proteins], @refgenome.cds_file, "Prot-Ref", @pidentity)
       puts "\nRunning BLAT alignment with Reference Genome.."
       @prot_synteny.run_blat @root, @outdir
       @prot_synteny.extract_hits :refgenome
@@ -136,7 +133,7 @@ class BacterialAnnotator
       db_file = @options[:external_db]
       ref_cds = extract_externaldb_prot_info db_file
 
-      externaldb_synteny = SyntenyManip.new(remaining_cds_file, db_file, "Prot-ExternalDB")
+      externaldb_synteny = SyntenyManip.new(remaining_cds_file, db_file, "Prot-ExternalDB", @pidentity)
       puts "\nRunning BLAT alignment with External Database.."
       externaldb_synteny.run_blat @root, @outdir
       externaldb_synteny.extract_hits :externaldb
@@ -182,7 +179,8 @@ class BacterialAnnotator
           # puts "\nNCBI blast on #{@remotedb} for #{cds_file}"
           ncbiblast = RemoteNCBI.new(@remotedb,
                                      cds_file,
-                                     "#{cds_file}.#{@remotedb}.xml")
+                                     "#{cds_file}.#{@remotedb}.xml",
+                                     @pidentity)
         rescue
           valid = false
         end

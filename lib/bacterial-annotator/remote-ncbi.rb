@@ -15,7 +15,7 @@ class RemoteNCBI
   attr_reader :aln_hits, :db, :xmloutput
 
   # initialize stuff for a remote ncbi run
-  def initialize db, seq_file, outfile
+  def initialize db, seq_file, outfile, pidentity
 
     if ! ["swissprot", "refseq_protein", "nr"].include? db
       @db = "bad database"
@@ -31,6 +31,7 @@ class RemoteNCBI
     @seq_file = seq_file
     @outfile = outfile
     @resultURI = submit_blast url
+    @pidentity = pidentity
 
     if @resultURI != ""
       @xmloutput = ""
@@ -164,7 +165,7 @@ class RemoteNCBI
         query_it.hits.each do |hit|
           if ! @aln_hits.has_key? prot_id
             p_identity = hit.identity.to_f/hit.target_len.to_f*100
-            if p_identity > 70
+            if p_identity >= @pidentity
               # cleaning product definition
               definition_clean = hit.definition.split(">")[0]
               product = definition_clean.

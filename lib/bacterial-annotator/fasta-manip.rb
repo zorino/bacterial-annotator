@@ -13,10 +13,11 @@ class FastaManip
   attr_reader :fasta_flat, :fasta_file, :prodigal_files
 
   # Initialize fasta holder
-  def initialize fasta_file
+  def initialize fasta_file, meta
 
     @fasta_file = fasta_file
     @fasta_flat = Bio::FlatFile.auto(@fasta_file)
+    @meta = meta
     @prodigal_files = nil
     @single_fasta = nil
 
@@ -30,7 +31,12 @@ class FastaManip
   def run_prodigal root, outdir
     @prodigal_files = {}
     Dir.mkdir "#{outdir}" if ! Dir.exists? "#{outdir}"
-    system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
+    if @meta
+      system("#{root}/prodigal.linux -p meta -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
+    else
+      system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
+    end
+
     @prodigal_files = {multiGBK: "#{outdir}/Genbanks.gbk",
                        contigs: [],
                        contigs_length: [],

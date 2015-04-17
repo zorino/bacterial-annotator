@@ -21,13 +21,15 @@ bacterial-annotator [OPTIONS]
 [OPTIONS]
 
 // IO
+
   --input/-i		<fasta_file>	Provide the fasta file to annotate
   --outdir/-o		<outdir>	Output directory [default=BAnnotation]
   --force/-f		Force to overwrite the output directory
 
 // Dataset
+
   --refgenome/-g        <GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
-  --guessRef		Will guess the best reference genome to use for the annotation.
+  --guessref		Will guess the best reference genome to use for the annotation.
 
   --remotedb		<remote_database> [nr|refseq|swissprot]
 			Complete the annotation of remaining CDS with a remote NCBI BLAST
@@ -40,9 +42,12 @@ bacterial-annotator [OPTIONS]
 			>sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
 
 // Other options
-  --minlength		Minimum contig length for annotation [default=500]
-  --gff			Will also generate gff annotation files [off by default]
 
+  --pidentity		Minimum percentage identity to incorporate a CDS annotation [default=0.7]
+  --minlength		Minimum contig length for annotation [default=500]
+
+  --meta		Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
+  --gff			Will also generate gff annotation files [off by default]
 
   --help/-h		Print this !
 OEM
@@ -56,7 +61,10 @@ def parseOptions
 
   # default options
   options[:outdir] = "BAnnotation"
-
+  options[:pidentity] = 70
+  options[:minlength] = 500
+  options[:meta] = 0
+  
   while x = ARGV.shift
 
     case x.downcase
@@ -70,6 +78,12 @@ def parseOptions
       options[:force] = 1
     when "--gff"
       options[:gff] = 1
+    when "--minlength"
+      options[:minlength] = ARGV.shift
+    when "--pidentity"
+      options[:pidentity] = ARGV.shift
+    when "--meta"
+      options[:meta] = 1
     when "--remotedb"
       options[:remote_db] = ARGV.shift
     when "--externaldb"
@@ -99,11 +113,12 @@ if ARGV.size > 1
     abort "exiting blat is missing"
   end
 
+  # Check Options 
   if ! options.has_key? :refgenome and ! options.has_key? :remote_db and ! options.has_key? :external_db
     puts "You didn't provide a reference genome or a database for the annotation !"
   elsif ! options.has_key? :input
     puts "You didn't provide a fasta file to annotate !"
-  elsif 
+  elsif
     puts ""
   end
 
