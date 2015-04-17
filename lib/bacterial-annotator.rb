@@ -382,7 +382,7 @@ class BacterialAnnotator
     File.open(file, "r") do |fopen|
       while l=fopen.gets
         if l[0] == ">"
-          if iter > 29
+          if iter > 19
             fout.close
             iter = 0
             file_nb += 1
