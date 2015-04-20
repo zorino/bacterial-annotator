@@ -2,6 +2,7 @@ launch-ecoli-annotation_REF+ExternalDB.sh
 Ecoli-RayAssembly-Annotation-REF+ExternalDB
 Ecoli-RayAssembly-Annotation-REF+NCBIremote
 Ecoli-RayAssembly-Annotation-REF+NRremote
+Ecoli-RayAssembly-Annotation
 remote-blast
 prot2003-2014.fa
 bacterial-annotator-*.gem
