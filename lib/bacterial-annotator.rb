@@ -228,7 +228,9 @@ class BacterialAnnotator
     @contig_annotations.each do |contig, contig_prot_annotations|
       gbk_path = @fasta.prodigal_files[:gbk_path]
       gbk_to_annotate = GenbankManip.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
-      gbk_to_annotate.add_annotation contig_prot_annotations, gbk_path, 0, @refgenome.gbk.locus
+      reference_locus = nil
+      reference_locus = @refgenome.gbk.locus if @with_refence_genome
+      gbk_to_annotate.add_annotation contig_prot_annotations, gbk_path, 0, reference_locus
     end
 
   end                           # end of method
