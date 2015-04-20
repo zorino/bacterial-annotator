@@ -174,7 +174,7 @@ class RemoteNCBI
                         gsub("RecName: Full=","").
                         split("; AltName")[0].
                         split("; Flags:")[0].
-                        split(" ; Short=")[0]
+                        split(" ; Short=")[0].strip
               gi = hit.hit_id.to_s.split("|")[1]
               organism = ""
               definition_clean = hit.definition.split(">")[0]
@@ -182,7 +182,7 @@ class RemoteNCBI
                 organism = definition_clean[/\[.*\]/].gsub("[","").gsub("]","")
               end
               @aln_hits[prot_id] = {
-                pId: hit.identity.to_f/hit.target_len.to_f*100,
+                pId: (hit.identity.to_f/hit.target_len.to_f*100).round(2),
                 length: hit.target_len.to_i,
                 evalue: hit.evalue,
                 score: hit.bit_score.to_f,

@@ -44,7 +44,7 @@ class SyntenyManip
         if ! @aln_hits.has_key? key
           next if lA[2].to_f < @pidentity
           @aln_hits[key] = {
-            pId: lA[2].to_f,
+            pId: lA[2].to_f.round(2),
             length: lA[3].to_i,
             evalue: lA[10],
             score: lA[11].to_f,
@@ -52,7 +52,7 @@ class SyntenyManip
           }
         elsif lA[11].to_f > @aln_hits[key][:score]
           @aln_hits[key] = {
-            pId: lA[2].to_f,
+            pId: lA[2].to_f.round(2),
             length: lA[3].to_i,
             evalue: lA[10],
             score: lA[11].to_f,
@@ -101,6 +101,7 @@ class SyntenyManip
         h = @aln_hits[p][:hits][hit_index]
         hit = ref_cds[h]
         annotations[p] = hit
+        annotations[p][:pId] = @aln_hits[p][:pId]
         i+=1
 
       else

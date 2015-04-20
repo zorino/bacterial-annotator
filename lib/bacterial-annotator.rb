@@ -147,7 +147,7 @@ class BacterialAnnotator
 
         hit_gi = v[:hits][0]
 
-        note = "correspond to gi:#{hit_gi}"
+        note = "Protein homology (#{v[:pId]}% identity) with gi:#{hit_gi}"
 
         # p v
         # p ref_cds[hit_gi]
@@ -200,7 +200,9 @@ class BacterialAnnotator
             if ! @contig_annotations.has_key? contig_of_protein
               @contig_annotations[contig_of_protein] = {}
             end
-            note = "correspond to gi:#{v[:hits][0][:gi]}"
+
+            note = "Protein homology (#{v[:pId]}% identity) with gi:#{v[:hits][0][:gi]}"
+            # note = "correspond to gi:#{v[:hits][0][:gi]}"
             if v[:hits][0][:org] != ""
               note +=  " from #{v[:hits][0][:org]}"
             end
@@ -226,7 +228,7 @@ class BacterialAnnotator
     @contig_annotations.each do |contig, contig_prot_annotations|
       gbk_path = @fasta.prodigal_files[:gbk_path]
       gbk_to_annotate = GenbankManip.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
-      gbk_to_annotate.add_annotation contig_prot_annotations, gbk_path, 0
+      gbk_to_annotate.add_annotation contig_prot_annotations, gbk_path, 0, @refgenome.gbk.locus
     end
 
   end                           # end of method

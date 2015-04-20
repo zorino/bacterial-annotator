@@ -102,7 +102,7 @@ class GenbankManip
 
 
   # add annotation to a genbank file produced by prodigal
-  def add_annotation annotations, outdir, mode
+  def add_annotation annotations, outdir, mode, reference_locus
 
     nb_of_added_ft = 0
     i = 0
@@ -134,6 +134,7 @@ class GenbankManip
         gene = hit[:gene]
         product = hit[:product]
         note = hit[:note]
+        pId = hit[:pId]
 
         if gene != nil
           qGene = Bio::Feature::Qualifier.new('gene', gene)
@@ -146,7 +147,7 @@ class GenbankManip
         end
 
         if locus != nil
-          qNote = Bio::Feature::Qualifier.new('note', "correspond to #{locus} locus")
+          qNote = Bio::Feature::Qualifier.new('note', "correspond to #{locus} locus (#{pId}% identity) from #{reference_locus.entry_id}")
           ftArray.push(qNote)
         end
 
