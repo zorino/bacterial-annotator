@@ -16,15 +16,22 @@ ROOT_path = File.dirname(__FILE__)
 def installProdigal
 
   begin
-    resp = open("https://github.com/hyattpd/Prodigal/releases/download/v2.6.2/prodigal.linux")
-    open("#{ROOT_path}/prodigal.linux", "wb") do |file|
+    resp = open("https://github.com/hyattpd/Prodigal/archive/v2.6.2.tar.gz")
+    open("#{ROOT_path}/v2.6.2.tar.gz", "wb") do |file|
       file.write(resp.read)
     end
+    Dir.chdir("#{ROOT_path}/")
+    `tar xvf v2.6.2.tar.gz; rm v2.6.2.tar.gz`
+    Dir.chdir("#{ROOT_path}/Prodigal-2.6.2")
+    `make`
+    `cp #{ROOT_path}/Prodigal-2.6.2/prodigal #{ROOT_path}/prodigal.linux`
     File.chmod(0755, "#{ROOT_path}/prodigal.linux")
+    # Dir.chir("#{ROOT_path}")
+    # File.chmod(0755, "#{ROOT_path}/prodigal.linux")
   rescue
     abort "Problem installing Prodigal, aborting"
   end
-
+  
 end
 
 
