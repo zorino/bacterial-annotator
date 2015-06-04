@@ -42,11 +42,7 @@ if ! File.exists? "#{ROOT_path}/prodigal.linux"
   puts "See https://github.com/hyattpd/Prodigal"
   puts "The Licence is GPLv3"
   installProdigal
-  puts "Prodigal successfully installed"
+  puts "Prodigal successfully installed in #{ROOT_path}/Prodigal-2.6.2"
   puts ""
 
 end
-
-# Main
-# Dir.mkdir("Prodigal-Output") if ! File.exists? "Prodigal-Output"
-# system("#{ROOT_path}/prodigal.linux -a Prodigal-Output/Proteins.fa -d Prodigal-Output/Genes.fa -o Prodigal-Output/Genbanks.gbk -i #{ARGV[0]}")

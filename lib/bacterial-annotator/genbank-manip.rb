@@ -106,11 +106,8 @@ class GenbankManip
 
     nb_of_added_ft = 0
     i = 0
-    contig = @gbk.definition.split(";")[2].
-             gsub("seqhdr","").
-             delete("\"").
-             delete("=").
-             split(" ")[0]
+
+    contig = @gbk.definition
 
     # iterate through 
     @gbk.features.each_with_index do |cds, ft_index|
@@ -119,6 +116,7 @@ class GenbankManip
 
       if mode == 0
         ftArray = []
+        cds.qualifiers = []
       else
         ftArray = cds.qualifiers
       end

@@ -86,13 +86,13 @@ class FastaManip
           day = "%02d" % date.day
           year = date.year
           locus = "LOCUS       #{file_name}#{spacer}#{seq_length.to_s} bp    DNA     linear   BCT #{day}-#{month}-#{year}\n"
+          locus += "DEFINITION  #{file_name}\n"
           fopen = File.open("#{outdir}/single-genbank/#{file_name}.gbk", "w")
           fopen.write(locus)
-          fopen.write(l)
         elsif l[0..1] == "//"
           fopen.write(outseq)
           fopen.close
-        else
+        elsif ! l.include? "                     /note="
           fopen.write(l)
         end
       end
