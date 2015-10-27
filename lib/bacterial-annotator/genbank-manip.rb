@@ -150,7 +150,7 @@ class GenbankManip
 
         # check if there is a reference genome.. reference_locus shouldn't be nil in that case
         if locus != nil
-          qNote = Bio::Feature::Qualifier.new('note', "correspond to #{locus} locus (#{pId}% identity) from #{reference_locus.entry_id}")
+          qNote = Bio::Feature::Qualifier.new('note', "corresponds to #{locus} locus (#{pId}% identity) from #{reference_locus.entry_id}")
           ftArray.push(qNote)
         end
 
