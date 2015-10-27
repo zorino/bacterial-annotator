@@ -57,14 +57,18 @@ class GenbankManip
         product = ftH["product"] if !ftH["product"].nil?
         protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
         locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
-        dna = get_DNA(ft,@bioseq)
         if ftH.has_key? "translation"
           pep = ftH["translation"][0] if !ftH["translation"].nil?
         else
-          pep = ""
+          dna = get_DNA(ft,@bioseq)
+          pep = dna.translate
         end
 
         pepBioSeq = Bio::Sequence.auto(pep)
+
+        if protId.strip == ""
+          protId = locustag          
+        end
 
         @coding_seq[protId] = {location: loc,
                                locustag: locustag,
