@@ -64,7 +64,7 @@ def parseOptions
   options[:pidentity] = 70
   options[:minlength] = 500
   options[:meta] = 0
-  
+
   while x = ARGV.shift
 
     case x.downcase
@@ -113,7 +113,7 @@ if ARGV.size > 1
     abort "exiting blat is missing"
   end
 
-  # Check Options 
+  # Check Options
   if ! options.has_key? :refgenome and ! options.has_key? :remote_db and ! options.has_key? :external_db
     puts "You didn't provide a reference genome or a database for the annotation !"
   elsif ! options.has_key? :input

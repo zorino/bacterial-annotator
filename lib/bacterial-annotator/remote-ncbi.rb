@@ -83,7 +83,7 @@ class RemoteNCBI
           end
 
         end
-       
+
       rescue
         try += 1
         puts "#{try} POST try for #{f}"

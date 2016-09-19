@@ -61,7 +61,7 @@ class FastaManip
       file_name = seq.definition.chomp.split(" ")[0]
       @prodigal_files[:contigs] << "#{file_name}"
       @prodigal_files[:contigs_length] << seq.seq.length
-      File.open("#{outdir}/single-fasta/#{file_name}.fasta", "w") do |fwrite| 
+      File.open("#{outdir}/single-fasta/#{file_name}.fasta", "w") do |fwrite|
         fwrite.write(seq)
       end
       @single_fasta[file_name] = seq
@@ -132,7 +132,7 @@ class FastaManip
       end
 
     end
-    
+
     return outseq, sequence.length
 
   end

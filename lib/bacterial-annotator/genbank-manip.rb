@@ -25,7 +25,7 @@ class GenbankManip
     flat_gbk = Bio::FlatFile.auto(@gbk_file)
 
     # Check if gbk is valid
-    if flat_gbk.dbclass != Bio::GenBank    
+    if flat_gbk.dbclass != Bio::GenBank
       abort "Aborting : The input #{@gbk_file} is not a valid genbank file !"
     else
       @gbk = flat_gbk.next_entry
@@ -67,7 +67,7 @@ class GenbankManip
         pepBioSeq = Bio::Sequence.auto(pep)
 
         if protId.strip == ""
-          protId = locustag          
+          protId = locustag
         end
 
         @coding_seq[protId] = {location: loc,
@@ -113,7 +113,7 @@ class GenbankManip
 
     contig = @gbk.definition
 
-    # iterate through 
+    # iterate through
     @gbk.features.each_with_index do |cds, ft_index|
 
       next if cds.feature != "CDS"
@@ -180,7 +180,7 @@ class GenbankManip
   ###################
   # Private Methods #
   ###################
-  
+
   # Fct: Get dna sequence
   def get_DNA (cds, seq)
     loc = cds.locations
@@ -208,5 +208,5 @@ class GenbankManip
 
   private :fetch_ncbi_genome, :get_DNA
 
-  
+
 end                             # end of Class

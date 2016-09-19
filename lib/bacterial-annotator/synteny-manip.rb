@@ -24,7 +24,7 @@ class SyntenyManip
   def run_blat root, outdir
     system("#{root}/blat.linux -out=blast8 -minIdentity=#{@pidentity} -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
     @aln_file = "#{outdir}/#{@name}.blat8.tsv"
-    # extract_hits 
+    # extract_hits
   end                           # end of method
 
   # Extract Hit from blast8 file and save it in hash
