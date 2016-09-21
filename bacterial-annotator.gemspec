@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
                    "lib/bacterial-annotator/synteny-manip.rb",
                    "lib/bacterial-annotator/remote-ncbi.rb"]
   s.homepage    = 'http://rubygems.org/gems/bacterial-annotator'
-  s.license       = 'GPLv3'
+  s.license       = 'GPL-3.0'
   s.require_path = 'lib'
   s.bindir = "bin"
   s.executables = [
