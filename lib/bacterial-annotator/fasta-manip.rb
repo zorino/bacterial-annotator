@@ -20,6 +20,7 @@ class FastaManip
     @meta = meta
     @prodigal_files = nil
     @single_fasta = nil
+    @seq_info = nil
 
     if @fasta_flat.dbclass != Bio::FastaFormat
       abort "Aborting : The input sequence is not a fasta file !"
@@ -138,11 +139,13 @@ class FastaManip
   end
 
 
-  # extract protein and gene names
+  # extract protein and gene names from prodigal... with contig numbering
   def extract_cds_names
 
     prot_ids = {}
+    prot_length = {}
     flatfile = Bio::FlatFile.auto(@prodigal_files[:proteins])
+
     flatfile.each_entry do |entry|
       prot_id = entry.definition.split(" ")[0]
       contig = prot_id.split("_")[0..-2].join("_")
@@ -150,6 +153,10 @@ class FastaManip
         prot_ids[contig] = []
       end
       prot_ids[contig] << prot_id
+
+      # puts "Prodigal length : " + entry.seq.length.to_s
+      prot_length[prot_id] = entry.seq.length-1 # minus the stop codon
+
     end
 
     prot_ids.each do |k,prot_array|
@@ -157,9 +164,9 @@ class FastaManip
     end
 
     @prodigal_files[:prot_ids_by_contig] = prot_ids
+    @prodigal_files[:prot_ids_length] = prot_length
 
   end
-
 
   private :extract_cds_names # :split_fasta, :split_genbank
 

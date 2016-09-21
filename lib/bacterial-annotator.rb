@@ -106,7 +106,46 @@ class BacterialAnnotator
       # dump foreign proteins to file
       foreign_cds_file = dump_cds
 
-    else
+      # Iterate over each Ref protein and print syntheny
+      synteny_file = File.open("#{@outdir}/Prot-Synteny.tsv","w")
+      synteny_file.write("RefLocusTag\tRefProtID\tRefLength\tRefCoverage\tIdentity\tQueryGene\tQueryLength\tQueryCoverage\n")
+      ref_annotated = {}
+      @contig_annotations.each do |contig,prot_annotations|
+        prot_annotations.each do |key,prot|
+          # p key
+          # p prot
+          ref_annotated[prot[:protId]] = {key: key, length: prot[:length], pId: prot[:pId]} if prot != nil
+        end
+      end
+
+      @refgenome.coding_seq.each do |ref_k, ref_v|
+        gene = ""
+        coverage_ref = ""
+        coverage_query = ""
+        query_length = ""
+        pId = ""
+        if ref_annotated[ref_v[:protId]] != nil
+          gene = ref_annotated[ref_v[:protId]][:key]
+          coverage_ref = (ref_annotated[ref_v[:protId]][:length].to_f/ref_v[:bioseq].seq.length.to_f).round(2)
+          query_length = @fasta.prodigal_files[:prot_ids_length][gene]
+          coverage_query = (ref_annotated[ref_v[:protId]][:length].to_f/query_length.to_f).round(2)
+          pId = ref_annotated[ref_v[:protId]][:pId]
+        end
+
+        synteny_file.write(ref_v[:protId])
+        synteny_file.write("\t"+ref_v[:locustag])
+        synteny_file.write("\t"+ref_v[:bioseq].seq.length.to_s)
+        synteny_file.write("\t"+coverage_ref.to_s)
+        synteny_file.write("\t"+pId.to_s)
+        synteny_file.write("\t"+gene)
+        synteny_file.write("\t"+query_length.to_s)
+        synteny_file.write("\t"+coverage_query.to_s)
+        synteny_file.write("\n")
+
+      end
+      synteny_file.close
+
+    else                        # no reference genome
 
       # no reference genome .. will process all the CDS
       foreign_cds_file = @fasta.prodigal_files[:proteins]
@@ -122,12 +161,14 @@ class BacterialAnnotator
     puts "\nPrinting Statistics.."
     print_stats "#{@outdir}/Annotation-Stats.txt"
 
+
   end                           # end of method
 
 
   # Finishing the annotation of the remaining CDS
   def finish_annotation remaining_cds_file
 
+    # only finish the annotation with an external DB
     if @options.has_key? :external_db	# from an external DB
 
       db_file = @options[:external_db]

@@ -70,7 +70,8 @@ class GenbankManip
           protId = locustag
         end
 
-        @coding_seq[protId] = {location: loc,
+        @coding_seq[protId] = {protId: protId,
+                               location: loc,
                                locustag: locustag,
                                gene: gene[0],
                                product: product[0],

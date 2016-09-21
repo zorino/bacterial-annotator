@@ -45,21 +45,28 @@ class SyntenyManip
           next if lA[2].to_f < @pidentity
           @aln_hits[key] = {
             pId: lA[2].to_f.round(2),
-            length: lA[3].to_i,
             evalue: lA[10],
             score: lA[11].to_f,
-            hits: [hit]
+            hits: [hit],
+            length: [lA[3].to_i],
+            query_location: [[lA[6].to_i,lA[7].to_i]],
+            subject_location: [[lA[8].to_i,lA[9].to_i]]
           }
         elsif lA[11].to_f > @aln_hits[key][:score]
           @aln_hits[key] = {
             pId: lA[2].to_f.round(2),
-            length: lA[3].to_i,
             evalue: lA[10],
             score: lA[11].to_f,
-            hits: [hit]
+            hits: [hit],
+            length: [lA[3].to_i],
+            query_location: [[lA[6].to_i,lA[7].to_i]],
+            subject_location: [[lA[8].to_i,lA[9].to_i]]
           }
         elsif lA[11].to_f == @aln_hits[key][:score]
           @aln_hits[key][:hits] << hit
+          @aln_hits[key][:length] << lA[3].to_i
+          @aln_hits[key][:query_location] << [lA[6].to_i,lA[7].to_i]
+          @aln_hits[key][:subject_location] << [lA[8].to_i,lA[9].to_i]
         end
       end
     end
@@ -102,6 +109,7 @@ class SyntenyManip
         hit = ref_cds[h]
         annotations[p] = hit
         annotations[p][:pId] = @aln_hits[p][:pId]
+        annotations[p][:length] = @aln_hits[p][:length][hit_index]
         i+=1
 
       else
