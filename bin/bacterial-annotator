@@ -16,18 +16,26 @@ def usage
 
   print <<OEM
 
-bacterial-annotator [OPTIONS]
+bacterial-annotator [annotate | compare] [OPTIONS]
 
-[OPTIONS]
+# Choose either to annotate a genome or compare several genome annotations
+
+  annotate  [OPTIONS] .. see annotate [OPTIONS]
+
+  compare   [annotation directories]*
+            The annotations to compared need to be done with the same reference genome !
+
+  --help/-h		Print this !
+
+
+annotate [OPTIONS]
 
 // IO
-
   --input/-i		<fasta_file>	Provide the fasta file to annotate
   --outdir/-o		<outdir>	Output directory [default=BAnnotation]
   --force/-f		Force to overwrite the output directory
 
 // Dataset
-
   --refgenome/-g        <GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
   --guessref		Will guess the best reference genome to use for the annotation.
 
@@ -42,20 +50,19 @@ bacterial-annotator [OPTIONS]
 			>sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
 
 // Other options
-
   --pidentity		Minimum percentage identity to incorporate a CDS annotation [default=0.7]
   --minlength		Minimum contig length for annotation [default=500]
 
   --meta		Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
   --gff			Will also generate gff annotation files [off by default]
 
-  --help/-h		Print this !
+
 OEM
 
 end
 
 # Parse the Options given on the CLI
-def parseOptions
+def parseOptions_annotate
 
   options = {}
 
@@ -103,7 +110,23 @@ end
 if ARGV.size > 1
 
   ROOT = File.dirname(__FILE__)
-  options = parseOptions
+
+  options = {}
+  genomes_list = []
+
+  if ARGV[0] == "annotate"
+    ARGV.shift
+    options = parseOptions_annotate
+  elsif ARGV[0] == "compare"
+    ARGV.shift
+    while x = ARGV.shift
+      genomes_list << x
+    end
+  else
+    usage
+    abort
+  end
+
 
   # Check for 3rd party dependencies : Prodigal and Blat
   system("ba_prodigal")
