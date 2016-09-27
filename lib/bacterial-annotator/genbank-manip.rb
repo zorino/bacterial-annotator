@@ -57,14 +57,18 @@ class GenbankManip
         product = ftH["product"] if !ftH["product"].nil?
         protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
         locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
-        if ftH.has_key? "translation"
-          pep = ftH["translation"][0] if !ftH["translation"].nil?
-        else
-          dna = get_DNA(ft,@bioseq)
-          pep = dna.translate
-        end
 
+        # if ftH.has_key? "translation"
+        #   pep = ftH["translation"][0] if !ftH["translation"].nil?
+        # else
+        #   dna = get_DNA(ft,@bioseq)
+        #   pep = dna.translate
+        # end
+
+        dna = get_DNA(ft,@bioseq)
+        pep = dna.translate
         pepBioSeq = Bio::Sequence.auto(pep)
+        dnaBioSeq = Bio::Sequence.auto(dna)
 
         if protId.strip == ""
           protId = locustag
@@ -75,7 +79,8 @@ class GenbankManip
                                locustag: locustag,
                                gene: gene[0],
                                product: product[0],
-                               bioseq: pepBioSeq }
+                               bioseq: pepBioSeq,
+                               bioseq_gene: dnaBioSeq}
       end
 
     end
@@ -90,16 +95,22 @@ class GenbankManip
   def write_cds_to_file outdir
 
     cds_file = "#{@gbk.accession}.pep"
+    dna_file = "#{@gbk.accession}.dna"
+
     if @coding_seq == nil
       get_cds
     end
 
+    dna_out = File.open("#{outdir}/#{dna_file}", "w")
     File.open("#{outdir}/#{cds_file}", "w") do |fwrite|
       @coding_seq.each_key do |k|
         seqout = @coding_seq[k][:bioseq].output_fasta("#{k}",60)
+        seqout_dna = @coding_seq[k][:bioseq_gene].output_fasta("#{k}",60)
         fwrite.write(seqout)
+        dna_out.write(seqout_dna)
       end
     end
+    dna_out.close
 
     @cds_file = "#{outdir}/" + cds_file
 
