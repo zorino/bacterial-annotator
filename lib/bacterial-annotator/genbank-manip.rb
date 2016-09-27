@@ -213,7 +213,7 @@ class GenbankManip
     Bio::NCBI.default_email = 'default@default.com'
     ncbi = Bio::NCBI::REST.new
     genbankstring = ncbi.efetch(refgenome_id, {"db"=>'nucleotide', "rettype"=>'gb'})
-    File.open("#{outdir}/#{refgenome_id}.gbk", "w") do |f| 
+    File.open("#{outdir}/#{refgenome_id}.gbk", "w") do |f|
       f.write(genbankstring)
     end
   end
