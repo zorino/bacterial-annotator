@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maxime@deraspe.net
+# review:  	
+# date:    	15-02-24
+# version: 	0.01
+# licence:  	
+
+require 'open-uri'
+
+ROOT_path = File.dirname(__FILE__)
+# mafft_url = http://mafft.cbrc.jp/alignment/software/mafft-7.222-without-extensions-src.tgz
+# Install MAFFT on the user system
+def installMafft
+
+  begin
+    resp = open("http://mafft.cbrc.jp/alignment/software/mafft-7.222-without-extensions-src.tgz")
+    open("#{ROOT_path}/mafft-7.222-without-extensions-src.tgz", "wb") do |file|
+      file.write(resp.read)
+    end
+    Dir.chdir("#{ROOT_path}/")
+    `tar xvf mafft-7.222-without-extensions-src.tgz`
+    Dir.chdir("#{ROOT_path}/mafft-7.222-without-extensions/core")
+    `make`
+    `make install PREFIX=$(pwd -P)/../`
+    `echo '#! /bin/sh' > #{ROOT_path}/mafft.linux`
+    `echo export MAFFT_BINARIES=$(pwd -P)/../binaries >> #{ROOT_path}/mafft.linux`
+    `tail -n +2 #{ROOT_path}/mafft-7.222-without-extensions/bin/mafft >> #{ROOT_path}/mafft.linux`
+    File.chmod(0755, "#{ROOT_path}/mafft.linux")
+  rescue
+    abort "Problem in stalling MAFFT, aborting"
+  end
+
+end
+
+
+# Install prodigal if not already install
+if ! File.exists? "#{ROOT_path}/mafft.linux"
+
+  puts "Installing MAFFT 7.222 the aligner.."
+  puts "See http://mafft.cbrc.jp/alignment/software/"
+  puts "License BSD : http://mafft.cbrc.jp/alignment/software/license.txt"
+  installMafft
+  puts "MAFFT successfully installed in #{ROOT_path}/mafft-7.222-without-extensions"
+  puts ""
+
+end

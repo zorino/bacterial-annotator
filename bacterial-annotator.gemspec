@@ -6,7 +6,8 @@ Gem::Specification.new do |s|
   s.description = "GEM to annotate bacterial genome sequence based on a reference genome and complete the annotation with an external database or a remote database."
   s.authors     = ["Maxime Deraspe"]
   s.email       = 'maxime@deraspe.net'
-  s.files       = ["lib/bacterial-annotator.rb",
+  s.files       = ["lib/bacterial-comparator.rb",
+                   "lib/bacterial-annotator.rb",
                    "lib/bacterial-annotator/genbank-manip.rb",
                    "lib/bacterial-annotator/fasta-manip.rb",
                    "lib/bacterial-annotator/synteny-manip.rb",
@@ -18,7 +19,8 @@ Gem::Specification.new do |s|
   s.executables = [
     "bacterial-annotator",
     "ba_prodigal",
-    "ba_blat"
+    "ba_blat",
+    "ba_mafft"
   ]
   s.default_executable = "bacterial-annotator"
   s.add_runtime_dependency 'bio', '~> 1.4', '>= 1.4.3'
