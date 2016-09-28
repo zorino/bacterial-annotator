@@ -9,6 +9,7 @@
 
 
 require 'bacterial-annotator'
+require 'bacterial-comparator'
 
 
 # Usage message to print to CLI
@@ -111,43 +112,52 @@ if ARGV.size > 1
 
   ROOT = File.dirname(__FILE__)
 
+  # Check for 3rd party dependencies : Prodigal, Blat, MAFFT
+  system("ba_prodigal")
+  system("ba_blat")
+  system("ba_mafft")
+
   options = {}
   genomes_list = []
 
   if ARGV[0] == "annotate"
     ARGV.shift
     options = parseOptions_annotate
+
+    if ! File.exist? ("#{ROOT}/blat.linux")
+      abort "#exiting blat is missing"
+    end
+
+    # Check Options
+    if ! options.has_key? :refgenome and ! options.has_key? :remote_db and ! options.has_key? :external_db
+      puts "You didn't provide a reference genome or a database for the annotation !"
+    elsif ! options.has_key? :input
+      puts "You didn't provide a fasta file to annotate !"
+    elsif
+      puts ""
+    end
+
+    bannot = BacterialAnnotator.new(options, ROOT)
+    bannot.prepare_files_for_annotation
+    bannot.run_annotation
+
   elsif ARGV[0] == "compare"
+
     ARGV.shift
     while x = ARGV.shift
       genomes_list << x
     end
+
+    bcomp = BacterialComparator.new(genomes_list, ROOT)
+    bcomp.mafft_align_all_pep ROOT
+
   else
+
     usage
     abort
+
   end
 
-
-  # Check for 3rd party dependencies : Prodigal and Blat
-  system("ba_prodigal")
-  system("ba_blat")
-
-  if ! File.exist? ("#{ROOT}/blat.linux")
-    abort "exiting blat is missing"
-  end
-
-  # Check Options
-  if ! options.has_key? :refgenome and ! options.has_key? :remote_db and ! options.has_key? :external_db
-    puts "You didn't provide a reference genome or a database for the annotation !"
-  elsif ! options.has_key? :input
-    puts "You didn't provide a fasta file to annotate !"
-  elsif
-    puts ""
-  end
-
-  bannot = BacterialAnnotator.new(options, ROOT)
-  bannot.prepare_files_for_annotation
-  bannot.run_annotation
 
 else
   usage
