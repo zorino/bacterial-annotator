@@ -21,42 +21,50 @@ bacterial-annotator [annotate | compare] [OPTIONS]
 
 # Choose either to annotate a genome or compare several genome annotations
 
-  annotate  [OPTIONS] .. see annotate [OPTIONS]
+  annotate  [OPTIONS]
+            .. see annotate -h for OPTIONS
 
-  compare   [annotation directories]*
-            The annotations to compared need to be done with the same reference genome !
+  compare   [OPTIONS] [all annotation directories]*
+            .. see compare -h for OPTIONS
 
   --help/-h		Print this !
 
+OEM
+
+end
+
+
+def usage_annotate
+
+  print <<OEM
 
 annotate [OPTIONS]
 
-// IO
-  --input/-i		<fasta_file>	Provide the fasta file to annotate
-  --outdir/-o		<outdir>	Output directory [default=BAnnotation]
-  --force/-f		Force to overwrite the output directory
+  // IO
+    --input/-i		<fasta_file>	Provide the fasta file to annotate
+    --outdir/-o		<outdir>	Output directory [default=BAnnotation]
+    --force/-f		Force to overwrite the output directory
 
-// Dataset
-  --refgenome/-g        <GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
-  --guessref		Will guess the best reference genome to use for the annotation.
+  // Dataset
+    --refgenome/-g        <GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
+    --guessref		Will guess the best reference genome to use for the annotation.
 
-  --remotedb		<remote_database> [nr|refseq|swissprot]
-			Complete the annotation of remaining CDS with a remote NCBI BLAST
-			Can be very slow, better to use an external database !
+    --remotedb		<remote_database> [nr|refseq|swissprot]
+			  Complete the annotation of remaining CDS with a remote NCBI BLAST
+			  Can be very slow, better to use an external database !
 
-  --externaldb		<proteins fasta_file>
-			Complete or do the annotation of remaining CDS with this database (a protein fasta file).
-			Fasta headers need to look similar to NCBI or EBI fasta headers, ex.:
-			>gi|385721352|gb|AFI72857.1| NDM-1 [Escherichia coli]
-			>sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
+    --externaldb		<proteins fasta_file>
+			  Complete or do the annotation of remaining CDS with this database (a protein fasta file).
+			  Fasta headers need to look similar to NCBI or EBI fasta headers, ex.:
+			  >gi|385721352|gb|AFI72857.1| NDM-1 [Escherichia coli]
+			  >sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
 
-// Other options
-  --pidentity		Minimum percentage identity to incorporate a CDS annotation [default=0.7]
-  --minlength		Minimum contig length for annotation [default=500]
+  // Other options
+    --pidentity		Minimum percentage identity to incorporate a CDS annotation [default=0.7]
+    --minlength		Minimum contig length for annotation [default=500]
 
-  --meta		Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
-  --gff			Will also generate gff annotation files [off by default]
-
+    --meta		Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
+    --gff			Will also generate gff annotation files [off by default]
 
 OEM
 
@@ -97,7 +105,73 @@ def parseOptions_annotate
     when "--externaldb"
       options[:external_db] = ARGV.shift
     when "--help", "-h"
-      usage
+      usage_annotate
+      abort
+    end
+
+  end
+
+  options
+
+end
+
+
+def usage_compare
+
+  print <<OEM
+
+compare [OPTIONS]
+
+  //IO
+    --outdir/-o    <output directory>
+    --proc         <nb of process> Number of process to run the comparison
+
+  //Synteny
+    --pidentity    <default 0.80> Minimal percentage identity to call a syntenic protein
+    --min_cov      <default 0.80> Minimal coverage for the alignment of the protein / gene
+
+  //Alignment (MAFFT)
+    --align        [dna|prot|both] by default align only proteins
+    --concat       <nb of genes | all>  by default all
+
+  //Phylo (RAXML)
+
+OEM
+
+end
+
+
+# Parse the Options given on the CLI
+def parseOptions_compare
+
+  options = {}
+
+  # default options
+  options[:outdir] = "phylogenomics"
+  options[:pidentity] = 0.8
+  options[:min_cov] = 0.8
+  options[:proc] = 2
+  options[:align] = "prot"
+  options[:genomes_list] = []
+
+  while x = ARGV.shift
+
+    case x.downcase
+    when "--outdir", "-o"
+      options[:outdir] = ARGV.shift
+    when "--pidentity"
+      options[:pidentity] = ARGV.shift
+    when "--min_cov"
+      options[:min_cov] = ARGV.shift
+    when "--proc", "-p"
+      options[:proc] = ARGV.shift
+    when "--align"
+      options[:align] = ARGV.shift
+    when "--help", "-h"
+      usage_compare
+      abort
+    else
+      options[:genomes_list] << x if File.exists? "#{x}"
     end
 
   end
@@ -121,6 +195,7 @@ if ARGV.size > 1
   genomes_list = []
 
   if ARGV[0] == "annotate"
+
     ARGV.shift
     options = parseOptions_annotate
 
@@ -129,7 +204,9 @@ if ARGV.size > 1
     end
 
     # Check Options
-    if ! options.has_key? :refgenome and ! options.has_key? :remote_db and ! options.has_key? :external_db
+    if ! options.has_key? :refgenome and
+       ! options.has_key? :remote_db and
+       ! options.has_key? :external_db
       puts "You didn't provide a reference genome or a database for the annotation !"
     elsif ! options.has_key? :input
       puts "You didn't provide a fasta file to annotate !"
@@ -144,12 +221,16 @@ if ARGV.size > 1
   elsif ARGV[0] == "compare"
 
     ARGV.shift
-    while x = ARGV.shift
-      genomes_list << x
+    options = parseOptions_compare
+    bcomp = BacterialComparator.new(options, ROOT)
+    if options[:align].downcase == "both"
+      bcomp.mafft_align_all_pep
+      bcomp.mafft_align_all_dna
+    elsif options[:align].downcase == "prot"
+      bcomp.mafft_align_all_pep
+    elsif options[:align].downcase == "dna"
+      bcomp.mafft_align_all_dna
     end
-
-    bcomp = BacterialComparator.new(genomes_list, ROOT)
-    bcomp.mafft_align_all_pep ROOT
 
   else
 
