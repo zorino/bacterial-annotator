@@ -205,6 +205,7 @@ class BacterialComparator
     Parallel.map(Dir["*.pep"], in_processes: @proc) { |f|
       mafft_align f
     }
+    Dir.chdir("..")
   end
 
   def mafft_align_all_dna
@@ -214,6 +215,7 @@ class BacterialComparator
     Parallel.map(Dir["*.dna"], in_processes: @proc) { |f|
       mafft_align f
     }
+    Dir.chdir("..")
   end
 
 
