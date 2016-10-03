@@ -23,6 +23,7 @@ class BacterialComparator
     Dir.mkdir(@outdir) if ! Dir.exists? @outdir
     @genomes_list = options[:genomes_list]
     @proc = options[:proc].to_i
+    @phylo_nb_genes = options[:phylo_nb_genes]
 
     min_cov = options[:min_cov].to_f
     min_pid = options[:pidentity].to_f
@@ -199,25 +200,102 @@ class BacterialComparator
 
   end
 
+
   def mafft_align_all_pep
     puts "# MAFFT multialign all protein sequences.."
     Dir.chdir("#{@outdir}/genes-align-pep/")
-    Parallel.map(Dir["*.pep"], in_processes: @proc) { |f|
-      mafft_align f
-    }
-    Dir.chdir("..")
+
+    is_done = 1
+    if Dir["*.pep"].length == Dir["*.aln"].length
+      Dir["*.aln"].each do |a|
+        if File.size(a) == 0
+          is_done = 0
+        end
+      end
+    else
+      is_done = 0
+    end
+
+    if is_done==0
+      Parallel.map(Dir["*.pep"], in_processes: @proc) { |f|
+        mafft_align f
+      }
+    end
+
+    concat_alignments "genes-align-pep.concat.fasta"
+    Dir.chdir("../../")
+
   end
 
   def mafft_align_all_dna
     puts "# MAFFT multialign all gene sequences.."
-    puts "# MAFFT multialign all protein sequences.."
     Dir.chdir("#{@outdir}/genes-align-dna/")
-    Parallel.map(Dir["*.dna"], in_processes: @proc) { |f|
-      mafft_align f
-    }
-    Dir.chdir("..")
+
+    is_done = 1
+    if Dir["*.dna"].length == Dir["*.aln"].length
+      Dir["*.aln"].each do |a|
+        if File.size(a) == 0
+          is_done = 0
+        end
+      end
+    else
+      is_done = 0
+    end
+
+    if is_done == 0
+      Parallel.map(Dir["*.dna"], in_processes: @proc) { |f|
+        mafft_align f
+      }
+    end
+
+    concat_alignments "genes-align-dna.concat.fasta"
+    Dir.chdir("../../")
+
   end
 
+
+  def concat_alignments outfile
+
+    fout = File.open("../#{outfile}", "w")
+
+    ref_id = Dir["../../#{@genomes_list[0]}/*.pep"][0].gsub(/.*\//,"").gsub(".pep","")
+
+    seq = ""
+    Dir["*.aln"].each do |f|
+      flat = Bio::FlatFile.auto(f)
+      ref_seq = flat.entries[0]
+      seq += ref_seq.seq
+    end
+
+    bioseq = Bio::Sequence.auto(seq)
+    out = bioseq.output_fasta("#{ref_id}",60)
+    fout.write(out)
+
+    for i in 1..@genomes_list.length
+      seq = ""
+      Dir["*.aln"].each do |f|
+        flat = Bio::FlatFile.auto(f)
+        j=0
+        flat.each_entry do |entry|
+          if j<i
+            j+=1
+            next
+          elsif i == j
+            seq += entry.seq
+            j+=1
+          else
+            break
+          end
+        end
+      end
+      bioseq = Bio::Sequence.auto(seq)
+      out = bioseq.output_fasta("#{@genomes_list[i-1]}",60)
+      fout.write(out)
+    end
+
+    fout.close
+
+  end
 
 
 end                             # end of Class
