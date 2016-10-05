@@ -84,8 +84,8 @@ class BacterialComparator
 
   def build_multifasta ref_prot, synteny
 
-    pep_out_dir = "./#{@outdir}/genes-align-pep"
-    dna_out_dir = "./#{@outdir}/genes-align-dna"
+    pep_out_dir = "./#{@outdir}/align-genes-pep"
+    dna_out_dir = "./#{@outdir}/align-genes-dna"
 
     # create multifasta by syntenic proteins (pep)
     if ! File.exists? pep_out_dir+"/#{ref_prot}.pep"
@@ -160,8 +160,8 @@ class BacterialComparator
 
     fout.close
 
-    pep_out_dir = "./#{@outdir}/genes-align-pep"
-    dna_out_dir = "./#{@outdir}/genes-align-dna"
+    pep_out_dir = "./#{@outdir}/align-genes-pep"
+    dna_out_dir = "./#{@outdir}/align-genes-dna"
     Dir.mkdir(pep_out_dir) if ! Dir.exists? pep_out_dir
     Dir.mkdir(dna_out_dir) if ! Dir.exists? dna_out_dir
 
@@ -202,8 +202,10 @@ class BacterialComparator
 
 
   def mafft_align_all_pep
+
     puts "# MAFFT multialign all protein sequences.."
-    Dir.chdir("#{@outdir}/genes-align-pep/")
+    ori_dir = Dir.pwd
+    Dir.chdir("#{@outdir}/align-genes-pep/")
 
     is_done = 1
     if Dir["*.pep"].length == Dir["*.aln"].length
@@ -220,16 +222,19 @@ class BacterialComparator
       Parallel.map(Dir["*.pep"], in_processes: @proc) { |f|
         mafft_align f
       }
+    else
+      puts "..Prot alignment files already exists, skipping."
     end
 
-    concat_alignments "genes-align-pep.concat.fasta"
-    Dir.chdir("../../")
+    concat_alignments "align-genes-pep.all.fasta"
+    Dir.chdir(ori_dir)
 
   end
 
   def mafft_align_all_dna
     puts "# MAFFT multialign all gene sequences.."
-    Dir.chdir("#{@outdir}/genes-align-dna/")
+    ori_dir = Dir.pwd
+    Dir.chdir("#{@outdir}/align-genes-dna/")
 
     is_done = 1
     if Dir["*.dna"].length == Dir["*.aln"].length
@@ -246,15 +251,22 @@ class BacterialComparator
       Parallel.map(Dir["*.dna"], in_processes: @proc) { |f|
         mafft_align f
       }
+    else
+      puts "..Gene alignment files already exists, skipping."
     end
 
-    concat_alignments "genes-align-dna.concat.fasta"
-    Dir.chdir("../../")
+    concat_alignments "align-genes-dna.all.fasta"
+    Dir.chdir(ori_dir)
 
   end
 
 
   def concat_alignments outfile
+
+    if File.exists?("../#{outfile}") and File.size("../#{outfile}") > 0
+      puts "..Alignment concatenated file already exists, skipping."
+      return
+    end
 
     fout = File.open("../#{outfile}", "w")
 
@@ -297,5 +309,64 @@ class BacterialComparator
 
   end
 
+  def mafft_aln aln_opt
+
+    if aln_opt == "both"
+      mafft_align_all_pep
+      mafft_align_all_dna
+    elsif aln_opt == "prot"
+      mafft_align_all_pep
+    elsif aln_opt == "dna"
+      mafft_align_all_dna
+    end
+
+  end
+
+
+  def raxml_tree_dna bt
+
+    # DNA tree
+    puts "# RAXML DNA tree creation.. "
+    ori_dir = Dir.pwd
+    Dir.chdir(@outdir)
+    Dir.mkdir("tree-genes-dna") if ! Dir.exists?("tree-genes-dna")
+    current_dir = Dir.pwd
+    tree_dir = "#{current_dir}/tree-genes-dna"
+    cmd = system("#{@root}/raxml.linux -T #{@proc} -f d -N #{bt} -s align-genes-dna.all.fasta  -m GTRGAMMA -p 123454321 -n DnaTree -w #{tree_dir}")
+    cmd = system("cat #{tree_dir}/RAxML_result.DnaTree.RUN.* >> #{tree_dir}/RAxML_result.BS")
+    cmd = system("#{@root}/raxml.linux -T 3 -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.DnaTree -m GTRGAMMA -n DNA_BS_TREE -w #{tree_dir}")
+    cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.DNA_BS_TREE #{tree_dir}/../")
+    Dir.chdir(ori_dir)
+  end
+
+  def raxml_tree_pep bt
+
+    # Prot tree
+    puts "# RAXML Protein tree creation.. "
+    ori_dir = Dir.pwd
+    Dir.chdir(@outdir)
+    Dir.mkdir("tree-genes-pep") if ! Dir.exists?("tree-genes-pep")
+    current_dir = Dir.pwd
+    tree_dir = "#{current_dir}/tree-genes-pep"
+    cmd = system("#{@root}/raxml.linux -T #{@proc} -f d -N #{bt} -s align-genes-pep.all.fasta  -m PROTGAMMAAUTO -p 123454321 -n PepTree -w #{tree_dir}")
+    cmd = system("cat #{tree_dir}/RAxML_result.PepTree.RUN.* >> #{tree_dir}/RAxML_result.BS")
+    cmd = system("#{@root}/raxml.linux -T 3 -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.PepTree -m PROTGAMMAAUTO -n PEP_BS_TREE -w #{tree_dir}")
+    cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.PEP_BS_TREE #{tree_dir}/../")
+    Dir.chdir(ori_dir)
+  end
+
+
+  def raxml_tree aln_opt, bt
+
+    if aln_opt == "both"
+      raxml_tree_dna bt
+      raxml_tree_pep bt
+    elsif aln_opt == "prot"
+      raxml_tree_pep bt
+    elsif aln_opt == "dna"
+      raxml_tree_dna bt
+    end
+
+  end
 
 end                             # end of Class

@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maxime@deraspe.net
+# review:  	
+# date:    	15-02-24
+# version: 	0.01
+# licence:  	
+
+require 'open-uri'
+
+ROOT_path = File.dirname(__FILE__)
+# raxml_url = https://github.com/stamatak/standard-RAxML/archive/master.zip
+# Install RAXML on the user system
+def installRaxml
+
+  begin
+    resp = open("https://github.com/stamatak/standard-RAxML/archive/master.zip")
+    open("#{ROOT_path}/master.zip", "wb") do |file|
+      file.write(resp.read)
+    end
+    Dir.chdir("#{ROOT_path}/")
+    `unzip master.zip`
+    Dir.chdir("#{ROOT_path}/standard-RAxML-master")
+    `make -f Makefile.PTHREADS.gcc`
+    `rm *.o`
+    `cp #{ROOT_path}/standard-RAxML-master/raxmlHPC-PTHREADS #{ROOT_path}/raxml.linux`
+    File.chmod(0755, "#{ROOT_path}/raxml.linux")
+  rescue
+    abort "Problem in stalling RAXML, aborting"
+  end
+
+end
+
+
+# Install prodigal if not already install
+if ! File.exists? "#{ROOT_path}/raxml.linux"
+
+  puts "Installing RAXML git master.."
+  puts "See https://github.com/stamatak/standard-RAxML"
+  puts "License GPLv3 : https://github.com/stamatak/standard-RAxML/blob/master/gpl-3.0.txt"
+  installRaxml
+  puts "RAXML successfully installed in #{ROOT_path}/standard-RAxML-master"
+  puts ""
+
+end

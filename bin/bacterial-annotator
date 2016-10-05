@@ -132,9 +132,11 @@ compare [OPTIONS]
 
   //Alignment (MAFFT)
     --align        [dna|prot|both] by default align only proteins
-    --concat       <nb of genes | all>  by default all
+    --concat       <nb of genes>  by default 0=all
 
-  //Phylo (RAXML)
+  //Phylogeny (RAXML)
+    --phylogeny    will build phylogenetic tree from the alignments files (pep or dna)
+    --bootstrap    <nb of bootstrap> by default 100
 
 OEM
 
@@ -153,6 +155,9 @@ def parseOptions_compare
   options[:proc] = 2
   options[:align] = "prot"
   options[:genomes_list] = []
+  options[:concat] = 0
+  options[:phylogeny] = 0
+  options[:bootstrap] = 100
 
   while x = ARGV.shift
 
@@ -167,6 +172,12 @@ def parseOptions_compare
       options[:proc] = ARGV.shift
     when "--align"
       options[:align] = ARGV.shift
+    when "--concat"
+      options[:concat] = ARGV.shift
+    when "--phylogeny"
+      options[:phylogeny] = 1
+    when "--bootstrap"
+      options[:bootstrap] = (ARGV.shift).to_i
     when "--help", "-h"
       usage_compare
       abort
@@ -190,6 +201,7 @@ if ARGV.size > 1
   system("ba_prodigal")
   system("ba_blat")
   system("ba_mafft")
+  system("ba_raxml")
 
   options = {}
   genomes_list = []
@@ -223,14 +235,9 @@ if ARGV.size > 1
     ARGV.shift
     options = parseOptions_compare
     bcomp = BacterialComparator.new(options, ROOT)
-    if options[:align].downcase == "both"
-      bcomp.mafft_align_all_pep
-      bcomp.mafft_align_all_dna
-    elsif options[:align].downcase == "prot"
-      bcomp.mafft_align_all_pep
-    elsif options[:align].downcase == "dna"
-      bcomp.mafft_align_all_dna
-    end
+    aln_opt = options[:align].downcase
+    bcomp.mafft_aln aln_opt
+    bcomp.raxml_tree aln_opt, options[:bootstrap] if options[:phylogeny] == 1
 
   else
 
