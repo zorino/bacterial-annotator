@@ -23,7 +23,7 @@ class RemoteNCBI
       @db = db
     end
 
-    url = 'http://blast.ncbi.nlm.nih.gov/Blast.cgi'\
+    url = 'https://blast.ncbi.nlm.nih.gov/Blast.cgi'\
           '?PROGRAM=blastp&BLAST_PROGRAMS=blastp'\
           '&PAGE_TYPE=BlastSearch&SHOW_DEFAULTS=on'\
           '&LINK_LOC=blasthome'
@@ -92,10 +92,10 @@ class RemoteNCBI
 
     end
 
-    uri_parsed = "http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&RID=#{requestID}"
+    uri_parsed = "https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Get&RID=#{requestID}"
     puts "NCBI Blast for #{f}: #{uri_parsed}"
 
-    return URI.parse("http://blast.ncbi.nlm.nih.gov/Blast.cgi?RESULTS_FILE=on&RID=#{requestID}&FORMAT_TYPE=XML&FORMAT_OBJECT=Alignment&CMD=Get")
+    return URI.parse("https://blast.ncbi.nlm.nih.gov/Blast.cgi?RESULTS_FILE=on&RID=#{requestID}&FORMAT_TYPE=XML&FORMAT_OBJECT=Alignment&CMD=Get")
 
   end                           # end of method
 
