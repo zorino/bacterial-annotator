@@ -64,6 +64,7 @@ class BacterialComparator
     flatfile.each_entry do |entry|
       ref_prot << entry.definition.split(" ")[0]
     end
+    flatfile.close
     ref_prot
   end
 
@@ -93,9 +94,11 @@ class BacterialComparator
       pep_file = Dir["#{@genomes_list[0]}/*.pep"]
       flatfile = Bio::FlatFile.auto("#{pep_file[0]}")
       pep_out.write(get_sequence_from_flatfile flatfile, ref_prot)
+      flatfile.close
       @genomes_list.each_with_index do |g,i|
         flatfile = Bio::FlatFile.auto("#{g}/Proteins.fa")
         pep_out.write(get_sequence_from_flatfile flatfile, synteny[i][:query_prot])
+        flatfile.close
       end
       pep_out.close
     end
@@ -107,9 +110,11 @@ class BacterialComparator
       dna_file = Dir["#{@genomes_list[0]}/*.dna"]
       flatfile = Bio::FlatFile.auto("#{dna_file[0]}")
       dna_out.write(get_sequence_from_flatfile flatfile, ref_prot)
+      flatfile.close
       @genomes_list.each_with_index do |g,i|
         flatfile = Bio::FlatFile.auto("#{g}/Genes.fa")
         dna_out.write(get_sequence_from_flatfile flatfile, synteny[i][:query_prot])
+        flatfile.close
       end
       dna_out.close
     end
@@ -276,6 +281,7 @@ class BacterialComparator
     Dir["*.aln"].each do |f|
       flat = Bio::FlatFile.auto(f)
       ref_seq = flat.entries[0]
+      flat.close
       seq += ref_seq.seq
     end
 
@@ -299,6 +305,7 @@ class BacterialComparator
             break
           end
         end
+        flat.close
       end
       bioseq = Bio::Sequence.auto(seq)
       out = bioseq.output_fasta("#{@genomes_list[i-1]}",60)
