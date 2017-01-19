@@ -18,7 +18,7 @@ class RemoteNCBI
   def initialize db, seq_file, outfile, pidentity
 
     if ! ["swissprot", "refseq_protein", "nr"].include? db
-      @db = "bad database"
+      @db = "nr"                # bad database
     else
       @db = db
     end
