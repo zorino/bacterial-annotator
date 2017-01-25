@@ -41,9 +41,11 @@ class BacterialComparator
   end
 
   def read_prot_synteny
+    puts "# Reading genomes synteny files (from genome annotations) .."
     synteny = {}
     @genomes_list.each do |g|
-      puts "#{g}/Prot-Synteny.tsv"
+      puts "   #{g}/Prot-Synteny.tsv"
+      genome_synteny = []
       file = File.open("#{g}/Prot-Synteny.tsv", "r")
       l = file.gets             # skip header
       while l = file.gets
@@ -51,6 +53,12 @@ class BacterialComparator
         lA = l.chomp.split("\t")
         synteny[lA[0]] =  [] if ! synteny.has_key? lA[0]
         synteny[lA[0]] << {ref_cov: lA[3].to_f, pId: lA[4].to_f, query_prot: lA[5], query_cov: lA[7].to_f}
+        genome_synteny << lA[0]
+      end
+      @ref_prot.each do |ref_prot|
+        if ! genome_synteny.include? ref_prot
+          synteny[lA[0]] << {ref_cov: "-", pId: "-", query_prot: "-", query_cov: "-"}
+        end
       end
       file.close
     end
@@ -124,7 +132,7 @@ class BacterialComparator
 
   def extract_syntenic_fasta min_cov, min_pid
 
-    "# Extracting Proteins and Genes multifasta.."
+    puts "# Extracting Proteins and Genes multifasta.."
     nb_of_syntenic = 0
     stats = {}
     stats[:syntenic] = []
@@ -136,7 +144,7 @@ class BacterialComparator
     @synteny.each do |k,v|
       is_syntenic = 1
       v.each do |v_|
-        if v_[:query_cov].nil?
+        if v_[:query_cov] == "-"
           is_syntenic = 0
           break
         elsif v_[:query_cov] > min_cov and
@@ -149,14 +157,23 @@ class BacterialComparator
         end
       end
 
+      fout.write("#{k}")
       if is_syntenic == 1
         nb_of_syntenic += 1
         # build_multifasta k, v
         to_build_multifasta << [k,v]
-        fout.write("#{k}")
         v.each do |x|
-          fout.write("\t#{x[:query_prot]}|#{x[:query_cov]}|#{x[:ref_cov]}")
+          fout.write("\t#{x[:query_prot]}|#{x[:pId]}|#{x[:query_cov]}|#{x[:ref_cov]}")
           stats[:syntenic] << k
+        end
+        fout.write("\n")
+      else
+        v.each do |x|
+          if x[:pId] == 0.0
+            fout.write("\t-")
+          else
+            fout.write("\t#{x[:query_prot]}|#{x[:pId]}|#{x[:query_cov]}|#{x[:ref_cov]}")
+          end
         end
         fout.write("\n")
       end
