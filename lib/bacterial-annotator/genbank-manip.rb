@@ -10,7 +10,7 @@
 
 class GenbankManip
 
-  attr_accessor :gbk, :coding_seq, :cds_file
+  attr_accessor :gbk, :coding_seq, :cds_file, :rna_file
 
   # Initialize then genbank file
   def initialize gbk_file, outdir
@@ -58,13 +58,6 @@ class GenbankManip
         protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
         locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
 
-        # if ftH.has_key? "translation"
-        #   pep = ftH["translation"][0] if !ftH["translation"].nil?
-        # else
-        #   dna = get_DNA(ft,@bioseq)
-        #   pep = dna.translate
-        # end
-
         dna = get_DNA(ft,@bioseq)
         pep = dna.translate
         pepBioSeq = Bio::Sequence.auto(pep)
@@ -88,6 +81,52 @@ class GenbankManip
     @coding_seq
 
   end
+
+  # Prepare rRNA tRNA
+  def get_rna
+
+    if @rna_seq == nil
+
+      @rna_seq = {}
+      @gbk.features do |ft|
+
+        next if ! ft.feature.to_s.include? "RNA"
+        ftH = ft.to_hash
+        loc = ft.locations
+        # seqBeg = loc[0].from.to_s
+        # seqEnd = loc[0].to.to_s
+        # strand = loc[0].strand.to_s
+        if ftH.has_key? "pseudo"
+          next
+        end
+        # gene = ftH["gene"] if !ftH["gene"].nil?
+        # protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
+        product = ""
+        product = ftH["product"][0] if !ftH["product"].nil?
+        locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
+
+        # puts "#{@accession}\t#{seqBeg}\t#{seqEnd}\t#{strand}\t#{protId}\t#{locustag}\t#{gene[0]}\t#{product[0]}"
+        dna = get_DNA(ft,@bioseq)
+        dnaBioSeq = Bio::Sequence.auto(dna)
+
+        # if protId.strip == ""
+        #   protId = locustag
+        # end
+
+        @rna_seq[locustag] = {type: ft.feature.to_s,
+                              location: loc,
+                              locustag: locustag,
+                              product: product,
+                              bioseq_gene: dnaBioSeq}
+
+      end
+
+    end
+
+    @rna_seq
+
+  end
+
 
 
   # Print CDS to files
@@ -113,6 +152,27 @@ class GenbankManip
     dna_out.close
 
     @cds_file = "#{outdir}/" + cds_file
+
+  end
+
+  # Print RNA to files
+  # RETURN : rna_file path
+  def write_rna_to_file outdir
+
+    rna_file = "#{@gbk.accession}.rna"
+
+    if @rna_seq == nil
+      get_rna
+    end
+
+    File.open("#{outdir}/#{rna_file}", "w") do |fwrite|
+      @rna_seq.each_key do |k|
+        seqout_dna = @rna_seq[k][:bioseq_gene].output_fasta("#{k}|#{@rna_seq[k][:type]}|#{@rna_seq[k][:product]}",60)
+        fwrite.write(seqout_dna)
+      end
+    end
+
+    @rna_file = "#{outdir}/" + rna_file
 
   end
 
@@ -177,12 +237,12 @@ class GenbankManip
 
     end
 
-    File.open("#{outdir}/#{contig}.gbk", "w") do |f| 
+    File.open("#{outdir}/#{contig}.gbk", "w") do |f|
       f.write(@gbk.to_biosequence.output(:genbank))
     end
 
     # Bioruby doesn't support gff at this point
-    # File.open("#{outdir}/#{contig}.gff", "w") do |f| 
+    # File.open("#{outdir}/#{contig}.gff", "w") do |f|
     #   f.write(@gbk.to_biosequence.output(:gff))
     # end
 

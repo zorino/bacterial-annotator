@@ -12,17 +12,22 @@ class SyntenyManip
 
   attr_reader :query_file, :subject_file, :aln_hits
 
-  def initialize query_file, subject_file, name, pidentity
+  def initialize query_file, subject_file, name, pidentity, type
     @query_file = query_file
     @subject_file = subject_file
     @name = name
     @pidentity = pidentity
     @aln_file = nil
+    @type = type
   end                           # end of initialize
 
   # run blat on proteins
   def run_blat root, outdir
-    system("#{root}/blat.linux -out=blast8 -minIdentity=#{@pidentity} -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
+    base_cmd = "#{root}/blat.linux -out=blast8 -minIdentity=#{@pidentity}"
+    system("#{base_cmd} #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
+    if @type == "prot"
+      system("#{base_cmd} -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
+    end
     @aln_file = "#{outdir}/#{@name}.blat8.tsv"
     # extract_hits
   end                           # end of method

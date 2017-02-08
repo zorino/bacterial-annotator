@@ -67,6 +67,7 @@ class BacterialAnnotator
     puts "Prodigal done."
     if @with_refence_genome
       @refgenome.write_cds_to_file @outdir
+      @refgenome.write_rna_to_file @outdir
       puts "Successfully loaded #{@refgenome.gbk.definition}"
     end
   end                           # end of method
@@ -77,8 +78,8 @@ class BacterialAnnotator
     # process reference genome synteny
     if @with_refence_genome        # Annotation with the Reference Genome
 
-      @prot_synteny = SyntenyManip.new(@fasta.prodigal_files[:proteins], @refgenome.cds_file, "Prot-Ref", @pidentity)
-      puts "\nRunning BLAT alignment with Reference Genome.."
+      puts "\nRunning BLAT alignment with Reference Genome CDS.."
+      @prot_synteny = SyntenyManip.new(@fasta.prodigal_files[:proteins], @refgenome.cds_file, "Prot-Ref", @pidentity, "prot")
       @prot_synteny.run_blat @root, @outdir
       @prot_synteny.extract_hits :refgenome
 
@@ -144,6 +145,12 @@ class BacterialAnnotator
 
       end
       synteny_file.close
+
+      puts "\nRunning BLAT alignment with Reference Genome RNA.."
+      @rna_synteny = SyntenyManip.new(@fasta.fasta_file, @refgenome.rna_file, "RNA-Ref", @pidentity, "dna")
+      @rna_synteny.run_blat @root, @outdir
+      @rna_synteny.extract_hits :refgenome
+
 
     else                        # no reference genome
 

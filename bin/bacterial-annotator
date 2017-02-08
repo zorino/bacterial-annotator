@@ -192,7 +192,10 @@ def parseOptions_compare
 end
 
 
-# Main
+########
+# MAIN #
+########
+
 if ARGV.size > 1
 
   ROOT = File.dirname(__FILE__)
