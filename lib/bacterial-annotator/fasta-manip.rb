@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # author:  	maxime déraspe
-# email:	maxime@deraspe.net
+# email:	maximilien1er@gmail.com
 # review:  	
 # date:    	15-02-24
 # version: 	0.0.1

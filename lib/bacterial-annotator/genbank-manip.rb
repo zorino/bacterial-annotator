@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # author:  	maxime déraspe
-# email:	maxime@deraspe.net
+# email:	maximilien1er@gmail.com
 # review:  	
 # date:    	15-02-24
 # version: 	0.0.1
@@ -91,6 +91,7 @@ class GenbankManip
       @gbk.features do |ft|
 
         next if ! ft.feature.to_s.include? "RNA"
+
         ftH = ft.to_hash
         loc = ft.locations
         # seqBeg = loc[0].from.to_s
@@ -108,10 +109,6 @@ class GenbankManip
         # puts "#{@accession}\t#{seqBeg}\t#{seqEnd}\t#{strand}\t#{protId}\t#{locustag}\t#{gene[0]}\t#{product[0]}"
         dna = get_DNA(ft,@bioseq)
         dnaBioSeq = Bio::Sequence.auto(dna)
-
-        # if protId.strip == ""
-        #   protId = locustag
-        # end
 
         @rna_seq[locustag] = {type: ft.feature.to_s,
                               location: loc,
@@ -178,73 +175,73 @@ class GenbankManip
 
 
   # add annotation to a genbank file produced by prodigal
-  def add_annotation annotations, outdir, mode, reference_locus
+  def add_annotations annotations, outdir, mode, reference_locus
 
     nb_of_added_ft = 0
     i = 0
 
     contig = @gbk.definition
 
-    # iterate through
-    @gbk.features.each_with_index do |cds, ft_index|
+    if mode == :inplace
 
-      next if cds.feature != "CDS"
+      # iterate through
+      @gbk.features.each_with_index do |cds, ft_index|
 
-      if mode == 0
+        next if cds.feature != "CDS"
+
         ftArray = []
         cds.qualifiers = []
-      else
-        ftArray = cds.qualifiers
+
+        i += 1
+        prot_id = contig+"_"+i.to_s
+        hit = nil
+        hit = annotations[prot_id] if annotations.has_key? prot_id
+
+        if hit != nil
+          locus, gene, product, note = nil
+          locus = hit[:locustag]
+          gene = hit[:gene]
+          product = hit[:product]
+          note = hit[:note]
+          pId = hit[:pId]
+
+          if gene != nil
+            qGene = Bio::Feature::Qualifier.new('gene', gene)
+            ftArray.push(qGene)
+          end
+
+          if product != nil
+            qProd = Bio::Feature::Qualifier.new('product', product)
+            ftArray.push(qProd)
+          end
+
+          # check if there is a reference genome.. reference_locus shouldn't be nil in that case
+          if locus != nil
+            qNote = Bio::Feature::Qualifier.new('note', "corresponds to #{locus} locus (#{pId}% identity) from #{reference_locus.entry_id}")
+            ftArray.push(qNote)
+          end
+
+          if note != nil
+            qNote = Bio::Feature::Qualifier.new('note', note)
+            ftArray.push(qNote)
+          end
+
+        end
+        cds.qualifiers = ftArray
+
       end
 
-      i += 1
-      prot_id = contig+"_"+i.to_s
-      hit = nil
-      hit = annotations[prot_id] if annotations.has_key? prot_id
 
-      if hit != nil
-        locus, gene, product, note = nil
-        locus = hit[:locustag]
-        gene = hit[:gene]
-        product = hit[:product]
-        note = hit[:note]
-        pId = hit[:pId]
+    elsif mode == :new
 
-        if gene != nil
-          qGene = Bio::Feature::Qualifier.new('gene', gene)
-          ftArray.push(qGene)
-        end
-
-        if product != nil
-          qProd = Bio::Feature::Qualifier.new('product', product)
-          ftArray.push(qProd)
-        end
-
-        # check if there is a reference genome.. reference_locus shouldn't be nil in that case
-        if locus != nil
-          qNote = Bio::Feature::Qualifier.new('note', "corresponds to #{locus} locus (#{pId}% identity) from #{reference_locus.entry_id}")
-          ftArray.push(qNote)
-        end
-
-        if note != nil
-          qNote = Bio::Feature::Qualifier.new('note', note)
-          ftArray.push(qNote)
-        end
-
-
-      end
-      cds.qualifiers = ftArray
+      
 
     end
+
 
     File.open("#{outdir}/#{contig}.gbk", "w") do |f|
       f.write(@gbk.to_biosequence.output(:genbank))
     end
-
-    # Bioruby doesn't support gff at this point
-    # File.open("#{outdir}/#{contig}.gff", "w") do |f|
-    #   f.write(@gbk.to_biosequence.output(:gff))
-    # end
 
   end
 
