@@ -64,7 +64,6 @@ annotate [OPTIONS]
     --minlength		Minimum contig length for annotation [default=500]
 
     --meta		Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
-    --gff			Will also generate gff annotation files [off by default]
 
 OEM
 
@@ -92,8 +91,6 @@ def parseOptions_annotate
       options[:outdir] = ARGV.shift
     when "--force", "-f"
       options[:force] = 1
-    when "--gff"
-      options[:gff] = 1
     when "--minlength"
       options[:minlength] = ARGV.shift
     when "--pidentity"
