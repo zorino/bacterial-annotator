@@ -176,7 +176,7 @@ class RemoteNCBI
                         split("; Flags:")[0].
                         split(" ; Short=")[0].strip
               gi = hit.hit_id.to_s.split("|")[1]
-              accession = hit.hit_accession.to_s
+              accession = hit.accession.to_s
               organism = ""
               definition_clean = hit.definition.split(">")[0]
               if ! definition_clean[/\[.*\]/].nil?
