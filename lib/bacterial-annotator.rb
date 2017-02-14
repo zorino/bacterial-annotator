@@ -118,9 +118,7 @@ class BacterialAnnotator
       @rna_synteny.extract_hits_dna :rna
       @contig_annotations_rna = {}
       @fasta.prodigal_files[:contigs].each_with_index do |contig, contig_index|
-        puts "adding rna_annotation for contig #{contig}"
         @contig_annotations_rna[contig] = @rna_synteny.get_annotation_for_contig contig
-        p @contig_annotations_rna[contig]
       end
 
     else                        # no reference genome
@@ -250,7 +248,7 @@ class BacterialAnnotator
       gbk_to_annotate.add_annotations contig_prot_annotations, "inplace", reference_locus
 
       if @contig_annotations_rna.has_key? contig
-        puts "Trying RNA annotation"
+        # puts "RNA annotation"
         gbk_to_annotate.add_annotations @contig_annotations_rna[contig], "new"
       end
 

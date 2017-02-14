@@ -176,9 +176,10 @@ class RemoteNCBI
                         split("; Flags:")[0].
                         split(" ; Short=")[0].strip
               gi = hit.hit_id.to_s.split("|")[1]
+              accession = hit.hit_accession.to_s
               organism = ""
               definition_clean = hit.definition.split(">")[0]
-              if ! definition_clean[/\[.*\]/].nil?                
+              if ! definition_clean[/\[.*\]/].nil?
                 organism = definition_clean[/\[.*\]/].gsub("[","").gsub("]","")
               end
               @aln_hits[prot_id] = {
@@ -186,7 +187,7 @@ class RemoteNCBI
                 length: hit.target_len.to_i,
                 evalue: hit.evalue,
                 score: hit.bit_score.to_f,
-                hits: [{gi: gi, product: product, org: organism}]
+                hits: [{gi: gi, accession: accession, product: product, org: organism}]
               }
             end
           end
