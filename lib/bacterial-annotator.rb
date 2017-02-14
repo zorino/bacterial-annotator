@@ -93,9 +93,9 @@ class BacterialAnnotator
         end
 
         contig_prots = @fasta.prodigal_files[:prot_ids_by_contig][contig]
-
+        # contig_to_annotate = contig_prots[0].split("_")[0..-2].join("_")
         # contig_prot_annotations = @prot_synteny.get_annotation_for_contig contig_prots, @refgenome.coding_seq
-        @contig_annotations[contig] = @prot_synteny.get_annotation_for_contig contig_prots, @refgenome.coding_seq
+        @contig_annotations[contig] = @prot_synteny.get_annotation_for_contig contig, contig_prots, @refgenome.coding_seq
 
         remaining_cds = cumulate_annotation_stats_reference contig, @contig_annotations[contig]
 
@@ -116,7 +116,12 @@ class BacterialAnnotator
       @rna_synteny = SyntenyManip.new(@fasta.fasta_file, @refgenome.rna_file, "RNA-Ref", @pidentity, "dna")
       @rna_synteny.run_blat @root, @outdir
       @rna_synteny.extract_hits_dna :rna
-
+      @contig_annotations_rna = {}
+      @fasta.prodigal_files[:contigs].each_with_index do |contig, contig_index|
+        puts "adding rna_annotation for contig #{contig}"
+        @contig_annotations_rna[contig] = @rna_synteny.get_annotation_for_contig contig
+        p @contig_annotations_rna[contig]
+      end
 
     else                        # no reference genome
 
@@ -242,7 +247,15 @@ class BacterialAnnotator
       gbk_to_annotate = GenbankManip.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
       reference_locus = nil
       reference_locus = @refgenome.gbk.locus if @with_refence_genome
-      gbk_to_annotate.add_annotations contig_prot_annotations, gbk_path, :inplace, reference_locus
+      gbk_to_annotate.add_annotations contig_prot_annotations, "inplace", reference_locus
+
+      if @contig_annotations_rna.has_key? contig
+        puts "Trying RNA annotation"
+        gbk_to_annotate.add_annotations @contig_annotations_rna[contig], "new"
+      end
+
+      gbk_to_annotate.save_genbank_to_file gbk_path
+
     end
 
   end                           # end of method
@@ -285,6 +298,7 @@ class BacterialAnnotator
     p_cds_annotated = @annotation_stats[:annotated_cds].to_f/@annotation_stats[:total_cds].to_f
 
     File.open(file, "w") do |fopen|
+
       fopen.write("#Contigs annotation based on reference genomes\n")
       fopen.write("Short Contigs (< #{@minlength}) :\t\t" + @annotation_stats[:short_contigs].length.to_s + "\n")
       fopen.write("Foreign Contigs :\t\t" + @annotation_stats[:foreign_contigs].length.to_s + "\n")
@@ -433,6 +447,7 @@ class BacterialAnnotator
     end
 
     @refgenome.coding_seq.each do |ref_k, ref_v|
+
       gene = ""
       coverage_ref = ""
       coverage_query = ""

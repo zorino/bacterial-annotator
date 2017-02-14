@@ -97,6 +97,7 @@ class SyntenyManip
           hit_split = lA[1].chomp.split("|")
           hit = hit_split[0]
           feature = hit_split[1]
+          product = hit_split[2]
         end
         if ! @aln_hits.has_key? key
           next if lA[2].to_f < @pidentity
@@ -105,6 +106,7 @@ class SyntenyManip
             evalue: lA[10],
             score: lA[11].to_f,
             hits: [hit],
+            product: [product],
             length: [lA[3].to_i],
             query_location: [[lA[6].to_i,lA[7].to_i]],
             subject_location: [[lA[8].to_i,lA[9].to_i]],
@@ -116,6 +118,7 @@ class SyntenyManip
             evalue: lA[10],
             score: lA[11].to_f,
             hits: [hit],
+            product: [product],
             length: [lA[3].to_i],
             query_location: [[lA[6].to_i,lA[7].to_i]],
             subject_location: [[lA[8].to_i,lA[9].to_i]],
@@ -126,55 +129,70 @@ class SyntenyManip
           @aln_hits[key][:length] << lA[3].to_i
           @aln_hits[key][:query_location] << [lA[6].to_i,lA[7].to_i]
           @aln_hits[key][:subject_location] << [lA[8].to_i,lA[9].to_i]
-          @aln_hits[key][:feature] << [feature]
+          @aln_hits[key][:feature] << feature
+          @aln_hits[key][:product] << product
         end
       end
     end
+
+    prune_aln_hits @aln_hits
 
   end                           # end of method
 
 
   # Get the annotations for a contig for RerenceGenome
-  def get_annotation_for_contig prots_to_annotate, ref_cds
+  def get_annotation_for_contig contig_to_annotate, prots_to_annotate=nil, ref_cds=nil
 
-    return {} if prots_to_annotate == nil
-
-    contig_to_annotate = prots_to_annotate[0].split("_")[0..-2].join("_")
     annotations = {}
-    prots = []
 
-    @aln_hits.each_key do |k|
-      contig = k.split("_")[0..-2].join("_")
-      if contig == contig_to_annotate
-        prots << k
+    if prots_to_annotate != nil
+
+      # contig_to_annotate = prots_to_annotate[0].split("_")[0..-2].join("_")
+      prots = []
+
+      @aln_hits.each_key do |k|
+        contig = k.split("_")[0..-2].join("_")
+        if contig == contig_to_annotate
+          prots << k
+        end
       end
-    end
 
-    # sorting the prot by their appearance in the contig
-    prots.sort! { |a,b| a.split("_")[-1].to_i <=> b.split("_")[-1].to_i }
+      # sorting the prot by their appearance in the contig
+      prots.sort! { |a,b| a.split("_")[-1].to_i <=> b.split("_")[-1].to_i }
 
-    i = 0
-    prots_to_annotate.each do |p|
+      i = 0
+      prots_to_annotate.each do |p|
 
-      if @aln_hits.has_key? p
+        if @aln_hits.has_key? p
 
-        hit_index = 0
+          hit_index = 0
 
-        if @aln_hits[p][:hits].length > 1
-          hit_index = choose_best_hit i, prots, ref_cds
+          if @aln_hits[p][:hits].length > 1
+            hit_index = choose_best_hit i, prots, ref_cds
+          end
+
+          h = @aln_hits[p][:hits][hit_index]
+          hit = ref_cds[h]
+          annotations[p] = hit
+          annotations[p][:pId] = @aln_hits[p][:pId]
+          annotations[p][:length] = @aln_hits[p][:length][hit_index]
+          i+=1
+
+        else
+
+          annotations[p] = nil
+
         end
 
-        h = @aln_hits[p][:hits][hit_index]
-        hit = ref_cds[h]
-        annotations[p] = hit
-        annotations[p][:pId] = @aln_hits[p][:pId]
-        annotations[p][:length] = @aln_hits[p][:length][hit_index]
-        i+=1
+      end
 
-      else
+    elsif ! @aln_hits.empty?
 
-        annotations[p] = nil
-
+      @aln_hits.each_key do |k|
+        contig = k.split("_")[0..-3].join("_")
+        if contig == contig_to_annotate
+          annotations[k] = @aln_hits[k]
+        end
       end
 
     end
@@ -251,6 +269,64 @@ class SyntenyManip
 
   end                           # end of method
 
+  def prune_aln_hits aln_hits
+
+    # @aln_hits[key] = {
+    #   pId: lA[2].to_f.round(2),
+    #   evalue: lA[10],
+    #   score: lA[11].to_f,
+    #   hits: [hit],
+    #   length: [lA[3].to_i],
+    #   query_location: [[lA[6].to_i,lA[7].to_i]],
+    #   subject_location: [[lA[8].to_i,lA[9].to_i]],
+    #   feature: [feature]
+    # }
+
+    keys_to_delete = []
+
+    aln_hits.each do |key1,val1|
+
+      aln_hits.each do |key2,val2|
+
+        next if key1==key2
+        next if keys_to_delete.include? key1
+        next if keys_to_delete.include? key2
+
+        if val1[:query_location][0][0] >= val2[:query_location][0][0] and
+          val1[:query_location][0][0] < val2[:query_location][0][1]
+          overlap_len = val2[:query_location][0][1] - val1[:query_location][0][0]
+          val1_len = val1[:query_location][0][1]-val1[:query_location][0][0]
+          val2_len = val2[:query_location][0][1]-val2[:query_location][0][0]
+          if overlap_len.to_f/val1_len > 0.2 and overlap_len.to_f/val2_len > 0.2
+            if val1[:score] < val2[:score]
+              keys_to_delete << key1
+            else
+              keys_to_delete << key2
+            end
+          end
+        elsif val2[:query_location][0][0] >= val1[:query_location][0][0] and
+             val2[:query_location][0][0] < val1[:query_location][0][1]
+          overlap_len = val1[:query_location][0][1] - val2[:query_location][0][0]
+          val1_len = val1[:query_location][0][1]-val1[:query_location][0][0]
+          val2_len = val2[:query_location][0][1]-val2[:query_location][0][0]
+          if overlap_len.to_f/val1_len > 0.2 and overlap_len.to_f/val2_len > 0.2
+            if val1[:score] < val2[:score]
+              keys_to_delete << key1
+            else
+              keys_to_delete << key2
+            end
+          end
+        end
+
+      end
+
+    end
+
+    keys_to_delete.each do |k|
+      aln_hits.delete(k)
+    end
+
+  end                           # end of method
 
 
 end                             # end of class

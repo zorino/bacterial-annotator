@@ -175,14 +175,14 @@ class GenbankManip
 
 
   # add annotation to a genbank file produced by prodigal
-  def add_annotations annotations, outdir, mode, reference_locus
+  def add_annotations annotations, mode, reference_locus=nil
 
-    nb_of_added_ft = 0
+    # nb_of_added_ft = 0
     i = 0
 
     contig = @gbk.definition
 
-    if mode == :inplace
+    if mode == "inplace"
 
       # iterate through
       @gbk.features.each_with_index do |cds, ft_index|
@@ -232,19 +232,55 @@ class GenbankManip
       end
 
 
-    elsif mode == :new
+    elsif mode == "new"
 
-      
+      sorted_annotations = annotations.sort_by { |k, v| v[:query_location][0][0] }
 
-    end
+      new_features = {}
+      annotations_done = {}
 
+      @gbk.features.each_with_index do |ft, ft_index|
 
-    File.open("#{outdir}/#{contig}.gbk", "w") do |f|
-      f.write(@gbk.to_biosequence.output(:genbank))
+        sorted_annotations.each do |k,v|
+
+          next if annotations_done.has_key? k
+
+          if v[:query_location][0][0] < ft.locations[0].from
+
+            if v[:subject_location][0][0] > v[:subject_location][0][1]
+              location = "complement(#{v[:query_location][0][0]}..#{v[:query_location][0][1]})"
+            else
+              location = "#{v[:query_location][0][0]}..#{v[:query_location][0][1]}"
+            end
+
+            feature = Bio::Feature.new(v[:feature][0],location)
+            feature.qualifiers.push(Bio::Feature::Qualifier.new('product',v[:product][0])) if ! v[:product][0].nil? or v[:product][0] != ""
+            new_features[ft_index] = feature
+            annotations_done[k] = 1
+            break
+
+          end
+
+        end
+
+      end
+
+      new_features.each do |k,v|
+        @gbk.features.insert(k,v)
+      end
+
     end
 
   end
 
+
+  def save_genbank_to_file outdir
+
+    File.open("#{outdir}/#{@gbk.definition}.gbk", "w") do |f|
+      f.write(@gbk.to_biosequence.output(:genbank))
+    end
+
+  end
 
   ###################
   # Private Methods #
