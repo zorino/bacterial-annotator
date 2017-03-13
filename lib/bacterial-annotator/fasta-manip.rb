@@ -53,7 +53,7 @@ class FastaManip
   end
 
 
-  # Split Multi Genbanks file
+  # Split Multi Fasta file
   # RETURN : array of fasta files
   def split_fasta outdir
     @single_fasta = {}

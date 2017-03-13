@@ -17,7 +17,7 @@ require 'bacterial-annotator/remote-ncbi'
 class BacterialAnnotator
 
   # Initialize BacterialAnnotator
-  # options[:input], options[:refgenome], ROOT, options[:outdir], options)
+  # options, ROOT
   def initialize options, root
 
     @root = root
@@ -26,7 +26,7 @@ class BacterialAnnotator
 
     @minlength = @options[:minlength].to_i
     @pidentity = @options[:pidentity].to_f
-    @pidentity = @pidentity * 100 if @pidentity < 1.00
+    @pidentity = @pidentity * 100 if @pidentity <= 1.00
 
     if File.exists? (@outdir)
       if ! options.has_key? :force
@@ -216,7 +216,7 @@ class BacterialAnnotator
               @contig_annotations[contig_of_protein] = {}
             end
             # note = "Protein homology (#{v[:pId]}% identity) with gi:#{v[:hits][0][:gi]}"
-            note = "Protein homology (#{v[:pId]}% identity) with gi:#{v[:hits][0][:accession]}"
+            note = "Protein homology (#{v[:pId]}% identity) with #{v[:hits][0][:accession]}"
             if v[:hits][0][:org] != ""
               note +=  " from #{v[:hits][0][:org]}"
             end
