@@ -8,7 +8,7 @@
 
 
 
-class FastaManip
+class SequenceFasta
 
   attr_reader :fasta_flat, :fasta_file, :prodigal_files
 

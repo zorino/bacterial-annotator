@@ -9,10 +9,11 @@
 require 'bio'
 require 'fileutils'
 
-require 'bacterial-annotator/genbank-manip'
-require 'bacterial-annotator/fasta-manip'
-require 'bacterial-annotator/synteny-manip'
-require 'bacterial-annotator/remote-ncbi'
+require 'bacterial-annotator/sequence-fasta'
+require 'bacterial-annotator/sequence-annotation'
+require 'bacterial-annotator/sequence-synteny'
+require 'bacterial-annotator/sequence-remote-synteny'
+
 
 class BacterialAnnotator
 
@@ -38,12 +39,12 @@ class BacterialAnnotator
     end
     Dir.mkdir(@outdir)
 
-    @fasta = FastaManip.new(@options[:input], @options[:meta])
+    @fasta = SequenceFasta.new(@options[:input], @options[:meta])
 
     @with_refence_genome = false
     if @options.has_key? :refgenome
       @with_refence_genome = true
-      @refgenome = GenbankManip.new(@options[:refgenome], @outdir)
+      @refgenome = SequenceAnnotation.new(@options[:refgenome], @outdir)
     end
 
     @prot_synteny = nil
@@ -80,7 +81,7 @@ class BacterialAnnotator
 
       # run CDS annotation
       puts "\nRunning BLAT alignment with Reference Genome CDS.."
-      @prot_synteny = SyntenyManip.new(@fasta.prodigal_files[:proteins], @refgenome.cds_file, "Prot-Ref", @pidentity, "prot")
+      @prot_synteny = SequenceSynteny.new(@fasta.prodigal_files[:proteins], @refgenome.cds_file, "Prot-Ref", @pidentity, "prot")
       @prot_synteny.run_blat @root, @outdir
       @prot_synteny.extract_hits_prodigal :refgenome
 
@@ -113,7 +114,7 @@ class BacterialAnnotator
 
       # run RNA annotation
       puts "\nRunning BLAT alignment with Reference Genome RNA.."
-      @rna_synteny = SyntenyManip.new(@fasta.fasta_file, @refgenome.rna_file, "RNA-Ref", @pidentity, "dna")
+      @rna_synteny = SequenceSynteny.new(@fasta.fasta_file, @refgenome.rna_file, "RNA-Ref", @pidentity, "dna")
       @rna_synteny.run_blat @root, @outdir
       @rna_synteny.extract_hits_dna :rna
       @contig_annotations_rna = {}
@@ -150,7 +151,7 @@ class BacterialAnnotator
       db_file = @options[:external_db]
       ref_cds = extract_externaldb_prot_info db_file
 
-      externaldb_synteny = SyntenyManip.new(remaining_cds_file, db_file, "Prot-ExternalDB", @pidentity)
+      externaldb_synteny = SequenceSynteny.new(remaining_cds_file, db_file, "Prot-ExternalDB", @pidentity)
       puts "\nRunning BLAT alignment with External Database.."
       externaldb_synteny.run_blat @root, @outdir
       externaldb_synteny.extract_hits_prodigal :externaldb
@@ -193,10 +194,10 @@ class BacterialAnnotator
         valid = true
         begin
           # puts "\nNCBI blast on #{@remotedb} for #{cds_file}"
-          ncbiblast = RemoteNCBI.new(@remotedb,
-                                     cds_file,
-                                     "#{cds_file}.#{@remotedb}.xml",
-                                     @pidentity)
+          ncbiblast = SequenceRemoteSynteny.new(@remotedb,
+                                                cds_file,
+                                                "#{cds_file}.#{@remotedb}.xml",
+                                                @pidentity)
         rescue
           valid = false
         end
@@ -242,7 +243,7 @@ class BacterialAnnotator
     puts "\nParsing annotation into genbank files.."
     @contig_annotations.each do |contig, contig_prot_annotations|
       gbk_path = @fasta.prodigal_files[:gbk_path]
-      gbk_to_annotate = GenbankManip.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
+      gbk_to_annotate = SequenceAnnotation.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
       reference_locus = nil
       reference_locus = @refgenome.gbk.locus if @with_refence_genome
       gbk_to_annotate.add_annotations contig_prot_annotations, "inplace", reference_locus

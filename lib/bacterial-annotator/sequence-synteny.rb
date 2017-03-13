@@ -8,7 +8,7 @@
 
 
 
-class SyntenyManip
+class SequenceSynteny
 
   attr_reader :query_file, :subject_file, :aln_hits
 

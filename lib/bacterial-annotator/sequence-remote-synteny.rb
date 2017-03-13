@@ -10,7 +10,7 @@ require 'mechanize'
 require 'open-uri'
 require 'bio'
 
-class RemoteNCBI
+class SequenceRemoteSynteny
 
   attr_reader :aln_hits, :db, :xmloutput
 

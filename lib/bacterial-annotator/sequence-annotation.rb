@@ -8,7 +8,7 @@
 
 
 
-class GenbankManip
+class SequenceAnnotation
 
   attr_accessor :gbk, :coding_seq, :cds_file, :rna_file
 
