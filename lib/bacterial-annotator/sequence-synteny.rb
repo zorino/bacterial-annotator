@@ -7,7 +7,6 @@
 # licence:  	
 
 
-
 class SequenceSynteny
 
   attr_reader :query_file, :subject_file, :aln_hits
@@ -135,7 +134,7 @@ class SequenceSynteny
       end
     end
 
-    prune_aln_hits @aln_hits
+    # prune_aln_hits @aln_hits
 
   end                           # end of method
 
@@ -177,6 +176,8 @@ class SequenceSynteny
           annotations[p][:pId] = @aln_hits[p][:pId]
           annotations[p][:length] = @aln_hits[p][:length][hit_index]
           i+=1
+
+          puts "#{p} #{@aln_hits[p][:pId]} #{ref_cds[h][:product]}"
 
         else
 

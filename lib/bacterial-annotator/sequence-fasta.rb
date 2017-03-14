@@ -10,27 +10,34 @@
 
 class SequenceFasta
 
-  attr_reader :fasta_flat, :fasta_file, :prodigal_files
+  attr_reader :fasta_flat, :fasta_file, :annotation_files
 
   # Initialize fasta holder
   def initialize fasta_file, meta
 
     @fasta_file = fasta_file
     @fasta_flat = Bio::FlatFile.auto(@fasta_file)
-    @meta = meta
-    @prodigal_files = nil
-    @single_fasta = nil
-    @seq_info = nil
 
     if @fasta_flat.dbclass != Bio::FastaFormat
       abort "Aborting : The input sequence is not a fasta file !"
     end
 
+    # @contigs = extract_contigs(@fasta_flat)
+
+    @meta = meta
+
+    @annotation_files = nil
+    @single_fasta = nil
+    @seq_info = nil
+
+
   end
+
+
 
   # Run prodigal on the genome to annotate
   def run_prodigal root, outdir
-    @prodigal_files = {}
+    @annotation_files = {}
     Dir.mkdir "#{outdir}" if ! Dir.exists? "#{outdir}"
     if @meta
       system("#{root}/prodigal.linux -p meta -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
@@ -38,7 +45,7 @@ class SequenceFasta
       system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
     end
 
-    @prodigal_files = {multiGBK: "#{outdir}/Genbanks.gbk",
+    @annotation_files = {multiGBK: "#{outdir}/Genbanks.gbk",
                        contigs: [],
                        contigs_length: [],
                        genes: "#{outdir}/Genes.fa",
@@ -49,7 +56,7 @@ class SequenceFasta
     split_fasta outdir
     split_genbank outdir, "#{outdir}/Genbanks.gbk"
     extract_cds_names
-    @prodigal_files
+    @annotation_files
   end
 
 
@@ -60,8 +67,8 @@ class SequenceFasta
     Dir.mkdir("#{outdir}/single-fasta") if ! Dir.exists?("#{outdir}/single-fasta")
     @fasta_flat.each_entry do |seq|
       file_name = seq.definition.chomp.split(" ")[0]
-      @prodigal_files[:contigs] << "#{file_name}"
-      @prodigal_files[:contigs_length] << seq.seq.length
+      @annotation_files[:contigs] << "#{file_name}"
+      @annotation_files[:contigs_length] << seq.seq.length
       File.open("#{outdir}/single-fasta/#{file_name}.fasta", "w") do |fwrite|
         fwrite.write(seq)
       end
@@ -144,7 +151,7 @@ class SequenceFasta
 
     prot_ids = {}
     prot_length = {}
-    flatfile = Bio::FlatFile.auto(@prodigal_files[:proteins])
+    flatfile = Bio::FlatFile.auto(@annotation_files[:proteins])
 
     flatfile.each_entry do |entry|
       prot_id = entry.definition.split(" ")[0]
@@ -163,8 +170,8 @@ class SequenceFasta
       prot_array.sort! { |a,b| a.split("_")[-1].to_i <=> b.split("_")[-1].to_i }
     end
 
-    @prodigal_files[:prot_ids_by_contig] = prot_ids
-    @prodigal_files[:prot_ids_length] = prot_length
+    @annotation_files[:prot_ids_by_contig] = prot_ids
+    @annotation_files[:prot_ids_length] = prot_length
 
   end
 

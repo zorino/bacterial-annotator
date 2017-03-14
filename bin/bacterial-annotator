@@ -204,7 +204,7 @@ if ARGV.size > 1
   system("ba_raxml")
 
   options = {}
-  genomes_list = []
+  genomes_list = []             # TODO multiple input genomes
 
   if ARGV[0] == "annotate"
 

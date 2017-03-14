@@ -39,12 +39,12 @@ class BacterialAnnotator
     end
     Dir.mkdir(@outdir)
 
-    @fasta = SequenceFasta.new(@options[:input], @options[:meta])
+    @query_fasta = SequenceFasta.new(@options[:input], @options[:meta])
 
     @with_refence_genome = false
     if @options.has_key? :refgenome
       @with_refence_genome = true
-      @refgenome = SequenceAnnotation.new(@options[:refgenome], @outdir)
+      @ref_genome = SequenceAnnotation.new(@options[:refgenome], @outdir)
     end
 
     @prot_synteny = nil
@@ -64,14 +64,24 @@ class BacterialAnnotator
   # Will run prodigal on the query and prepare reference genome files
   def prepare_files_for_annotation
     puts "\nRunning Prodigal on your genome.."
-    @fasta.run_prodigal @root, @outdir
+    @query_fasta.run_prodigal @root, @outdir
     puts "Prodigal done."
     if @with_refence_genome
-      @refgenome.write_cds_to_file @outdir
-      @refgenome.write_rna_to_file @outdir
-      puts "Successfully loaded #{@refgenome.gbk.definition}"
+      @ref_genome.write_cds_to_file @outdir
+      @ref_genome.write_rna_to_file @outdir
+      puts "Successfully loaded #{@ref_genome.gbk.definition}"
     end
   end                           # end of method
+
+
+  def run_reference_synteny
+
+    prot_synteny = SequenceSynteny.new(@query_fasta)
+
+
+  end
+
+
 
   # run_alignment of reference genome proteins and the query
   def run_annotation
@@ -81,22 +91,26 @@ class BacterialAnnotator
 
       # run CDS annotation
       puts "\nRunning BLAT alignment with Reference Genome CDS.."
-      @prot_synteny = SequenceSynteny.new(@fasta.prodigal_files[:proteins], @refgenome.cds_file, "Prot-Ref", @pidentity, "prot")
+      @prot_synteny = SequenceSynteny.new(@query_fasta.annotation_files[:proteins], @ref_genome.cds_file, "Prot-Ref", @pidentity, "prot")
       @prot_synteny.run_blat @root, @outdir
       @prot_synteny.extract_hits_prodigal :refgenome
 
-      @fasta.prodigal_files[:contigs].each_with_index do |contig, contig_index|
+      @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
 
         # Skip short contigs
-        if @fasta.prodigal_files[:contigs_length][contig_index] < @minlength
+        if @query_fasta.annotation_files[:contigs_length][contig_index] < @minlength
           @annotation_stats[:short_contigs] << contig
           next
         end
 
-        contig_prots = @fasta.prodigal_files[:prot_ids_by_contig][contig]
+        contig_prots = @query_fasta.annotation_files[:prot_ids_by_contig][contig]
         # contig_to_annotate = contig_prots[0].split("_")[0..-2].join("_")
-        # contig_prot_annotations = @prot_synteny.get_annotation_for_contig contig_prots, @refgenome.coding_seq
-        @contig_annotations[contig] = @prot_synteny.get_annotation_for_contig contig, contig_prots, @refgenome.coding_seq
+        # contig_prot_annotations = @prot_synteny.get_annotation_for_contig contig_prots, @ref_genome.coding_seq
+        @contig_annotations[contig] = @prot_synteny.get_annotation_for_contig contig, contig_prots, @ref_genome.coding_seq
+
+        File.open("annotation-dump.json", "w") do |dump|
+          dump.write(@contig_annotations)
+        end
 
         remaining_cds = cumulate_annotation_stats_reference contig, @contig_annotations[contig]
 
@@ -114,18 +128,18 @@ class BacterialAnnotator
 
       # run RNA annotation
       puts "\nRunning BLAT alignment with Reference Genome RNA.."
-      @rna_synteny = SequenceSynteny.new(@fasta.fasta_file, @refgenome.rna_file, "RNA-Ref", @pidentity, "dna")
+      @rna_synteny = SequenceSynteny.new(@query_fasta.fasta_file, @ref_genome.rna_file, "RNA-Ref", @pidentity, "dna")
       @rna_synteny.run_blat @root, @outdir
       @rna_synteny.extract_hits_dna :rna
       @contig_annotations_rna = {}
-      @fasta.prodigal_files[:contigs].each_with_index do |contig, contig_index|
+      @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
         @contig_annotations_rna[contig] = @rna_synteny.get_annotation_for_contig contig
       end
 
     else                        # no reference genome
 
       # no reference genome .. will process all the CDS
-      foreign_cds_file = @fasta.prodigal_files[:proteins]
+      foreign_cds_file = @query_fasta.annotation_files[:proteins]
 
     end
 
@@ -242,10 +256,10 @@ class BacterialAnnotator
 
     puts "\nParsing annotation into genbank files.."
     @contig_annotations.each do |contig, contig_prot_annotations|
-      gbk_path = @fasta.prodigal_files[:gbk_path]
+      gbk_path = @query_fasta.annotation_files[:gbk_path]
       gbk_to_annotate = SequenceAnnotation.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
       reference_locus = nil
-      reference_locus = @refgenome.gbk.locus if @with_refence_genome
+      reference_locus = @ref_genome.gbk.locus if @with_refence_genome
       gbk_to_annotate.add_annotations contig_prot_annotations, "inplace", reference_locus
 
       if @contig_annotations_rna.has_key? contig
@@ -265,7 +279,7 @@ class BacterialAnnotator
   def cumulate_annotation_stats_reference contig, contig_prots_ann
 
     remaining_cds = []
-    contig_prots = @fasta.prodigal_files[:prot_ids_by_contig][contig]
+    contig_prots = @query_fasta.annotation_files[:prot_ids_by_contig][contig]
 
     @annotation_stats[:total_cds] += contig_prots.length if contig_prots
     contig_prots_ann.each do |k,v|
@@ -326,7 +340,7 @@ class BacterialAnnotator
       foreign_cds.push(*v)
     end
     inprot = false
-    File.open(@fasta.prodigal_files[:proteins]) do |fprot|
+    File.open(@query_fasta.annotation_files[:proteins]) do |fprot|
       while l=fprot.gets
         if l[0] == ">"
           inprot = false
@@ -445,7 +459,7 @@ class BacterialAnnotator
       end
     end
 
-    @refgenome.coding_seq.each do |ref_k, ref_v|
+    @ref_genome.coding_seq.each do |ref_k, ref_v|
 
       gene = ""
       coverage_ref = ""
@@ -455,7 +469,7 @@ class BacterialAnnotator
       if ref_annotated[ref_v[:protId]] != nil
         gene = ref_annotated[ref_v[:protId]][:key]
         coverage_ref = (ref_annotated[ref_v[:protId]][:length].to_f/ref_v[:bioseq].seq.length.to_f).round(2)
-        query_length = @fasta.prodigal_files[:prot_ids_length][gene]
+        query_length = @query_fasta.annotation_files[:prot_ids_length][gene]
         coverage_query = (ref_annotated[ref_v[:protId]][:length].to_f/query_length.to_f).round(2)
         pId = ref_annotated[ref_v[:protId]][:pId]
       end

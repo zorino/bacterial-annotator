@@ -377,6 +377,7 @@ class BacterialComparator
     cmd = system("#{@root}/raxml.linux -T 3 -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.PepTree -m PROTGAMMAAUTO -n PEP_BS_TREE -w #{tree_dir}")
     cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.PEP_BS_TREE #{tree_dir}/../")
     Dir.chdir(ori_dir)
+
   end
 
 
