@@ -48,8 +48,6 @@ class SequenceRemoteSynteny
 
     f = @seq_file.split("/")[-1]
 
-    seq_fasta = File.read(@seq_file)
-
     a = Mechanize.new { |agent|
       agent.user_agent_alias = 'Linux Firefox'
       agent.ignore_bad_chunking = true
@@ -147,7 +145,7 @@ class SequenceRemoteSynteny
 
   end                           # end of method
 
-  # extract blast results from 
+  # extract blast results from
   def extract_blast_results
 
     if !@valid
@@ -182,7 +180,8 @@ class SequenceRemoteSynteny
               if ! definition_clean[/\[.*\]/].nil?
                 organism = definition_clean[/\[.*\]/].gsub("[","").gsub("]","")
               end
-              @aln_hits[prot_id] = {
+
+              @aln_hits[prot_id][:homology] = {
                 pId: (hit.identity.to_f/hit.target_len.to_f*100).round(2),
                 length: hit.target_len.to_i,
                 evalue: hit.evalue,

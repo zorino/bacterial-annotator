@@ -49,12 +49,8 @@ annotate [OPTIONS]
     --refgenome/-g	<GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
     --guessref	 	Will guess the best reference genome to use for the annotation.
 
-    --remotedb		<remote_database> [nr|refseq|swissprot]
-			  Complete the annotation of remaining CDS with a remote NCBI BLAST
-			  Can be very slow, better to use an external database !
-
     --externaldb	<proteins fasta_file>
-			  Complete or do the annotation of remaining CDS with this database (a protein fasta file).
+			  Finish or do a complete annotation with this sequence database (a protein fasta file).
 			  Fasta headers need to look similar to NCBI or EBI fasta headers, ex.:
 			  >gi|385721352|gb|AFI72857.1| NDM-1 [Escherichia coli]
 			  >sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
@@ -103,8 +99,6 @@ def parseOptions_annotate
       options[:pcoverage] = ARGV.shift
     when "--meta"
       options[:meta] = 1
-    when "--remotedb"
-      options[:remote_db] = ARGV.shift
     when "--externaldb"
       options[:external_db] = ARGV.shift
     when "--help", "-h"
@@ -223,7 +217,6 @@ if ARGV.size > 1
 
     # Check Options
     if ! options.has_key? :refgenome and
-       ! options.has_key? :remote_db and
        ! options.has_key? :external_db
       puts "You didn't provide a reference genome or a database for the annotation !"
     elsif ! options.has_key? :input
