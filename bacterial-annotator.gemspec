@@ -1,17 +1,16 @@
 Gem::Specification.new do |s|
   s.name        = 'bacterial-annotator'
-  s.version     = '0.4.1'
-  s.date        = '2017-02-14'
+  s.version     = '0.5.0'
+  s.date        = '2017-05-30'
   s.summary     = "Bacterial Annotator"
   s.description = "GEM to annotate bacterial genome sequence based on a reference genome and complete the annotation with an external database or a remote database."
   s.authors     = ["Maxime Deraspe"]
   s.email       = 'maximilien1er@gmail.com'
   s.files       = ["lib/bacterial-comparator.rb",
                    "lib/bacterial-annotator.rb",
-                   "lib/bacterial-annotator/genbank-manip.rb",
-                   "lib/bacterial-annotator/fasta-manip.rb",
-                   "lib/bacterial-annotator/synteny-manip.rb",
-                   "lib/bacterial-annotator/remote-ncbi.rb"]
+                   "lib/bacterial-annotator/sequence-annotation.rb",
+                   "lib/bacterial-annotator/sequence-fasta.rb",
+                   "lib/bacterial-annotator/sequence-synteny.rb"]
   s.homepage    = 'http://rubygems.org/gems/bacterial-annotator'
   s.license       = 'GPL-3.0'
   s.require_path = 'lib'
