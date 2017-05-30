@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # author:  	maxime déraspe
 # email:	maximilien1er@gmail.com
-# review:  	
 # date:    	15-02-24
 # version: 	0.0.1
 # licence:  	
@@ -67,13 +66,16 @@ class SequenceAnnotation
           protId = locustag
         end
 
-        @coding_seq[protId] = {protId: protId,
-                               location: loc,
-                               locustag: locustag,
-                               gene: gene[0],
-                               product: product[0],
-                               bioseq: pepBioSeq,
-                               bioseq_gene: dnaBioSeq}
+        @coding_seq[protId] = {
+          protId: protId,
+          location: loc,
+          locustag: locustag,
+          gene: gene[0],
+          product: product[0],
+          bioseq: pepBioSeq,
+          bioseq_gene: dnaBioSeq,
+          bioseq_len: pepBioSeq.length
+        }
       end
 
     end
@@ -110,11 +112,13 @@ class SequenceAnnotation
         dna = get_DNA(ft,@bioseq)
         dnaBioSeq = Bio::Sequence.auto(dna)
 
-        @rna_seq[locustag] = {type: ft.feature.to_s,
-                              location: loc,
-                              locustag: locustag,
-                              product: product,
-                              bioseq_gene: dnaBioSeq}
+        @rna_seq[locustag] = {
+          type: ft.feature.to_s,
+          location: loc,
+          locustag: locustag,
+          product: product,
+          bioseq_gene: dnaBioSeq
+        }
 
       end
 
@@ -123,7 +127,6 @@ class SequenceAnnotation
     @rna_seq
 
   end
-
 
 
   # Print CDS to files
@@ -174,11 +177,107 @@ class SequenceAnnotation
   end
 
 
+  # add annotation from reference prot synteny
+  def add_annotation_ref_synteny_prot synteny_prot, annotations, ref_genome=nil
+
+    contig = @gbk.definition
+
+    prot_iterator = 0
+    @gbk.features.each_with_index do |cds, ft_index|
+
+      next if cds.feature != "CDS"
+
+      prot_iterator+=1
+      prot_id = contig+"_"+prot_iterator.to_s
+
+      ftArray = []
+      cds.qualifiers = []
+
+      hit = nil
+
+      next if ! synteny_prot.has_key? prot_id or
+        ! synteny_prot[prot_id].has_key? :homology
+
+      # puts "#{annotations.keys}"
+      if annotations.has_key? synteny_prot[prot_id][:homology][:hits][0]
+        hit = annotations[synteny_prot[prot_id][:homology][:hits][0]]
+        # puts hit
+      else
+        puts "no hit for #{prot_id}"
+        next
+      end
+
+      # hit = annotations[synteny_prot[prot_id][:homology][:hits][0]]
+
+      if synteny_prot.has_key? prot_id
+
+        locus, gene, product, note, inference = nil
+        locus = hit[:locustag]
+        gene = hit[:gene]
+        product = hit[:product]
+        note = hit[:note]
+        inference = hit[:inference]
+        pId = synteny_prot[prot_id][:homology][:pId]
+        cov_query = (synteny_prot[prot_id][:homology][:cov_query]*100).round(2)
+        cov_subject = (synteny_prot[prot_id][:homology][:cov_subject]*100).round(2)
+        reference_prot_id = synteny_prot[prot_id][:homology][:hits][0]
+
+        qLocusTag = Bio::Feature::Qualifier.new('locus_tag', "#{prot_id}")
+        ftArray.push(qLocusTag)
+
+        if gene != nil
+          qGene = Bio::Feature::Qualifier.new('gene', gene)
+          ftArray.push(qGene)
+        end
+
+        if product != nil
+          qProd = Bio::Feature::Qualifier.new('product', product)
+          ftArray.push(qProd)
+        end
+
+        # check if there is a reference genome.. reference_locus shouldn't be nil in that case
+        if locus != nil
+          qNote = Bio::Feature::Qualifier.new('note', "corresponds to #{locus} locus (AA identity: #{pId}%; coverage(q,s): #{cov_query}%,#{cov_subject}%) from #{ref_genome}")
+          ftArray.push(qNote)
+
+          db_source = "[DBSource]"
+          if reference_prot_id.include? "_"
+            db_source = "RefSeq"
+          else
+            db_source = "INSD"
+          end
+          qInference = Bio::Feature::Qualifier.new('inference', "similar to AA sequence:#{db_source}:#{reference_prot_id}")
+          ftArray.push(qInference)
+
+        end
+
+        if note != nil
+          qNote = Bio::Feature::Qualifier.new('note', note)
+          ftArray.push(qNote)
+        end
+
+        if inference != nil
+          qInference = Bio::Feature::Qualifier.new('inference', inference)
+          ftArray.push(qInference)
+        end
+
+      end
+
+      cds.qualifiers = ftArray
+
+    end
+
+
+  end
+
+
   # add annotation to a genbank file produced by prodigal
   def add_annotations annotations, mode, reference_locus=nil
 
     # nb_of_added_ft = 0
     i = 0
+
+    fdebug = File.open("debug-add-annotation.txt","w")
 
     contig = @gbk.definition
 
@@ -195,9 +294,19 @@ class SequenceAnnotation
         i += 1
         prot_id = contig+"_"+i.to_s
         hit = nil
-        hit = annotations[prot_id] if annotations.has_key? prot_id
+
+        if annotations.has_key? prot_id
+          hit = annotations[prot_id]
+        else
+          puts "no hit for #{prot_id}"
+          next
+        end
 
         if hit != nil
+
+          fdebug.write(hit)
+          fdebug.write("\n")
+
           locus, gene, product, note = nil
           locus = hit[:locustag]
           gene = hit[:gene]
@@ -271,6 +380,8 @@ class SequenceAnnotation
 
     end
 
+    fdebug.close
+
   end
 
 
@@ -315,3 +426,4 @@ class SequenceAnnotation
 
 
 end                             # end of Class
+

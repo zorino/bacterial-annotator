@@ -18,45 +18,58 @@ require 'bacterial-annotator/sequence-remote-synteny'
 class BacterialAnnotator
 
   # Initialize BacterialAnnotator
-  # options, ROOT
+  # options, ROOT (path)
   def initialize options, root
 
     @root = root
     @options = options
-    @outdir = @options[:outdir]
 
     @minlength = @options[:minlength].to_i
-    @pidentity = @options[:pidentity].to_f
-    @pidentity = @pidentity * 100 if @pidentity <= 1.00
+    @options[:minlength] = @options[:minlength].to_i
+    @options[:pidentity] = @options[:pidentity].to_f
+    @options[:pidentispacemacs-lightty] = @options[:pidentity] * 100 if @options[:pidentity] <= 1.00
+    @options[:pcoverage] = @options[:pcoverage].to_f
+    @options[:pcoverage] = @options[:pcoverage] / 100 if @options[:pcoverage] > 1.00
 
-    if File.exists? (@outdir)
+    if File.exists? (@options[:outdir])
       if ! options.has_key? :force
         abort "Output directory already exist ! Choose another one or use -f to overwrite"
       else
-        puts "Overwriting output directory #{@outdir}"
-        FileUtils.remove_dir(@outdir, :force=>true)
+        puts "Overwriting output directory #{@options[:outdir]}"
+        FileUtils.remove_dir(@options[:outdir], :force=>true)
       end
     end
-    Dir.mkdir(@outdir)
+    Dir.mkdir(@options[:outdir])
 
     @query_fasta = SequenceFasta.new(@options[:input], @options[:meta])
 
     @with_refence_genome = false
     if @options.has_key? :refgenome
       @with_refence_genome = true
-      @ref_genome = SequenceAnnotation.new(@options[:refgenome], @outdir)
+      @ref_genome = SequenceAnnotation.new(@options[:refgenome], @options[:outdir])
     end
 
+    @with_external_db = false
+    @with_external_db = true if @options.has_key? :external_db
+
     @prot_synteny = nil
-    @annotation_stats = {by_contigs: {},
-                         annotated_cds: 0,
-                         total_cds: 0,
-                         foreign_contigs: [],
-                         synteny_contigs: [],
-                         short_contigs: []}
+    @annotation_stats = {
+      by_contigs: {},
+      annotated_cds: 0,
+      flagged_cds: [],
+      total_cds: 0,
+      foreign_contigs: [],
+      synteny_contigs: [],
+      short_contigs: []
+    }
 
     @contig_foreign_cds = {}
+
     @contig_annotations = {}
+
+    @contig_annotations_externaldb = {}
+
+    @contig_annotations_cds = {}
 
   end                           # end of method
 
@@ -64,23 +77,41 @@ class BacterialAnnotator
   # Will run prodigal on the query and prepare reference genome files
   def prepare_files_for_annotation
     puts "\nRunning Prodigal on your genome.."
-    @query_fasta.run_prodigal @root, @outdir
+    @query_fasta.run_prodigal @root, @options[:outdir]
     puts "Prodigal done."
     if @with_refence_genome
-      @ref_genome.write_cds_to_file @outdir
-      @ref_genome.write_rna_to_file @outdir
+      @ref_genome.write_cds_to_file @options[:outdir]
+      @ref_genome.write_rna_to_file @options[:outdir]
       puts "Successfully loaded #{@ref_genome.gbk.definition}"
     end
   end                           # end of method
 
 
-  def run_reference_synteny
+  def run_reference_synteny_prot
 
-    prot_synteny = SequenceSynteny.new(@query_fasta)
+    ref_synteny_prot = SequenceSynteny.new(@query_fasta.annotation_files[:proteins], @ref_genome.cds_file,
+                                           "Prot-Ref", @options[:pidentity], @options[:pcoverage], "prot")
 
+    ref_synteny_prot.run_blat @root, @options[:outdir]
+
+    ref_synteny_prot.extract_hits :refgenome
+
+    fdebug = File.open("debug-synteny.tsv", "w")
+
+    ref_synteny_prot.query_sequences.each do |k,v|
+      if v.has_key? :homology
+        @contig_annotations_cds[v[:contig]] = [] if ! @contig_annotations_cds.has_key? v[:contig]
+        @contig_annotations_cds[v[:contig]] << k
+        fdebug.write("#{v[:contig]}\t#{k}\t#{v[:homology][:pId]}\t#{v[:homology][:cov_query]}\t#{v[:homology][:cov_subject]}\t#{v[:homology][:hits].join(',')}\t#{@ref_genome.coding_seq[v[:homology][:hits][0]][:locustag]}\t#{@ref_genome.coding_seq[v[:homology][:hits][0]][:product]}\t#{v[:homology][:assert_cutoff].join(',')}\n")
+      else
+        fdebug.write("#{v[:contig]} #{k} NONE...\n")
+      end
+    end
+    fdebug.close
+
+    ref_synteny_prot
 
   end
-
 
 
   # run_alignment of reference genome proteins and the query
@@ -89,12 +120,11 @@ class BacterialAnnotator
     # process reference genome synteny
     if @with_refence_genome        # Annotation with the Reference Genome
 
-      # run CDS annotation
-      puts "\nRunning BLAT alignment with Reference Genome CDS.."
-      @prot_synteny = SequenceSynteny.new(@query_fasta.annotation_files[:proteins], @ref_genome.cds_file, "Prot-Ref", @pidentity, "prot")
-      @prot_synteny.run_blat @root, @outdir
-      @prot_synteny.extract_hits_prodigal :refgenome
+      @prot_synteny_refgenome = run_reference_synteny_prot
 
+      # iterate over each contig
+      #     discard short contig
+      #     cumulate statistics of homolog CDS
       @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
 
         # Skip short contigs
@@ -103,16 +133,7 @@ class BacterialAnnotator
           next
         end
 
-        contig_prots = @query_fasta.annotation_files[:prot_ids_by_contig][contig]
-        # contig_to_annotate = contig_prots[0].split("_")[0..-2].join("_")
-        # contig_prot_annotations = @prot_synteny.get_annotation_for_contig contig_prots, @ref_genome.coding_seq
-        @contig_annotations[contig] = @prot_synteny.get_annotation_for_contig contig, contig_prots, @ref_genome.coding_seq
-
-        File.open("annotation-dump.json", "w") do |dump|
-          dump.write(@contig_annotations)
-        end
-
-        remaining_cds = cumulate_annotation_stats_reference contig, @contig_annotations[contig]
+        remaining_cds = cumulate_annotation_stats_reference contig
 
         if ! remaining_cds.empty?
           @contig_foreign_cds[contig] = remaining_cds
@@ -128,8 +149,9 @@ class BacterialAnnotator
 
       # run RNA annotation
       puts "\nRunning BLAT alignment with Reference Genome RNA.."
-      @rna_synteny = SequenceSynteny.new(@query_fasta.fasta_file, @ref_genome.rna_file, "RNA-Ref", @pidentity, "dna")
-      @rna_synteny.run_blat @root, @outdir
+      @rna_synteny = SequenceSynteny.new(@query_fasta.fasta_file, @ref_genome.rna_file,
+                                         "RNA-Ref", @options[:pidentity], @options[:pcoverage], "dna")
+      @rna_synteny.run_blat @root, @options[:outdir]
       @rna_synteny.extract_hits_dna :rna
       @contig_annotations_rna = {}
       @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
@@ -150,7 +172,7 @@ class BacterialAnnotator
     parse_genbank_files
 
     puts "\nPrinting Statistics.."
-    print_stats "#{@outdir}/Annotation-Stats.txt"
+    print_stats "#{@options[:outdir]}"
 
 
   end                           # end of method
@@ -165,34 +187,50 @@ class BacterialAnnotator
       db_file = @options[:external_db]
       ref_cds = extract_externaldb_prot_info db_file
 
-      externaldb_synteny = SequenceSynteny.new(remaining_cds_file, db_file, "Prot-ExternalDB", @pidentity)
-      puts "\nRunning BLAT alignment with External Database.."
-      externaldb_synteny.run_blat @root, @outdir
-      externaldb_synteny.extract_hits_prodigal :externaldb
+      @externaldb_synteny = SequenceSynteny.new(remaining_cds_file, db_file,
+                                                "Prot-ExternalDB", @options[:pidentity],
+                                                @options[:pcoverage], "prot")
 
-      externaldb_synteny.aln_hits.each do |k,v|
+      puts "\nRunning BLAT alignment with External Database.."
+      @externaldb_synteny.run_blat @root, @options[:outdir]
+      @externaldb_synteny.extract_hits :externaldb
+
+      @externaldb_synteny.query_sequences.each do |k, v|
+
         contig_of_protein = k.split("_")[0..-2].join("_")
 
-        if ! @contig_annotations.has_key? contig_of_protein
-          @contig_annotations[contig_of_protein] = {}
+        if ! @contig_annotations_externaldb.has_key? contig_of_protein
+          @contig_annotations_externaldb[contig_of_protein] = {}
         end
 
-        hit_gi = v[:hits][0]
+        next if ! v.has_key? :homology
+
+        @contig_annotations_cds[contig_of_protein] << k
+
+        hit_gi = v[:homology][:hits][0]
 
         # note = "Protein homology (#{v[:pId]}% identity) with gi:#{hit_gi}"
-        note = "Protein homology (#{v[:pId]}% identity) with #{hit_gi}"
+        cov_query = (v[:homology][:cov_query]*100).round(2)
+        cov_subject = (v[:homology][:cov_subject]*100).round(2)
+        note = "Protein homology (AA identity: #{v[:homology][:pId]}%; coverage (q,s): #{cov_query}%,#{cov_subject}%) with #{ref_cds[hit_gi][:prot_id]}"
+        inference = "similar to AA sequence:#{ref_cds[hit_gi][:db_source]}:#{ref_cds[hit_gi][:prot_id]}"
 
         if ref_cds[hit_gi][:org] != ""
           note +=  " from #{ref_cds[hit_gi][:org]}"
         end
-        @contig_annotations[contig_of_protein][k] = {product: ref_cds[hit_gi][:product],
-                                                     feature: "cds",
-                                                     gene: nil,
-                                                     locustag: nil,
-                                                     note: note}
+
+        @contig_annotations_externaldb[contig_of_protein][v[:homology][:hits][0]] = {
+          product: ref_cds[hit_gi][:product],
+          feature: "cds",
+          gene: nil,
+          prot_id: ref_cds[hit_gi][:prot_id],
+          locustag: nil,
+          note: note,
+          inference: inference
+        }
+
 
       end
-
 
     elsif @options.has_key? :remote_db	# from a remote DB
 
@@ -211,7 +249,7 @@ class BacterialAnnotator
           ncbiblast = SequenceRemoteSynteny.new(@remotedb,
                                                 cds_file,
                                                 "#{cds_file}.#{@remotedb}.xml",
-                                                @pidentity)
+                                                @options[:pidentity])
         rescue
           valid = false
         end
@@ -220,26 +258,35 @@ class BacterialAnnotator
         if !valid
           puts "Problem NCBI blast for foreign proteins"
         else
+
           ncbiblast.extract_blast_results
           if ! ncbiblast.aln_hits
             puts "Didn't produce the annotation for #{cds_file}"
             next
           end
+
           ncbiblast.aln_hits.each do |k,v|
+
             contig_of_protein = k.split("_")[0..-2].join("_")
+
             if ! @contig_annotations.has_key? contig_of_protein
-              @contig_annotations[contig_of_protein] = {}
+              @contig_annotations_externaldb[contig_of_protein] = {}
             end
-            # note = "Protein homology (#{v[:pId]}% identity) with gi:#{v[:hits][0][:gi]}"
-            note = "Protein homology (#{v[:pId]}% identity) with #{v[:hits][0][:accession]}"
+
+            @contig_annotations_cds[contig_of_protein] << k
+
+            note = "Protein homology (#{v[:pId]}% identity) with gi:#{v[:hits][0][:gi]}"
+
             if v[:hits][0][:org] != ""
               note +=  " from #{v[:hits][0][:org]}"
             end
-            @contig_annotations[contig_of_protein][k] = {product: v[:hits][0][:product],
-                                                         feature: "cds",
-                                                         gene: nil,
-                                                         locustag: nil,
-                                                         note: note}
+            @contig_annotations_externaldb[contig_of_protein][] = {
+              product: v[:hits][0][:product],
+              feature: "cds",
+              gene: nil,
+              locustag: k,
+              note: note
+            }
           end
 
         end
@@ -255,12 +302,24 @@ class BacterialAnnotator
   def parse_genbank_files
 
     puts "\nParsing annotation into genbank files.."
-    @contig_annotations.each do |contig, contig_prot_annotations|
+    @contig_annotations_cds.each do |contig, contig_prots|
+
       gbk_path = @query_fasta.annotation_files[:gbk_path]
       gbk_to_annotate = SequenceAnnotation.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
-      reference_locus = nil
-      reference_locus = @ref_genome.gbk.locus if @with_refence_genome
-      gbk_to_annotate.add_annotations contig_prot_annotations, "inplace", reference_locus
+
+      if @with_external_db
+        gbk_to_annotate.add_annotation_ref_synteny_prot(
+          (@prot_synteny_refgenome.query_sequences.merge(@externaldb_synteny.query_sequences)),
+          @contig_annotations_externaldb[contig].merge(@ref_genome.coding_seq),
+          @options[:refgenome].gsub(/.gb.*/,"")
+        )
+      else
+        gbk_to_annotate.add_annotation_ref_synteny_prot(
+          @prot_synteny_refgenome.query_sequences,
+          @ref_genome.coding_seq,
+          @options[:refgenome].gsub(/.gb.*/,"")
+        )
+      end
 
       if @contig_annotations_rna.has_key? contig
         # puts "RNA annotation"
@@ -276,34 +335,65 @@ class BacterialAnnotator
 
   # cumulate the stats for the synteny
   # return : unannotated cds array
-  def cumulate_annotation_stats_reference contig, contig_prots_ann
+  # def cumulate_annotation_stats_reference contig, contig_prots_ann
+  def cumulate_annotation_stats_reference contig
 
     remaining_cds = []
     contig_prots = @query_fasta.annotation_files[:prot_ids_by_contig][contig]
 
     @annotation_stats[:total_cds] += contig_prots.length if contig_prots
-    contig_prots_ann.each do |k,v|
-      if v != nil
-        @annotation_stats[:annotated_cds] += 1
-      else
-        remaining_cds << k
-      end
+
+    # count contig as foreign if no cds homolog in reference genome
+    if @contig_annotations_cds.has_key? contig and
+       @contig_annotations_cds[contig].length > 0
+      @annotation_stats[:synteny_contigs] << contig
+    else
+      @annotation_stats[:foreign_contigs] << contig
+      return
     end
 
-    # Annotated Contigs
-    if contig_prots_ann.keys.length < 1
-      @annotation_stats[:foreign_contigs] << contig
-    else
-      @annotation_stats[:synteny_contigs] << contig
+    contig_prots.each do |prot|
+
+      if @contig_annotations_cds[contig].include? prot
+
+        if @prot_synteny_refgenome.query_sequences[prot].has_key? :homology and
+           @prot_synteny_refgenome.query_sequences[prot][:homology][:hits].length > 0
+
+          assert_sum = @prot_synteny_refgenome.query_sequences[prot][:homology][:assert_cutoff].inject(:+)
+          if assert_sum > 2
+            @annotation_stats[:annotated_cds] += 1
+          else
+            flag = "#{prot}"
+            flag += "\t#{@prot_synteny_refgenome.query_sequences[prot][:homology][:assert_cutoff].join(',')}"
+            flag += "\t#{@prot_synteny_refgenome.query_sequences[prot][:homology][:pId]}"
+            flag += "\t#{(@prot_synteny_refgenome.query_sequences[prot][:homology][:cov_query]*100).round(2)}"
+            flag += "\t#{(@prot_synteny_refgenome.query_sequences[prot][:homology][:cov_subject]*100).round(2)}"
+            @annotation_stats[:flagged_cds] << flag
+          end
+
+        else
+
+          puts "No " + prot
+
+        end
+
+      else
+
+        remaining_cds << prot
+
+      end
+
     end
 
     remaining_cds
+
   end                           # end of method
 
 
   # print statistics to file
-  def print_stats file
+  def print_stats file_dir
 
+    file = file_dir + "/Annotation-Stats.txt"
     total_nb_contigs = @annotation_stats[:foreign_contigs].length +
                        @annotation_stats[:synteny_contigs].length +
                        @annotation_stats[:short_contigs].length
@@ -322,10 +412,19 @@ class BacterialAnnotator
 
       fopen.write("#CDS annotations based on reference genomes\n")
       fopen.write("Annotated CDS :\t\t\t" + @annotation_stats[:annotated_cds].to_s + "\n")
+      fopen.write("Flagged CDS :\t\t\t" + @annotation_stats[:flagged_cds].length.to_s + "\n")
       fopen.write("Total CDS :\t\t\t" + @annotation_stats[:total_cds].to_s + "\n")
       fopen.write("% CDS annotated :\t\t" + (p_cds_annotated*100).round(2).to_s + "\n")
       fopen.write("\n")
 
+    end
+
+    file_flagged_cds = file_dir + "/Prot-flagged.tsv"
+    File.open(file_flagged_cds, "w") do |fopen|
+      fopen.write("CDS locus\tAssertion-CutOff\tAA Identity\tCovQuery(%)\tCovSubject(%)\n")
+      @annotation_stats[:flagged_cds].each do |fcds|
+        fopen.write("#{fcds}\n")
+      end
     end
 
   end                           # end of method
@@ -334,7 +433,7 @@ class BacterialAnnotator
   # dump cds to file for blast
   def dump_cds
 
-    cds_outfile = File.open("#{@outdir}/Proteins-foreign.fa","w")
+    cds_outfile = File.open("#{@options[:outdir]}/Proteins-foreign.fa","w")
     foreign_cds = []
     @contig_foreign_cds.each_value do |v|
       foreign_cds.push(*v)
@@ -355,7 +454,7 @@ class BacterialAnnotator
       end
     end
     cds_outfile.close
-    return "#{@outdir}/Proteins-foreign.fa"
+    return "#{@options[:outdir]}/Proteins-foreign.fa"
 
   end                           # end of method
 
@@ -378,25 +477,46 @@ class BacterialAnnotator
         if l[0] == ">"
 
           lA = l.chomp.split("|")
-          key_gi = lA[1]
+          #key_gi = lA[1]
+          key_gi = l.split(" ")[0][1..-1]
           product_long = lA[-1]
 
           organism = ""
           product = ""
+          db_source = "[DBSource]"
 
           if product_long.include? " [" and product_long.include? "]" # NCBI
             organism = product_long[/\[.*?\]/]
             product = product_long.split(" [")[0].strip
-          elsif product_long.include? "OS="
+          elsif product_long.include? "OS=" # Swissprot / TrEMBL
             product_tmp = product.split("OS=")
             organism = product_tmp[1].split(/[A-Z][A-Z]=/)[0].strip
             product = product_tmp[0].strip
-          elsif product_long.include? "[A-Z][A-Z]="
+          elsif product_long.include? "[A-Z][A-Z]=" # NCBI
             product = product_long.split(/[A-Z][A-Z]=/)[0].strip
+          else
+            product = product_long
           end
+
           org = organism.gsub("[","").gsub("]","")
+
           product.lstrip!
-          ref_cds[key_gi] = {product: product, org: org}
+          prot_id = nil
+
+          if key_gi.count("|") == 4
+            if lA[2] == "ref"
+              db_source = "RefSeq"
+            end
+            prot_id = lA[3]
+          elsif key_gi.count("|") == 2
+            if lA[0].include? == "sp" or
+              lA[0].include? == "tr"
+              db_source = "UniProtKB"
+            end
+            prot_id = lA[1]
+          end
+
+          ref_cds[key_gi] = {product: product, org: org, prot_id: prot_id, db_source: db_source}
 
         end
 
@@ -413,7 +533,7 @@ class BacterialAnnotator
   def split_remaining_cds_file file
 
     cds_files = []
-    outdir = "#{@outdir}/Protein-foreign.split"
+    outdir = "#{@options[:outdir]}/Protein-foreign.split"
 
     Dir.mkdir(outdir) if ! Dir.exists? outdir
 
@@ -444,17 +564,15 @@ class BacterialAnnotator
 
   end                           # end of method
 
-  # will reference CDS synteny to file
+  # will dump reference CDS synteny to file
   def dump_ref_synteny_to_file
 
     # Iterate over each Ref protein and print syntheny
-    synteny_file = File.open("#{@outdir}/Prot-Synteny.tsv","w")
+    synteny_file = File.open("#{@options[:outdir]}/Prot-Synteny.tsv","w")
     synteny_file.write("RefLocusTag\tRefProtID\tRefLength\tRefCoverage\tIdentity\tQueryGene\tQueryLength\tQueryCoverage\n")
     ref_annotated = {}
-    @contig_annotations.each do |contig,prot_annotations|
+    @contig_annotations.each do |contig, prot_annotations|
       prot_annotations.each do |key,prot|
-        # p key
-        # p prot
         ref_annotated[prot[:protId]] = {key: key, length: prot[:length], pId: prot[:pId]} if prot != nil
       end
     end

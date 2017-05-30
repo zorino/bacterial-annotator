@@ -46,22 +46,25 @@ annotate [OPTIONS]
     --force/-f		Force to overwrite the output directory
 
   // Dataset
-    --refgenome/-g        <GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
-    --guessref		Will guess the best reference genome to use for the annotation.
+    --refgenome/-g	<GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
+    --guessref	 	Will guess the best reference genome to use for the annotation.
 
     --remotedb		<remote_database> [nr|refseq|swissprot]
 			  Complete the annotation of remaining CDS with a remote NCBI BLAST
 			  Can be very slow, better to use an external database !
 
-    --externaldb		<proteins fasta_file>
+    --externaldb	<proteins fasta_file>
 			  Complete or do the annotation of remaining CDS with this database (a protein fasta file).
 			  Fasta headers need to look similar to NCBI or EBI fasta headers, ex.:
 			  >gi|385721352|gb|AFI72857.1| NDM-1 [Escherichia coli]
 			  >sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
 
   // Other options
-    --pidentity		Minimum percentage identity to incorporate a CDS annotation [default=0.7]
-    --minlength		Minimum contig length for annotation [default=500]
+    --pidentity		<% identity> Minimum percentage identity to incorporate a CDS annotation [default=0.7]
+    --pcoverage		<% identity> Minimum percentage of coverage over protein alignment to incorporate a CDS annotation [default=0.7]
+			             .. otherwise hint for a non-functional protein
+
+    --minlength		<length> Minimum contig length for annotation [default=500]
 
     --meta		Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
 
@@ -77,6 +80,7 @@ def parseOptions_annotate
   # default options
   options[:outdir] = "BAnnotation"
   options[:pidentity] = 70
+  options[:pcoverage] = 70
   options[:minlength] = 500
   options[:meta] = 0
 
@@ -95,6 +99,8 @@ def parseOptions_annotate
       options[:minlength] = ARGV.shift
     when "--pidentity"
       options[:pidentity] = ARGV.shift
+    when "--pcoverage"
+      options[:pcoverage] = ARGV.shift
     when "--meta"
       options[:meta] = 1
     when "--remotedb"

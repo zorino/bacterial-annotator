@@ -30,13 +30,12 @@ class SequenceFasta
     @single_fasta = nil
     @seq_info = nil
 
-
   end
-
 
 
   # Run prodigal on the genome to annotate
   def run_prodigal root, outdir
+
     @annotation_files = {}
     Dir.mkdir "#{outdir}" if ! Dir.exists? "#{outdir}"
     if @meta
@@ -45,18 +44,22 @@ class SequenceFasta
       system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
     end
 
-    @annotation_files = {multiGBK: "#{outdir}/Genbanks.gbk",
-                       contigs: [],
-                       contigs_length: [],
-                       genes: "#{outdir}/Genes.fa",
-                       proteins: "#{outdir}/Proteins.fa",
-                       prot_ids_by_contig: {},
-                       fasta_path: "#{outdir}/single-fasta/",
-                       gbk_path: "#{outdir}/single-genbank/"}
+    @annotation_files = {
+      multiGBK: "#{outdir}/Genbanks.gbk",
+      contigs: [],
+      contigs_length: [],
+      genes: "#{outdir}/Genes.fa",
+      proteins: "#{outdir}/Proteins.fa",
+      prot_ids_by_contig: {},
+      fasta_path: "#{outdir}/single-fasta/",
+      gbk_path: "#{outdir}/single-genbank/"
+    }
+
     split_fasta outdir
     split_genbank outdir, "#{outdir}/Genbanks.gbk"
     extract_cds_names
     @annotation_files
+
   end
 
 
@@ -115,7 +118,6 @@ class SequenceFasta
     outseq = "ORIGIN\n"
     # puts "ORIGIN"
 
-    ntNum = 0
     sequence = seq.seq.downcase
 
     nt_left = true

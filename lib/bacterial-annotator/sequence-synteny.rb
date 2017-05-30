@@ -9,16 +9,40 @@
 
 class SequenceSynteny
 
-  attr_reader :query_file, :subject_file, :aln_hits
+  attr_reader :query_file, :subject_file, :aln_hits, :query_sequences, :subject_sequences
 
-  def initialize query_file, subject_file, name, pidentity, type
+  def initialize query_file, subject_file, name, pidentity, min_coverage, type
     @query_file = query_file
     @subject_file = subject_file
+
+    @query_sequences = get_sequences(query_file)
+    @subject_sequences = get_sequences(subject_file)
+
     @name = name
     @pidentity = pidentity
+    @min_coverage = min_coverage
     @aln_file = nil
     @type = type
+
   end                           # end of initialize
+
+
+  # get sequences name with length in hash
+  def get_sequences seq_file
+
+    sequences = {}
+    flat = Bio::FlatFile.auto("#{seq_file}")
+    flat.each_entry do |s|
+      s_name = s.definition.chomp.split(" ")[0]
+      sequences[s_name] = {}
+      sequences[s_name][:length] = s.seq.length
+      sequences[s_name][:conserved] = false
+      sequences[s_name][:contig] = s_name.split("_")[0..-2].join("_") if s_name.include? "_"
+    end
+
+    sequences
+
+  end
 
   # run blat on proteins
   def run_blat root, outdir
@@ -31,9 +55,98 @@ class SequenceSynteny
     # extract_hits
   end                           # end of method
 
+
   # Extract Hit from blast8 file and save it in hash
   # contig-0_1      ABJ71957.1      96.92   65      2       0       1       65      1       65      9.2e-31 131.0
-  def extract_hits_prodigal mode, ref_cds=nil
+  def extract_hits mode
+
+    feature = ""
+    File.open(@aln_file,"r") do |fread|
+      while l = fread.gets
+
+        lA = l.chomp!.split("\t")
+        key = lA[0]
+
+        # extraction of hit id depends on mode ..
+        if mode == :refgenome
+          hit = lA[1]
+          feature = "cds"
+        elsif mode == :externaldb
+          # hit = lA[1].chomp.split("|")[3]
+          hit = lA[1]
+          feature = "cds"
+        end
+
+        # compute coverage based on sequences length
+        cov_query = (lA[3].to_f/@query_sequences[key][:length]).round(2)
+        cov_subject = (lA[3].to_f/@subject_sequences[hit][:length]).round(2)
+
+        # assert cutoff on identity and coverage
+        # 1 -> pass cutoff, 0 under cutoff
+        assert_cutoff = [1,1,1]
+        assert_cutoff[0] = 0 if lA[2].to_f < @pidentity
+        assert_cutoff[1] = 0 if cov_query < @min_coverage
+        assert_cutoff[2] = 0 if cov_subject < @min_coverage
+
+        # first hit for query
+        if ! @query_sequences[key].has_key? :homology
+          @query_sequences[key][:conserved] = true
+          @subject_sequences[key][:conserved] = true
+          @query_sequences[key][:homology] = {
+            pId: lA[2].to_f.round(2),
+            cov_query: cov_query,
+            cov_subject: cov_subject,
+            evalue: lA[10],
+            score: lA[11].to_f,
+            hits: [hit],
+            length: [lA[3].to_i],
+            query_location: [[lA[6].to_i,lA[7].to_i]],
+            subject_location: [[lA[8].to_i,lA[9].to_i]],
+            feature: feature,
+            assert_cutoff: assert_cutoff
+          }
+          @subject_sequences[hit][:hits] = [key]
+
+        # query already got at least 1 hit and new_score > last_score
+        elsif lA[11].to_f > @query_sequences[key][:homology][:score]
+          @query_sequences[key][:conserved] = true
+          @subject_sequences[key][:conserved] = true
+          @query_sequences[key][:homology] = {
+            pId: lA[2].to_f.round(2),
+            cov_query: cov_query,
+            cov_subject: cov_subject,
+            evalue: lA[10],
+            score: lA[11].to_f,
+            hits: [hit],
+            length: [lA[3].to_i],
+            query_location: [[lA[6].to_i,lA[7].to_i]],
+            subject_location: [[lA[8].to_i,lA[9].to_i]],
+            feature: feature,
+            assert_cutoff: assert_cutoff
+          }
+          @subject_sequences[hit][:hits] =  [key]
+
+        # query already got at least 1 hit and score == last_score
+        elsif lA[11].to_f == @query_sequences[key][:homology][:score]
+          @query_sequences[key][:homology][:hits] << hit
+          @query_sequences[key][:homology][:length] << lA[3].to_i
+          @query_sequences[key][:homology][:query_location] << [lA[6].to_i,lA[7].to_i]
+          @query_sequences[key][:homology][:subject_location] << [lA[8].to_i,lA[9].to_i]
+          if @subject_sequences[hit].has_key? :hits
+            @subject_sequences[hit][:hits] << key
+          else
+            @subject_sequences[hit][:hits] = [key]
+          end
+        end
+      end
+    end
+
+  end                           # end of method
+
+
+  # Extract Hit from blast8 file and save it in hash
+  # contig-0_1      ABJ71957.1      96.92   65      2       0       1       65      1       65      9.2e-31 131.0
+  def extract_hits_prodigal mode
 
     @aln_hits = {}
     feature = ""
@@ -48,8 +161,8 @@ class SequenceSynteny
           hit = lA[1].chomp.split("|")[3]
           feature = "cds"
         end
+        next if lA[2].to_f < @pidentity
         if ! @aln_hits.has_key? key
-          next if lA[2].to_f < @pidentity
           @aln_hits[key] = {
             pId: lA[2].to_f.round(2),
             evalue: lA[10],
@@ -98,10 +211,12 @@ class SequenceSynteny
           feature = hit_split[1]
           product = hit_split[2]
         end
+        next if lA[2].to_f < @pidentity
         if ! @aln_hits.has_key? key
-          next if lA[2].to_f < @pidentity
           @aln_hits[key] = {
             pId: lA[2].to_f.round(2),
+            # cov_query: (@query_sequences[key][:length]/lA[3].to_f).round(2),
+            # cov_subject: (@subject_sequences[hit][:length]/lA[3].to_f).round(2),
             evalue: lA[10],
             score: lA[11].to_f,
             hits: [hit],
@@ -114,6 +229,8 @@ class SequenceSynteny
         elsif lA[11].to_f > @aln_hits[key][:score]
           @aln_hits[key] = {
             pId: lA[2].to_f.round(2),
+            # cov_query: (@query_sequences[key][:length]/lA[3].to_f).round(2),
+            # cov_subject: (@subject_sequences[hit][:length]/lA[3].to_f).round(2),
             evalue: lA[10],
             score: lA[11].to_f,
             hits: [hit],
@@ -177,7 +294,9 @@ class SequenceSynteny
           annotations[p][:length] = @aln_hits[p][:length][hit_index]
           i+=1
 
-          puts "#{p} #{@aln_hits[p][:pId]} #{ref_cds[h][:product]}"
+          File.open("debug-annotation-by-contig.txt","a") do |fout|
+            fout.write("#{p} #{@aln_hits[p][:pId]} #{@aln_hits[p][:cov_query]} #{@aln_hits[p][:cov_subject]} #{ref_cds[h][:product]}\n")
+          end
 
         else
 
