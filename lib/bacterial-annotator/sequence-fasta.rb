@@ -164,7 +164,7 @@ class SequenceFasta
       prot_ids[contig] << prot_id
 
       # puts "Prodigal length : " + entry.seq.length.to_s
-      prot_length[prot_id] = entry.seq.length-1 # minus the stop codon
+      prot_length[prot_id] = entry.seq.length
 
     end
 

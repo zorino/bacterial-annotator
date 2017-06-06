@@ -294,10 +294,6 @@ class SequenceSynteny
           annotations[p][:length] = @aln_hits[p][:length][hit_index]
           i+=1
 
-          File.open("debug-annotation-by-contig.txt","a") do |fout|
-            fout.write("#{p} #{@aln_hits[p][:pId]} #{@aln_hits[p][:cov_query]} #{@aln_hits[p][:cov_subject]} #{ref_cds[h][:product]}\n")
-          end
-
         else
 
           annotations[p] = nil

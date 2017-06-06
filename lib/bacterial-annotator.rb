@@ -95,18 +95,12 @@ class BacterialAnnotator
 
     ref_synteny_prot.extract_hits :refgenome
 
-    fdebug = File.open("debug-synteny.tsv", "w")
-
     ref_synteny_prot.query_sequences.each do |k,v|
       if v.has_key? :homology
         @contig_annotations_cds[v[:contig]] = [] if ! @contig_annotations_cds.has_key? v[:contig]
         @contig_annotations_cds[v[:contig]] << k
-        fdebug.write("#{v[:contig]}\t#{k}\t#{v[:homology][:pId]}\t#{v[:homology][:cov_query]}\t#{v[:homology][:cov_subject]}\t#{v[:homology][:hits].join(',')}\t#{@ref_genome.coding_seq[v[:homology][:hits][0]][:locustag]}\t#{@ref_genome.coding_seq[v[:homology][:hits][0]][:product]}\t#{v[:homology][:assert_cutoff].join(',')}\n")
-      else
-        fdebug.write("#{v[:contig]} #{k} NONE...\n")
       end
     end
-    fdebug.close
 
     ref_synteny_prot
 
@@ -134,7 +128,7 @@ class BacterialAnnotator
 
         remaining_cds = cumulate_annotation_stats_reference contig
 
-        if ! remaining_cds.empty?
+        if remaining_cds != []
           @contig_foreign_cds[contig] = remaining_cds
         end
 
@@ -249,13 +243,13 @@ class BacterialAnnotator
         gbk_to_annotate.add_annotation_ref_synteny_prot(
           (@prot_synteny_refgenome.query_sequences.merge(@externaldb_synteny.query_sequences)),
           @contig_annotations_externaldb[contig].merge(@ref_genome.coding_seq),
-          @options[:refgenome].gsub(/.gb.*/,"")
+          (File.basename @options[:refgenome]).gsub(/.gb.*/,"")
         )
       else
         gbk_to_annotate.add_annotation_ref_synteny_prot(
           @prot_synteny_refgenome.query_sequences,
           @ref_genome.coding_seq,
-          @options[:refgenome].gsub(/.gb.*/,"")
+          (File.basename @options[:refgenome]).gsub(/.gb.*/,"")
         )
       end
 
@@ -509,6 +503,19 @@ class BacterialAnnotator
     synteny_file = File.open("#{@options[:outdir]}/Prot-Synteny.tsv","w")
     synteny_file.write("RefLocusTag\tRefProtID\tRefLength\tRefCoverage\tIdentity\tQueryGene\tQueryLength\tQueryCoverage\n")
     ref_annotated = {}
+
+    @prot_synteny_refgenome.query_sequences.each do |prot, syn_val|
+      next if ! syn_val.has_key? :homology
+      ref_annotated[syn_val[:homology][:hits][0]] = {
+        key: prot,
+        pId: syn_val[:homology][:pId],
+        cov_query: syn_val[:homology][:cov_query],
+        cov_subject: syn_val[:homology][:cov_subject],
+        assert_cutoff: syn_val[:homology][:assert_cutoff],
+        length: syn_val[:homology][:length][0]
+      }
+    end
+
     @contig_annotations.each do |contig, prot_annotations|
       prot_annotations.each do |key,prot|
         ref_annotated[prot[:protId]] = {key: key, length: prot[:length], pId: prot[:pId]} if prot != nil
@@ -524,9 +531,9 @@ class BacterialAnnotator
       pId = ""
       if ref_annotated[ref_v[:protId]] != nil
         gene = ref_annotated[ref_v[:protId]][:key]
-        coverage_ref = (ref_annotated[ref_v[:protId]][:length].to_f/ref_v[:bioseq].seq.length.to_f).round(2)
+        coverage_ref = ref_annotated[ref_v[:protId]][:cov_subject]
         query_length = @query_fasta.annotation_files[:prot_ids_length][gene]
-        coverage_query = (ref_annotated[ref_v[:protId]][:length].to_f/query_length.to_f).round(2)
+        coverage_query = ref_annotated[ref_v[:protId]][:cov_query]
         pId = ref_annotated[ref_v[:protId]][:pId]
       end
 
@@ -541,6 +548,7 @@ class BacterialAnnotator
       synteny_file.write("\n")
 
     end
+
     synteny_file.close
 
   end

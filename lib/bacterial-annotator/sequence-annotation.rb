@@ -76,6 +76,7 @@ class SequenceAnnotation
           bioseq_gene: dnaBioSeq,
           bioseq_len: pepBioSeq.length
         }
+
       end
 
     end
@@ -277,8 +278,6 @@ class SequenceAnnotation
     # nb_of_added_ft = 0
     i = 0
 
-    fdebug = File.open("debug-add-annotation.txt","w")
-
     contig = @gbk.definition
 
     if mode == "inplace"
@@ -303,9 +302,6 @@ class SequenceAnnotation
         end
 
         if hit != nil
-
-          fdebug.write(hit)
-          fdebug.write("\n")
 
           locus, gene, product, note = nil
           locus = hit[:locustag]
@@ -379,8 +375,6 @@ class SequenceAnnotation
       end
 
     end
-
-    fdebug.close
 
   end
 
