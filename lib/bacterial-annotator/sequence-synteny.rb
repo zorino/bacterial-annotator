@@ -251,7 +251,7 @@ class SequenceSynteny
       end
     end
 
-    # prune_aln_hits @aln_hits
+    prune_aln_hits @aln_hits
 
   end                           # end of method
 
@@ -386,17 +386,6 @@ class SequenceSynteny
   end                           # end of method
 
   def prune_aln_hits aln_hits
-
-    # @aln_hits[key] = {
-    #   pId: lA[2].to_f.round(2),
-    #   evalue: lA[10],
-    #   score: lA[11].to_f,
-    #   hits: [hit],
-    #   length: [lA[3].to_i],
-    #   query_location: [[lA[6].to_i,lA[7].to_i]],
-    #   subject_location: [[lA[8].to_i,lA[9].to_i]],
-    #   feature: [feature]
-    # }
 
     keys_to_delete = []
 
