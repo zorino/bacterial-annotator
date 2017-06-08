@@ -196,70 +196,81 @@ class SequenceAnnotation
 
       hit = nil
 
-      next if ! synteny_prot.has_key? prot_id or
-        ! synteny_prot[prot_id].has_key? :homology
-
-      # puts "#{annotations.keys}"
-      if annotations.has_key? synteny_prot[prot_id][:homology][:hits][0]
-        hit = annotations[synteny_prot[prot_id][:homology][:hits][0]]
-        # puts hit
-      else
-        puts "no hit for #{prot_id}"
-        next
-      end
-
-      # hit = annotations[synteny_prot[prot_id][:homology][:hits][0]]
-
-      if synteny_prot.has_key? prot_id
-
-        locus, gene, product, note, inference = nil
-        locus = hit[:locustag]
-        gene = hit[:gene]
-        product = hit[:product]
-        note = hit[:note]
-        inference = hit[:inference]
-        pId = synteny_prot[prot_id][:homology][:pId]
-        cov_query = (synteny_prot[prot_id][:homology][:cov_query]*100).round(2)
-        cov_subject = (synteny_prot[prot_id][:homology][:cov_subject]*100).round(2)
-        reference_prot_id = synteny_prot[prot_id][:homology][:hits][0]
+      if ! synteny_prot.has_key? prot_id or
+         ! synteny_prot[prot_id].has_key? :homology or
+         ! annotations.has_key? synteny_prot[prot_id][:homology][:hits][0] or
+         synteny_prot[prot_id][:homology][:assert_cutoff].inject(:+) < 3
 
         qLocusTag = Bio::Feature::Qualifier.new('locus_tag', "#{prot_id}")
+        qProd = Bio::Feature::Qualifier.new('product', "hypothetical protein")
+
         ftArray.push(qLocusTag)
+        ftArray.push(qProd)
 
-        if gene != nil
-          qGene = Bio::Feature::Qualifier.new('gene', gene)
-          ftArray.push(qGene)
-        end
-
-        if product != nil
-          qProd = Bio::Feature::Qualifier.new('product', product)
-          ftArray.push(qProd)
-        end
-
-        # check if there is a reference genome.. reference_locus shouldn't be nil in that case
-        if locus != nil
-          qNote = Bio::Feature::Qualifier.new('note', "corresponds to #{locus} locus (AA identity: #{pId}%; coverage(q,s): #{cov_query}%,#{cov_subject}%) from #{ref_genome}")
+        if synteny_prot.has_key? prot_id and
+          synteny_prot[prot_id].has_key? :homology and
+          synteny_prot[prot_id][:homology][:assert_cutoff] == [1,1,0]
+          hit = annotations[synteny_prot[prot_id][:homology][:hits][0]]
+          qNote = Bio::Feature::Qualifier.new('note', "possible pseudo gene of #{hit[:locustag]} from #{ref_genome}")
           ftArray.push(qNote)
+        end
 
-          db_source = "[DBSource]"
-          if reference_prot_id.include? "_"
-            db_source = "RefSeq"
-          else
-            db_source = "INSD"
+      else
+
+        hit = annotations[synteny_prot[prot_id][:homology][:hits][0]]
+
+        if synteny_prot.has_key? prot_id
+
+          locus, gene, product, note, inference = nil
+          locus = hit[:locustag]
+          gene = hit[:gene]
+          product = hit[:product]
+          note = hit[:note]
+          inference = hit[:inference]
+          pId = synteny_prot[prot_id][:homology][:pId]
+          cov_query = (synteny_prot[prot_id][:homology][:cov_query]*100).round(2)
+          cov_subject = (synteny_prot[prot_id][:homology][:cov_subject]*100).round(2)
+          reference_prot_id = synteny_prot[prot_id][:homology][:hits][0]
+
+          qLocusTag = Bio::Feature::Qualifier.new('locus_tag', "#{prot_id}")
+          ftArray.push(qLocusTag)
+
+          if gene != nil
+            qGene = Bio::Feature::Qualifier.new('gene', gene)
+            ftArray.push(qGene)
           end
-          qInference = Bio::Feature::Qualifier.new('inference', "similar to AA sequence:#{db_source}:#{reference_prot_id}")
-          ftArray.push(qInference)
 
-        end
+          if product != nil
+            qProd = Bio::Feature::Qualifier.new('product', product)
+            ftArray.push(qProd)
+          end
 
-        if note != nil
-          qNote = Bio::Feature::Qualifier.new('note', note)
-          ftArray.push(qNote)
-        end
+          # check if there is a reference genome.. reference_locus shouldn't be nil in that case
+          if locus != nil
+            qNote = Bio::Feature::Qualifier.new('note', "corresponds to #{locus} locus (AA identity: #{pId}%; coverage(q,s): #{cov_query}%,#{cov_subject}%) from #{ref_genome}")
+            ftArray.push(qNote)
 
-        if inference != nil
-          qInference = Bio::Feature::Qualifier.new('inference', inference)
-          ftArray.push(qInference)
+            db_source = "[DBSource]"
+            if reference_prot_id.include? "_"
+              db_source = "RefSeq"
+            else
+              db_source = "INSD"
+            end
+            qInference = Bio::Feature::Qualifier.new('inference', "similar to AA sequence:#{db_source}:#{reference_prot_id}")
+            ftArray.push(qInference)
+
+          end
+
+          if note != nil
+            qNote = Bio::Feature::Qualifier.new('note', note)
+            ftArray.push(qNote)
+          end
+
+          if inference != nil
+            qInference = Bio::Feature::Qualifier.new('inference', inference)
+            ftArray.push(qInference)
+          end
+
         end
 
       end
