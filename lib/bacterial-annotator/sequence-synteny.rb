@@ -75,6 +75,8 @@ class SequenceSynteny
           # hit = lA[1].chomp.split("|")[3]
           hit = lA[1]
           feature = "cds"
+          # decrease min. % identity for foreign proteins
+          @pidentity = 60.0
         end
 
         # compute coverage based on sequences length
