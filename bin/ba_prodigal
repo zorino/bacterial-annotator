@@ -24,7 +24,8 @@ def installProdigal
     `tar xvf v2.6.2.tar.gz; rm v2.6.2.tar.gz`
     Dir.chdir("#{ROOT_path}/Prodigal-2.6.2")
     `make`
-    `cp #{ROOT_path}/Prodigal-2.6.2/prodigal #{ROOT_path}/prodigal.linux`
+    Dir.chdir("../")
+    `cp Prodigal-2.6.2/prodigal prodigal.linux`
     File.chmod(0755, "#{ROOT_path}/prodigal.linux")
     # Dir.chir("#{ROOT_path}")
     # File.chmod(0755, "#{ROOT_path}/prodigal.linux")
