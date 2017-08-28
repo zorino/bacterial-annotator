@@ -7,3 +7,4 @@ remote-blast
 prot2003-2014.fa
 bacterial-annotator-*.gem
 annotations/
+bin/*.linux
