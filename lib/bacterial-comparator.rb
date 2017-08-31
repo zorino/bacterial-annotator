@@ -24,7 +24,6 @@ class BacterialComparator
     @genomes_list = options[:genomes_list]
     @proc = options[:proc].to_i
     @phylo_nb_genes = options[:phylo_nb_genes]
-
     min_cov = options[:min_cov].to_f
     min_pid = options[:pidentity].to_f
     if min_cov > 1
@@ -209,7 +208,7 @@ class BacterialComparator
       else
         status = "OK"
         status = "FAILED" if cmd != true
-        puts "Alignment #{f} : #{status}"
+        # puts "Alignment #{f} : #{status}"
       end
     rescue
       if trying < 3
@@ -248,7 +247,11 @@ class BacterialComparator
       puts "..Prot alignment files already exists, skipping."
     end
 
-    concat_alignments "align-genes-pep.all.fasta"
+    # ugly hack to find out the reference genome
+    ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
+
+    concat_alignments "align-genes-pep.all.fasta", ref_id
+
     Dir.chdir(ori_dir)
 
   end
@@ -277,13 +280,17 @@ class BacterialComparator
       puts "..Gene alignment files already exists, skipping."
     end
 
-    concat_alignments "align-genes-dna.all.fasta"
+    # ugly hack to find out the reference genome
+    ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
+
+    concat_alignments "align-genes-dna.all.fasta", ref_id
+
     Dir.chdir(ori_dir)
 
   end
 
 
-  def concat_alignments outfile
+  def concat_alignments outfile, ref_id
 
     if File.exists?("../#{outfile}") and File.size("../#{outfile}") > 0
       puts "..Alignment concatenated file already exists, skipping."
@@ -291,8 +298,6 @@ class BacterialComparator
     end
 
     fout = File.open("../#{outfile}", "w")
-
-    ref_id = Dir["../../#{@genomes_list[0]}/*.pep"][0].gsub(/.*\//,"").gsub(".pep","")
 
     seq = ""
     Dir["*.aln"].each do |f|
@@ -303,7 +308,7 @@ class BacterialComparator
     end
 
     bioseq = Bio::Sequence.auto(seq)
-    out = bioseq.output_fasta("#{ref_id}",60)
+    out = bioseq.output_fasta("#{ref_id}", 60)
     fout.write(out)
 
     for i in 1..@genomes_list.length
@@ -358,7 +363,7 @@ class BacterialComparator
     tree_dir = "#{current_dir}/tree-genes-dna"
     cmd = system("#{@root}/raxml.linux -T #{@proc} -f d -N #{bt} -s align-genes-dna.all.fasta  -m GTRGAMMA -p 123454321 -n DnaTree -w #{tree_dir}")
     cmd = system("cat #{tree_dir}/RAxML_result.DnaTree.RUN.* >> #{tree_dir}/RAxML_result.BS")
-    cmd = system("#{@root}/raxml.linux -T 3 -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.DnaTree -m GTRGAMMA -n DNA_BS_TREE -w #{tree_dir}")
+    cmd = system("#{@root}/raxml.linux -T #{@proc} -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.DnaTree -m GTRGAMMA -n DNA_BS_TREE -w #{tree_dir}")
     cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.DNA_BS_TREE #{tree_dir}/../")
     Dir.chdir(ori_dir)
   end
@@ -374,7 +379,7 @@ class BacterialComparator
     tree_dir = "#{current_dir}/tree-genes-pep"
     cmd = system("#{@root}/raxml.linux -T #{@proc} -f d -N #{bt} -s align-genes-pep.all.fasta  -m PROTGAMMAAUTO -p 123454321 -n PepTree -w #{tree_dir}")
     cmd = system("cat #{tree_dir}/RAxML_result.PepTree.RUN.* >> #{tree_dir}/RAxML_result.BS")
-    cmd = system("#{@root}/raxml.linux -T 3 -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.PepTree -m PROTGAMMAAUTO -n PEP_BS_TREE -w #{tree_dir}")
+    cmd = system("#{@root}/raxml.linux -T #{@proc} -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.PepTree -m PROTGAMMAAUTO -n PEP_BS_TREE -w #{tree_dir}")
     cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.PEP_BS_TREE #{tree_dir}/../")
     Dir.chdir(ori_dir)
 
