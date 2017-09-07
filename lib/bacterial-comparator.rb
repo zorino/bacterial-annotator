@@ -330,7 +330,9 @@ class BacterialComparator
         flat.close
       end
       bioseq = Bio::Sequence.auto(seq)
-      out = bioseq.output_fasta("#{@genomes_list[i-1]}",60)
+      # get the file name without path prefix and extension
+      genome_name = genomes_list[i-1].split("/")[-1].split(".")[0]
+      out = bioseq.output_fasta(genome_name,60)
       fout.write(out)
     end
 
