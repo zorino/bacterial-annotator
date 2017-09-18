@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maximilien1er@gmail.com
+# review:  	
+# date:    	15-02-24
+# version: 	0.01
+# licence:  	
+
+require 'open-uri'
+
+ROOT_path = File.dirname(__FILE__)
+# fasttree_url = http://www.microbesonline.org/fasttree/FastTreeMP
+# Install FASTTREE on the user system
+
+def installFastTree
+
+  begin
+    resp = open("http://www.microbesonline.org/fasttree/FastTreeMP")
+    open("#{ROOT_path}/fasttree.linux", "wb") do |file|
+      file.write(resp.read)
+    end
+    Dir.chdir("#{ROOT_path}/")
+    File.chmod(0755, "#{ROOT_path}/fasttree.linux")
+  rescue
+    abort "Problem in stalling FastTree, aborting"
+  end
+
+end
+
+
+# Install prodigal if not already install
+if ! File.exists? "#{ROOT_path}/fasttree.linux"
+
+  puts "Installing FastTree .."
+  puts "See http://www.microbesonline.org/fasttree/#Install"
+  puts "License - OpenSource (unknown)"
+  installFastTree
+  puts "FastTree successfully installed in #{ROOT_path}/fasttree.linux"
+  puts ""
+
+end
