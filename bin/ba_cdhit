@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maximilien1er@gmail.com
+# review:  	
+# date:    	17-08-24
+# version: 	0.01
+# licence:  	
+
+require 'open-uri'
+
+ROOT_path = File.dirname(__FILE__)
+# cdhit URL = "https://github.com/weizhongli/cdhit/releases/download/V4.6.8/cd-hit-v4.6.8-2017-0621-source.tar.gz"
+
+# Install cdhit on the user system
+def installcdhit
+
+  begin
+    resp = open("https://github.com/weizhongli/cdhit/releases/download/V4.6.8/cd-hit-v4.6.8-2017-0621-source.tar.gz")
+    open("#{ROOT_path}/cdhit-4.6.8.tar.gz", "wb") do |file|
+      file.write(resp.read)
+    end
+    Dir.chdir("#{ROOT_path}/")
+    `tar xvf cdhit-4.6.8.tar.gz; rm cdhit-4.6.8.tar.gz`
+    Dir.chdir("#{ROOT_path}/cd-hit-v4.6.8-2017-0621")
+    `make`
+    Dir.chdir("../")
+    `mv ./cd-hit-v4.6.8-2017-0621/cd-hit ./cdhit.linux`
+    `mv ./cd-hit-v4.6.8-2017-0621/cd-hit-2d ./cdhit2d.linux`
+    File.chmod(0755, "#{ROOT_path}/cdhit.linux")
+    File.chmod(0755, "#{ROOT_path}/cdhit2d.linux")
+  rescue
+    abort "Problem installing cdhit, aborting"
+  end
+
+end
+
+
+# Install cdhit if not already install
+if ! File.exists? "#{ROOT_path}/cdhit.linux"
+
+  puts "Installing cd-hit tools.."
+  puts "Requirements: SSE+ instructions, OpenMP"
+  puts "See https://github.com/weizhongli/cdhit/"
+  puts "The Licence is GPLv2"
+  installcdhit
+  puts "cd-hit successfully installed in #{ROOT_path}/cdhit.linux and cdhit2d.linux"
+  puts ""
+
+end
+
