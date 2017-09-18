@@ -20,7 +20,7 @@ def installRaxml
       file.write(resp.read)
     end
     Dir.chdir("#{ROOT_path}/")
-    `unzip master.zip`
+    `unzip master.zip && rm master.zip`
     Dir.chdir("#{ROOT_path}/standard-RAxML-master")
     `make -f Makefile.PTHREADS.gcc`
     `rm *.o`

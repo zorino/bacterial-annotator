@@ -27,8 +27,7 @@ def installProdigal
     Dir.chdir("../")
     `cp Prodigal-2.6.2/prodigal prodigal.linux`
     File.chmod(0755, "#{ROOT_path}/prodigal.linux")
-    # Dir.chir("#{ROOT_path}")
-    # File.chmod(0755, "#{ROOT_path}/prodigal.linux")
+    `rm -fr Prodigal-2.6.2`
   rescue
     abort "Problem installing Prodigal, aborting"
   end

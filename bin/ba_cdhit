@@ -29,6 +29,7 @@ def installcdhit
     `mv ./cd-hit-v4.6.8-2017-0621/cd-hit-2d ./cdhit2d.linux`
     File.chmod(0755, "#{ROOT_path}/cdhit.linux")
     File.chmod(0755, "#{ROOT_path}/cdhit2d.linux")
+    `rm -fr cd-hit-v4.6.8-2017-0621`
   rescue
     abort "Problem installing cdhit, aborting"
   end

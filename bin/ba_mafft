@@ -20,7 +20,7 @@ def installMafft
       file.write(resp.read)
     end
     Dir.chdir("#{ROOT_path}/")
-    `tar xvf mafft-7.222-without-extensions-src.tgz`
+    `tar xvf mafft-7.222-without-extensions-src.tgz && rm mafft-7.222-without-extensions-src.tgz`
     Dir.chdir("#{ROOT_path}/mafft-7.222-without-extensions/core")
     `make`
     `make install PREFIX=$(pwd -P)/../`
@@ -28,6 +28,7 @@ def installMafft
     `echo export MAFFT_BINARIES=$(pwd -P)/../binaries >> #{ROOT_path}/mafft.linux`
     `tail -n +2 #{ROOT_path}/mafft-7.222-without-extensions/bin/mafft >> #{ROOT_path}/mafft.linux`
     File.chmod(0755, "#{ROOT_path}/mafft.linux")
+    `rm -fr mafft-7.222-without-extensions`
   rescue
     abort "Problem in stalling MAFFT, aborting"
   end

@@ -26,6 +26,7 @@ def installFasta36
     `cp fasta-36.3.8d/bin/glsearch36 ./glsearch36.linux`
     `cp fasta-36.3.8d/bin/tfastx36 ./tfastx36.linux`
     File.chmod(0755, "#{ROOT_path}/fasta36.linux")
+    `rm -fr fasta-36.3.8d`
   rescue
     abort "Problem installing Fasta36, aborting"
   end
