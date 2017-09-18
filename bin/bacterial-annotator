@@ -44,22 +44,21 @@ annotate [OPTIONS]
     --input/-i		<fasta_file>	Provide the fasta file to annotate
     --outdir/-o		<outdir>	Output directory [default=BAnnotation]
     --force/-f		Force to overwrite the output directory
+    --name/-n     <name> Sample name
 
-  // Dataset
+  // MERGEM-based Annotation (Recommended)
+    --db          MERGEM database directory
+
+  // Reference-Based Annotation
     --refgenome/-g	<GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
-    --guessref	 	Will guess the best reference genome to use for the annotation.
-
     --externaldb	<proteins fasta_file>
 			  Finish or do a complete annotation with this sequence database (a protein fasta file).
 			  Fasta headers need to look similar to NCBI or EBI fasta headers, ex.:
 			  >gi|385721352|gb|AFI72857.1| NDM-1 [Escherichia coli]
 			  >sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
-
-  // Other options
     --pidentity		<% identity> Minimum percentage identity to incorporate a CDS annotation [default=0.7]
     --pcoverage		<% identity> Minimum percentage of coverage over protein alignment to incorporate a CDS annotation [default=0.7]
 			             .. otherwise hint for a non-functional protein
-
     --minlength		<length> Minimum contig length for annotation [default=500]
 
     --meta		Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
@@ -131,9 +130,10 @@ compare [OPTIONS]
     --align        [dna|prot|both] by default align only proteins
     --concat       <nb of genes>  by default 0=all
 
-  //Phylogeny (RAXML)
+  //Phylogeny (Maximum Likelihood)
     --phylogeny    will build phylogenetic tree from the alignments files (pep or dna)
-    --bootstrap    <nb of bootstrap> by default 100
+    --software     [raxml|fasttree]  (default fasttree)
+    --bootstrap    <nb of bootstrap> (default 100)
 
 OEM
 
@@ -197,11 +197,15 @@ if ARGV.size > 1
 
   ROOT = File.dirname(__FILE__)
 
-  # Check for 3rd party dependencies : Prodigal, Blat, MAFFT
+  # Check for 3rd party dependencies : Prodigal, Blat, MAFFT, ...
   system("ba_prodigal")
   system("ba_blat")
   system("ba_mafft")
   system("ba_raxml")
+  system("ba_diamond")
+  system("ba_fasta36")
+  system("ba_cdhit")
+  system("ba_fasttree")
 
   options = {}
   genomes_list = []             # TODO multiple input genomes

@@ -35,6 +35,13 @@ class SequenceSynteny
     flat.each_entry do |s|
       s_name = s.definition.chomp.split(" ")[0]
       sequences[s_name] = {}
+      properties = s.definition.chomp.split(";")
+      partial = false
+      if properties.length >= 2 and properties[1].include? "partial"
+        partial = (properties[1].gsub("partial=","")=='01')
+        puts "partial:" + partial.to_s
+      end
+      sequences[s_name][:partial] = partial
       sequences[s_name][:length] = s.seq.length
       sequences[s_name][:conserved] = false
       sequences[s_name][:contig] = s_name.split("_")[0..-2].join("_") if s_name.include? "_"
@@ -88,7 +95,7 @@ class SequenceSynteny
         assert_cutoff = [1,1,1]
         assert_cutoff[0] = 0 if lA[2].to_f < @pidentity
         assert_cutoff[1] = 0 if cov_query < @min_coverage
-        assert_cutoff[2] = 0 if cov_subject < @min_coverage
+        assert_cutoff[2] = 0 if cov_subject < @min_coverage and @query_sequences[key][:partial] == false
 
         # first hit for query
         if ! @query_sequences[key].has_key? :homology
