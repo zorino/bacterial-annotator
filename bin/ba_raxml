@@ -10,17 +10,18 @@
 require 'open-uri'
 
 ROOT_path = File.dirname(__FILE__)
-# raxml_url = https://github.com/stamatak/standard-RAxML/archive/master.zip
+# raxml_url = https://github.com/stamatak/standard-RAxML/archive/v8.2.11.zip
 # Install RAXML on the user system
 def installRaxml
 
   begin
-    resp = open("https://github.com/stamatak/standard-RAxML/archive/master.zip")
+    resp = open("https://github.com/stamatak/standard-RAxML/archive/v8.2.11.zip")
     open("#{ROOT_path}/master.zip", "wb") do |file|
       file.write(resp.read)
     end
     Dir.chdir("#{ROOT_path}/")
     `unzip master.zip && rm master.zip`
+    `mv standard-RAxML-8.2.11 standard-RAxML-master`
     Dir.chdir("#{ROOT_path}/standard-RAxML-master")
     `make -f Makefile.PTHREADS.gcc`
     `rm *.o`
