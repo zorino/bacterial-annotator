@@ -11,6 +11,21 @@
 require 'bacterial-annotator'
 require 'bacterial-comparator'
 
+VERSION = "0.6.2"
+
+def print_version
+  version = "Bacterial Annotator - Version #{VERSION}\n\n"
+  version += "Packaged with : \n"
+  version += "  -- Prodigal v2.6.2\n"
+  version += "  -- BLAT standalone version\n"
+  version += "  -- MAFFT v7.222\n"
+  version += "  -- fasta36  v36.3.8d\n"
+  version += "  -- RAxML v8.2.11\n"
+  version += "  -- FastTree v2.1.10\n"
+  puts version
+end
+
+
 
 # Usage message to print to CLI
 def usage
@@ -28,6 +43,8 @@ bacterial-annotator [annotate | compare] [OPTIONS]
             .. see compare -h for OPTIONS
 
   --help/-h		Print this !
+
+  --version/-v  Version of the Bacterial-Annotator
 
 OEM
 
@@ -47,7 +64,7 @@ annotate [OPTIONS]
     --name/-n     <name> Sample name
 
   // MERGEM-based Annotation (Recommended)
-    --db          MERGEM database directory
+    --db/-d          <directory> MERGEM database directory
 
   // Reference-Based Annotation
     --refgenome/-g	<GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
@@ -56,8 +73,8 @@ annotate [OPTIONS]
 			  Fasta headers need to look similar to NCBI or EBI fasta headers, ex.:
 			  >gi|385721352|gb|AFI72857.1| NDM-1 [Escherichia coli]
 			  >sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
-    --pidentity		<% identity> Minimum percentage identity to incorporate a CDS annotation [default=0.7]
-    --pcoverage		<% identity> Minimum percentage of coverage over protein alignment to incorporate a CDS annotation [default=0.7]
+    --pidentity		<% identity> Minimum percentage identity to incorporate a CDS annotation [default=0.8]
+    --pcoverage		<% identity> Minimum percentage of coverage over protein alignment to incorporate a CDS annotation [default=0.8]
 			             .. otherwise hint for a non-functional protein
     --minlength		<length> Minimum contig length for annotation [default=500]
 
@@ -74,8 +91,8 @@ def parseOptions_annotate
 
   # default options
   options[:outdir] = "BAnnotation"
-  options[:pidentity] = 70
-  options[:pcoverage] = 70
+  options[:pidentity] = 80
+  options[:pcoverage] = 80
   options[:minlength] = 500
   options[:meta] = 0
 
@@ -84,6 +101,10 @@ def parseOptions_annotate
     case x.downcase
     when "--input", "-i"
       options[:input] = ARGV.shift
+    when "--name", "-n"
+      options[:name] = ARGV.shift
+    when "--db", "-d"
+      options[:mergem] = ARGV.shift
     when "--refgenome", "-g"
       options[:refgenome] = ARGV.shift
     when "--outdir", "-o"
@@ -101,7 +122,11 @@ def parseOptions_annotate
     when "--externaldb"
       options[:external_db] = ARGV.shift
     when "--help", "-h"
+
       usage_annotate
+      abort
+    when "--version", "-v"
+      print_version
       abort
     end
 
@@ -188,12 +213,11 @@ def parseOptions_compare
 
 end
 
-
 ########
 # MAIN #
 ########
 
-if ARGV.size > 1
+if ARGV.size >= 1
 
   ROOT = File.dirname(__FILE__)
 
@@ -242,11 +266,13 @@ if ARGV.size > 1
     bcomp.mafft_aln aln_opt
     bcomp.raxml_tree aln_opt, options[:bootstrap] if options[:phylogeny] == 1
 
-  else
+  elsif ARGV[0] == "--version" or ARGV[0] == "-v"
 
-    usage
+    print_version
     abort
 
+  else
+    usage
   end
 
 
