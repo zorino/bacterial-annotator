@@ -39,7 +39,6 @@ class SequenceSynteny
       partial = false
       if properties.length >= 2 and properties[1].include? "partial"
         partial = (properties[1].gsub("partial=","")=='01')
-        puts "partial:" + partial.to_s
       end
       sequences[s_name][:partial] = partial
       sequences[s_name][:length] = s.seq.length
@@ -54,9 +53,10 @@ class SequenceSynteny
   # run blat on proteins
   def run_blat root, outdir
     base_cmd = "#{root}/blat.linux -out=blast8 -minIdentity=#{@pidentity}"
-    system("#{base_cmd} #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
     if @type == "prot"
       system("#{base_cmd} -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
+    else
+      system("#{base_cmd} #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
     end
     @aln_file = "#{outdir}/#{@name}.blat8.tsv"
     # extract_hits
@@ -152,57 +152,6 @@ class SequenceSynteny
 
   end                           # end of method
 
-
-  # Extract Hit from blast8 file and save it in hash
-  # contig-0_1      ABJ71957.1      96.92   65      2       0       1       65      1       65      9.2e-31 131.0
-  def extract_hits_prodigal mode
-
-    @aln_hits = {}
-    feature = ""
-    File.open(@aln_file,"r") do |fread|
-      while l = fread.gets
-        lA = l.chomp!.split("\t")
-        key = lA[0]
-        if mode == :refgenome
-          hit = lA[1]
-          feature = "cds"
-        elsif mode == :externaldb
-          hit = lA[1].chomp.split("|")[3]
-          feature = "cds"
-        end
-        next if lA[2].to_f < @pidentity
-        if ! @aln_hits.has_key? key
-          @aln_hits[key] = {
-            pId: lA[2].to_f.round(2),
-            evalue: lA[10],
-            score: lA[11].to_f,
-            hits: [hit],
-            length: [lA[3].to_i],
-            query_location: [[lA[6].to_i,lA[7].to_i]],
-            subject_location: [[lA[8].to_i,lA[9].to_i]],
-            feature: feature
-          }
-        elsif lA[11].to_f > @aln_hits[key][:score]
-          @aln_hits[key] = {
-            pId: lA[2].to_f.round(2),
-            evalue: lA[10],
-            score: lA[11].to_f,
-            hits: [hit],
-            length: [lA[3].to_i],
-            query_location: [[lA[6].to_i,lA[7].to_i]],
-            subject_location: [[lA[8].to_i,lA[9].to_i]],
-            feature: feature
-          }
-        elsif lA[11].to_f == @aln_hits[key][:score]
-          @aln_hits[key][:hits] << hit
-          @aln_hits[key][:length] << lA[3].to_i
-          @aln_hits[key][:query_location] << [lA[6].to_i,lA[7].to_i]
-          @aln_hits[key][:subject_location] << [lA[8].to_i,lA[9].to_i]
-        end
-      end
-    end
-
-  end                           # end of method
 
   # Extract Hit from blast8 file and save it in hash
   # prpa    PA0668.4|rRNA|23S       99.97   2891    1       0       705042  707932  1       2891    0.0e+00 5671.0
