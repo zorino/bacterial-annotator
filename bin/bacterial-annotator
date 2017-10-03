@@ -61,7 +61,7 @@ annotate [OPTIONS]
     --input/-i		<fasta_file>	Provide the fasta file to annotate
     --outdir/-o		<outdir>	Output directory [default=BAnnotation]
     --force/-f		Force to overwrite the output directory
-    --name/-n     <name> Sample name
+    --name/-n		<name> Sample name
 
   // MERGEM-based Annotation (Recommended)
     --db/-d          <directory> MERGEM database directory

@@ -30,6 +30,10 @@ class BacterialAnnotator
     @options[:pcoverage] = @options[:pcoverage].to_f
     @options[:pcoverage] = @options[:pcoverage] / 100 if @options[:pcoverage] > 1.00
 
+    if ! @options.has_key? :name
+      @options[:name] = @options[:input].gsub(/.fasta|.fa|.fna/,"")
+    end
+
     if File.exists? (@options[:outdir])
       if ! options.has_key? :force
         abort "Output directory already exist ! Choose another one or use -f to overwrite"
