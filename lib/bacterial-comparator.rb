@@ -247,7 +247,7 @@ class BacterialComparator
       puts "..Prot alignment files already exists, skipping."
     end
 
-    # ugly hack to find out the reference genome
+    # FIXME ugly hack to find out the reference genome
     ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
 
     concat_alignments "align-genes-pep.all.fasta", ref_id
