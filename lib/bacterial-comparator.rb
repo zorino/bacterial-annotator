@@ -136,8 +136,7 @@ class BacterialComparator
 
   end
 
-
-  # FIXME too slow..
+  # extract and dump multifasta for syntenic genes and proteins
   def extract_syntenic_fasta min_cov, min_pid
 
     puts "# Extracting Proteins and Genes multifasta.."
