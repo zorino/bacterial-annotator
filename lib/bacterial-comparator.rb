@@ -76,59 +76,68 @@ class BacterialComparator
   end
 
 
-  def get_sequence_from_flatfile flatfile, name
+  # load all id => sequences from multifasta
+  def load_genome_cds file
 
-    out = ""
+    proteins = {}
+    flatfile = Bio::FlatFile.auto(file)
     flatfile.each_entry do |entry|
-      if entry.definition.split(" ")[0] == name
-        bioseq = Bio::Sequence.auto(entry.seq)
-        out = bioseq.output_fasta("#{name}",60)
-      end
+      name = entry.definition.split(" ")[0]
+      bioseq = Bio::Sequence.auto(entry.seq)
+      out = bioseq.output_fasta("#{name}",60)
+      proteins[name] = out
     end
-    out
+
+    return proteins
 
   end
 
 
-  def build_multifasta ref_prot, synteny
+  def build_multifasta synteny_list
 
     pep_out_dir = "./#{@outdir}/align-genes-pep"
-    dna_out_dir = "./#{@outdir}/align-genes-dna"
 
-    # create multifasta by syntenic proteins (pep)
-    if ! File.exists? pep_out_dir+"/#{ref_prot}.pep"
-      pep_out = File.open(pep_out_dir+"/#{ref_prot}.pep", "w")
-      pep_file = Dir["#{@genomes_list[0]}/*.pep"]
-      flatfile = Bio::FlatFile.auto("#{pep_file[0]}")
-      pep_out.write(get_sequence_from_flatfile flatfile, ref_prot)
-      flatfile.close
-      @genomes_list.each_with_index do |g,i|
-        flatfile = Bio::FlatFile.auto("#{g}/Proteins.fa")
-        pep_out.write(get_sequence_from_flatfile flatfile, synteny[i][:query_prot])
-        flatfile.close
-      end
+    ref_proteins = load_genome_cds(Dir["#{@genomes_list[0]}/*.pep"][0])
+    synteny_list.each do |k,v|
+      pep_out = File.open(pep_out_dir+"/#{k}.pep", "w")
+      pep_out.write(ref_proteins[k])
       pep_out.close
     end
 
-    # create multifasta by syntenic genes (dna)
-    if ! File.exists? dna_out_dir+"/#{ref_prot}.dna"
-      dna_out = File.open(dna_out_dir+"/#{ref_prot}.dna", "w")
-      # create multifasta by syntenic proteins
-      dna_file = Dir["#{@genomes_list[0]}/*.dna"]
-      flatfile = Bio::FlatFile.auto("#{dna_file[0]}")
-      dna_out.write(get_sequence_from_flatfile flatfile, ref_prot)
-      flatfile.close
-      @genomes_list.each_with_index do |g,i|
-        flatfile = Bio::FlatFile.auto("#{g}/Genes.fa")
-        dna_out.write(get_sequence_from_flatfile flatfile, synteny[i][:query_prot])
-        flatfile.close
+    @genomes_list.each_with_index do |g,i|
+
+      genome_proteins = load_genome_cds("#{g}/Proteins.fa")
+      synteny_list.each do |k,v|
+        pep_out = File.open(pep_out_dir+"/#{k}.pep", "a")
+        pep_out.write(genome_proteins[v[i][:query_prot]])
+        pep_out.close
       end
+
+    end
+
+    dna_out_dir = "./#{@outdir}/align-genes-dna"
+    ref_genes = load_genome_cds(Dir["#{@genomes_list[0]}/*.dna"][0])
+    synteny_list.each do |k,v|
+      dna_out = File.open(dna_out_dir+"/#{k}.dna", "w")
+      dna_out.write(ref_genes[k])
       dna_out.close
+    end
+
+    @genomes_list.each_with_index do |g,i|
+
+      genome_genes = load_genome_cds("#{g}/Genes.fa")
+      synteny_list.each do |k,v|
+        dna_out = File.open(dna_out_dir+"/#{k}.dna", "a")
+        dna_out.write(genome_genes[v[i][:query_prot]])
+        dna_out.close
+      end
+
     end
 
   end
 
 
+  # FIXME too slow..
   def extract_syntenic_fasta min_cov, min_pid
 
     puts "# Extracting Proteins and Genes multifasta.."
@@ -141,6 +150,7 @@ class BacterialComparator
     to_build_multifasta = []
 
     @synteny.each do |k,v|
+
       is_syntenic = 1
       v.each do |v_|
         if v_[:query_cov] == "-"
@@ -186,8 +196,10 @@ class BacterialComparator
     Dir.mkdir(pep_out_dir) if ! Dir.exists? pep_out_dir
     Dir.mkdir(dna_out_dir) if ! Dir.exists? dna_out_dir
 
-    Parallel.map(to_build_multifasta, in_processes: @proc) { |k,v|
-      build_multifasta k, v
+    synteny_list = to_build_multifasta.each_slice((to_build_multifasta.length/@proc)+1).to_a
+
+    Parallel.map(synteny_list, in_processes: @proc) { |list|
+      build_multifasta list
     }
 
     stats[:nb_of_syntenic] = nb_of_syntenic
