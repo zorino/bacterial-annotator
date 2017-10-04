@@ -505,18 +505,20 @@ class BacterialAnnotator
 
     # Iterate over each Ref protein and print syntheny
     synteny_file = File.open("#{@options[:outdir]}/Prot-Synteny.tsv","w")
-    synteny_file.write("RefLocusTag\tRefProtID\tRefLength\tRefCoverage\tIdentity\tQueryGene\tQueryLength\tQueryCoverage\n")
+    synteny_file.write("RefLocusTag\tRefProtID\tRefLength\tRefCoverage\tIdentity\tQueryGene\tQueryLength\tQueryCoverage\tQueryPartial\n")
     ref_annotated = {}
 
     @prot_synteny_refgenome.query_sequences.each do |prot, syn_val|
       next if ! syn_val.has_key? :homology
+      next if ref_annotated.has_key? syn_val[:homology][:hits][0] and ref_annotated[syn_val[:homology][:hits][0]][:partial] == 0
       ref_annotated[syn_val[:homology][:hits][0]] = {
         key: prot,
         pId: syn_val[:homology][:pId],
         cov_query: syn_val[:homology][:cov_query],
         cov_subject: syn_val[:homology][:cov_subject],
         assert_cutoff: syn_val[:homology][:assert_cutoff],
-        length: syn_val[:homology][:length][0]
+        length: syn_val[:homology][:length][0],
+        partial: (syn_val[:partial] ? 1 : 0)
       }
     end
 
@@ -539,6 +541,7 @@ class BacterialAnnotator
         query_length = @query_fasta.annotation_files[:prot_ids_length][gene]
         coverage_query = ref_annotated[ref_v[:protId]][:cov_query]
         pId = ref_annotated[ref_v[:protId]][:pId]
+        partial = ref_annotated[ref_v[:protId]][:partial]
       end
 
       synteny_file.write(ref_v[:protId])
@@ -549,6 +552,7 @@ class BacterialAnnotator
       synteny_file.write("\t"+gene)
       synteny_file.write("\t"+query_length.to_s)
       synteny_file.write("\t"+coverage_query.to_s)
+      synteny_file.write("\t"+partial.to_s)
       synteny_file.write("\n")
 
     end

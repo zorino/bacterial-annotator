@@ -38,7 +38,7 @@ class SequenceSynteny
       properties = s.definition.chomp.split(";")
       partial = false
       if properties.length >= 2 and properties[1].include? "partial"
-        partial = (properties[1].gsub("partial=","")=='01')
+        partial = (properties[1].gsub("partial=","").include? '1')
       end
       sequences[s_name][:partial] = partial
       sequences[s_name][:length] = s.seq.length
