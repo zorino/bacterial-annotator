@@ -12,7 +12,7 @@ require 'fileutils'
 require 'bacterial-annotator/sequence-fasta'
 require 'bacterial-annotator/sequence-annotation'
 require 'bacterial-annotator/sequence-synteny'
-
+require 'helper'
 
 class BacterialAnnotator
 
@@ -79,13 +79,16 @@ class BacterialAnnotator
   # Prepare files for the annotation
   # Will run prodigal on the query and prepare reference genome files
   def prepare_files_for_annotation
-    puts "\nRunning Prodigal on your genome.."
+    print "# Running Prodigal on your genome.."
+    start_time = Time.now
     @query_fasta.run_prodigal @root, @options[:outdir]
-    puts "Prodigal done."
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time - start_time)
+    print "done (#{c_time})\n"
     if @with_refence_genome
       @ref_genome.write_cds_to_file @options[:outdir]
       @ref_genome.write_rna_to_file @options[:outdir]
-      puts "Successfully loaded #{@ref_genome.gbk.definition}"
+      # puts "Successfully loaded #{@ref_genome.gbk.definition}"
     end
   end                           # end of method
 
@@ -95,7 +98,12 @@ class BacterialAnnotator
     ref_synteny_prot = SequenceSynteny.new(@query_fasta.annotation_files[:proteins], @ref_genome.cds_file,
                                            "Prot-Ref", @options[:pidentity], @options[:pcoverage], "prot")
 
+    print "# Running alignment with Reference Genome CDS (blat).."
+    start_time = Time.now
     ref_synteny_prot.run_blat @root, @options[:outdir]
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time - start_time)
+    print "done (#{c_time})\n"
 
     ref_synteny_prot.extract_hits :refgenome
 
@@ -145,10 +153,14 @@ class BacterialAnnotator
       dump_ref_synteny_to_file
 
       # run RNA annotation
-      puts "\nRunning BLAT alignment with Reference Genome RNA.."
       @rna_synteny = SequenceSynteny.new(@query_fasta.fasta_file, @ref_genome.rna_file,
                                          "RNA-Ref", @options[:pidentity], @options[:pcoverage], "dna")
+      print "# Running alignment with Reference Genome RNA (blat).."
+      start_time = Time.now
       @rna_synteny.run_blat @root, @options[:outdir]
+      end_time = Time.now
+      c_time = Helper.sec2str(end_time-start_time)
+      print "done (#{c_time})\n"
       @rna_synteny.extract_hits_dna :rna
       @contig_annotations_rna = {}
       @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
@@ -168,9 +180,9 @@ class BacterialAnnotator
     # Parse annotations to genbank files
     parse_genbank_files
 
-    puts "\nPrinting Statistics.."
+    print "# Printing Statistics.."
     print_stats "#{@options[:outdir]}"
-
+    print "done\n"
 
   end                           # end of method
 
@@ -188,7 +200,7 @@ class BacterialAnnotator
                                                 "Prot-ExternalDB", @options[:pidentity],
                                                 @options[:pcoverage], "prot")
 
-      puts "\nRunning BLAT alignment with External Database.."
+      puts "# Running BLAT alignment with External Database.."
       @externaldb_synteny.run_blat @root, @options[:outdir]
       @externaldb_synteny.extract_hits :externaldb
 
@@ -237,7 +249,8 @@ class BacterialAnnotator
   # parse all genbank files
   def parse_genbank_files
 
-    puts "\nParsing annotation into genbank files.."
+    print "# Parsing annotation into genbank files.."
+    start_time = Time.now
     @contig_annotations_cds.each do |contig, contig_prots|
 
       gbk_path = @query_fasta.annotation_files[:gbk_path]
@@ -265,7 +278,9 @@ class BacterialAnnotator
       gbk_to_annotate.save_genbank_to_file gbk_path
 
     end
-
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    print "done (#{c_time})\n"
   end                           # end of method
 
 
@@ -510,6 +525,7 @@ class BacterialAnnotator
 
     @prot_synteny_refgenome.query_sequences.each do |prot, syn_val|
       next if ! syn_val.has_key? :homology
+      next if syn_val[:homology][:assert_cutoff].inject(:+) < 3
       next if ref_annotated.has_key? syn_val[:homology][:hits][0] and ref_annotated[syn_val[:homology][:hits][0]][:partial] == 0
       ref_annotated[syn_val[:homology][:hits][0]] = {
         key: prot,

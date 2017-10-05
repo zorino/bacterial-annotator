@@ -249,8 +249,6 @@ if ARGV.size >= 1
       puts "You didn't provide a reference genome or a database for the annotation !"
     elsif ! options.has_key? :input
       puts "You didn't provide a fasta file to annotate !"
-    elsif
-      puts ""
     end
 
     bannot = BacterialAnnotator.new(options, ROOT)

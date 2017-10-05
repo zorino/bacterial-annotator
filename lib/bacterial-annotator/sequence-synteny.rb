@@ -52,7 +52,7 @@ class SequenceSynteny
 
   # run blat on proteins
   def run_blat root, outdir
-    base_cmd = "#{root}/blat.linux -out=blast8 -minIdentity=#{@pidentity}"
+    base_cmd = "#{root}/blat.linux -out=blast8 -minIdentity=#{@pidentity} > /dev/null 2>&1"
     if @type == "prot"
       system("#{base_cmd} -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
     else

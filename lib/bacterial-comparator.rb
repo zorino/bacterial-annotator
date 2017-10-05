@@ -9,6 +9,7 @@
 require 'bio'
 require 'fileutils'
 require 'parallel'
+require 'helper'
 
 class BacterialComparator
 
@@ -48,7 +49,7 @@ class BacterialComparator
       file = File.open("#{g}/Prot-Synteny.tsv", "r")
       l = file.gets             # skip header
       while l = file.gets
-        # AAK98805.1      spr0001 453     1.0     100.0   ABAC01000005_14 453     1.0
+        # AAK98805.1      spr0001 453     1.0     100.0   ABAC01000005_14 453     1.0	1|0
         lA = l.chomp.split("\t")
         synteny[lA[0]] =  [] if ! synteny.has_key? lA[0]
         synteny[lA[0]] << {ref_cov: lA[3].to_f, pId: lA[4].to_f, query_prot: lA[5], query_cov: lA[7].to_f}
@@ -202,7 +203,7 @@ class BacterialComparator
     }
 
     stats[:nb_of_syntenic] = nb_of_syntenic
-    puts "Syntenic genes : " + nb_of_syntenic.to_s + " / " + @ref_prot.length.to_s
+    puts "   Syntenic genes : " + nb_of_syntenic.to_s + " / " + @ref_prot.length.to_s
 
   end
 
