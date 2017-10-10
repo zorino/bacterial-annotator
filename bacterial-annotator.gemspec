@@ -8,6 +8,7 @@ Gem::Specification.new do |s|
   s.email       = 'maximilien1er@gmail.com'
   s.files       = ["lib/bacterial-comparator.rb",
                    "lib/bacterial-annotator.rb",
+                   "lib/helper.rb",
                    "lib/bacterial-annotator/sequence-annotation.rb",
                    "lib/bacterial-annotator/sequence-fasta.rb",
                    "lib/bacterial-annotator/sequence-synteny.rb"]
