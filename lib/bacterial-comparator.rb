@@ -41,10 +41,11 @@ class BacterialComparator
   end
 
   def read_prot_synteny
-    puts "# Reading genomes synteny files (from genome annotations) .."
+
+    print "# Reading genome synteny files - from genome annotations.."
+    start_time = Time.now
     synteny = {}
     @genomes_list.each do |g|
-      puts "   #{g}/Prot-Synteny.tsv"
       genome_synteny = []
       file = File.open("#{g}/Prot-Synteny.tsv", "r")
       l = file.gets             # skip header
@@ -62,7 +63,12 @@ class BacterialComparator
       end
       file.close
     end
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    print "done (#{c_time})\n"
+
     synteny
+
   end
 
   def get_ref_prot
@@ -89,7 +95,7 @@ class BacterialComparator
       proteins[name] = out
     end
 
-    return proteins
+    proteins
 
   end
 
@@ -140,7 +146,9 @@ class BacterialComparator
   # extract and dump multifasta for syntenic genes and proteins
   def extract_syntenic_fasta min_cov, min_pid
 
-    puts "# Extracting Proteins and Genes multifasta.."
+    print "# Extracting Proteins and Genes multifasta.."
+    start_time = Time.now
+
     nb_of_syntenic = 0
     stats = {}
     stats[:syntenic] = []
@@ -202,8 +210,12 @@ class BacterialComparator
       build_multifasta list
     }
 
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    print "done (#{c_time})\n"
+
     stats[:nb_of_syntenic] = nb_of_syntenic
-    puts "   Syntenic genes : " + nb_of_syntenic.to_s + " / " + @ref_prot.length.to_s
+    #puts "   Syntenic genes : " + nb_of_syntenic.to_s + " / " + @ref_prot.length.to_s
 
   end
 
@@ -236,7 +248,9 @@ class BacterialComparator
 
   def mafft_align_all_pep
 
-    puts "# MAFFT multialign all protein sequences.."
+    print "# Sequence alignments - conserved single proteins a.a. (MAFFT).."
+    start_time = Time.now
+
     ori_dir = Dir.pwd
     Dir.chdir("#{@outdir}/align-genes-pep/")
 
@@ -255,9 +269,11 @@ class BacterialComparator
       Parallel.map(Dir["*.pep"], in_processes: @proc) { |f|
         mafft_align f
       }
-    else
-      puts "..Prot alignment files already exists, skipping."
     end
+
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    print "done (#{c_time})\n"
 
     # FIXME ugly hack to find out the reference genome
     ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
@@ -269,7 +285,10 @@ class BacterialComparator
   end
 
   def mafft_align_all_dna
-    puts "# MAFFT multialign all gene sequences.."
+
+    print "# Sequence alignments - conserved single genes dna (MAFFT).."
+    start_time = Time.now
+
     ori_dir = Dir.pwd
     Dir.chdir("#{@outdir}/align-genes-dna/")
 
@@ -288,12 +307,14 @@ class BacterialComparator
       Parallel.map(Dir["*.dna"], in_processes: @proc) { |f|
         mafft_align f
       }
-    else
-      puts "..Gene alignment files already exists, skipping."
     end
 
     # ugly hack to find out the reference genome
     ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
+
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    print "done (#{c_time})\n"
 
     concat_alignments "align-genes-dna.all.fasta", ref_id
 
@@ -367,36 +388,39 @@ class BacterialComparator
 
 
   def raxml_tree_dna bt
-
-    # DNA tree
-    puts "# RAXML DNA tree creation.. "
+    print "# Genes DNA tree creation (RAXML).."
+    start_time = Time.now
     ori_dir = Dir.pwd
     Dir.chdir(@outdir)
     Dir.mkdir("tree-genes-dna") if ! Dir.exists?("tree-genes-dna")
     current_dir = Dir.pwd
     tree_dir = "#{current_dir}/tree-genes-dna"
-    cmd = system("#{@root}/raxml.linux -T #{@proc} -f d -N #{bt} -s align-genes-dna.all.fasta  -m GTRGAMMA -p 123454321 -n DnaTree -w #{tree_dir}")
+    cmd = system("#{@root}/raxml.linux -T #{@proc} -f d -N #{bt} -s align-genes-dna.all.fasta  -m GTRGAMMA -p 123454321 -n DnaTree -w #{tree_dir} > /dev/null 2>&1")
     cmd = system("cat #{tree_dir}/RAxML_result.DnaTree.RUN.* >> #{tree_dir}/RAxML_result.BS")
-    cmd = system("#{@root}/raxml.linux -T #{@proc} -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.DnaTree -m GTRGAMMA -n DNA_BS_TREE -w #{tree_dir}")
-    cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.DNA_BS_TREE #{tree_dir}/../")
+    cmd = system("#{@root}/raxml.linux -T #{@proc} -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.DnaTree -m GTRGAMMA -n DNA_BS_TREE -w #{tree_dir} > /dev/null 2>&1")
+    cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.DNA_BS_TREE #{tree_dir}/../tree-genes-dna.nwk")
     Dir.chdir(ori_dir)
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    print "done (#{c_time})\n"
   end
 
   def raxml_tree_pep bt
-
-    # Prot tree
-    puts "# RAXML Protein tree creation.. "
+    print "# Proteins AA tree creation (RAXML).."
+    start_time = Time.now
     ori_dir = Dir.pwd
     Dir.chdir(@outdir)
     Dir.mkdir("tree-genes-pep") if ! Dir.exists?("tree-genes-pep")
     current_dir = Dir.pwd
     tree_dir = "#{current_dir}/tree-genes-pep"
-    cmd = system("#{@root}/raxml.linux -T #{@proc} -f d -N #{bt} -s align-genes-pep.all.fasta  -m PROTGAMMAAUTO -p 123454321 -n PepTree -w #{tree_dir}")
+    cmd = system("#{@root}/raxml.linux -T #{@proc} -f d -N #{bt} -s align-genes-pep.all.fasta  -m PROTGAMMAAUTO -p 123454321 -n PepTree -w #{tree_dir} > /dev/null 2>&1")
     cmd = system("cat #{tree_dir}/RAxML_result.PepTree.RUN.* >> #{tree_dir}/RAxML_result.BS")
-    cmd = system("#{@root}/raxml.linux -T #{@proc} -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.PepTree -m PROTGAMMAAUTO -n PEP_BS_TREE -w #{tree_dir}")
-    cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.PEP_BS_TREE #{tree_dir}/../")
+    cmd = system("#{@root}/raxml.linux -T #{@proc} -f b -z #{tree_dir}/RAxML_result.BS -t #{tree_dir}/RAxML_bestTree.PepTree -m PROTGAMMAAUTO -n PEP_BS_TREE -w #{tree_dir} > /dev/null 2>&1")
+    cmd = system("ln -s #{tree_dir}/RAxML_bipartitionsBranchLabels.PEP_BS_TREE #{tree_dir}/../tree-proteins-aa.nwk")
     Dir.chdir(ori_dir)
-
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    print "done (#{c_time})\n"
   end
 
 
