@@ -8,10 +8,9 @@
 
 
 
-module Helper
+class Helper
 
-
-  def sec2str secs
+  def self.sec2str secs
     [[60, :seconds], [60, :minutes], [24, :hours], [1000, :days]].map{ |count, name|
       if secs > 0
         secs, n = secs.divmod(count)
@@ -19,7 +18,5 @@ module Helper
       end
     }.compact.reverse.join(' ')
   end
-
-  module_function :sec2str
 
 end
