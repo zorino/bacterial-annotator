@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maximilien1er@gmail.com
+# review:  	
+# date:    	17-10-12
+# version: 	0.01
+# licence:  	
+
+require 'open-uri'
+
+ROOT_path = File.dirname(__FILE__)
+# url = "https://github.com/marbl/Mash/releases/download/v2.0/mash-Linux64-v2.0.tar"
+
+# Install Mash on the user system
+def installMash
+
+  begin
+    resp = open("https://github.com/marbl/Mash/releases/download/v2.0/mash-Linux64-v2.0.tar")
+    open("#{ROOT_path}/mash.tar", "wb") do |file|
+      file.write(resp.read)
+    end
+    Dir.chdir("#{ROOT_path}/")
+    `tar -xvf mash.tar > /dev/null 2>&1`
+    `cp mash-Linux64-v2.0/mash mash.linux`
+    File.chmod(0755, "#{ROOT_path}/mash.linux")
+    `rm -fr mash.tar mash-Linux64-v2.0/`
+  rescue
+    abort "Problem installing Mash, aborting"
+  end
+
+end
+
+
+# Install Mash if not already install
+if ! File.exists? "#{ROOT_path}/mash.linux"
+
+  puts "Installing Mash the MinHash sequence comparator.."
+  puts "See https://github.com/marbl/Mash/"
+  puts "The Licence is Custom"
+  installMash
+  puts "Mash successfully installed in #{ROOT_path}/mash.linux"
+  puts ""
+
+end
