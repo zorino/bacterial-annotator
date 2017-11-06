@@ -153,7 +153,11 @@ class BacterialComparator
     stats = {}
     stats[:syntenic] = []
     fout = File.open("#{@outdir}/cds-synteny.tsv", "w")
-    fout.write("Gene\t"+@genomes_list.join("\t")+"\n")
+    genomes_name = []
+    @genomes_list.each do |g|
+      genomes_name.push(File.basename(g))
+    end
+    fout.write("Gene\t"+genomes_name.join("\t")+"\n")
 
     to_build_multifasta = []
 
@@ -386,7 +390,6 @@ class BacterialComparator
 
   end
 
-
   def raxml_tree_dna bt
     print "# Genes DNA tree creation (RAXML).."
     start_time = Time.now
@@ -422,7 +425,6 @@ class BacterialComparator
     c_time = Helper.sec2str(end_time-start_time)
     print "done (#{c_time})\n"
   end
-
 
   def raxml_tree aln_opt, bt
 
