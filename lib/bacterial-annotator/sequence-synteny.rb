@@ -100,7 +100,7 @@ class SequenceSynteny
         # first hit for query
         if ! @query_sequences[key].has_key? :homology
           @query_sequences[key][:conserved] = true
-          @subject_sequences[key][:conserved] = true
+          # @subject_sequences[key][:conserved] = true
           @query_sequences[key][:homology] = {
             pId: lA[2].to_f.round(2),
             cov_query: cov_query,
@@ -119,7 +119,7 @@ class SequenceSynteny
         # query already got at least 1 hit and new_score > last_score
         elsif lA[11].to_f > @query_sequences[key][:homology][:score]
           @query_sequences[key][:conserved] = true
-          @subject_sequences[key][:conserved] = true
+          # @subject_sequences[key][:conserved] = true
           @query_sequences[key][:homology] = {
             pId: lA[2].to_f.round(2),
             cov_query: cov_query,
