@@ -1,13 +1,14 @@
 Gem::Specification.new do |s|
   s.name        = 'bacterial-annotator'
-  s.version     = '0.6.6'
-  s.date        = '2017-10-10'
+  s.version     = '0.7.0'
+  s.date        = '2017-11-06'
   s.summary     = "Bacterial Annotator"
   s.description = "GEM to annotate bacterial genome sequence based on a reference genome and complete the annotation with an external database."
   s.authors     = ["Maxime Deraspe"]
   s.email       = 'maximilien1er@gmail.com'
   s.files       = ["lib/bacterial-comparator.rb",
                    "lib/bacterial-annotator.rb",
+                   "lib/bacterial-identificator.rb",
                    "lib/helper.rb",
                    "lib/bacterial-annotator/sequence-annotation.rb",
                    "lib/bacterial-annotator/sequence-fasta.rb",
@@ -25,7 +26,8 @@ Gem::Specification.new do |s|
     "ba_diamond",
     "ba_fasta36",
     "ba_cdhit",
-    "ba_fasttree"
+    "ba_fasttree",
+    "ba_mash"
   ]
   s.default_executable = "bacterial-annotator"
   s.add_runtime_dependency 'bio', '~> 1.4', '>= 1.4.3'
