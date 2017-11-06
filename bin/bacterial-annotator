@@ -10,6 +10,7 @@
 
 require 'bacterial-annotator'
 require 'bacterial-comparator'
+require 'bacterial-identificator'
 
 VERSION = "0.6.6"
 
@@ -22,6 +23,7 @@ def print_version
   version += "  -- fasta36  v36.3.8d\n"
   version += "  -- RAxML v8.2.11\n"
   version += "  -- FastTree v2.1.10\n"
+  version += "  -- MASH v2.0\n"
   puts version
 end
 
@@ -35,6 +37,9 @@ def usage
 bacterial-annotator [annotate | compare] [OPTIONS]
 
 # Choose either to annotate a genome or compare several genome annotations
+
+  identify  [OPTIONS]
+            .. see identify -h for OPTIONS
 
   annotate  [OPTIONS]
             .. see annotate -h for OPTIONS
@@ -64,7 +69,7 @@ annotate [OPTIONS]
     --name/-n		<name> Sample name
 
   // MERGEM-based Annotation (Recommended)
-    --db/-d          <directory> MERGEM database directory
+    --db/-d		<directory> MERGEM database directory
 
   // Reference-Based Annotation
     --refgenome/-g	<GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
@@ -122,7 +127,6 @@ def parseOptions_annotate
     when "--externaldb"
       options[:external_db] = ARGV.shift
     when "--help", "-h"
-
       usage_annotate
       abort
     when "--version", "-v"
@@ -213,6 +217,58 @@ def parseOptions_compare
 
 end
 
+
+def usage_identify
+
+  print <<OEM
+
+identify [OPTIONS] genome_1.fasta genome_2.fasta genome_x.fasta
+
+  //MERGEM Database
+    --db/-d        <database directory>
+
+  //IO
+    --proc         <nb of process> Number of process to run the comparison
+
+OEM
+
+end
+
+def parseOptions_identify
+
+  options = {}
+  options[:proc] = 2
+  options[:genomes_list] = []
+
+  while x = ARGV.shift
+
+    case x.downcase
+    when "--db", "-d"
+      options[:database] = ARGV.shift
+    when "--proc", "-p"
+      options[:proc] = ARGV.shift
+    when "--help", "-h"
+      usage_identify
+      abort
+    else
+      if File.exists? "#{x}"
+        options[:genomes_list] << x
+      else
+        puts "#{x} file doesn't exist"
+        usage_identify
+        abort
+      end
+    end
+
+  end
+
+  options
+
+end
+
+
+
+
 ########
 # MAIN #
 ########
@@ -230,9 +286,9 @@ if ARGV.size >= 1
   system("ba_fasta36")
   system("ba_cdhit")
   system("ba_fasttree")
+  system("ba_mash")
 
   options = {}
-  genomes_list = []             # TODO multiple input genomes
 
   if ARGV[0] == "annotate"
 
@@ -240,7 +296,8 @@ if ARGV.size >= 1
     options = parseOptions_annotate
 
     if ! File.exist? ("#{ROOT}/blat.linux")
-      abort "#exiting blat is missing"
+      puts "Exiting program because blat is missing"
+      abort
     end
 
     # Check Options
@@ -264,6 +321,17 @@ if ARGV.size >= 1
     bcomp.mafft_aln aln_opt
     bcomp.raxml_tree aln_opt, options[:bootstrap] if options[:phylogeny] == 1
 
+  elsif ARGV[0] == "identify"
+
+    ARGV.shift
+    options = parseOptions_identify
+    if options[:genomes_list].empty?
+      puts "You need at least 1 genome fasta to identify !!"
+      usage_identify
+      abort
+    end
+    bident = BacterialIdentificator.new(options, ROOT)
+
   elsif ARGV[0] == "--version" or ARGV[0] == "-v"
 
     print_version
@@ -272,7 +340,6 @@ if ARGV.size >= 1
   else
     usage
   end
-
 
 else
   usage
