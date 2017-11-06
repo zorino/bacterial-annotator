@@ -22,8 +22,6 @@ class SequenceFasta
       abort "Aborting : The input sequence is not a fasta file !"
     end
 
-    # @contigs = extract_contigs(@fasta_flat)
-
     @meta = meta
 
     @annotation_files = nil
@@ -38,7 +36,7 @@ class SequenceFasta
 
     @annotation_files = {}
     Dir.mkdir "#{outdir}" if ! Dir.exists? "#{outdir}"
-    if @meta
+    if @meta==1
       system("#{root}/prodigal.linux -p meta -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
     else
       system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
