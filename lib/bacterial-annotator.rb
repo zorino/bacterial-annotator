@@ -26,7 +26,7 @@ class BacterialAnnotator
     @minlength = @options[:minlength].to_i
     @options[:minlength] = @options[:minlength].to_i
     @options[:pidentity] = @options[:pidentity].to_f
-    @options[:pidentispacemacs-lightty] = @options[:pidentity] * 100 if @options[:pidentity] <= 1.00
+    @options[:pidentity] = @options[:pidentity] * 100 if @options[:pidentity] <= 1.00
     @options[:pcoverage] = @options[:pcoverage].to_f
     @options[:pcoverage] = @options[:pcoverage] / 100 if @options[:pcoverage] > 1.00
 
@@ -200,8 +200,12 @@ class BacterialAnnotator
                                                 "Prot-ExternalDB", @options[:pidentity],
                                                 @options[:pcoverage], "prot")
 
-      puts "# Running BLAT alignment with External Database.."
+      print "# Running BLAT alignment with External Database.."
+      start_time = Time.now
       @externaldb_synteny.run_blat @root, @options[:outdir]
+      end_time = Time.now
+      c_time = Helper.sec2str(end_time-start_time)
+      print "done (#{c_time})\n"
       @externaldb_synteny.extract_hits :externaldb
 
       @externaldb_synteny.query_sequences.each do |k, v|
@@ -214,6 +218,9 @@ class BacterialAnnotator
 
         next if ! v.has_key? :homology
 
+        if ! @contig_annotations_cds.has_key? contig_of_protein
+          @contig_annotations_cds[contig_of_protein] = []
+        end
         @contig_annotations_cds[contig_of_protein] << k
 
         hit_gi = v[:homology][:hits][0]
@@ -238,7 +245,6 @@ class BacterialAnnotator
           inference: inference
         }
 
-
       end
 
     end
@@ -256,11 +262,16 @@ class BacterialAnnotator
       gbk_path = @query_fasta.annotation_files[:gbk_path]
       gbk_to_annotate = SequenceAnnotation.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
 
-      if @with_external_db
+      if @with_external_db and @with_refence_genome
         gbk_to_annotate.add_annotation_ref_synteny_prot(
           (@prot_synteny_refgenome.query_sequences.merge(@externaldb_synteny.query_sequences)),
           @contig_annotations_externaldb[contig].merge(@ref_genome.coding_seq),
           (File.basename @options[:refgenome]).gsub(/.gb.*/,"")
+        )
+      elsif @with_external_db
+        gbk_to_annotate.add_annotation_ref_synteny_prot(
+          @externaldb_synteny.query_sequences,
+          @contig_annotations_externaldb[contig]
         )
       else
         gbk_to_annotate.add_annotation_ref_synteny_prot(
@@ -270,7 +281,7 @@ class BacterialAnnotator
         )
       end
 
-      if @contig_annotations_rna.has_key? contig
+      if @contig_annotations_rna and @contig_annotations_rna.has_key? contig
         # puts "RNA annotation"
         gbk_to_annotate.add_annotations @contig_annotations_rna[contig], "new"
       end
@@ -419,6 +430,8 @@ class BacterialAnnotator
     # >sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae GN=blaNDM-1 PE=1 SV=1
     # TrEMBL
     # >tr|E5KIY2|E5KIY2_ECOLX Beta-lactamase NDM-1 OS=Escherichia coli GN=blaNDM-1 PE=1 SV=1
+    # MERGEM
+    # >Genome_ID|location|Protein_ID|LocusTag|Gene|Protein_Product
 
     ref_cds = {}
 
@@ -436,7 +449,10 @@ class BacterialAnnotator
           product = ""
           db_source = "[DBSource]"
 
-          if product_long.include? " [" and product_long.include? "]" # NCBI
+          if product_long.scan(/|/).count >= 5 # MERGEM
+            product = product_long
+            db_source = "RefSeq"
+          elsif product_long.include? " [" and product_long.include? "]" # NCBI
             organism = product_long[/\[.*?\]/]
             product = product_long.split(" [")[0].strip
           elsif product_long.include? "OS=" # Swissprot / TrEMBL
@@ -465,6 +481,9 @@ class BacterialAnnotator
               db_source = "UniProtKB"
             end
             prot_id = lA[1]
+          elsif key_gi.count("|") == 5
+            db_source = "RefSeq"
+            prot_id = lA[2]
           end
 
           ref_cds[key_gi] = {product: product, org: org, prot_id: prot_id, db_source: db_source}
