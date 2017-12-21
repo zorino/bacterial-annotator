@@ -224,8 +224,8 @@ def usage_identify
 
 identify [OPTIONS] genome_1.fasta genome_2.fasta genome_x.fasta
 
-  //MERGEM Database
-    --db/-d        <database directory>
+  //Mash Sketch
+    --mash/-m      <mash sketch file>
 
   //IO
     --proc         <nb of process> Number of process to run the comparison
@@ -238,13 +238,13 @@ def parseOptions_identify
 
   options = {}
   options[:proc] = 2
-  options[:genomes_list] = []
+  options[:genome_list] = []
 
   while x = ARGV.shift
 
     case x.downcase
-    when "--db", "-d"
-      options[:database] = ARGV.shift
+    when "--mash", "-m"
+      options[:mash_file] = ARGV.shift
     when "--proc", "-p"
       options[:proc] = ARGV.shift
     when "--help", "-h"
@@ -252,7 +252,7 @@ def parseOptions_identify
       abort
     else
       if File.exists? "#{x}"
-        options[:genomes_list] << x
+        options[:genome_list] << x
       else
         puts "#{x} file doesn't exist"
         usage_identify
@@ -325,7 +325,7 @@ if ARGV.size >= 1
 
     ARGV.shift
     options = parseOptions_identify
-    if options[:genomes_list].empty?
+    if options[:genome_list].empty?
       puts "You need at least 1 genome fasta to identify !!"
       usage_identify
       abort

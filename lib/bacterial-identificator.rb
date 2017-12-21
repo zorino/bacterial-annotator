@@ -20,14 +20,28 @@ class BacterialIdentificator
   def initialize options, root
 
     @root = root
-    @db_path = options[:database]
-    @genomes_list = options[:genomes_list]
+    @mash_file = options[:mash_file]
+    @genome_list = options[:genome_list]
     @proc = options[:proc].to_i
-    p @genomes_list
 
-    @genomes_list.each do |g|
-      mash_genome g
+    @genome_hits = {}
+    @genome_list.each do |g|
+      @genome_hits[g] = []
     end
+
+    Parallel.map(@genome_list, in_threads: @proc) do |g|
+      @genome_hits[g] = mash_genome g
+    end
+
+    order_hits = consensus_reference # @genome_hits
+
+    order_hits.each do |k,v|
+      puts "#{k} #{v}"
+    end
+
+    reference = order_hits[0]
+
+    find_genome_outliers reference
 
   end
 
@@ -37,7 +51,7 @@ class BacterialIdentificator
     # Reference-ID, Query-ID, Mash-distance, P-value, and Matching-hashes
     # fields = ["hit","query","distance","pvalue","match"]
 
-    results_raw = `#{@root}/mash.linux dist #{@db_path}/species-sequences.msh #{genome}`
+    results_raw = `#{@root}/mash.linux dist #{@mash_file} #{genome}`
     results = []
 
     results_raw.split("\n").each do |l|
@@ -55,10 +69,37 @@ class BacterialIdentificator
       end
     end
 
+    return results_sorted
+
   end
 
+  # consensus species model
+  def consensus_reference
 
+    all_hits = {}
+    @genome_hits.each do |g, hits|
+      puts "#{g}"
+      hits.each do |h|
+        score = h[4].split("/")[0].to_i
+        if ! all_hits.has_key? h[0]
+          all_hits[h[0]] = score
+        else
+          all_hits[h[0]] += score
+        end
+      end
+    end
+    return all_hits.sort_by { |k,v| v }.to_h
 
+  end
+
+  # find genome that are not part of reference species
+  def find_genome_outliers reference
+
+    # @genome_hits.each do |g, hits|
+    #   # need some exclusion threshold logic
+    # end
+
+  end
 
 end
 
