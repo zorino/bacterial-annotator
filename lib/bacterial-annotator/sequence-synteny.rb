@@ -11,10 +11,12 @@ class SequenceSynteny
 
   attr_reader :query_file, :subject_file, :aln_hits, :query_sequences, :subject_sequences
 
-  def initialize query_file, subject_file, name, pidentity, min_coverage, type
+  def initialize root, outdir, query_file, subject_file, name, pidentity, min_coverage, type
+
+    @root = root
+    @outdir = outdir
     @query_file = query_file
     @subject_file = subject_file
-
     @query_sequences = get_sequences(query_file)
     @subject_sequences = get_sequences(subject_file)
 
@@ -31,6 +33,7 @@ class SequenceSynteny
   def get_sequences seq_file
 
     sequences = {}
+
     flat = Bio::FlatFile.auto("#{seq_file}")
     flat.each_entry do |s|
       s_name = s.definition.chomp.split(" ")[0]
@@ -51,16 +54,52 @@ class SequenceSynteny
   end
 
   # run blat on proteins
-  def run_blat root, outdir
-    base_cmd = "#{root}/blat.linux -out=blast8 -minIdentity=#{@pidentity} > /dev/null 2>&1"
+  def run_blat
+    base_cmd = "#{@root}/blat.linux -out=blast8 -minIdentity=#{@pidentity} > /dev/null 2>&1"
     if @type == "prot"
-      system("#{base_cmd} -prot #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
+      system("#{base_cmd} -prot #{@subject_file} #{@query_file} #{@outdir}/#{@name}.blat8.tsv")
     else
-      system("#{base_cmd} #{@subject_file} #{@query_file} #{outdir}/#{@name}.blat8.tsv")
+      system("#{base_cmd} #{@subject_file} #{@query_file} #{@outdir}/#{@name}.blat8.tsv")
     end
-    @aln_file = "#{outdir}/#{@name}.blat8.tsv"
+    @aln_file = "#{@outdir}/#{@name}.blat8.tsv"
     # extract_hits
   end                           # end of method
+
+  # run fasta36 on proteins
+  def run_fasta36
+    if @type == "prot"
+      system("#{@root}/fasta36.linux -T 1 -b 3 -E 1e-40 -m 8 #{@query_file} #{@subject_file} > #{@outdir}/#{@name}.fasta36.tsv")
+    else
+      system("#{@root}/glsearch36.linux -T 1 -b 12 -E 1e-40 -m 8 #{@query_file} #{@subject_file} > #{@outdir}/#{@name}.fasta36.tsv")
+    end
+    @aln_file_fasta36 = "#{@outdir}/#{@name}.fasta36.tsv"
+    # extract_hits
+  end                           # end of method
+
+  # run diamond on proteins
+  def run_diamond
+    if @type == "prot"
+      system("#{@root}/diamond.linux makedb --db #{subject_file} --in #{subject_file} > /dev/null 2>&1")
+      system("#{@root}/diamond.linux blastp --db #{subject_file} -q #{query_file} -o #{@outdir}/#{@name}.diamond.tsv -f 6 > /dev/null 2>&1")
+    else
+      # system("#{@root}/glsearch36.linux -b 3 -E 1e-25 -m 8 #{@subject_file} #{@query_file} > #{@outdir}/#{@name}.fasta36.tsv")
+    end
+    @aln_file = "#{@outdir}/#{@name}.diamond.tsv"
+    # extract_hits
+  end                           # end of method
+
+  # # run dimaond on proteins
+  # def run_fasta36 root, @outdir
+  #   if @type == "prot"
+  #     system("#{@root}/fasta36.linux -E 0.00001 -m 8 #{@query_file} #{@subject_file} > #{@outdir}/#{@name}.fasta36.tsv")
+  #   # system("#{base_cmd} -prot #{@subject_file} #{@query_file} #{@outdir}/#{@name}.blat8.tsv")
+  #   else
+  #     system("#{@root}/glsearch36.linux -m 8 #{@subject_file} #{@query_file} > #{@outdir}/#{@name}.fasta36.tsv")
+  #     system("#{base_cmd} #{@subject_file} #{@query_file} #{@outdir}/#{@name}.blat8.tsv")
+  #   end
+  #   @aln_file_fasta36 = "#{@outdir}/#{@name}.fasta36.tsv"
+  #   # extract_hits
+  # end                           # end of method
 
 
   # Extract Hit from blast8 file and save it in hash

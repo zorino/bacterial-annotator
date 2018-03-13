@@ -34,15 +34,31 @@ class BacterialComparator
       min_pid = min_pid/100
     end
 
+    @aln_opt = options[:align].downcase
+    @run_phylo = 0
+    if options[:phylogeny] == 1
+      @bootstrap = options[:bootstrap]
+      @run_phylo = 1
+    end
+
     @ref_prot = get_ref_prot
     @synteny = read_prot_synteny
     @stats = extract_syntenic_fasta min_cov, min_pid
 
   end
 
+
+  def run_comparison
+
+    run_mafft_aln
+    run_raxml_phylo if @run_phylo != 0
+
+  end
+
+
   def read_prot_synteny
 
-    print "# Reading genome synteny files - from genome annotations.."
+    puts "# Reading genome synteny files START.."
     start_time = Time.now
     synteny = {}
     @genomes_list.each do |g|
@@ -65,7 +81,8 @@ class BacterialComparator
     end
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+
+    puts "# Reading genome synteny files [DONE] (in #{c_time})"
 
     synteny
 
@@ -146,7 +163,7 @@ class BacterialComparator
   # extract and dump multifasta for syntenic genes and proteins
   def extract_syntenic_fasta min_cov, min_pid
 
-    print "# Extracting Proteins and Genes multifasta.."
+    puts "# Extracting Proteins and Genes multifasta  START.."
     start_time = Time.now
 
     nb_of_syntenic = 0
@@ -216,13 +233,12 @@ class BacterialComparator
 
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Extracting Proteins and Genes multifasta  [DONE] (in #{c_time})"
 
     stats[:nb_of_syntenic] = nb_of_syntenic
     #puts "   Syntenic genes : " + nb_of_syntenic.to_s + " / " + @ref_prot.length.to_s
 
   end
-
 
   def mafft_align f
 
@@ -252,7 +268,7 @@ class BacterialComparator
 
   def mafft_align_all_pep
 
-    print "# Sequence alignments - conserved single proteins a.a. (MAFFT).."
+    puts "# Sequence alignments - individual proteins a.a. (MAFFT)  START.."
     start_time = Time.now
 
     ori_dir = Dir.pwd
@@ -277,7 +293,7 @@ class BacterialComparator
 
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Sequence alignments - individual proteins a.a. (MAFFT)  [DONE] (in #{c_time})"
 
     # FIXME ugly hack to find out the reference genome
     ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
@@ -290,7 +306,7 @@ class BacterialComparator
 
   def mafft_align_all_dna
 
-    print "# Sequence alignments - conserved single genes dna (MAFFT).."
+    puts "# Sequence alignments - individual genes dna (MAFFT)  START.."
     start_time = Time.now
 
     ori_dir = Dir.pwd
@@ -313,12 +329,12 @@ class BacterialComparator
       }
     end
 
-    # ugly hack to find out the reference genome
+    # ugly hack to find out the reference genome FIXME
     ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
 
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Sequence alignments - individual genes dna (MAFFT)  [DONE] (in #{c_time})"
 
     concat_alignments "align-genes-dna.all.fasta", ref_id
 
@@ -377,21 +393,21 @@ class BacterialComparator
 
   end
 
-  def mafft_aln aln_opt
+  def run_mafft_aln
 
-    if aln_opt == "both"
+    if @aln_opt == "both"
       mafft_align_all_pep
       mafft_align_all_dna
-    elsif aln_opt == "prot"
+    elsif @aln_opt == "prot"
       mafft_align_all_pep
-    elsif aln_opt == "dna"
+    elsif @aln_opt == "dna"
       mafft_align_all_dna
     end
 
   end
 
   def raxml_tree_dna bt
-    print "# Genes DNA tree creation (RAXML).."
+    puts "# Genes DNA tree creation (RAXML)  START.."
     start_time = Time.now
     ori_dir = Dir.pwd
     Dir.chdir(@outdir)
@@ -405,11 +421,11 @@ class BacterialComparator
     Dir.chdir(ori_dir)
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Genes DNA tree creation (RAXML)  [DONE] (in #{c_time})"
   end
 
   def raxml_tree_pep bt
-    print "# Proteins AA tree creation (RAXML).."
+    puts "# Proteins AA tree creation (RAXML)  START.."
     start_time = Time.now
     ori_dir = Dir.pwd
     Dir.chdir(@outdir)
@@ -423,18 +439,18 @@ class BacterialComparator
     Dir.chdir(ori_dir)
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Proteins AA tree creation (RAXML)  [DONE] (in #{c_time})"
   end
 
-  def raxml_tree aln_opt, bt
+  def run_raxml_phylo
 
-    if aln_opt == "both"
-      raxml_tree_dna bt
-      raxml_tree_pep bt
-    elsif aln_opt == "prot"
-      raxml_tree_pep bt
-    elsif aln_opt == "dna"
-      raxml_tree_dna bt
+    if @aln_opt == "both"
+      raxml_tree_dna @bootstrap
+      raxml_tree_pep @bootstrap
+    elsif @aln_opt == "prot"
+      raxml_tree_pep @bootstrap
+    elsif @aln_opt == "dna"
+      raxml_tree_dna @bootstrap
     end
 
   end

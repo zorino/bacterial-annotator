@@ -10,6 +10,9 @@ require 'bio'
 require 'fileutils'
 require 'parallel'
 require 'helper'
+require 'json'
+require 'pp'
+
 
 class BacterialIdentificator
 
@@ -23,6 +26,12 @@ class BacterialIdentificator
     @mash_file = options[:mash_file]
     @genome_list = options[:genome_list]
     @proc = options[:proc].to_i
+    @output=options[:output]
+
+  end
+
+
+  def run_identification
 
     @genome_hits = {}
     @genome_list.each do |g|
@@ -33,15 +42,7 @@ class BacterialIdentificator
       @genome_hits[g] = mash_genome g
     end
 
-    order_hits = consensus_reference # @genome_hits
-
-    order_hits.each do |k,v|
-      puts "#{k} #{v}"
-    end
-
-    reference = order_hits[0]
-
-    find_genome_outliers reference
+    print_output
 
   end
 
@@ -57,17 +58,10 @@ class BacterialIdentificator
     results_raw.split("\n").each do |l|
       lA = l.chomp.split("\t")
       next if lA[-1].split("/")[0] == '0' # no match
-      results << lA
+      results << (lA[0..0] + lA[2..-1])
     end
 
-    results_sorted = results.sort {|a,b| a[2] <=> b[2]}
-
-    File.open("#{genome}.msh_dist", "w") do |fout|
-      results_sorted.each do |f|
-        fout.write(f.join("\t"))
-        fout.write("\n")
-      end
-    end
+    results_sorted = results.sort {|a,b| a[1] <=> b[1]}
 
     return results_sorted
 
@@ -78,9 +72,8 @@ class BacterialIdentificator
 
     all_hits = {}
     @genome_hits.each do |g, hits|
-      puts "#{g}"
       hits.each do |h|
-        score = h[4].split("/")[0].to_i
+        score = h[3].split("/")[0].to_i
         if ! all_hits.has_key? h[0]
           all_hits[h[0]] = score
         else
@@ -92,14 +85,53 @@ class BacterialIdentificator
 
   end
 
-  # find genome that are not part of reference species
-  def find_genome_outliers reference
+  # print json
+  def print_output
 
-    # @genome_hits.each do |g, hits|
-    #   # need some exclusion threshold logic
-    # end
+    case @output.downcase
+    when "csv"
+      @genome_hits.each do |g, hits|
+        hits.each do |h|
+          puts "#{g},#{h.join(',')}"
+        end
+      end
+    when "json"
+      new_genome_hits = {}
+      @genome_hits.each do |g, hits|
+        new_genome_hits[g] = []
+        hits.each do |h|
+          new_genome_hits[g].push(Hash[["hit","distance","e-value","score"].zip(h)])
+        end
+      end
+      puts JSON.pretty_generate({genomes: new_genome_hits, summary: summary})
+    else
+      @genome_hits.each do |g, hits|
+        hits.each do |h|
+          out = h.join("\t")
+          puts "#{g}\t#{out}"
+        end
+      end
+    end
 
   end
 
-end
+  def summary
 
+    genome_hit_association =  {}
+
+    @genome_hits.each do |g, hits|
+      genome_hit_association[hits[0][0]] = 0 if ! genome_hit_association.has_key? hits[0][0]
+      genome_hit_association[hits[0][0]] += 1
+    end
+
+    population = {
+      consensus: consensus_reference.first[0],
+      genome_hits: genome_hit_association
+    }
+
+    return population
+
+  end
+
+
+end

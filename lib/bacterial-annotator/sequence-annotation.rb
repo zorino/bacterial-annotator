@@ -12,20 +12,182 @@ class SequenceAnnotation
   attr_accessor :gbk, :coding_seq, :cds_file, :rna_file
 
   # Initialize then genbank file
-  def initialize gbk_file, outdir
+  def initialize root, outdir, file_ref, type
 
-    @gbk_file = gbk_file
-    if ! File.exists? @gbk_file
-      fetch_ncbi_genome(@gbk_file, outdir)
-      @gbk_file = "#{outdir}/#{gbk_file}.gbk"
-      # @gbk_file += ".gbk"
+    @root = root
+    @outdir = outdir
+    @coding_seq = {}
+    @rna_seq = {}
+
+    case type
+    when "refGbk"
+      # reference genome use for annotation
+      reference_gbk file_ref
+    when "db"
+      # reference database use for annotation
+      reference_db file_ref
+    when "fasta"
+      # single fasta database for annotation (completion)
+      single_fasta file_ref
+    when "newGbk"
+      # new genbank holder to be annotated
+      new_gbk file_ref
     end
 
-    flat_gbk = Bio::FlatFile.auto(@gbk_file)
+  end
+
+
+  # Use a MERGEM database to get annotation from it
+  def reference_db dir
+
+    abort "Aborting: Can't find MERGEM db direcotry" if ! File.exists? dir
+
+    @cds_file = "#{dir}/cds.dmnd"
+    @rna_file = "#{dir}/rnas.fasta"
+
+    File.open("#{dir}/cds.txt") do |f|
+      while l = f.gets
+        lA = l.chomp.split(" ")
+        @coding_seq[lA[0].gsub(">","")] = {
+          protId: lA[0].gsub(">",""),
+          location: nil,
+          product: lA[1],
+        }
+      end
+    end
+
+    File.open("#{dir}/rnas.txt") do |f|
+      while l = f.gets
+        lA = l.chomp.split(" ")
+        @rna_seq[lA[0].gsub(">","")] = {
+          protId: lA[0].gsub(">",""),
+          location: nil,
+          product: lA[1],
+        }
+      end
+    end
+
+  end
+
+  # Use a Genbank Reference and read annotation from it
+  def reference_gbk gbk_file
+
+    puts "# Preparing reference genome files.."
+    if ! File.exists? gbk_file
+      fetch_ncbi_genome(gbk_file)
+      gbk_file = "#{@outdir}/#{gbk_file}.gbk"
+      # gbk_file += ".gbk"
+    end
+
+    flat_gbk = Bio::FlatFile.auto(gbk_file)
 
     # Check if gbk is valid
     if flat_gbk.dbclass != Bio::GenBank
-      abort "Aborting : The input #{@gbk_file} is not a valid genbank file !"
+      abort "Aborting : The input #{gbk_file} is not a valid genbank file !"
+    else
+      @gbk = flat_gbk.next_entry
+    end
+
+    @bioseq = @gbk.to_biosequence
+
+    write_cds_to_file
+    write_rna_to_file
+
+  end
+
+  # Use a Genbank Reference and read annotation from it
+  def single_fasta fasta_file
+
+    return "" if ! File.exists? fasta_file
+
+    File.open(fasta_file, "r") do |dbfile|
+
+      while l=dbfile.gets
+
+        if l[0] == ">"
+
+          lA = l.chomp.split("|")
+
+          if lA.length > 1      # refseq, ncbi, trembl, swissprot
+
+            key_gi = l.split(" ")[0][1..-1]
+            product_long = lA[-1]
+
+            organism = ""
+            product = ""
+            db_source = "[DBSource]"
+
+            if product_long.scan(/|/).count >= 5 # FROM BIORUBY SCRIPTS
+              product = product_long
+              db_source = "RefSeq"
+            elsif product_long.include? " [" and product_long.include? "]" # NCBI
+              organism = product_long[/\[.*?\]/]
+              product = product_long.split(" [")[0].strip
+            elsif product_long.include? "OS=" # Swissprot / TrEMBL
+              product_tmp = product.split("OS=")
+              organism = product_tmp[1].split(/[A-Z][A-Z]=/)[0].strip
+              product = product_tmp[0].strip
+            elsif product_long.include? "[A-Z][A-Z]=" # NCBI
+              product = product_long.split(/[A-Z][A-Z]=/)[0].strip
+            else
+              product = product_long
+            end
+
+            org = organism.gsub("[","").gsub("]","")
+
+            product.lstrip!
+            prot_id = nil
+
+            if key_gi.count("|") == 4
+              if lA[2] == "ref"
+                db_source = "RefSeq"
+              end
+              prot_id = lA[3]
+            elsif key_gi.count("|") == 2
+              if lA[0].include? == "sp" or
+                lA[0].include? == "tr"
+                db_source = "UniProtKB"
+              end
+              prot_id = lA[1]
+            elsif key_gi.count("|") == 5
+              db_source = "RefSeq"
+              prot_id = lA[2]
+            end
+
+
+          else                  # mergem
+
+
+          end
+
+          @coding_seq[key_gi] = { product: product,
+                                  org: org,
+                                  prot_id: prot_id,
+                                  db_source: db_source }
+
+        end
+
+      end
+
+    end
+
+  end
+
+
+  # New Genbank Holder to add annotation to it
+  def new_gbk gbk_file
+
+    if ! File.exists? gbk_file
+      fetch_ncbi_genome(gbk_file)
+      gbk_file = "#{@outdir}/#{gbk_file}.gbk"
+      # gbk_file += ".gbk"
+    end
+
+    flat_gbk = Bio::FlatFile.auto(gbk_file)
+
+    # Check if gbk is valid
+    if flat_gbk.dbclass != Bio::GenBank
+      abort "Aborting : The input #{gbk_file} is not a valid genbank file !"
     else
       @gbk = flat_gbk.next_entry
     end
@@ -38,9 +200,7 @@ class SequenceAnnotation
   # Prepare CDS/proteins
   def get_cds
 
-    if @coding_seq == nil
-
-      @coding_seq = {}
+    if @coding_seq.empty?
 
       # Iterate over each CDS
       @gbk.each_cds do |ft|
@@ -88,12 +248,12 @@ class SequenceAnnotation
   # Prepare rRNA tRNA
   def get_rna
 
-    if @rna_seq == nil
+    if @rna_seq.empty?
 
       @rna_seq = {}
       @gbk.features do |ft|
 
-        next if ! ft.feature.to_s.include? "RNA"
+        next if ! ft.feature.to_s.include? "rRNA"
 
         ftH = ft.to_hash
         loc = ft.locations
@@ -129,20 +289,19 @@ class SequenceAnnotation
 
   end
 
-
   # Print CDS to files
   # RETURN : cds_file path
-  def write_cds_to_file outdir
+  def write_cds_to_file
 
     cds_file = "#{@gbk.accession}.pep"
     dna_file = "#{@gbk.accession}.dna"
 
-    if @coding_seq == nil
+    if @coding_seq.empty?
       get_cds
     end
 
-    dna_out = File.open("#{outdir}/#{dna_file}", "w")
-    File.open("#{outdir}/#{cds_file}", "w") do |fwrite|
+    dna_out = File.open("#{@outdir}/#{dna_file}", "w")
+    File.open("#{@outdir}/#{cds_file}", "w") do |fwrite|
       @coding_seq.each_key do |k|
         seqout = @coding_seq[k][:bioseq].output_fasta("#{k}",60)
         seqout_dna = @coding_seq[k][:bioseq_gene].output_fasta("#{k}",60)
@@ -152,28 +311,28 @@ class SequenceAnnotation
     end
     dna_out.close
 
-    @cds_file = "#{outdir}/" + cds_file
+    @cds_file = "#{@outdir}/" + cds_file
 
   end
 
   # Print RNA to files
   # RETURN : rna_file path
-  def write_rna_to_file outdir
+  def write_rna_to_file
 
     rna_file = "#{@gbk.accession}.rna"
 
-    if @rna_seq == nil
+    if @rna_seq.empty?
       get_rna
     end
 
-    File.open("#{outdir}/#{rna_file}", "w") do |fwrite|
+    File.open("#{@outdir}/#{rna_file}", "w") do |fwrite|
       @rna_seq.each_key do |k|
         seqout_dna = @rna_seq[k][:bioseq_gene].output_fasta("#{k}|#{@rna_seq[k][:type]}|#{@rna_seq[k][:product]}",60)
         fwrite.write(seqout_dna)
       end
     end
 
-    @rna_file = "#{outdir}/" + rna_file
+    @rna_file = "#{@outdir}/" + rna_file
 
   end
 
@@ -247,6 +406,7 @@ class SequenceAnnotation
 
           # check if there is a reference genome.. reference_locus shouldn't be nil in that case
           if locus != nil
+
             qNote = Bio::Feature::Qualifier.new('note', "corresponds to #{locus} locus (AA identity: #{pId}%; coverage(q,s): #{cov_query}%,#{cov_subject}%) from #{ref_genome}")
             ftArray.push(qNote)
 
@@ -390,9 +550,9 @@ class SequenceAnnotation
   end
 
 
-  def save_genbank_to_file outdir
+  def save_genbank_to_file
 
-    File.open("#{outdir}/#{@gbk.definition}.gbk", "w") do |f|
+    File.open("#{@outdir}/#{@gbk.definition}.gbk", "w") do |f|
       f.write(@gbk.to_biosequence.output(:genbank))
     end
 
@@ -403,7 +563,7 @@ class SequenceAnnotation
   ###################
 
   # Fct: Get dna sequence
-  def get_DNA (cds, seq)
+  def get_DNA cds, seq
     loc = cds.locations
     sbeg = loc[0].from.to_i
     send = loc[0].to.to_i
@@ -418,11 +578,11 @@ class SequenceAnnotation
 
 
   # Fetch genbank genome from NCBI
-  def fetch_ncbi_genome refgenome_id, outdir
+  def fetch_ncbi_genome refgenome_id
     Bio::NCBI.default_email = 'default@default.com'
     ncbi = Bio::NCBI::REST.new
     genbankstring = ncbi.efetch(refgenome_id, {"db"=>'nucleotide', "rettype"=>'gb'})
-    File.open("#{outdir}/#{refgenome_id}.gbk", "w") do |f|
+    File.open("#{@outdir}/#{refgenome_id}.gbk", "w") do |f|
       f.write(genbankstring)
     end
   end

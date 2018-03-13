@@ -44,12 +44,25 @@ class BacterialAnnotator
     end
     Dir.mkdir(@options[:outdir])
 
-    @query_fasta = SequenceFasta.new(@options[:input], @options[:meta])
+    @query_fasta = SequenceFasta.new(@root,
+                                     options[:outdir],
+                                     @options[:input],
+                                     @options[:meta])
 
     @with_refence_genome = false
+    @with_db = false
     if @options.has_key? :refgenome
       @with_refence_genome = true
-      @ref_genome = SequenceAnnotation.new(@options[:refgenome], @options[:outdir])
+      @ref_genome = SequenceAnnotation.new(@root,
+                                           @options[:outdir],
+                                           @options[:refgenome],
+                                           "refGbk")
+    elsif @options[:mergem]
+      @with_db = true
+      @ref_genome = SequenceAnnotation.new(@root,
+                                           @options[:outdir],
+                                           @options[:mergem],
+                                           "db")
     end
 
     @with_external_db = false
@@ -76,51 +89,10 @@ class BacterialAnnotator
 
   end                           # end of method
 
-  # Prepare files for the annotation
-  # Will run prodigal on the query and prepare reference genome files
-  def prepare_files_for_annotation
-    print "# Running Prodigal on your genome.."
-    start_time = Time.now
-    @query_fasta.run_prodigal @root, @options[:outdir]
-    end_time = Time.now
-    c_time = Helper.sec2str(end_time - start_time)
-    print "done (#{c_time})\n"
-    if @with_refence_genome
-      @ref_genome.write_cds_to_file @options[:outdir]
-      @ref_genome.write_rna_to_file @options[:outdir]
-      # puts "Successfully loaded #{@ref_genome.gbk.definition}"
-    end
-  end                           # end of method
-
-
-  def run_reference_synteny_prot
-
-    ref_synteny_prot = SequenceSynteny.new(@query_fasta.annotation_files[:proteins], @ref_genome.cds_file,
-                                           "Prot-Ref", @options[:pidentity], @options[:pcoverage], "prot")
-
-    print "# Running alignment with Reference Genome CDS (blat).."
-    start_time = Time.now
-    ref_synteny_prot.run_blat @root, @options[:outdir]
-    end_time = Time.now
-    c_time = Helper.sec2str(end_time - start_time)
-    print "done (#{c_time})\n"
-
-    ref_synteny_prot.extract_hits :refgenome
-
-    ref_synteny_prot.query_sequences.each do |k,v|
-      if v.has_key? :homology
-        @contig_annotations_cds[v[:contig]] = [] if ! @contig_annotations_cds.has_key? v[:contig]
-        @contig_annotations_cds[v[:contig]] << k
-      end
-    end
-
-    ref_synteny_prot
-
-  end
-
-
   # run_alignment of reference genome proteins and the query
   def run_annotation
+
+    prepare_files_for_annotation
 
     # process reference genome synteny
     if @with_refence_genome        # Annotation with the Reference Genome
@@ -153,14 +125,30 @@ class BacterialAnnotator
       dump_ref_synteny_to_file
 
       # run RNA annotation
-      @rna_synteny = SequenceSynteny.new(@query_fasta.fasta_file, @ref_genome.rna_file,
-                                         "RNA-Ref", @options[:pidentity], @options[:pcoverage], "dna")
+      @rna_synteny = SequenceSynteny.new(@root,
+                                         @options[:outdir],
+                                         @query_fasta.fasta_file,
+                                         @ref_genome.rna_file,
+                                         "RNA-Ref",
+                                         @options[:pidentity],
+                                         @options[:pcoverage],
+                                         "dna")
+
       print "# Running alignment with Reference Genome RNA (blat).."
       start_time = Time.now
-      @rna_synteny.run_blat @root, @options[:outdir]
+      @rna_synteny.run_blat
       end_time = Time.now
       c_time = Helper.sec2str(end_time-start_time)
       print "done (#{c_time})\n"
+
+      # # takes too long
+      # print "# Running alignment with Reference Genome RNA (fasta36).."
+      # start_time = Time.now
+      # @rna_synteny.run_fasta36
+      # end_time = Time.now
+      # c_time = Helper.sec2str(end_time-start_time)
+      # print "done (#{c_time})\n"
+
       @rna_synteny.extract_hits_dna :rna
       @contig_annotations_rna = {}
       @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
@@ -187,6 +175,64 @@ class BacterialAnnotator
   end                           # end of method
 
 
+  # Prepare files for the annotation
+  # Will run prodigal on the query and prepare reference genome files
+  def prepare_files_for_annotation
+    print "# Running Prodigal on your genome.."
+    start_time = Time.now
+    @query_fasta.run_prodigal
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time - start_time)
+    print "done (#{c_time})\n"
+  end                           # end of method
+
+
+  def run_reference_synteny_prot
+
+    ref_synteny_prot = SequenceSynteny.new(@root,
+                                           @options[:outdir],
+                                           @query_fasta.annotation_files[:proteins],
+                                           @ref_genome.cds_file,
+                                           "Prot-Ref",
+                                           @options[:pidentity],
+                                           @options[:pcoverage],
+                                           "prot")
+
+    print "# Running alignment with Reference Genome CDS (diamond).."
+    start_time = Time.now
+    ref_synteny_prot.run_diamond
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time - start_time)
+    print "done (#{c_time})\n"
+
+    # print "# Running alignment with Reference Genome CDS (blat).."
+    # start_time = Time.now
+    # ref_synteny_prot.run_blat
+    # end_time = Time.now
+    # c_time = Helper.sec2str(end_time - start_time)
+    # print "done (#{c_time})\n"
+
+    # print "# Running alignment with Reference Genome CDS (fasta36).."
+    # start_time = Time.now
+    # ref_synteny_prot.run_fasta36
+    # end_time = Time.now
+    # c_time = Helper.sec2str(end_time - start_time)
+    # print "done (#{c_time})\n"
+
+    ref_synteny_prot.extract_hits :refgenome
+
+    ref_synteny_prot.query_sequences.each do |k,v|
+      if v.has_key? :homology
+        @contig_annotations_cds[v[:contig]] = [] if ! @contig_annotations_cds.has_key? v[:contig]
+        @contig_annotations_cds[v[:contig]] << k
+      end
+    end
+
+    ref_synteny_prot
+
+  end
+
+
   # Finishing the annotation of the remaining CDS
   def finish_annotation remaining_cds_file
 
@@ -194,15 +240,25 @@ class BacterialAnnotator
     if @options.has_key? :external_db	# from an external DB
 
       db_file = @options[:external_db]
-      ref_cds = extract_externaldb_prot_info db_file
+      ref_cds = SequenceAnnotation.new(@root,
+                                       @options[:outdir],
+                                       db_file,
+                                      "fasta")
 
-      @externaldb_synteny = SequenceSynteny.new(remaining_cds_file, db_file,
-                                                "Prot-ExternalDB", @options[:pidentity],
-                                                @options[:pcoverage], "prot")
+      # ref_cds = extract_externaldb_prot_info db_file
+
+      @externaldb_synteny = SequenceSynteny.new(@root,
+                                                @options[:outdir],
+                                                remaining_cds_file,
+                                                db_file,
+                                                "Prot-ExternalDB",
+                                                @options[:pidentity],
+                                                @options[:pcoverage],
+                                                "prot")
 
       print "# Running BLAT alignment with External Database.."
       start_time = Time.now
-      @externaldb_synteny.run_blat @root, @options[:outdir]
+      @externaldb_synteny.run_blat
       end_time = Time.now
       c_time = Helper.sec2str(end_time-start_time)
       print "done (#{c_time})\n"
@@ -228,18 +284,18 @@ class BacterialAnnotator
         # note = "Protein homology (#{v[:pId]}% identity) with gi:#{hit_gi}"
         cov_query = (v[:homology][:cov_query]*100).round(2)
         cov_subject = (v[:homology][:cov_subject]*100).round(2)
-        note = "Protein homology (AA identity: #{v[:homology][:pId]}%; coverage (q,s): #{cov_query}%,#{cov_subject}%) with #{ref_cds[hit_gi][:prot_id]}"
-        inference = "similar to AA sequence:#{ref_cds[hit_gi][:db_source]}:#{ref_cds[hit_gi][:prot_id]}"
+        note = "Protein homology (AA identity: #{v[:homology][:pId]}%; coverage (q,s): #{cov_query}%,#{cov_subject}%) with #{ref_cds.coding_seq[hit_gi][:prot_id]}"
+        inference = "similar to AA sequence:#{ref_cds.coding_seq[hit_gi][:db_source]}:#{ref_cds.coding_seq[hit_gi][:prot_id]}"
 
-        if ref_cds[hit_gi][:org] != ""
-          note +=  " from #{ref_cds[hit_gi][:org]}"
+        if ref_cds.coding_seq[hit_gi][:org] != ""
+          note +=  " from #{ref_cds.coding_seq[hit_gi][:org]}"
         end
 
         @contig_annotations_externaldb[contig_of_protein][v[:homology][:hits][0]] = {
-          product: ref_cds[hit_gi][:product],
+          product: ref_cds.coding_seq[hit_gi][:product],
           feature: "cds",
           gene: nil,
-          prot_id: ref_cds[hit_gi][:prot_id],
+          prot_id: ref_cds.coding_seq[hit_gi][:prot_id],
           locustag: nil,
           note: note,
           inference: inference
@@ -260,7 +316,10 @@ class BacterialAnnotator
     @contig_annotations_cds.each do |contig, contig_prots|
 
       gbk_path = @query_fasta.annotation_files[:gbk_path]
-      gbk_to_annotate = SequenceAnnotation.new("#{gbk_path}/#{contig}.gbk", "#{gbk_path}")
+      gbk_to_annotate = SequenceAnnotation.new(@root,
+                                               "#{gbk_path}",
+                                               "#{gbk_path}/#{contig}.gbk",
+                                               "newGbk")
 
       if @with_external_db and @with_refence_genome
         gbk_to_annotate.add_annotation_ref_synteny_prot(
@@ -286,7 +345,7 @@ class BacterialAnnotator
         gbk_to_annotate.add_annotations @contig_annotations_rna[contig], "new"
       end
 
-      gbk_to_annotate.save_genbank_to_file gbk_path
+      gbk_to_annotate.save_genbank_to_file
 
     end
     end_time = Time.now
