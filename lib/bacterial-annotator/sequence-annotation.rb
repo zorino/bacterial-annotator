@@ -5,11 +5,13 @@
 # version: 	0.0.1
 # licence:  	
 
+require 'json'
+require 'zlib'
 
 
 class SequenceAnnotation
 
-  attr_accessor :gbk, :coding_seq, :cds_file, :rna_file
+  attr_accessor :gbk, :coding_seq, :rna_seq, :cds_file, :rna_file
 
   # Initialize then genbank file
   def initialize root, outdir, file_ref, type
@@ -45,16 +47,33 @@ class SequenceAnnotation
     @cds_file = "#{dir}/cds.dmnd"
     @rna_file = "#{dir}/rnas.fasta"
 
-    File.open("#{dir}/cds.txt") do |f|
-      while l = f.gets
-        lA = l.chomp.split(" ")
-        @coding_seq[lA[0].gsub(">","")] = {
-          protId: lA[0].gsub(">",""),
-          location: nil,
-          product: lA[1],
-        }
-      end
+    json_genes = {}
+    Zlib::GzipReader.open("#{dir}/cds.json.gz") {|gz|
+      json_genes = JSON.parse(gz.read)
+    }
+
+    json_genes.each do |gene|
+
+      prot_id = gene["cluster_id"]
+      @coding_seq[prot_id] = {
+        protId: prot_id,
+        location: nil,
+        product: gene["consensus_name"],
+        length: gene["consensus_length"]
+      }
+
     end
+
+    # File.open("#{dir}/cds.txt") do |f|
+    #   while l = f.gets
+    #     lA = l.chomp.split(" ")
+    #     @coding_seq[lA[0].gsub(">","")] = {
+    #       protId: lA[0].gsub(">",""),
+    #       location: nil,
+    #       product: lA[1..-1].join(' '),
+    #     }
+    #   end
+    # end
 
     File.open("#{dir}/rnas.txt") do |f|
       while l = f.gets
@@ -62,7 +81,7 @@ class SequenceAnnotation
         @rna_seq[lA[0].gsub(">","")] = {
           protId: lA[0].gsub(">",""),
           location: nil,
-          product: lA[1],
+          product: lA[1..-1].join(' '),
         }
       end
     end
@@ -234,7 +253,7 @@ class SequenceAnnotation
           product: product[0],
           bioseq: pepBioSeq,
           bioseq_gene: dnaBioSeq,
-          bioseq_len: pepBioSeq.length
+          length: pepBioSeq.length
         }
 
       end

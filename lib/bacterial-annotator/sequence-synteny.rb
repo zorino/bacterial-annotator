@@ -6,6 +6,8 @@
 # version: 	0.0.1
 # licence:  	
 
+require 'json'
+require 'zlib'
 
 class SequenceSynteny
 
@@ -30,23 +32,47 @@ class SequenceSynteny
 
 
   # get sequences name with length in hash
-  def get_sequences seq_file
+  def get_sequences raw_file
 
     sequences = {}
 
-    flat = Bio::FlatFile.auto("#{seq_file}")
-    flat.each_entry do |s|
-      s_name = s.definition.chomp.split(" ")[0]
-      sequences[s_name] = {}
-      properties = s.definition.chomp.split(";")
-      partial = false
-      if properties.length >= 2 and properties[1].include? "partial"
-        partial = (properties[1].gsub("partial=","").include? '1')
+    if raw_file.include?(".dmnd")
+
+      seq_info_file = raw_file.gsub(".dmnd",".json.gz")
+
+      json_genes = {}
+      Zlib::GzipReader.open(seq_info_file) {|gz|
+        json_genes = JSON.parse(gz.read)
+      }
+
+      json_genes.each do |gene|
+
+        sequences[gene["cluster_id"]] = {}
+        sequences[gene["cluster_id"]][:length] = gene["consensus_length"].to_f
+        sequences[gene["cluster_id"]][:conserved] = false
+        sequences[gene["cluster_id"]][:contig] = gene["cluster_id"].split("_")[0..-2].join("_") if gene["cluster_id"].include? "_"
+
       end
-      sequences[s_name][:partial] = partial
-      sequences[s_name][:length] = s.seq.length
-      sequences[s_name][:conserved] = false
-      sequences[s_name][:contig] = s_name.split("_")[0..-2].join("_") if s_name.include? "_"
+
+    else
+
+      seq_file = raw_file
+      flat = Bio::FlatFile.auto("#{seq_file}")
+      flat.each_entry do |s|
+        s_name = s.definition.chomp.split(" ")[0]
+        sequences[s_name] = {}
+        properties = s.definition.chomp.split(";")
+        partial = false
+        if properties.length >= 2 and properties[1].include? "partial"
+          partial = (properties[1].gsub("partial=","").include? '1')
+        end
+        sequences[s_name][:partial] = partial
+        sequences[s_name][:length] = s.seq.length
+        sequences[s_name][:conserved] = false
+        sequences[s_name][:contig] = s_name.split("_")[0..-2].join("_") if s_name.include? "_"
+
+      end
+
     end
 
     sequences
@@ -79,27 +105,19 @@ class SequenceSynteny
   # run diamond on proteins
   def run_diamond
     if @type == "prot"
-      system("#{@root}/diamond.linux makedb --db #{subject_file} --in #{subject_file} > /dev/null 2>&1")
-      system("#{@root}/diamond.linux blastp --db #{subject_file} -q #{query_file} -o #{@outdir}/#{@name}.diamond.tsv -f 6 > /dev/null 2>&1")
+      if subject_file.include? ".dmnd"
+        db_file = subject_file
+      else
+        system("#{@root}/diamond.linux makedb --db #{subject_file} --in #{subject_file} > /dev/null 2>&1")
+        db_file = subject_file
+      end
+      system("#{@root}/diamond.linux blastp --db #{db_file} -q #{query_file} -o #{@outdir}/#{@name}.diamond.tsv -f 6 > /dev/null 2>&1")
     else
       # system("#{@root}/glsearch36.linux -b 3 -E 1e-25 -m 8 #{@subject_file} #{@query_file} > #{@outdir}/#{@name}.fasta36.tsv")
     end
     @aln_file = "#{@outdir}/#{@name}.diamond.tsv"
     # extract_hits
   end                           # end of method
-
-  # # run dimaond on proteins
-  # def run_fasta36 root, @outdir
-  #   if @type == "prot"
-  #     system("#{@root}/fasta36.linux -E 0.00001 -m 8 #{@query_file} #{@subject_file} > #{@outdir}/#{@name}.fasta36.tsv")
-  #   # system("#{base_cmd} -prot #{@subject_file} #{@query_file} #{@outdir}/#{@name}.blat8.tsv")
-  #   else
-  #     system("#{@root}/glsearch36.linux -m 8 #{@subject_file} #{@query_file} > #{@outdir}/#{@name}.fasta36.tsv")
-  #     system("#{base_cmd} #{@subject_file} #{@query_file} #{@outdir}/#{@name}.blat8.tsv")
-  #   end
-  #   @aln_file_fasta36 = "#{@outdir}/#{@name}.fasta36.tsv"
-  #   # extract_hits
-  # end                           # end of method
 
 
   # Extract Hit from blast8 file and save it in hash
