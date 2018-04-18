@@ -102,6 +102,11 @@ def parseOptions_annotate
   options[:minlength] = 500
   options[:meta] = 0
 
+  if ARGV.length == 0
+    usage_annotate
+    abort
+  end
+
   while x = ARGV.shift
 
     case x.downcase
