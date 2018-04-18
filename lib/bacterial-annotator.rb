@@ -23,6 +23,8 @@ class BacterialAnnotator
     @root = root
     @options = options
 
+    abort if ! @options.has_key? :input
+
     @minlength = @options[:minlength].to_i
     @options[:minlength] = @options[:minlength].to_i
     @options[:pidentity] = @options[:pidentity].to_f
@@ -88,6 +90,7 @@ class BacterialAnnotator
     @contig_annotations_cds = {}
 
   end                           # end of method
+
 
   # run_alignment of reference genome proteins and the query
   def run_annotation
@@ -155,9 +158,39 @@ class BacterialAnnotator
         @contig_annotations_rna[contig] = @rna_synteny.get_annotation_for_contig contig
       end
 
+
+    elsif @with_db
+
+      @prot_synteny_refgenome = run_mergem_synteny_prot
+      # iterate over each contig
+      #     discard short contig
+      #     cumulate statistics of homolog CDS
+      @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
+
+        # Skip short contigs
+        if @query_fasta.annotation_files[:contigs_length][contig_index] < @minlength
+          @annotation_stats[:short_contigs] << contig
+          next
+        end
+
+        remaining_cds = cumulate_annotation_stats_reference contig
+
+        if remaining_cds != []
+          @contig_foreign_cds[contig] = remaining_cds
+        end
+
+      end
+
+      # dump foreign proteins to file
+      foreign_cds_file = dump_cds
+
+      # dump reference CDS synteny to file
+      dump_ref_synteny_to_file
+
+
     else                        # no reference genome
 
-      # no reference genome .. will process all the CDS
+      # no reference genome .. will process all the CDS as foreign for the external db
       foreign_cds_file = @query_fasta.annotation_files[:proteins]
 
     end
@@ -185,6 +218,41 @@ class BacterialAnnotator
     c_time = Helper.sec2str(end_time - start_time)
     print "done (#{c_time})\n"
   end                           # end of method
+
+
+  def run_mergem_synteny_prot
+
+
+    ref_synteny_prot = SequenceSynteny.new(@root,
+                                           @options[:outdir],
+                                           @query_fasta.annotation_files[:proteins],
+                                           @ref_genome.cds_file,
+                                           "Prot-Ref",
+                                           @options[:pidentity],
+                                           @options[:pcoverage],
+                                           "prot")
+
+    print "# Running alignment with Reference Genome CDS (diamond).."
+    start_time = Time.now
+    ref_synteny_prot.run_diamond
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time - start_time)
+    print "done (#{c_time})\n"
+
+    ref_synteny_prot.extract_hits :refgenome
+
+    ref_synteny_prot.query_sequences.each do |k,v|
+      if v.has_key? :homology
+        @contig_annotations_cds[v[:contig]] = [] if ! @contig_annotations_cds.has_key? v[:contig]
+        @contig_annotations_cds[v[:contig]] << k
+      end
+    end
+
+    ref_synteny_prot
+
+
+  end
+
 
 
   def run_reference_synteny_prot
@@ -331,6 +399,11 @@ class BacterialAnnotator
         gbk_to_annotate.add_annotation_ref_synteny_prot(
           @externaldb_synteny.query_sequences,
           @contig_annotations_externaldb[contig]
+        )
+      elsif @with_db
+        gbk_to_annotate.add_annotation_ref_synteny_prot(
+          @prot_synteny_refgenome.query_sequences,
+          @ref_genome.coding_seq
         )
       else
         gbk_to_annotate.add_annotation_ref_synteny_prot(
@@ -638,9 +711,14 @@ class BacterialAnnotator
         partial = ref_annotated[ref_v[:protId]][:partial]
       end
 
+      _locus_tag = ref_v[:locustag] || ""
+      _seq_len = "NA"
+      # _seq_len = ref_v[:bioseq].seq.length.to_s if ! ref_v[:bioseq].nil?
+      _seq_len = ref_v[:length].to_s if ! ref_v[:length].nil?
+
       synteny_file.write(ref_v[:protId])
-      synteny_file.write("\t"+ref_v[:locustag])
-      synteny_file.write("\t"+ref_v[:bioseq].seq.length.to_s)
+      synteny_file.write("\t"+_locus_tag)
+      synteny_file.write("\t"+_seq_len)
       synteny_file.write("\t"+coverage_ref.to_s)
       synteny_file.write("\t"+pId.to_s)
       synteny_file.write("\t"+gene)
