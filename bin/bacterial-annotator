@@ -12,7 +12,7 @@ require 'bacterial-annotator'
 require 'bacterial-comparator'
 require 'bacterial-identificator'
 
-VERSION = "0.6.6"
+VERSION = "0.8.0"
 
 def print_version
   version = "Bacterial Annotator - Version #{VERSION}\n\n"
@@ -63,27 +63,28 @@ def usage_annotate
 annotate [OPTIONS]
 
   // IO
-    --input/-i		<fasta_file>	Provide the fasta file to annotate
-    --outdir/-o		<outdir>	Output directory [default=BAnnotation]
-    --force/-f		Force to overwrite the output directory
-    --name/-n		<name> Sample name
+    --input/-i      <fasta_file>         Provide the fasta file to annotate
+    --outdir/-o     <outdir>             Output directory [default=BAnnotation]
+    --name/-n       <name>               Sample name
+    --force/-f                           Force to overwrite the output directory
 
   // MERGEM-based Annotation (Recommended)
-    --db/-d		<directory> MERGEM database directory
+    --db/-d         <species_dir>        From MERGEM database (include CDS and RNAs fasta)
+                                         // see bacteriapps.genome.ulaval.ca/mergem
 
   // Reference-Based Annotation
-    --refgenome/-g	<GBK_ID> 	Provide a Genbank file or a Gbk Accession ID.
-    --externaldb	<proteins fasta_file>
-			  Finish or do a complete annotation with this sequence database (a protein fasta file).
-			  Fasta headers need to look similar to NCBI or EBI fasta headers, ex.:
-			  >gi|385721352|gb|AFI72857.1| NDM-1 [Escherichia coli]
-			  >sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
-    --pidentity		<% identity> Minimum percentage identity to incorporate a CDS annotation [default=0.8]
-    --pcoverage		<% identity> Minimum percentage of coverage over protein alignment to incorporate a CDS annotation [default=0.8]
-			             .. otherwise hint for a non-functional protein
-    --minlength		<length> Minimum contig length for annotation [default=500]
+    --refgenome/-g  <GBK_ID>             Provide a Genbank file or a Gbk Accession ID.
+    --externaldb    <fasta_file>         Finish or do a complete annotation with this sequence database (protein fasta file).
+                                         Fasta headers need to look similar to NCBI or EBI fasta headers
+                                         EX: >gi|385721352|gb|AFI72857.1| NDM-1 [Escherichia coli]
+                                             >sp|C7C422|BLAN1_KLEPN Beta-lactamase NDM-1 OS=Klebsiella pneumoniae..
 
-    --meta		Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
+  // Options
+    --pidentity     <% identity>          Minimum percentage identity to incorporate a CDS annotation [default=0.8]
+    --pcoverage     <% identity>          Minimum percentage of coverage over protein alignment to incorporate a CDS annotation [default=0.8]
+                                          // otherwise hint for a non-functional protein
+    --minlength     <length>              Minimum contig length for annotation [default=500]
+    --meta                                Better for metagenome and plasmid annotations because of disparate codon usage [default=off]
 
 OEM
 
@@ -100,6 +101,11 @@ def parseOptions_annotate
   options[:pcoverage] = 80
   options[:minlength] = 500
   options[:meta] = 0
+
+  if ARGV.length == 0
+    usage_annotate
+    abort
+  end
 
   while x = ARGV.shift
 
@@ -183,6 +189,7 @@ def parseOptions_compare
   options[:genomes_list] = []
   options[:concat] = 0
   options[:phylogeny] = 0
+  options[:software] = "fasttree"
   options[:bootstrap] = 100
 
   while x = ARGV.shift
@@ -202,6 +209,8 @@ def parseOptions_compare
       options[:concat] = ARGV.shift
     when "--phylogeny"
       options[:phylogeny] = 1
+    when "--software"
+      options[:software] = ARGV.shift
     when "--bootstrap"
       options[:bootstrap] = (ARGV.shift).to_i
     when "--help", "-h"
@@ -230,6 +239,8 @@ identify [OPTIONS] genome_1.fasta genome_2.fasta genome_x.fasta
   //IO
     --proc         <nb of process> Number of process to run the comparison
 
+    --output       [csv,tsv|json]
+
 OEM
 
 end
@@ -239,6 +250,7 @@ def parseOptions_identify
   options = {}
   options[:proc] = 2
   options[:genome_list] = []
+  options[:output] = "tsv"
 
   while x = ARGV.shift
 
@@ -247,6 +259,8 @@ def parseOptions_identify
       options[:mash_file] = ARGV.shift
     when "--proc", "-p"
       options[:proc] = ARGV.shift
+    when "--output", "-o"
+      options[:output] = ARGV.shift
     when "--help", "-h"
       usage_identify
       abort
@@ -302,14 +316,14 @@ if ARGV.size >= 1
 
     # Check Options
     if ! options.has_key? :refgenome and
-       ! options.has_key? :external_db
+       ! options.has_key? :external_db and
+       ! options.has_key? :mergem
       puts "You didn't provide a reference genome or a database for the annotation !"
     elsif ! options.has_key? :input
       puts "You didn't provide a fasta file to annotate !"
     end
 
     bannot = BacterialAnnotator.new(options, ROOT)
-    bannot.prepare_files_for_annotation
     bannot.run_annotation
 
   elsif ARGV[0] == "compare"
@@ -317,9 +331,7 @@ if ARGV.size >= 1
     ARGV.shift
     options = parseOptions_compare
     bcomp = BacterialComparator.new(options, ROOT)
-    aln_opt = options[:align].downcase
-    bcomp.mafft_aln aln_opt
-    bcomp.raxml_tree aln_opt, options[:bootstrap] if options[:phylogeny] == 1
+    bcomp.run_comparison
 
   elsif ARGV[0] == "identify"
 
@@ -331,6 +343,7 @@ if ARGV.size >= 1
       abort
     end
     bident = BacterialIdentificator.new(options, ROOT)
+    bident.run_identification
 
   elsif ARGV[0] == "--version" or ARGV[0] == "-v"
 

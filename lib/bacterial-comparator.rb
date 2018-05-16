@@ -20,11 +20,17 @@ class BacterialComparator
   def initialize options, root
 
     @root = root
-    @outdir = options[:outdir]
+    @outdir = File.expand_path(File.dirname(options[:outdir]))+"/#{options[:outdir]}"
     Dir.mkdir(@outdir) if ! Dir.exists? @outdir
     @genomes_list = options[:genomes_list]
     @proc = options[:proc].to_i
     @phylo_nb_genes = options[:phylo_nb_genes]
+    if ["fasttree","raxml"].include? options[:software]
+      @software = options[:software]
+    else
+      @software = "fasttree"
+    end
+
     min_cov = options[:min_cov].to_f
     min_pid = options[:pidentity].to_f
     if min_cov > 1
@@ -34,15 +40,32 @@ class BacterialComparator
       min_pid = min_pid/100
     end
 
+    @aln_opt = options[:align].downcase
+    @run_phylo = 0
+    if options[:phylogeny] == 1
+      @bootstrap = options[:bootstrap]
+      @run_phylo = 1
+    end
+
     @ref_prot = get_ref_prot
     @synteny = read_prot_synteny
     @stats = extract_syntenic_fasta min_cov, min_pid
 
   end
 
+
+  def run_comparison
+
+    run_mafft_aln
+
+    run_phylo if @run_phylo != 0
+
+  end
+
+
   def read_prot_synteny
 
-    print "# Reading genome synteny files - from genome annotations.."
+    puts "# Reading genome synteny files START.."
     start_time = Time.now
     synteny = {}
     @genomes_list.each do |g|
@@ -65,7 +88,8 @@ class BacterialComparator
     end
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+
+    puts "# Reading genome synteny files [DONE] (in #{c_time})"
 
     synteny
 
@@ -102,7 +126,7 @@ class BacterialComparator
 
   def build_multifasta synteny_list
 
-    pep_out_dir = "./#{@outdir}/align-genes-pep"
+    pep_out_dir = "#{@outdir}/align-genes-pep"
 
     ref_proteins = load_genome_cds(Dir["#{@genomes_list[0]}/*.pep"][0])
     synteny_list.each do |k,v|
@@ -122,7 +146,7 @@ class BacterialComparator
 
     end
 
-    dna_out_dir = "./#{@outdir}/align-genes-dna"
+    dna_out_dir = "#{@outdir}/align-genes-dna"
     ref_genes = load_genome_cds(Dir["#{@genomes_list[0]}/*.dna"][0])
     synteny_list.each do |k,v|
       dna_out = File.open(dna_out_dir+"/#{k}.dna", "w")
@@ -146,7 +170,7 @@ class BacterialComparator
   # extract and dump multifasta for syntenic genes and proteins
   def extract_syntenic_fasta min_cov, min_pid
 
-    print "# Extracting Proteins and Genes multifasta.."
+    puts "# Extracting Proteins and Genes multifasta  START.."
     start_time = Time.now
 
     nb_of_syntenic = 0
@@ -203,8 +227,8 @@ class BacterialComparator
 
     fout.close
 
-    pep_out_dir = "./#{@outdir}/align-genes-pep"
-    dna_out_dir = "./#{@outdir}/align-genes-dna"
+    pep_out_dir = "#{@outdir}/align-genes-pep"
+    dna_out_dir = "#{@outdir}/align-genes-dna"
     Dir.mkdir(pep_out_dir) if ! Dir.exists? pep_out_dir
     Dir.mkdir(dna_out_dir) if ! Dir.exists? dna_out_dir
 
@@ -216,13 +240,12 @@ class BacterialComparator
 
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Extracting Proteins and Genes multifasta  [DONE] (in #{c_time})"
 
     stats[:nb_of_syntenic] = nb_of_syntenic
     #puts "   Syntenic genes : " + nb_of_syntenic.to_s + " / " + @ref_prot.length.to_s
 
   end
-
 
   def mafft_align f
 
@@ -252,7 +275,7 @@ class BacterialComparator
 
   def mafft_align_all_pep
 
-    print "# Sequence alignments - conserved single proteins a.a. (MAFFT).."
+    puts "# Sequence alignments - individual proteins a.a. (MAFFT)  START.."
     start_time = Time.now
 
     ori_dir = Dir.pwd
@@ -277,12 +300,14 @@ class BacterialComparator
 
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Sequence alignments - individual proteins a.a. (MAFFT)  [DONE] (in #{c_time})"
 
     # FIXME ugly hack to find out the reference genome
-    ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
+    Dir.chdir("#{@outdir}")
+    Dir.chdir("../")
+    ref_id = Dir["#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
 
-    concat_alignments "align-genes-pep.all.fasta", ref_id
+    concat_alignments "#{@outdir}/align-genes-pep.all.fasta", ref_id
 
     Dir.chdir(ori_dir)
 
@@ -290,7 +315,7 @@ class BacterialComparator
 
   def mafft_align_all_dna
 
-    print "# Sequence alignments - conserved single genes dna (MAFFT).."
+    puts "# Sequence alignments - individual genes dna (MAFFT)  START.."
     start_time = Time.now
 
     ori_dir = Dir.pwd
@@ -313,14 +338,18 @@ class BacterialComparator
       }
     end
 
-    # ugly hack to find out the reference genome
-    ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
+    # ugly hack to find out the reference genome FIXME
+    Dir.chdir("#{@outdir}")
+    Dir.chdir("../")
+
+    ref_id = Dir["#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
+    # ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
 
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Sequence alignments - individual genes dna (MAFFT)  [DONE] (in #{c_time})"
 
-    concat_alignments "align-genes-dna.all.fasta", ref_id
+    concat_alignments "#{@outdir}/align-genes-dna.all.fasta", ref_id
 
     Dir.chdir(ori_dir)
 
@@ -329,15 +358,17 @@ class BacterialComparator
 
   def concat_alignments outfile, ref_id
 
-    if File.exists?("../#{outfile}") and File.size("../#{outfile}") > 0
+    if File.exists?("#{outfile}") and File.size("#{outfile}") > 0
       puts "..Alignment concatenated file already exists, skipping."
       return
     end
 
-    fout = File.open("../#{outfile}", "w")
+    fout = File.open("#{outfile}", "w")
 
     seq = ""
-    Dir["*.aln"].each do |f|
+    aln_dir = outfile.split(".")[0..-3].join(".")
+
+    Dir["#{aln_dir}/*.aln"].each do |f|
       flat = Bio::FlatFile.auto(f)
       ref_seq = flat.entries[0]
       flat.close
@@ -350,7 +381,7 @@ class BacterialComparator
 
     for i in 1..@genomes_list.length
       seq = ""
-      Dir["*.aln"].each do |f|
+      Dir["#{aln_dir}/*.aln"].each do |f|
         flat = Bio::FlatFile.auto(f)
         j=0
         flat.each_entry do |entry|
@@ -377,21 +408,21 @@ class BacterialComparator
 
   end
 
-  def mafft_aln aln_opt
+  def run_mafft_aln
 
-    if aln_opt == "both"
+    if @aln_opt == "both"
       mafft_align_all_pep
       mafft_align_all_dna
-    elsif aln_opt == "prot"
+    elsif @aln_opt == "prot"
       mafft_align_all_pep
-    elsif aln_opt == "dna"
+    elsif @aln_opt == "dna"
       mafft_align_all_dna
     end
 
   end
 
   def raxml_tree_dna bt
-    print "# Genes DNA tree creation (RAXML).."
+    puts "# Genes DNA tree creation (RAXML)  START.."
     start_time = Time.now
     ori_dir = Dir.pwd
     Dir.chdir(@outdir)
@@ -405,11 +436,11 @@ class BacterialComparator
     Dir.chdir(ori_dir)
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Genes DNA tree creation (RAXML)  [DONE] (in #{c_time})"
   end
 
   def raxml_tree_pep bt
-    print "# Proteins AA tree creation (RAXML).."
+    puts "# Proteins AA tree creation (RAXML)  START.."
     start_time = Time.now
     ori_dir = Dir.pwd
     Dir.chdir(@outdir)
@@ -423,18 +454,60 @@ class BacterialComparator
     Dir.chdir(ori_dir)
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
-    print "done (#{c_time})\n"
+    puts "# Proteins AA tree creation (RAXML)  [DONE] (in #{c_time})"
   end
 
-  def raxml_tree aln_opt, bt
 
-    if aln_opt == "both"
-      raxml_tree_dna bt
-      raxml_tree_pep bt
-    elsif aln_opt == "prot"
-      raxml_tree_pep bt
-    elsif aln_opt == "dna"
-      raxml_tree_dna bt
+  def fasttree_tree_dna bt
+    puts "# Genes DNA tree creation (FastTree)  START.."
+    start_time = Time.now
+    ori_dir = Dir.pwd
+    Dir.chdir(@outdir)
+    Dir.mkdir("tree-genes-dna") if ! Dir.exists?("tree-genes-dna")
+    current_dir = Dir.pwd
+    cmd = system("export OMP_NUM_THREADS=#{@proc} && #{@root}/fasttree.linux -nosupport -fastest -nt -gtr align-genes-dna.all.fasta > tree-genes-dna.nwk")
+    Dir.chdir(ori_dir)
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    puts "# Genes DNA tree creation (FastTree)  [DONE] (in #{c_time})"
+  end
+
+
+  def fasttree_tree_pep bt
+    puts "# Proteins AA tree creation (FastTree)  START.."
+    start_time = Time.now
+    ori_dir = Dir.pwd
+    Dir.chdir(@outdir)
+    Dir.mkdir("tree-genes-pep") if ! Dir.exists?("tree-genes-pep")
+    current_dir = Dir.pwd
+    cmd = system("export OMP_NUM_THREADS=#{@proc} && #{@root}/fasttree.linux -nosupport -fastest align-genes-pep.all.fasta > tree-proteins-aa.nwk")
+    Dir.chdir(ori_dir)
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time-start_time)
+    puts "# Proteins AA tree creation (FastTree)  [DONE] (in #{c_time})"
+  end
+
+
+  def run_phylo
+
+    if @software == "raxml"
+      if @aln_opt == "both"
+        raxml_tree_dna @bootstrap
+        raxml_tree_pep @bootstrap
+      elsif @aln_opt == "prot"
+        raxml_tree_pep @bootstrap
+      elsif @aln_opt == "dna"
+        raxml_tree_dna @bootstrap
+      end
+    elsif @software == "fasttree"
+      if @aln_opt == "both"
+        fasttree_tree_dna @bootstrap
+        fasttree_tree_pep @bootstrap
+      elsif @aln_opt == "prot"
+        fasttree_tree_pep @bootstrap
+      elsif @aln_opt == "dna"
+        fasttree_tree_dna @bootstrap
+      end
     end
 
   end

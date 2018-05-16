@@ -13,8 +13,10 @@ class SequenceFasta
   attr_reader :fasta_flat, :fasta_file, :annotation_files
 
   # Initialize fasta holder
-  def initialize fasta_file, meta
+  def initialize root, outdir, fasta_file, meta
 
+    @root = root
+    @outdir = outdir
     @fasta_file = fasta_file
     @fasta_flat = Bio::FlatFile.auto(@fasta_file)
 
@@ -32,29 +34,29 @@ class SequenceFasta
 
 
   # Run prodigal on the genome to annotate
-  def run_prodigal root, outdir
+  def run_prodigal
 
     @annotation_files = {}
-    Dir.mkdir "#{outdir}" if ! Dir.exists? "#{outdir}"
+    Dir.mkdir "#{@outdir}" if ! Dir.exists? "#{@outdir}"
     if @meta==1
-      system("#{root}/prodigal.linux -p meta -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
+      system("#{@root}/prodigal.linux -p meta -i #{@fasta_file} -a #{@outdir}/Proteins.fa -d #{@outdir}/Genes.fa -o #{@outdir}/Genbanks.gbk -q")
     else
-      system("#{root}/prodigal.linux -i #{@fasta_file} -a #{outdir}/Proteins.fa -d #{outdir}/Genes.fa -o #{outdir}/Genbanks.gbk -q")
+      system("#{@root}/prodigal.linux -i #{@fasta_file} -a #{@outdir}/Proteins.fa -d #{@outdir}/Genes.fa -o #{@outdir}/Genbanks.gbk -q")
     end
 
     @annotation_files = {
-      multiGBK: "#{outdir}/Genbanks.gbk",
+      multiGBK: "#{@outdir}/Genbanks.gbk",
       contigs: [],
       contigs_length: [],
-      genes: "#{outdir}/Genes.fa",
-      proteins: "#{outdir}/Proteins.fa",
+      genes: "#{@outdir}/Genes.fa",
+      proteins: "#{@outdir}/Proteins.fa",
       prot_ids_by_contig: {},
-      fasta_path: "#{outdir}/single-fasta/",
-      gbk_path: "#{outdir}/single-genbank/"
+      fasta_path: "#{@outdir}/single-fasta/",
+      gbk_path: "#{@outdir}/single-genbank/"
     }
 
-    split_fasta outdir
-    split_genbank outdir, "#{outdir}/Genbanks.gbk"
+    split_fasta
+    split_genbank
     extract_cds_names
     @annotation_files
 
@@ -63,14 +65,14 @@ class SequenceFasta
 
   # Split Multi Fasta file
   # RETURN : array of fasta files
-  def split_fasta outdir
+  def split_fasta
     @single_fasta = {}
-    Dir.mkdir("#{outdir}/single-fasta") if ! Dir.exists?("#{outdir}/single-fasta")
+    Dir.mkdir("#{@outdir}/single-fasta") if ! Dir.exists?("#{@outdir}/single-fasta")
     @fasta_flat.each_entry do |seq|
       file_name = seq.definition.chomp.split(" ")[0]
       @annotation_files[:contigs] << "#{file_name}"
       @annotation_files[:contigs_length] << seq.seq.length
-      File.open("#{outdir}/single-fasta/#{file_name}.fasta", "w") do |fwrite|
+      File.open("#{@outdir}/single-fasta/#{file_name}.fasta", "w") do |fwrite|
         fwrite.write(seq)
       end
       @single_fasta[file_name] = seq
@@ -80,9 +82,10 @@ class SequenceFasta
 
   # Split Multi Genbanks file
   # RETURN : array of genbank files
-  def split_genbank outdir, multigbk
+  def split_genbank
 
-    Dir.mkdir("#{outdir}/single-genbank")if ! Dir.exists?("#{outdir}/single-genbank")
+    multigbk = "#{@outdir}/Genbanks.gbk"
+    Dir.mkdir("#{@outdir}/single-genbank")if ! Dir.exists?("#{@outdir}/single-genbank")
     File.open(multigbk,"r") do |f|
       fopen = nil
       while l = f.gets
@@ -96,7 +99,7 @@ class SequenceFasta
           year = date.year
           locus = "LOCUS       #{file_name}#{spacer}#{seq_length.to_s} bp    DNA     linear   BCT #{day}-#{month}-#{year}\n"
           locus += "DEFINITION  #{file_name}\n"
-          fopen = File.open("#{outdir}/single-genbank/#{file_name}.gbk", "w")
+          fopen = File.open("#{@outdir}/single-genbank/#{file_name}.gbk", "w")
           fopen.write(locus)
         elsif l[0..1] == "//"
           fopen.write(outseq)
