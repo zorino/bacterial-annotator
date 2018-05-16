@@ -47,7 +47,7 @@ class BacterialAnnotator
     Dir.mkdir(@options[:outdir])
 
     @query_fasta = SequenceFasta.new(@root,
-                                     options[:outdir],
+                                     @options[:outdir],
                                      @options[:input],
                                      @options[:meta])
 
