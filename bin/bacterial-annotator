@@ -301,6 +301,7 @@ if ARGV.size >= 1
   system("ba_cdhit")
   system("ba_fasttree")
   system("ba_mash")
+  system("ba_trnascan")
 
   options = {}
 

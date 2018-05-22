@@ -1,0 +1,57 @@
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
+# author:  	maxime déraspe
+# email:	maximilien1er@gmail.com
+# review:  	
+# date:    	18-05-22
+# version: 	0.01
+# licence:  	
+
+require 'open-uri'
+
+ROOT_path = File.dirname(__FILE__)
+# trnascan URL = "http://trna.ucsc.edu/software/trnascan-se-2.0.0.tar.gz"
+# infernal URL = "http://eddylab.org/infernal/infernal-1.1.2.tar.gz"
+
+# Install trnascan on the user system
+def installTrnascan
+  begin
+
+    # infernal as dependencies
+    resp = open("http://eddylab.org/infernal/infernal-1.1.2.tar.gz")
+    open("#{ROOT_path}/infernal-1.1.2.tar.gz", "wb") do |file|
+      file.write(resp.read)
+    end
+    Dir.chdir("#{ROOT_path}/")
+    `tar xvf infernal-1.1.2.tar.gz && rm infernal-1.1.2.tar.gz`
+    `cd infernal-1.1.2 && ./configure --prefix=#{ROOT_path}/infernal-1.1.2/build && make && make install`
+
+    # trnascan-se
+    resp = open("http://trna.ucsc.edu/software/trnascan-se-2.0.0.tar.gz")
+    open("#{ROOT_path}/trnascan-se-2.0.0.tar.gz", "wb") do |file|
+      file.write(resp.read)
+    end
+    Dir.chdir("#{ROOT_path}/")
+    `tar xvf trnascan-se-2.0.0.tar.gz; rm trnascan-se-2.0.0.tar.gz`
+    `cd tRNAscan-SE-2.0/ && ./configure --prefix=#{ROOT_path}/tRNAscan-SE-2.0/build && make && make install && cd build/bin && ln -s #{ROOT_path}/infernal-1.1.2/build/bin/ .`
+    `cp #{ROOT_path}/tRNAscan-SE-2.0/build/bin/tRNAscan-SE #{ROOT_path}/trnascan.linux`
+    File.chmod(0755, "#{ROOT_path}/trnascan.linux")
+  rescue
+    abort "Problem installing tRNAscan-SE, aborting"
+  end
+
+end
+
+
+# Install trnascan if not already install
+if ! File.exists? "#{ROOT_path}/trnascan.linux"
+
+  puts "Installing tRNAscan-SE tRNA finder.."
+  puts "See http://lowelab.ucsc.edu/tRNAscan-SE/"
+  puts "The Licence is BSD"
+  installTrnascan
+  puts "Trnascan successfully installed in #{ROOT_path}/trnascan.linux"
+  puts ""
+
+end
+
