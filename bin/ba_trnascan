@@ -33,7 +33,7 @@ def installTrnascan
     end
     Dir.chdir("#{ROOT_path}/")
     `tar xvf trnascan-se-2.0.0.tar.gz; rm trnascan-se-2.0.0.tar.gz`
-    `cd tRNAscan-SE-2.0/ && ./configure --prefix=#{ROOT_path}/tRNAscan-SE-2.0/build && make && make install && cd build/bin && ln -s #{ROOT_path}/infernal-1.1.2/build/bin/ .`
+    `cd tRNAscan-SE-2.0/ && ./configure --prefix=#{ROOT_path}/tRNAscan-SE-2.0/build && make && make install && cd build/bin && ln -s #{ROOT_path}/infernal-1.1.2/build/bin/* .`
     `cp #{ROOT_path}/tRNAscan-SE-2.0/build/bin/tRNAscan-SE #{ROOT_path}/trnascan.linux`
     File.chmod(0755, "#{ROOT_path}/trnascan.linux")
   rescue
