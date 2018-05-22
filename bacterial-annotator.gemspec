@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name        = 'bacterial-annotator'
-  s.version     = '0.8.0'
-  s.date        = '2018-04-18'
+  s.version     = '0.8.1'
+  s.date        = '2018-05-22'
   s.summary     = "Bacterial Annotator"
   s.description = "GEM to annotate bacterial genome sequence based on a reference genome and complete the annotation with an external database."
   s.authors     = ["Maxime Deraspe"]
@@ -27,7 +27,8 @@ Gem::Specification.new do |s|
     "ba_fasta36",
     "ba_cdhit",
     "ba_fasttree",
-    "ba_mash"
+    "ba_mash",
+    "ba_trnascan"
   ]
   s.default_executable = "bacterial-annotator"
   s.add_runtime_dependency 'bio', '~> 1.4', '>= 1.4.3'
