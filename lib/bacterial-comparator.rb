@@ -20,7 +20,7 @@ class BacterialComparator
   def initialize options, root
 
     @root = root
-    @outdir = File.expand_path(File.dirname(options[:outdir]))+"/#{options[:outdir]}"
+    @outdir = File.expand_path(File.dirname(options[:outdir])) + "/#{File.basename(options[:outdir])}"
     Dir.mkdir(@outdir) if ! Dir.exists? @outdir
     @genomes_list = options[:genomes_list]
     @proc = options[:proc].to_i
