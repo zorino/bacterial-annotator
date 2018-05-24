@@ -303,8 +303,7 @@ class BacterialComparator
     puts "# Sequence alignments - individual proteins a.a. (MAFFT)  [DONE] (in #{c_time})"
 
     # FIXME ugly hack to find out the reference genome
-    Dir.chdir("#{@outdir}")
-    Dir.chdir("../")
+    Dir.chdir(ori_dir)
     ref_id = Dir["#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
 
     concat_alignments "#{@outdir}/align-genes-pep.all.fasta", ref_id
@@ -339,11 +338,8 @@ class BacterialComparator
     end
 
     # ugly hack to find out the reference genome FIXME
-    Dir.chdir("#{@outdir}")
-    Dir.chdir("../")
-
+    Dir.chdir(ori_dir)
     ref_id = Dir["#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
-    # ref_id = Dir["#{ori_dir}/#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
 
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
