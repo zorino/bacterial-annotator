@@ -38,6 +38,8 @@ bacterial-annotator [annotate | compare] [OPTIONS]
 
 # Choose either to annotate a genome or compare several genome annotations
 
+  install   Install the third parties dependencies
+
   identify  [OPTIONS]
             .. see identify -h for OPTIONS
 
@@ -281,15 +283,9 @@ def parseOptions_identify
 end
 
 
+def install_dep
 
-
-########
-# MAIN #
-########
-
-if ARGV.size >= 1
-
-  ROOT = File.dirname(__FILE__)
+  # requirement ruby, ruby-dev, unzip
 
   # Check for 3rd party dependencies : Prodigal, Blat, MAFFT, ...
   system("ba_prodigal")
@@ -303,12 +299,26 @@ if ARGV.size >= 1
   system("ba_mash")
   system("ba_trnascan")
 
+end
+
+
+
+########
+# MAIN #
+########
+
+if ARGV.size >= 1
+
+  ROOT = File.dirname(__FILE__)
+
   options = {}
 
   if ARGV[0] == "annotate"
 
     ARGV.shift
     options = parseOptions_annotate
+
+    install_dep
 
     if ! File.exist? ("#{ROOT}/blat.linux")
       puts "Exiting program because blat is missing"
@@ -351,6 +361,8 @@ if ARGV.size >= 1
     print_version
     abort
 
+  elsif ARGV[0] == "install"
+    install_dep
   else
     usage
   end
