@@ -22,7 +22,6 @@ def installBlat
         file.write(resp.body)
       end
     end
-    
     File.chmod(0755, "#{ROOT_path}/blat.linux")
   rescue
     abort "Problem installing Blat, aborting"
@@ -41,18 +40,11 @@ if ! File.exists? "#{ROOT_path}/blat.linux"
   puts "available on the Kent Informatics website (http://www.kentinformatics.com/)."
   puts "See http://hgdownload.cse.ucsc.edu/admin/exe/linux.x86_64/blat/"
   puts ""
-  puts "Do you accept the license ? Y/n"
+  puts "By using bacterial-annotator you explicitly accept the license."
 
-  answer = $stdin.gets.chomp
-
-  if answer.downcase == "y" or answer.downcase == ""
-    puts "OK you accepted the licence let's install the blat binary"
-    installBlat
-    puts "Blat successfully installed : OK"
-    puts ""
-  else
-    puts "Sorry bacterial-annotator rely on blat for the alignment !"
-  end
+  installBlat
+  puts "Blat successfully installed : OK"
+  puts ""
 
 end
 
