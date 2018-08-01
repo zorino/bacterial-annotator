@@ -20,7 +20,7 @@ def print_version
   version += "  -- Prodigal v2.6.2\n"
   version += "  -- BLAT standalone version\n"
   version += "  -- MAFFT v7.222\n"
-  version += "  -- fasta36  v36.3.8d\n"
+  version += "  -- fasta36  v36.3.8g\n"
   version += "  -- RAxML v8.2.11\n"
   version += "  -- FastTree v2.1.10\n"
   version += "  -- MASH v2.0\n"
