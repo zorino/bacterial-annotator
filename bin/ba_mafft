@@ -10,12 +10,12 @@
 require 'open-uri'
 
 ROOT_path = File.dirname(__FILE__)
-# mafft_url = http://mafft.cbrc.jp/alignment/software/mafft-7.222-without-extensions-src.tgz
+# mafft_url = https://mafft.cbrc.jp/alignment/software/mafft-7.222-without-extensions-src.tgz
 # Install MAFFT on the user system
 def installMafft
 
   begin
-    resp = open("http://mafft.cbrc.jp/alignment/software/mafft-7.222-without-extensions-src.tgz")
+    resp = open("https://mafft.cbrc.jp/alignment/software/mafft-7.222-without-extensions-src.tgz")
     open("#{ROOT_path}/mafft-7.222-without-extensions-src.tgz", "wb") do |file|
       file.write(resp.read)
     end
