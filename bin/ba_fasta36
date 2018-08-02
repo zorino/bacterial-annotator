@@ -10,13 +10,13 @@
 require 'open-uri'
 
 ROOT_path = File.dirname(__FILE__)
-# fasta36 URL = "https://github.com/wrpearson/fasta36/releases/download/v36.3.8g_13Apr16/fasta-36.3.8g-linux64.tar.gz"
+# fasta36 URL = "https://github.com/wrpearson/fasta36/releases/download/fasta-v36.3.8g/fasta-36.3.8g-linux64.tar.gz"
 
 # Install fasta36 on the user system
 def installFasta36
 
   begin
-    resp = open("https://github.com/wrpearson/fasta36/releases/download/v36.3.8g_13Apr16/fasta-36.3.8g-linux64.tar.gz")
+    resp = open("https://github.com/wrpearson/fasta36/releases/download/fasta-v36.3.8g/fasta-36.3.8g-linux64.tar.gz")
     open("#{ROOT_path}/fasta-36.3.8g-linux64.tar.gz", "wb") do |file|
       file.write(resp.read)
     end
