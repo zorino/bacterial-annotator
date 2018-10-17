@@ -194,6 +194,11 @@ def parseOptions_compare
   options[:software] = "fasttree"
   options[:bootstrap] = 100
 
+  if ARGV.length == 0
+    usage_compare
+    abort
+  end
+
   while x = ARGV.shift
 
     case x.downcase
@@ -253,6 +258,11 @@ def parseOptions_identify
   options[:proc] = 2
   options[:genome_list] = []
   options[:output] = "tsv"
+
+  if ARGV.length == 0
+    usage_identify
+    abort
+  end
 
   while x = ARGV.shift
 
