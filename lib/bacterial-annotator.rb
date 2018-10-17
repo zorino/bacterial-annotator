@@ -463,6 +463,7 @@ class BacterialAnnotator
             flag += "\t#{(@prot_synteny_refgenome.query_sequences[prot][:homology][:cov_query]*100).round(2)}"
             flag += "\t#{(@prot_synteny_refgenome.query_sequences[prot][:homology][:cov_subject]*100).round(2)}"
             @annotation_stats[:flagged_cds] << flag
+            remaining_cds << prot
           end
 
         else
