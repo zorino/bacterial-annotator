@@ -369,6 +369,20 @@ class BacterialAnnotator
           inference: inference
         }
 
+        @annotation_stats[:flagged_cds].each do |flag|
+          if flag.include? "#{k}"
+            if v[:homology][:assert_cutoff].inject(:+) > 2
+              flag.replace("#{flag}\tAnnotated by externaldb (#{v[:homology][:hits][0]}|#{v[:homology][:pId]}|#{cov_query}|#{cov_subject}))")
+            elsif v[:homology][:assert_cutoff] == [1,1,0]
+              flag.replace("#{flag}\tPossible pseudogene (coverage subject = #{cov_subject} with #{v[:homology][:hits][0]}))")
+            elsif v[:homology][:assert_cutoff] == [1,0,1]
+              flag.replace("#{flag}\tPossible pseudogene (coverage query = #{cov_query} with #{v[:homology][:hits][0]}))")
+            elsif v[:homology][:assert_cutoff] == [0,1,1]
+              flag.replace("#{flag}\tLow similarity (percent identity = #{v[:homology][:pId]} with #{v[:homology][:hits][0]}))")
+            end
+          end
+        end
+
       end
 
     end
@@ -516,7 +530,7 @@ class BacterialAnnotator
 
     file_flagged_cds = file_dir + "/Prot-flagged.tsv"
     File.open(file_flagged_cds, "w") do |fopen|
-      fopen.write("CDS locus\tAssertion-CutOff\tAA Identity\tCovQuery(%)\tCovSubject(%)\n")
+      fopen.write("CDS locus\tAssertion-CutOff\tAA Identity\tCovQuery(%)\tCovSubject(%)\tNote\n")
       @annotation_stats[:flagged_cds].each do |fcds|
         fopen.write("#{fcds}\n")
       end
