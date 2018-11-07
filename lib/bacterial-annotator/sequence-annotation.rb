@@ -7,7 +7,7 @@
 
 require 'json'
 require 'zlib'
-
+require 'pp'
 
 class SequenceAnnotation
 
@@ -272,7 +272,7 @@ class SequenceAnnotation
       @rna_seq = {}
       @gbk.features do |ft|
 
-        next if ! ft.feature.to_s.include? "rRNA"
+        next if ! ft.feature.to_s.include? "RNA"
 
         ftH = ft.to_hash
         loc = ft.locations
@@ -285,7 +285,12 @@ class SequenceAnnotation
         # gene = ftH["gene"] if !ftH["gene"].nil?
         # protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
         product = ""
-        product = ftH["product"][0] if !ftH["product"].nil?
+
+        if !ftH["product"].nil?
+          product = ftH["product"][0]
+          # puts ftH["product"].join(",") + "---" + ftH["product"][0]
+        end
+
         locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
 
         # puts "#{@accession}\t#{seqBeg}\t#{seqEnd}\t#{strand}\t#{protId}\t#{locustag}\t#{gene[0]}\t#{product[0]}"
@@ -533,6 +538,7 @@ class SequenceAnnotation
 
       new_features = {}
       annotations_done = {}
+      gbk_features_len = @gbk.features.length
 
       @gbk.features.each_with_index do |ft, ft_index|
 
@@ -540,8 +546,9 @@ class SequenceAnnotation
 
           next if annotations_done.has_key? k
 
-          if v[:query_location][0][0] < ft.locations[0].from
+          if v[:query_location][0][0] < ft.locations[0].from or ft_index == gbk_features_len-1
 
+            pp v
             if v[:subject_location][0][0] > v[:subject_location][0][1]
               location = "complement(#{v[:query_location][0][0]}..#{v[:query_location][0][1]})"
             else
@@ -550,7 +557,12 @@ class SequenceAnnotation
 
             feature = Bio::Feature.new(v[:feature][0],location)
             feature.qualifiers.push(Bio::Feature::Qualifier.new('product',v[:product][0])) if ! v[:product][0].nil? or v[:product][0] != ""
-            new_features[ft_index] = feature
+            if ft_index == gbk_features_len-1
+              new_features[gbk_features_len] = feature
+            else
+              new_features[ft_index] = feature
+            end
+
             annotations_done[k] = 1
             break
 
