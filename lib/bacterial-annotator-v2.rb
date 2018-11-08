@@ -10,13 +10,16 @@ require 'bio'
 require 'fileutils'
 
 require 'bacterial-annotator/sequence-fasta'
+require 'bacterial-annotator/sequence-fasta-v2'
 require 'bacterial-annotator/sequence-annotation'
+require 'bacterial-annotator/sequence-annotation-v2'
 require 'bacterial-annotator/sequence-synteny'
+require 'bacterial-annotator/sequence-synteny-v2'
 require 'bacterial-annotator/reference-genome'
 
 require 'helper'
 
-class BacterialAnnotator
+class BacterialAnnotatorV2
 
   # Initialize BacterialAnnotator
   # options, ROOT (path)
@@ -27,47 +30,23 @@ class BacterialAnnotator
 
     abort if ! @options.has_key? :input
 
-
-    # options sanitizer TODO
-    @minlength = @options[:minlength].to_i
-    @options[:minlength] = @options[:minlength].to_i
-    @options[:pidentity] = @options[:pidentity].to_f
-    @options[:pidentity] = @options[:pidentity] * 100 if @options[:pidentity] <= 1.00
-    @options[:pcoverage] = @options[:pcoverage].to_f
-    @options[:pcoverage] = @options[:pcoverage] / 100 if @options[:pcoverage] > 1.00
-
-    if ! @options.has_key? :name
-      @options[:name] = @options[:input].gsub(/.fasta|.fa|.fna/,"")
-    end
-
-    if File.exists? (@options[:outdir])
-      if ! options.has_key? :force
-        abort "Output directory already exist ! Choose another one or use -f to overwrite"
-      else
-        puts "Overwriting output directory #{@options[:outdir]}"
-        FileUtils.remove_dir(@options[:outdir], :force=>true)
-      end
-    end
+    sanitize_options
 
     Dir.mkdir(@options[:outdir])
 
-    @query_fasta = SequenceFasta.new(@root,
-                                     @options[:outdir],
-                                     @options[:input],
-                                     @options[:meta])
+    @query_fasta_v2 = SequenceAnnotationV2.new(@root,
+                                               @options)
 
     @with_refence_genome = false
     @with_db = false
+
     if @options.has_key? :refgenome
 
       @with_refence_genome = true
-      @ref_genome = SequenceAnnotation.new(@root,
-                                           @options[:outdir],
-                                           @options[:refgenome],
-                                           "refGbk")
 
       @ref_genome_v2 = ReferenceGenome.new(@root,
                                            @options)
+
 
     elsif @options[:mergem]
       @with_db = true
@@ -81,92 +60,101 @@ class BacterialAnnotator
     @with_external_db = true if @options.has_key? :external_db
 
     @prot_synteny = nil
-    @annotation_stats = {
-      by_contigs: {},
-      annotated_cds: 0,
-      flagged_cds: [],
-      total_cds: 0,
-      foreign_contigs: [],
-      synteny_contigs: [],
-      short_contigs: []
-    }
-
-    @contig_foreign_cds = {}
-
-    @contig_annotations = {}
-
-    @contig_annotations_externaldb = {}
-
-    @contig_annotations_cds = {}
 
   end                           # end of method
+
+
+  def sanitize_options
+
+    # options sanitizer TODO
+    @minlength = @options[:minlength].to_i
+    @options[:minlength] = @options[:minlength].to_i
+    @options[:minlength] = @options[:minlength].to_i
+    @options[:pidentity] = @options[:pidentity].to_f
+    @options[:pidentity] = @options[:pidentity] * 100 if @options[:pidentity] <= 1.00
+    @options[:pcoverage] = @options[:pcoverage].to_f
+    @options[:pcoverage] = @options[:pcoverage] / 100 if @options[:pcoverage] > 1.00
+
+    if ! @options.has_key? :name
+      @options[:name] = @options[:input].gsub(/.fasta|.fa|.fna/,"")
+    end
+
+    if File.exists? (@options[:outdir])
+      if ! @options.has_key? :force
+        abort "Output directory already exist ! Choose another one or use -f to overwrite"
+      else
+        puts "Overwriting output directory #{@options[:outdir]}"
+        FileUtils.remove_dir(@options[:outdir], :force=>true)
+      end
+    end
+
+  end
 
 
   # run_alignment of reference genome proteins and the query
   def run_annotation
 
-    prepare_files_for_annotation
+    # prepare_files_for_annotation
 
     # process reference genome synteny
     if @with_refence_genome        # Annotation with the Reference Genome
 
-      @prot_synteny_refgenome = run_reference_synteny_prot
+      # @prot_synteny_refgenome = run_reference_synteny_prot
 
-      # iterate over each contig
-      #     discard short contig
-      #     cumulate statistics of homolog CDS
-      @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
+      # @prot_synteny_refgenome = @query_fasta_v2.run_annotation_ref_genome @ref_genome_v2
+      @prot_synteny_refgenome = @query_fasta_v2.run_annotation "prot",
+                                                               @ref_genome_v2.cds_file,
+                                                               @ref_genome_v2.genes,
+                                                               "diamond"
 
-        # Skip short contigs
-        if @query_fasta.annotation_files[:contigs_length][contig_index] < @minlength
-          @annotation_stats[:short_contigs] << contig
-          next
-        end
+      # @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
 
-        remaining_cds = cumulate_annotation_stats_reference contig
+      #   if @query_fasta.annotation_files[:contigs_length][contig_index] < @minlength
+      #     @annotation_stats[:short_contigs] << contig
+      #     next
+      #   end
 
-        if remaining_cds != []
-          @contig_foreign_cds[contig] = remaining_cds
-        end
+      #   remaining_cds = cumulate_annotation_stats_reference contig
 
-      end
+      #   if remaining_cds != []
+      #     @contig_foreign_cds[contig] = remaining_cds
+      #   end
 
-      # dump foreign proteins to file
-      foreign_cds_file = dump_cds
+      # end
 
-      # dump reference CDS synteny to file
-      dump_ref_synteny_to_file
+      # foreign_cds_file = dump_cds
 
-      # run RNA annotation
-      @rna_synteny = SequenceSynteny.new(@root,
-                                         @options[:outdir],
-                                         @query_fasta.fasta_file,
-                                         @ref_genome.rna_file,
-                                         "RNA-Ref",
-                                         @options[:pidentity],
-                                         @options[:pcoverage],
-                                         "dna")
+      # dump_ref_synteny_to_file
 
-      print "# Running alignment with Reference Genome RNA (blat).."
-      start_time = Time.now
-      @rna_synteny.run_blat
-      end_time = Time.now
-      c_time = Helper.sec2str(end_time-start_time)
-      print "done (#{c_time})\n"
+      # @rna_synteny = SequenceSynteny.new(@root,
+      #                                    @options[:outdir],
+      #                                    @query_fasta.fasta_file,
+      #                                    @ref_genome.rna_file,
+      #                                    "RNA-Ref",
+      #                                    @options[:pidentity],
+      #                                    @options[:pcoverage],
+      #                                    "dna")
 
-      # # takes too long
-      # print "# Running alignment with Reference Genome RNA (fasta36).."
+      # print "# Running alignment with Reference Genome RNA (blat).."
       # start_time = Time.now
-      # @rna_synteny.run_fasta36
+      # @rna_synteny.run_blat
       # end_time = Time.now
       # c_time = Helper.sec2str(end_time-start_time)
       # print "done (#{c_time})\n"
 
-      @rna_synteny.extract_hits_dna :rna
-      @contig_annotations_rna = {}
-      @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
-        @contig_annotations_rna[contig] = @rna_synteny.get_annotation_for_contig contig
-      end
+      # # # takes too long
+      # # print "# Running alignment with Reference Genome RNA (fasta36).."
+      # # start_time = Time.now
+      # # @rna_synteny.run_fasta36
+      # # end_time = Time.now
+      # # c_time = Helper.sec2str(end_time-start_time)
+      # # print "done (#{c_time})\n"
+
+      # @rna_synteny.extract_hits_dna :rna
+      # @contig_annotations_rna = {}
+      # @query_fasta.annotation_files[:contigs].each_with_index do |contig, contig_index|
+      #   @contig_annotations_rna[contig] = @rna_synteny.get_annotation_for_contig contig
+      # end
 
 
     elsif @with_db
@@ -205,15 +193,15 @@ class BacterialAnnotator
 
     end
 
-    # Finishing annotation for foreign proteins
-    finish_annotation foreign_cds_file
+    # # Finishing annotation for foreign proteins
+    # finish_annotation foreign_cds_file
 
-    # Parse annotations to genbank files
-    parse_genbank_files
+    # # Parse annotations to genbank files
+    # parse_genbank_files
 
-    print "# Printing Statistics.."
-    print_stats "#{@options[:outdir]}"
-    print "done\n"
+    # print "# Printing Statistics.."
+    # print_stats "#{@options[:outdir]}"
+    # print "done\n"
 
   end                           # end of method
 

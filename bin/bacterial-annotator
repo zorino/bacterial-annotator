@@ -9,6 +9,7 @@
 
 
 require 'bacterial-annotator'
+require 'bacterial-annotator-v2'
 require 'bacterial-comparator'
 require 'bacterial-identificator'
 
@@ -344,7 +345,8 @@ if ARGV.size >= 1
       puts "You didn't provide a fasta file to annotate !"
     end
 
-    bannot = BacterialAnnotator.new(options, ROOT)
+    # bannot = BacterialAnnotator.new(options, ROOT)
+    bannot = BacterialAnnotatorV2.new(options, ROOT)
     bannot.run_annotation
 
   elsif ARGV[0] == "compare"
