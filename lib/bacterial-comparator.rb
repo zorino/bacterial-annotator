@@ -96,10 +96,9 @@ class BacterialComparator
 
         run_synteny_prot @root, genome_dir, @ref_prot_file, query_prot_file
 
+        g = genome_dir
+        @genomes_list[i] = genome_dir
       end
-
-      g = genome_dir
-      @genomes_list[i] = genome_dir
 
       file = File.open("#{g}/Prot-Synteny.tsv", "r")
       l = file.gets             # skip header
