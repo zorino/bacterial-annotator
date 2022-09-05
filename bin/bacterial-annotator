@@ -2,10 +2,10 @@
 # -*- coding: utf-8 -*-
 # author:  	maxime déraspe
 # email:	maximilien1er@gmail.com
-# review:  	
+# review:
 # date:    	15-02-24
 # version: 	0.01
-# licence:  	
+# licence:
 
 
 require 'bacterial-annotator'
@@ -160,6 +160,7 @@ compare [OPTIONS]
     --proc         <nb of process> Number of process to run the comparison
 
   //Synteny
+    --refgenome    genbank ref genome if you want to provide complete genomes not previously annotated with bacterial-annotator
     --pidentity    <default 0.80> Minimal percentage identity to call a syntenic protein
     --min_cov      <default 0.80> Minimal coverage for the alignment of the protein / gene
 
@@ -193,6 +194,7 @@ def parseOptions_compare
   options[:phylogeny] = 0
   options[:software] = "fasttree"
   options[:bootstrap] = 100
+  options[:refgenome] = ""
 
   if ARGV.length == 0
     usage_compare
@@ -212,6 +214,8 @@ def parseOptions_compare
       options[:proc] = ARGV.shift
     when "--align"
       options[:align] = ARGV.shift
+    when "--refgenome", "-g"
+      options[:refgenome] = ARGV.shift
     when "--concat"
       options[:concat] = ARGV.shift
     when "--phylogeny"

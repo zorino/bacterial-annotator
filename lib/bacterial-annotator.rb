@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # author:  	maxime déraspe
 # email:	maximilien1er@gmail.com
-# review:  	
+# review:
 # date:    	15-02-24
 # version: 	0.0.1
-# licence:  	
+# licence:
 
 require 'bio'
 require 'fileutils'
@@ -324,11 +324,19 @@ class BacterialAnnotator
                                                 @options[:pcoverage],
                                                 "prot")
 
-      print "# Running BLAT alignment with External Database.."
+      # print "# Running BLAT alignment with External Database.."
+      # start_time = Time.now
+      # @externaldb_synteny.run_blat
+      # end_time = Time.now
+      # c_time = Helper.sec2str(end_time-start_time)
+      # print "done (#{c_time})\n"
+      # @externaldb_synteny.extract_hits :externaldb
+
+      print "# Running alignment with External DB"
       start_time = Time.now
-      @externaldb_synteny.run_blat
+      @externaldb_synteny.run_diamond
       end_time = Time.now
-      c_time = Helper.sec2str(end_time-start_time)
+      c_time = Helper.sec2str(end_time - start_time)
       print "done (#{c_time})\n"
       @externaldb_synteny.extract_hits :externaldb
 

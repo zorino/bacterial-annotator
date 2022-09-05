@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 # author:  	maxime déraspe
 # email:	maximilien1er@gmail.com
-# review:  	
+# review:
 # date:    	15-02-24
 # version: 	0.0.1
-# licence:  	
+# licence:
 
 require 'bio'
 require 'fileutils'
 require 'parallel'
 require 'helper'
+
+require 'bacterial-annotator/sequence-annotation'
 
 class BacterialComparator
 
@@ -25,6 +27,9 @@ class BacterialComparator
     @genomes_list = options[:genomes_list]
     @proc = options[:proc].to_i
     @phylo_nb_genes = options[:phylo_nb_genes]
+    @refgenome_file = options[:refgenome]
+    @refgenome = ""
+
     if ["fasttree","raxml"].include? options[:software]
       @software = options[:software]
     else
@@ -62,14 +67,40 @@ class BacterialComparator
 
   end
 
-
   def read_prot_synteny
 
     puts "# Reading genome synteny files START.."
     start_time = Time.now
     synteny = {}
-    @genomes_list.each do |g|
+
+    # If genome is genbank (.gbk or .gb) then do syntheny first
+
+    @genomes_list.each_with_index do |g,i|
+
       genome_synteny = []
+
+      if g =~ /.gbk/i
+        new_genomes_dir = @outdir+"/new-genomes/"
+        Dir.mkdir(new_genomes_dir) if ! Dir.exists? new_genomes_dir
+        genome_dir = new_genomes_dir + "/" + File.basename(g).gsub(".gbk","")
+        Dir.mkdir(genome_dir) if ! Dir.exists? genome_dir
+        genome_to_annotate = SequenceAnnotation.new(@root,
+                                                    genome_dir,
+                                                    g,
+                                                    "refGbk")
+        query_prot_file = Dir["#{genome_dir}/*.pep"][0]
+        query_gene_file = Dir["#{genome_dir}/*.dna"][0]
+
+        File.symlink(query_prot_file, File.dirname(query_prot_file)+"/Proteins.fa")
+        File.symlink(query_gene_file, File.dirname(query_gene_file)+"/Genes.fa")
+
+        run_synteny_prot @root, genome_dir, @ref_prot_file, query_prot_file
+
+      end
+
+      g = genome_dir
+      @genomes_list[i] = genome_dir
+
       file = File.open("#{g}/Prot-Synteny.tsv", "r")
       l = file.gets             # skip header
       while l = file.gets
@@ -79,6 +110,7 @@ class BacterialComparator
         synteny[lA[0]] << {ref_cov: lA[3].to_f, pId: lA[4].to_f, query_prot: lA[5], query_cov: lA[7].to_f}
         genome_synteny << lA[0]
       end
+
       @ref_prot.each do |ref_prot|
         if ! genome_synteny.include? ref_prot
           synteny[lA[0]] << {ref_cov: "-", pId: "-", query_prot: "-", query_cov: "-"}
@@ -96,16 +128,45 @@ class BacterialComparator
   end
 
   def get_ref_prot
-    ref_prot = []
-    pep_file = Dir["#{@genomes_list[0]}/*.pep"]
-    flatfile = Bio::FlatFile.auto("#{pep_file[0]}")
-    flatfile.each_entry do |entry|
-      ref_prot << entry.definition.split(" ")[0]
-    end
-    flatfile.close
-    ref_prot
-  end
 
+    ref_prot = []
+    if File.exist?("#{@genomes_list[0]}/*.pep")
+      pep_file = Dir["#{@genomes_list[0]}/*.pep"]
+      @ref_prot_file = pep_file[0]
+      flatfile = Bio::FlatFile.auto("#{@ref_prot_file}")
+      flatfile.each_entry do |entry|
+        ref_prot << entry.definition.split(" ")[0]
+      end
+      flatfile.close
+      dna_file = Dir["#{@genomes_list[0]}/*.dna"]
+      @ref_dna_file = dna_file[0]
+    else
+      if @refgenome_file == ""
+        abort "You need to provide a reference genome to add a non-annotated genome"
+      elsif @refgenome == ""
+        new_genomes_dir = @outdir+"/new-genomes/"
+        Dir.mkdir(new_genomes_dir) if ! Dir.exists? new_genomes_dir
+        refgenome_dir = new_genomes_dir + "/" + File.basename(@refgenome_file).gsub(".gbk","")
+        Dir.mkdir(refgenome_dir) if ! Dir.exists? refgenome_dir
+        @refgenome = SequenceAnnotation.new(@root,
+                                            refgenome_dir,
+                                            @refgenome_file,
+                                            "refGbk")
+        pep_file = Dir["#{refgenome_dir}/*.pep"]
+        @ref_prot_file = pep_file[0]
+        flatfile = Bio::FlatFile.auto("#{@ref_prot_file}")
+        flatfile.each_entry do |entry|
+          ref_prot << entry.definition.split(" ")[0]
+        end
+        flatfile.close
+        dna_file = Dir["#{refgenome_dir}/*.dna"]
+        @ref_dna_file = dna_file[0]
+      end
+    end
+
+    ref_prot
+
+  end
 
   # load all id => sequences from multifasta
   def load_genome_cds file
@@ -128,7 +189,7 @@ class BacterialComparator
 
     pep_out_dir = "#{@outdir}/align-genes-pep"
 
-    ref_proteins = load_genome_cds(Dir["#{@genomes_list[0]}/*.pep"][0])
+    ref_proteins = load_genome_cds(@ref_prot_file)
     synteny_list.each do |k,v|
       pep_out = File.open(pep_out_dir+"/#{k}.pep", "w")
       pep_out.write(ref_proteins[k])
@@ -147,7 +208,7 @@ class BacterialComparator
     end
 
     dna_out_dir = "#{@outdir}/align-genes-dna"
-    ref_genes = load_genome_cds(Dir["#{@genomes_list[0]}/*.dna"][0])
+    ref_genes = load_genome_cds(@ref_dna_file)
     synteny_list.each do |k,v|
       dna_out = File.open(dna_out_dir+"/#{k}.dna", "w")
       dna_out.write(ref_genes[k])
@@ -304,7 +365,7 @@ class BacterialComparator
 
     # FIXME ugly hack to find out the reference genome
     Dir.chdir(ori_dir)
-    ref_id = Dir["#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
+    ref_id = @ref_prot_file.split('/')[-1].gsub(".pep","")
 
     concat_alignments "#{@outdir}/align-genes-pep.all.fasta", ref_id
 
@@ -339,7 +400,7 @@ class BacterialComparator
 
     # ugly hack to find out the reference genome FIXME
     Dir.chdir(ori_dir)
-    ref_id = Dir["#{@genomes_list[0]}/*.pep"][0].split('/')[-1].gsub(".pep","")
+    ref_id = @ref_prot_file.split('/')[-1].gsub(".pep","")
 
     end_time = Time.now
     c_time = Helper.sec2str(end_time-start_time)
@@ -507,5 +568,111 @@ class BacterialComparator
     end
 
   end
+
+
+  def get_fasta_length fasta
+    flatfile = Bio::FlatFile.auto(fasta)
+    prot_lengths = {}
+    flatfile.each_entry do |entry|
+      prot_id = entry.definition.split(" ")[0]
+      prot_length = entry.length
+      prot_lengths[prot_id] = prot_length
+    end
+    flatfile.close
+    prot_lengths
+  end
+
+
+  def run_synteny_prot root, outdir, ref_prot_file, query_prot_file
+
+    puts query_prot_file
+    puts ref_prot_file
+
+    ref_synteny_prot = SequenceSynteny.new(root,
+                                           outdir,
+                                           query_prot_file,
+                                           ref_prot_file,
+                                           "Prot-Ref",
+                                           0.80,
+                                           0.80,
+                                           "prot")
+
+    print "# Running alignment with Reference Genome CDS (diamond).."
+    start_time = Time.now
+    ref_synteny_prot.run_diamond
+    end_time = Time.now
+    c_time = Helper.sec2str(end_time - start_time)
+    print "done (#{c_time})\n"
+
+    ref_synteny_prot.extract_hits :refgenome
+
+    synteny_file = File.open("#{outdir}/Prot-Synteny.tsv","w")
+    synteny_file.write("RefLocusTag\tRefProtID\tRefLength\tRefCoverage\tIdentity\tQueryGene\tQueryLength\tQueryCoverage\tQueryPartial\n")
+    ref_annotated = {}
+
+    ref_synteny_prot.query_sequences.each do |prot, syn_val|
+      next if ! syn_val.has_key? :homology
+      next if syn_val[:homology][:assert_cutoff].inject(:+) < 3
+      next if ref_annotated.has_key? syn_val[:homology][:hits][0] and ref_annotated[syn_val[:homology][:hits][0]][:partial] == 0
+      ref_annotated[syn_val[:homology][:hits][0]] = {
+        key: prot,
+        pId: syn_val[:homology][:pId],
+        cov_query: syn_val[:homology][:cov_query],
+        cov_subject: syn_val[:homology][:cov_subject],
+        assert_cutoff: syn_val[:homology][:assert_cutoff],
+        length: syn_val[:homology][:length][0],
+        partial: (syn_val[:partial] ? 1 : 0)
+      }
+      # ref_annotated[syn_val[:homology][:hits][0]] = {
+      #   key: prot,
+      #   pId: syn_val[:homology][:pId],
+      #   cov_query: syn_val[:homology][:cov_query],
+      #   cov_subject: syn_val[:homology][:cov_subject],
+      #   assert_cutoff: syn_val[:homology][:assert_cutoff],
+      #   length: syn_val[:homology][:length][0],
+      #   partial: (syn_val[:partial] ? 1 : 0)
+      # }
+    end
+
+    # print ref_annotated
+    query_lengths = get_fasta_length query_prot_file
+
+    @refgenome.coding_seq.each do |ref_k, ref_v|
+      gene = ""
+      coverage_ref = ""
+      coverage_query = ""
+      query_length = ""
+      pId = ""
+      if ref_annotated[ref_v[:protId]] != nil
+        gene = ref_annotated[ref_v[:protId]][:key]
+        coverage_ref = ref_annotated[ref_v[:protId]][:cov_subject]
+        query_length = query_lengths[ref_annotated[ref_v[:protId]][:key]]
+        coverage_query = ref_annotated[ref_v[:protId]][:cov_query]
+        pId = ref_annotated[ref_v[:protId]][:pId]
+        partial = ref_annotated[ref_v[:protId]][:partial]
+      end
+
+      _locus_tag = ref_v[:locustag] || ""
+      _seq_len = "NA"
+      # _seq_len = ref_v[:bioseq].seq.length.to_s if ! ref_v[:bioseq].nil?
+      _seq_len = ref_v[:length].to_s if ! ref_v[:length].nil?
+
+      synteny_file.write(ref_v[:protId])
+      synteny_file.write("\t"+_locus_tag)
+      synteny_file.write("\t"+_seq_len)
+      synteny_file.write("\t"+coverage_ref.to_s)
+      synteny_file.write("\t"+pId.to_s)
+      synteny_file.write("\t"+gene)
+      synteny_file.write("\t"+query_length.to_s)
+      synteny_file.write("\t"+coverage_query.to_s)
+      synteny_file.write("\t"+partial.to_s)
+      synteny_file.write("\n")
+
+    end
+
+    synteny_file.close
+
+  end
+
 
 end                             # end of Class
