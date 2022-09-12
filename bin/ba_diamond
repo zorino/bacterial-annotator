@@ -2,28 +2,27 @@
 # -*- coding: utf-8 -*-
 # author:  	maxime déraspe
 # email:	maximilien1er@gmail.com
-# review:  	
+# review:
 # date:    	17-08-24
 # version: 	0.01
-# licence:  	
+# licence:
 
 require 'open-uri'
 
 ROOT_path = File.dirname(__FILE__)
-# diamond URL = "https://github.com/bbuchfink/diamond/releases/download/v0.9.10/diamond-linux64.tar.gz"
+# diamond URL = "https://github.com/bbuchfink/diamond/releases/download/v2.0.15/diamond-linux64.tar.gz"
 
 # Install diamond on the user system
 def installDiamond
 
   begin
-    resp = open("https://github.com/bbuchfink/diamond/releases/download/v0.9.10/diamond-linux64.tar.gz")
+    resp = open("https://github.com/bbuchfink/diamond/releases/download/v2.0.15/diamond-linux64.tar.gz")
     open("#{ROOT_path}/diamond-linux64.tar.gz", "wb") do |file|
       file.write(resp.read)
     end
     Dir.chdir("#{ROOT_path}/")
     `tar xvf diamond-linux64.tar.gz; rm diamond-linux64.tar.gz`
     `mv diamond ./diamond.linux`
-    `rm diamond_manual.pdf`
     File.chmod(0755, "#{ROOT_path}/diamond.linux")
   rescue
     abort "Problem installing Diamond, aborting"
@@ -43,4 +42,3 @@ if ! File.exists? "#{ROOT_path}/diamond.linux"
   puts ""
 
 end
-
