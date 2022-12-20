@@ -3,7 +3,7 @@
 # email:	maximilien1er@gmail.com
 # date:    	15-02-24
 # version: 	0.0.1
-# licence:  	
+# licence:
 
 require 'json'
 require 'zlib'
@@ -104,7 +104,16 @@ class SequenceAnnotation
     if flat_gbk.dbclass != Bio::GenBank
       abort "Aborting : The input #{gbk_file} is not a valid genbank file !"
     else
-      @gbk = flat_gbk.next_entry
+
+      @gbk_all = []
+      @bioseq_all = []
+      flat_gbk.each_entry do |e|
+        @gbk_all << e
+        @bioseq_all << e.to_biosequence
+      end
+
+      @gbk = @gbk_all[0]
+
     end
 
     @bioseq = @gbk.to_biosequence
@@ -221,41 +230,45 @@ class SequenceAnnotation
 
     if @coding_seq.empty?
 
-      # Iterate over each CDS
-      @gbk.each_cds do |ft|
-        ftH = ft.to_hash
-        loc = ft.locations
-        gene = []
-        product = []
-        protId = ""
-        if ftH.has_key? "pseudo"
-          next
+      @gbk_all.each_with_index do |gb, gb_i|
+
+        # Iterate over each CDS
+        gb.each_cds do |ft|
+          ftH = ft.to_hash
+          loc = ft.locations
+          gene = []
+          product = []
+          protId = ""
+          if ftH.has_key? "pseudo"
+            next
+          end
+
+          gene = ftH["gene"] if !ftH["gene"].nil?
+          product = ftH["product"] if !ftH["product"].nil?
+          protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
+          locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
+
+          dna = get_DNA(ft,@bioseq_all[gb_i])
+          pep = dna.translate
+          pepBioSeq = Bio::Sequence.auto(pep)
+          dnaBioSeq = Bio::Sequence.auto(dna)
+
+          if protId.strip == ""
+            protId = locustag
+          end
+
+          @coding_seq[protId] = {
+            protId: protId,
+            location: loc,
+            locustag: locustag,
+            gene: gene[0],
+            product: product[0],
+            bioseq: pepBioSeq,
+            bioseq_gene: dnaBioSeq,
+            length: pepBioSeq.length
+          }
+
         end
-        gene = ftH["gene"] if !ftH["gene"].nil?
-        product = ftH["product"] if !ftH["product"].nil?
-        protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
-        locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
-
-        dna = get_DNA(ft,@bioseq)
-        pep = dna.translate
-        pepBioSeq = Bio::Sequence.auto(pep)
-        dnaBioSeq = Bio::Sequence.auto(dna)
-
-        if protId.strip == ""
-          protId = locustag
-        end
-
-        @coding_seq[protId] = {
-          protId: protId,
-          location: loc,
-          locustag: locustag,
-          gene: gene[0],
-          product: product[0],
-          bioseq: pepBioSeq,
-          bioseq_gene: dnaBioSeq,
-          length: pepBioSeq.length
-        }
-
       end
 
     end
@@ -270,43 +283,45 @@ class SequenceAnnotation
     if @rna_seq.empty?
 
       @rna_seq = {}
-      @gbk.features do |ft|
 
-        next if ! ft.feature.to_s.include? "RNA"
+      @gbk_all.each_with_index do |gb, gb_i|
+        gb.features do |ft|
 
-        ftH = ft.to_hash
-        loc = ft.locations
-        # seqBeg = loc[0].from.to_s
-        # seqEnd = loc[0].to.to_s
-        # strand = loc[0].strand.to_s
-        if ftH.has_key? "pseudo"
-          next
+          next if ! ft.feature.to_s.include? "RNA"
+
+          ftH = ft.to_hash
+          loc = ft.locations
+          # seqBeg = loc[0].from.to_s
+          # seqEnd = loc[0].to.to_s
+          # strand = loc[0].strand.to_s
+          if ftH.has_key? "pseudo"
+            next
+          end
+          # gene = ftH["gene"] if !ftH["gene"].nil?
+          # protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
+          product = ""
+
+          if !ftH["product"].nil?
+            product = ftH["product"][0]
+            # puts ftH["product"].join(",") + "---" + ftH["product"][0]
+          end
+
+          locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
+
+          # puts "#{@accession}\t#{seqBeg}\t#{seqEnd}\t#{strand}\t#{protId}\t#{locustag}\t#{gene[0]}\t#{product[0]}"
+          dna = get_DNA(ft,@bioseq_all[gb_i])
+          dnaBioSeq = Bio::Sequence.auto(dna)
+
+          @rna_seq[locustag] = {
+            type: ft.feature.to_s,
+            location: loc,
+            locustag: locustag,
+            product: product,
+            bioseq_gene: dnaBioSeq
+          }
+
         end
-        # gene = ftH["gene"] if !ftH["gene"].nil?
-        # protId = ftH["protein_id"][0] if !ftH["protein_id"].nil?
-        product = ""
-
-        if !ftH["product"].nil?
-          product = ftH["product"][0]
-          # puts ftH["product"].join(",") + "---" + ftH["product"][0]
-        end
-
-        locustag = ftH["locus_tag"][0] if !ftH["locus_tag"].nil?
-
-        # puts "#{@accession}\t#{seqBeg}\t#{seqEnd}\t#{strand}\t#{protId}\t#{locustag}\t#{gene[0]}\t#{product[0]}"
-        dna = get_DNA(ft,@bioseq)
-        dnaBioSeq = Bio::Sequence.auto(dna)
-
-        @rna_seq[locustag] = {
-          type: ft.feature.to_s,
-          location: loc,
-          locustag: locustag,
-          product: product,
-          bioseq_gene: dnaBioSeq
-        }
-
       end
-
     end
 
     @rna_seq
@@ -622,4 +637,3 @@ class SequenceAnnotation
 
 
 end                             # end of Class
-
