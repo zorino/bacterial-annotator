@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 # author:  	maxime déraspe
 # email:	maximilien1er@gmail.com
-# review:  	
+# review:
 # date:    	15-02-24
 # version: 	0.0.1
-# licence:  	
+# licence:
 
 require 'json'
 require 'zlib'
@@ -111,7 +111,7 @@ class SequenceSynteny
         system("#{@root}/diamond.linux makedb --db #{subject_file} --in #{subject_file} > /dev/null 2>&1")
         db_file = subject_file
       end
-      system("#{@root}/diamond.linux blastp --db #{db_file} -q #{query_file} -o #{@outdir}/#{@name}.diamond.tsv -f 6 > /dev/null 2>&1")
+      system("#{@root}/diamond.linux blastp --masking none --db #{db_file} -q #{query_file} -o #{@outdir}/#{@name}.diamond.tsv -f 6 > /dev/null 2>&1")
     else
       # system("#{@root}/glsearch36.linux -b 3 -E 1e-25 -m 8 #{@subject_file} #{@query_file} > #{@outdir}/#{@name}.fasta36.tsv")
     end
