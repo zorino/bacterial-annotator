@@ -45,6 +45,9 @@ class BacterialComparator
       min_pid = min_pid/100
     end
 
+    @min_cov = min_cov
+    @min_pid = min_pid
+
     @aln_opt = options[:align].downcase
     @run_phylo = 0
     if options[:phylogeny] == 1
@@ -592,8 +595,8 @@ class BacterialComparator
                                            query_prot_file,
                                            ref_prot_file,
                                            "Prot-Ref",
-                                           0.80,
-                                           0.80,
+                                           @min_cov,
+                                           @min_cov,
                                            "prot")
 
     print "# Running alignment with Reference Genome CDS (diamond).."
@@ -613,6 +616,7 @@ class BacterialComparator
       next if ! syn_val.has_key? :homology
       next if syn_val[:homology][:assert_cutoff].inject(:+) < 3
       next if ref_annotated.has_key? syn_val[:homology][:hits][0] and ref_annotated[syn_val[:homology][:hits][0]][:partial] == 0
+
       ref_annotated[syn_val[:homology][:hits][0]] = {
         key: prot,
         pId: syn_val[:homology][:pId],
@@ -622,6 +626,7 @@ class BacterialComparator
         length: syn_val[:homology][:length][0],
         partial: (syn_val[:partial] ? 1 : 0)
       }
+
       # ref_annotated[syn_val[:homology][:hits][0]] = {
       #   key: prot,
       #   pId: syn_val[:homology][:pId],
@@ -631,6 +636,7 @@ class BacterialComparator
       #   length: syn_val[:homology][:length][0],
       #   partial: (syn_val[:partial] ? 1 : 0)
       # }
+
     end
 
     # print ref_annotated
@@ -642,13 +648,21 @@ class BacterialComparator
       coverage_query = ""
       query_length = ""
       pId = ""
+
       if ref_annotated[ref_v[:protId]] != nil
-        gene = ref_annotated[ref_v[:protId]][:key]
-        coverage_ref = ref_annotated[ref_v[:protId]][:cov_subject]
-        query_length = query_lengths[ref_annotated[ref_v[:protId]][:key]]
-        coverage_query = ref_annotated[ref_v[:protId]][:cov_query]
-        pId = ref_annotated[ref_v[:protId]][:pId]
-        partial = ref_annotated[ref_v[:protId]][:partial]
+
+        if ref_annotated[ref_v[:protId]][:pId] >= @min_pid and
+          ref_annotated[ref_v[:protId]][:cov_query] >= @min_cov and
+          ref_annotated[ref_v[:protId]][:cov_subject] >= @min_cov
+
+          gene = ref_annotated[ref_v[:protId]][:key]
+          coverage_ref = ref_annotated[ref_v[:protId]][:cov_subject]
+          query_length = query_lengths[ref_annotated[ref_v[:protId]][:key]]
+          coverage_query = ref_annotated[ref_v[:protId]][:cov_query]
+          pId = ref_annotated[ref_v[:protId]][:pId]
+          partial = ref_annotated[ref_v[:protId]][:partial]
+        end
+
       end
 
       _locus_tag = ref_v[:locustag] || ""
