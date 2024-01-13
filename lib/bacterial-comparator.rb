@@ -615,7 +615,9 @@ class BacterialComparator
     ref_synteny_prot.query_sequences.each do |prot, syn_val|
       next if ! syn_val.has_key? :homology
       next if syn_val[:homology][:assert_cutoff].inject(:+) < 3
-      next if ref_annotated.has_key? syn_val[:homology][:hits][0] and ref_annotated[syn_val[:homology][:hits][0]][:partial] == 0
+      next if ref_annotated.has_key? syn_val[:homology][:hits][0] and
+        ref_annotated[syn_val[:homology][:hits][0]][:partial] == 0 and
+        ref_annotated[syn_val[:homology][:hits][0]][:score] > syn_val[:homology][:score]
 
       ref_annotated[syn_val[:homology][:hits][0]] = {
         key: prot,
