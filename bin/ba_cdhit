@@ -16,7 +16,7 @@ ROOT_path = File.dirname(__FILE__)
 def installcdhit
 
   begin
-    resp = open("https://github.com/weizhongli/cdhit/releases/download/V4.6.8/cd-hit-v4.6.8-2017-0621-source.tar.gz")
+    resp = URI.open("https://github.com/weizhongli/cdhit/releases/download/V4.6.8/cd-hit-v4.6.8-2017-0621-source.tar.gz")
     open("#{ROOT_path}/cdhit-4.6.8.tar.gz", "wb") do |file|
       file.write(resp.read)
     end

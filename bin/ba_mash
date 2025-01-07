@@ -16,7 +16,7 @@ ROOT_path = File.dirname(__FILE__)
 def installMash
 
   begin
-    resp = open("https://github.com/marbl/Mash/releases/download/v2.0/mash-Linux64-v2.0.tar")
+    resp = URI.open("https://github.com/marbl/Mash/releases/download/v2.0/mash-Linux64-v2.0.tar")
     open("#{ROOT_path}/mash.tar", "wb") do |file|
       file.write(resp.read)
     end

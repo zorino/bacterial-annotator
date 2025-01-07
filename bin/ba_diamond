@@ -14,9 +14,8 @@ ROOT_path = File.dirname(__FILE__)
 
 # Install diamond on the user system
 def installDiamond
-
   begin
-    resp = open("https://github.com/bbuchfink/diamond/releases/download/v2.0.15/diamond-linux64.tar.gz")
+    resp = URI.open("https://github.com/bbuchfink/diamond/releases/download/v2.0.15/diamond-linux64.tar.gz")
     open("#{ROOT_path}/diamond-linux64.tar.gz", "wb") do |file|
       file.write(resp.read)
     end

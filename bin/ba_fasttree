@@ -16,7 +16,7 @@ ROOT_path = File.dirname(__FILE__)
 def installFastTree
 
   begin
-    resp = open("http://www.microbesonline.org/fasttree/FastTreeMP")
+    resp = URI.open("http://www.microbesonline.org/fasttree/FastTreeMP")
     open("#{ROOT_path}/fasttree.linux", "wb") do |file|
       file.write(resp.read)
     end

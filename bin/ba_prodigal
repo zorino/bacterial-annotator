@@ -16,7 +16,7 @@ ROOT_path = File.dirname(__FILE__)
 def installProdigal
 
   begin
-    resp = open("https://github.com/hyattpd/Prodigal/archive/v2.6.2.tar.gz")
+    resp = URI.open("https://github.com/hyattpd/Prodigal/archive/v2.6.2.tar.gz")
     open("#{ROOT_path}/v2.6.2.tar.gz", "wb") do |file|
       file.write(resp.read)
     end

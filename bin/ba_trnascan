@@ -18,7 +18,7 @@ def installTrnascan
   begin
 
     # infernal as dependencies
-    resp = open("http://eddylab.org/infernal/infernal-1.1.2.tar.gz")
+    resp = URI.open("http://eddylab.org/infernal/infernal-1.1.2.tar.gz")
     open("#{ROOT_path}/infernal-1.1.2.tar.gz", "wb") do |file|
       file.write(resp.read)
     end
@@ -27,7 +27,7 @@ def installTrnascan
     `cd infernal-1.1.2 && ./configure --prefix=#{ROOT_path}/infernal-1.1.2/build && make && make install`
 
     # trnascan-se
-    resp = open("http://trna.ucsc.edu/software/trnascan-se-2.0.0.tar.gz")
+    resp = URI.open("http://trna.ucsc.edu/software/trnascan-se-2.0.0.tar.gz")
     open("#{ROOT_path}/trnascan-se-2.0.0.tar.gz", "wb") do |file|
       file.write(resp.read)
     end

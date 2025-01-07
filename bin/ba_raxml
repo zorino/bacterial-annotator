@@ -15,7 +15,7 @@ ROOT_path = File.dirname(__FILE__)
 def installRaxml
 
   begin
-    resp = open("https://github.com/stamatak/standard-RAxML/archive/v8.2.11.zip")
+    resp = URI.open("https://github.com/stamatak/standard-RAxML/archive/v8.2.11.zip")
     open("#{ROOT_path}/master.zip", "wb") do |file|
       file.write(resp.read)
     end

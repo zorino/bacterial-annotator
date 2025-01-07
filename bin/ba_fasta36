@@ -16,7 +16,7 @@ ROOT_path = File.dirname(__FILE__)
 def installFasta36
 
   begin
-    resp = open("https://github.com/wrpearson/fasta36/releases/download/fasta-v36.3.8g/fasta-36.3.8g-linux64.tar.gz")
+    resp = URI.open("https://github.com/wrpearson/fasta36/releases/download/fasta-v36.3.8g/fasta-36.3.8g-linux64.tar.gz")
     open("#{ROOT_path}/fasta-36.3.8g-linux64.tar.gz", "wb") do |file|
       file.write(resp.read)
     end
