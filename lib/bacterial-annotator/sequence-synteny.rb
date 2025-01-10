@@ -60,6 +60,7 @@ class SequenceSynteny
       flat = Bio::FlatFile.auto("#{seq_file}")
       flat.each_entry do |s|
         s_name = s.definition.chomp.split(" ")[0]
+        # puts s_name
         sequences[s_name] = {}
         properties = s.definition.chomp.split(";")
         partial = false
@@ -69,6 +70,7 @@ class SequenceSynteny
         sequences[s_name][:partial] = partial
         sequences[s_name][:length] = s.seq.length
         sequences[s_name][:conserved] = false
+
         sequences[s_name][:contig] = s_name.split("_")[0..-2].join("_") if s_name.include? "_"
 
       end

@@ -73,18 +73,35 @@ class BacterialComparator
   def read_prot_synteny
 
     puts "# Reading genome synteny files START.."
+    # print(@genomes_list)
+
     start_time = Time.now
     synteny = {}
 
     # If genome is genbank (.gbk or .gb) then do syntheny first
+    new_genomes_dir = @outdir+"/new-genomes/"
+    Dir.mkdir(new_genomes_dir) if ! Dir.exists? new_genomes_dir
 
     @genomes_list.each_with_index do |g,i|
 
       genome_synteny = []
 
-      if g =~ /.gbk/i
-        new_genomes_dir = @outdir+"/new-genomes/"
-        Dir.mkdir(new_genomes_dir) if ! Dir.exists? new_genomes_dir
+      if File.directory?(g)
+        @genomes_list[i] = g
+      else
+
+        if ! File.exists? g
+          puts "Downloading genbank file because it doesn't exists"
+          id = g
+          if id =~ /.gbk/i
+            id = id.gsub(".gbk","")
+          else
+            g = id+".gbk"
+          end
+          puts "#{id} #{g}"
+          Helper.download_genbank id, g
+        end
+
         genome_dir = new_genomes_dir + "/" + File.basename(g).gsub(".gbk","")
         Dir.mkdir(genome_dir) if ! Dir.exists? genome_dir
         genome_to_annotate = SequenceAnnotation.new(@root,
@@ -101,7 +118,9 @@ class BacterialComparator
 
         g = genome_dir
         @genomes_list[i] = genome_dir
+
       end
+
 
       file = File.open("#{g}/Prot-Synteny.tsv", "r")
       l = file.gets             # skip header
@@ -203,6 +222,10 @@ class BacterialComparator
       genome_proteins = load_genome_cds("#{g}/Proteins.fa")
       synteny_list.each do |k,v|
         pep_out = File.open(pep_out_dir+"/#{k}.pep", "a")
+        # puts "#{v[i][:query_prot]}"
+        if ! genome_proteins.has_key? v[i][:query_prot]
+          puts "#{g} doesn't have the query prot"
+        end
         pep_out.write(genome_proteins[v[i][:query_prot]])
         pep_out.close
       end
@@ -613,6 +636,7 @@ class BacterialComparator
     ref_annotated = {}
 
     ref_synteny_prot.query_sequences.each do |prot, syn_val|
+
       next if ! syn_val.has_key? :homology
       next if syn_val[:homology][:assert_cutoff].inject(:+) < 3
       next if ref_annotated.has_key? syn_val[:homology][:hits][0] and
@@ -622,6 +646,7 @@ class BacterialComparator
       ref_annotated[syn_val[:homology][:hits][0]] = {
         key: prot,
         pId: syn_val[:homology][:pId],
+        score: syn_val[:homology][:score],
         cov_query: syn_val[:homology][:cov_query],
         cov_subject: syn_val[:homology][:cov_subject],
         assert_cutoff: syn_val[:homology][:assert_cutoff],

@@ -228,7 +228,7 @@ def parseOptions_compare
       usage_compare
       abort
     else
-      options[:genomes_list] << x if File.exists? "#{x}"
+      options[:genomes_list] << x
     end
 
   end
